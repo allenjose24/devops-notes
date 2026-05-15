@@ -1,0 +1,3190 @@
+
+
+=== Welcome and Introduction ===
+
+
+--- Welcome to the Course! ---
+
+Instructor: Hello and welcome to this course.
+I am so excited that you decided to enroll in this course.
+Why? Because data is all around us.
+We all both generate and use data
+to make our lives better.
+Businesses, governments, and organizations of all types
+use data to make better decisions that affect us every day.
+Much of the data out there, however, is unused
+because organizations do not have the tools
+and knowledge to capture, aggregate, model,
+and transform the data into useful knowledge.
+(bright music)
+Data alone, however cool it is, is meaningless.
+Splunk is one of the most
+powerful data engineering tools available.
+It allows you to turn context-free data into real value.
+And in this course, you'll learn all you need to know
+in order to bring that value to any organization.
+This course is for everyone.
+Whether you're just curious about Splunk
+and what it can do for data,
+whether you've inherited a Splunk environment
+and aren't sure how to get started,
+or you've been asked to get value
+out of your organization's data,
+or you're simply a curious leader who wants to know
+if Splunk is the right tool for their organization,
+this course is for you.
+
+--- Introduction to the Course and How to be Successful ---
+
+Adam: Hey, everyone, and welcome to the course.
+I'm excited to be working with you.
+This course, like many Udemy courses,
+is divided up into sections,
+and this first section is the beginning of your journey.
+We'll talk, first and foremost,
+about how to be successful in the course.
+Then, we'll give you an introduction to Splunk,
+what it is and why an organization would want to use it.
+Then we'll compare and contrast Splunk Enterprise
+and Splunk Cloud Platform.
+We'll also talk about extending Splunk.
+Splunk Enterprise and Splunk Cloud Platform
+make up the core Splunk products
+that are part of the Splunk Platform,
+and those are what we will be focusing on in this course.
+Here's the obligatory slide about me.
+I hold a Master of Science in Information Systems
+from a large R1 research university
+where I've also been teaching for the past 12 years.
+I'm a Splunk Certified Administrator
+and, of course, an online course author.
+I've also been in tech for about 20 years.
+Your success in this course is my number one priority,
+so I want to give you some tips and tricks
+on how to get the most out of this course.
+A recent study showed that consistency is key to expertise
+and that studying something
+for 18 to 20 minutes every day for a full year
+would put you ahead of 90% of all other people
+on that subject.
+So with that in mind,
+I'm gonna ask you to Splunk every day during this course.
+You don't have to give me 20 minutes,
+although that would be ideal.
+If you can give me just five minutes a day,
+I guarantee you'll get a lot out of this course.
+Each section also has a quiz
+and some sections have homework.
+I recommend you make sure you know
+the section you're on very well
+before going onto the next section,
+and you can test that by passing the quizzes
+with a 100% score.
+And of course, follow along in the fun.
+We'll have a lot of demos
+and a lot of ways that you can get hands-on with Splunk.
+In support of your success,
+I'll provide downloadable slides, homework and quizzes,
+and I'll refer you to specific places
+in the official Splunk documentation
+for deeper dives where necessary.
+And even with all of that, we all get stuck sometimes,
+so I wanna point you to some resources for getting help.
+The Splunk Community found at community.splunk.com
+is amazing.
+They have a question-and-answer platform
+where I've been able to ask anything
+from very beginner questions to advanced-level questions,
+and somebody always answers me within 24 hours.
+All the Splunk pros hang out at the Splunk Community.
+So, feel free to visit that.
+Of course, the official word
+comes from Splunk documentation at docs.splunk.com.
+Get to know the Splunk documentation.
+I reference it frequently,
+both in this course and in my professional life.
+It's well-written and well-organized.
+And we do have a course Q&amp;A
+that you should feel free to participate in,
+answer other students' questions, or ask your own.
+Quick reminder that course ratings
+are everything to instructors.
+So if you enjoyed this course,
+please don't hesitate to give it five stars.
+It helps me keep the content of this course updated,
+as well as make new courses in the future.
+
+
+=== Deploying Splunk ===
+
+
+--- Splunk Overview ---
+
+Instructor: So, what is Splunk?
+Splunk is a huge platform with vast data capabilities
+spanning multiple products and services.
+It can be overwhelming, but by completing this course,
+you'll have an understanding of which products to use
+for which specific use cases.
+Splunk began as a machine data processing software
+and has since expanded into the number one platform
+for business analytics,
+security and incident monitoring, SIEM,
+the more advanced SOAR,
+which is security orchestration, automation, and response,
+data science and machine learning,
+data engineering, behavior analytics, IT operations,
+and much, much more.
+Hidden in your organization's data
+is a gold mine of useful, actionable knowledge.
+Data, as we know,
+is generated by everything in the modern world.
+Humans generate their data by our very location,
+but also by our actions like web clicks and purchases.
+Machines generate a lot of data.
+The internet of things generates a lot of data.
+How many sensors are on a modern electric car, for example?
+Splunk takes this data, and I mean any type of data,
+unstructured, structured, semi-structured,
+machine-generated, human-generated,
+and allows you to create value in the form of dashboards,
+reports, alerts, and alert actions.
+That's right, you can have Splunk kick off an email
+or run a script.
+Consider a typical modern organization.
+It might have some assets in various cloud providers,
+perhaps Microsoft 365 with Entra ID,
+maybe a few other Azure services.
+It might have some big data solutions
+built out in Google Cloud and some infrastructure in AWS.
+Most organizations
+also use some sort of platform as a service
+or software as a service, too,
+like Salesforce or ServiceNow.
+This organization likely also has on-premises assets,
+like edge devices, laptops, and desktops,
+or physical servers in a data center.
+It likely also has networking gear and so on.
+Each and every one of these items
+generates a huge amount of data.
+And what usually happens to all of that data?
+That's right, it goes into a variable corporate black hole.
+Until there's a problem.
+And when there's a problem,
+IT professionals like you and me
+are left with manually searching through tens of thousands
+or hundreds of thousands of log entries
+trying to investigate the situation.
+But I'm here to tell you, friends, there's a better way.
+With Splunk, we can set up a system to capture this data,
+clean it, format it, transform it,
+and derive real business value from it.
+We can also train Splunk on unstructured data.
+Splunk is great at reading and parsing machine data,
+for example.
+This is not a block of actual machine data,
+it's just some random characters,
+but I wanted to illustrate
+that machine data often looks somewhat like this.
+It's not really human-readable, but with Splunk,
+we can train it to look for certain patterns
+using regular expressions,
+and then label those patterns as fields.
+Now, another name for a field, of course, is a column.
+So in Splunk, we can then take these fields
+and build data intelligence systems
+that people can actually understand.
+Splunk products are categorized into six categories.
+In this class, we'll focus on the Splunk Platform,
+which is the core of Splunk.
+It includes Splunk Enterprise and Splunk Cloud Platform.
+We'll also, of course, talk about apps and add-ons
+and ways to extend Splunk.
+Other product categories are Security,
+IT Operations, and Observability.
+Splunk also provides a lot of developer tools
+and developer kits for building your own apps.
+
+
+=== Getting data In ===
+
+
+--- Splunk Enterprise and Splunk Architecture ---
+
+One of the greatest things about Splunk is its extensibility.
+Both Splunk Enterprise and Splunk Cloud platform can be extended, but Splunk Enterprise has the most
+extensibility.
+This extensibility gives you almost endless possibilities.
+Splunk enterprise follows standard distributed system architecture best practices, which means it's
+highly modular and highly scalable.
+The architecture of Splunk Enterprise is built on Splunk components.
+This is an important word to know for this class.
+Splunk components are simply instances of Splunk Enterprise that are configured for a specific job.
+And in this first discussion, I'm just going to talk about them at a high level.
+But we will dive more deeply into Splunk components throughout the course.
+The key thing to remember is every Splunk component, except for universal forwarders, are simply installations
+of Splunk Enterprise configured in a different way.
+There are two broad categories of Splunk Enterprise components.
+They fall into processing components and management components.
+And these components do exactly what you think they do.
+The processing components process data.
+The management components help you manage your Splunk environment.
+Starting from the left, the search head handles all things search related.
+It also hosts the Splunk web interface, and you can think of it as sort of the Splunk main installation.
+In a highly distributed system, you might have more than one search head in a search head.
+Cluster forwarders, in this case heavy forwarders, which are Splunk components, process and move
+data onto either indexers or search head indexer combinations.
+In small Splunk deployments, search heads can also be combined and act as indexers.
+Indexers, or indexer clusters, receive data from forwarders or directly from systems and transform
+that data into what Splunk calls events.
+A single event is one row of data, and then it places those events in what Splunk calls an index.
+And on disk, Splunk calls these storage buckets.
+Over on the management side, the indexer cluster manager, or indexer cluster node manages an indexer
+cluster.
+An indexer cluster is a cluster of distributed and load balanced indexers.
+The monitoring console is a set of dashboards and health checks that are included in your Splunk Enterprise
+deployment, and it provides insights and monitoring into your entire Splunk environment.
+Going down to the license Manager.
+The license manager is Splunk component, through which all licensed Splunk components have to register,
+and they get a license from the license manager.
+And the license manager keeps track of all the different licenses you have and to which components they
+are assigned.
+The two final components are the deployment server and the deployer, and it's easy to get these confused,
+but the deployment server is really a component that manages deployment of other Splunk components,
+as well as updates and patches to Splunk components.
+From the perspective of the deployment server, Splunk components are called deployment clients.
+And finally, the deployer.
+The deployer manages search head clusters.
+If you have a highly distributed environment, you might have more than one search head that's load
+balanced and part of a cluster.
+I realize that's a lot of information to take in, so here's a very basic Splunk deployment.
+You might have a server or a cloud service, and the data goes to forwarders and forwarders.
+Forward the data onto an indexer which processes and stores the data.
+And the indexer presents the data as available to search from the search head and the user.
+You and I interact with the Splunk web interface that's part of the Splunk search.
+Head diving.
+One level deeper, we get configuration files Miles behind the scenes.
+Everything about Splunk is governed by sets of configuration or dot conf files.
+These files contain system settings, authentication and authorization information, index related settings,
+deployment and cluster settings, knowledge objects, data models, saved searches, and a lot of other
+things.
+They also contain app specific settings that we'll talk much more about later.
+The four conf files that we'll discuss in class are these inputs, indexes, outputs and props.
+These are the conf files I see and work with most often.
+There are a lot of other conf files as well, and this is one of those times where I'm going to refer
+you to the Splunk documentation.
+The resource to view is definitely the Splunk docs.
+So first of all, what do these files do?
+Basically inputs dot conf defines data inputs such as source types or files indexes dot conf Manages
+index storage locations.
+Remember buckets on disk and things like data retention policies.
+Outputs.
+Manages data forwarding settings on a forwarder.
+Props conf manages things like timestamps and field extractions.
+Remember, every behavior that Splunk does is governed by a conf file.
+Every change you make in Splunk Web or Splunk UI is written to a config file.
+Therefore, you can actually edit config files directly to change the settings and behavior of Splunk
+inside a config file is pretty simple.
+It's built on stanzas and settings, so a config file has a bunch of stanzas with a bunch of settings
+under it.
+If you go to Splunk docs, you can see example config files.
+Splunk can be extended with multiple products, thousands of apps and add ons.
+You can find those at Splunk base and Splunk also offers a suite of developer tools through which you
+can build your own apps, which include things like custom data models and configuration files.
+
+
+=== Installing Splunk ===
+
+
+--- Splunk Cloud Platform Overview and Demo ---
+
+The Splunk Cloud platform is another option for deploying Splunk.
+Like many options in the cloud, this means that you get Splunk as a service.
+You get all the benefits of Splunk Enterprise without having to manage all the components and infrastructure
+directly.
+Splunk updates and patches everything for you automatically, and it's stored at Splunk's highly secure
+data centers.
+For this class, I do recommend you create a free 14 day trial of Splunk Cloud to follow some of the
+demos, including the demo we will do in just a moment, as well as the homework for this section.
+The downside to Splunk Cloud is licensing fees.
+We'll go into more detail on Splunk Cloud and Splunk Enterprise throughout this course.
+I'm now going to show you how to create Splunk Cloud Platform 14 day free trial.
+So please follow along with me and we'll create our Splunk instance, and then we'll do some basic Splunk
+searches and create a basic dashboard.
+So first of all go to Splunk Comm.
+Click on Trials and Downloads.
+Under Splunk Cloud platform click Get My free trial.
+And start a new account.
+Or if you already have an account, click Log in.
+Once you've created your account, Splunk will send you a verification email that looks like this.
+And go ahead and click on the Verify your Email button or copy and paste the URL you see there.
+Now you'll get another email from Splunk showing you your Splunk Cloud URL and login credentials.
+And that email will look something like this.
+So go ahead and copy that URL and paste it in the browser and make note of your username and temporary
+password.
+Now here's our Splunk Cloud instance.
+So let's log in with the username and temporary password that we've been assigned.
+And it will make you reset your password.
+Accept the license terms.
+And here we are in Splunk web user experience.
+We can see all of the installed apps on the left side.
+We can see a bunch of options in the main pane.
+But I want to point your direction up to settings.
+Settings is where we will configure most of our Splunk instances in this course.
+In settings we can configure data inputs, indexes, source types, data models, and all kinds of things.
+The most used app is the search and reporting app that is the app that lets you search through your
+data and build reports.
+So let's try that now.
+Click on Search and Reporting.
+Now we have the search bar.
+We have the time picker.
+We have the search button and we have the search history.
+What we're going to do now is search through the Splunk internal logs, which come with every Splunk
+instance.
+And we'll see if we can get some insights from those logs.
+And it's completely okay if you don't quite understand what we're doing or what's going on at this point.
+This is really just to get your feet wet into Splunk and to be able to build a simple dashboard by the
+end of the course.
+I promise you'll understand everything we're doing here, but please follow along because this will
+also allow you to complete the homework.
+So in the search bar type index.
+Equals Underscore internal.
+This is a special index or storage area that Splunk uses to store its internal logs.
+And on the time picker, choose all time.
+And click search.
+Now we have a lot of data for a brand new Splunk instance.
+Notice on the Field Explorer on the left side, Splunk has determined some fields that might be of interest
+to us.
+And we can click on these for more detail.
+The numbers next to the field show how many unique values Splunk has detected for that field.
+So for Splunk server, there's only one value.
+And that is the name of this Splunk server.
+But for group there are 58 values.
+One easy way to start searching is to use basic keywords.
+Let's keep our index at underscore internal, but let's search for the keyword error.
+Keep the time picker on all time and click search.
+Now we've narrowed it down to 27,000 events.
+And Splunk has determined some fields that might be of interest here.
+For example, what about alt error code name that has four values.
+And we have handshake failed host unreachable namespace not found and no matching document with SSL
+handshake failed.
+Being by far the most occurring error.
+So let's add that to the search by clicking on it.
+So now our search is index equals underscore internal keyword error.
+And then attribute error.
+Code name equals SSL.
+Handshake failed.
+Now let's get rid of that keyword error because we're being more precise now.
+And we'll search again.
+Now we only have 18,000 events.
+Now, maybe this is an important error to know about and to know when it's happening for our business.
+So one thing we can do is we can count the number of these errors happening over time.
+So let's put a pipe and that's usually right above your enter key on your keyboard.
+And we're going to use the command stats and then count.
+Now let's move the time picker back to 24 hours.
+And now we can see we have a count of 6160.
+Now each new day that passes this will change because we are only searching the last 24 hours.
+But that's kind of boring to just say 6160.
+What I want to do is a single value visualization.
+And never underestimate the single value visualization in Splunk.
+So let's click on visualization.
+And under chart choose Single Value.
+Now let's format it just a bit.
+In the caption we'll put SSL handshake failed last 24 hours.
+Now for colors.
+Let's say we have some thresholds.
+Let's get rid of some of these.
+Let's say anything above 1000 we're concerned about.
+So from 1000 to max it's going to be red up to 1000.
+Let's make it yellow.
+It's caution.
+And from min to let's say 500 it's green.
+So we have minimum to 500 is green, 500 to 1000 is yellow and 1000 and above is red.
+So right now we're in the red.
+I like to also do this color mode where the block background is the color.
+And let's see what else we can do here.
+And that is number format.
+We don't need to be really any more precise.
+There will be no decimals in the number of errors.
+So let's close this.
+Now.
+Let's make a new dashboard and use this as the first panel of our new dashboard.
+So we're going to click Save as New Dashboard.
+And let's call the dashboard the error dashboard.
+We'll leave the description blank for now.
+And permissions we'll share it with the app.
+And for now let's use classic dashboards I'll show you Dashboard Studio later in the course.
+The panel title will be SSL Handshake Failed.
+We'll keep the visualization type at single value and we won't worry about advanced panel settings right
+now.
+Let's click Save to Dashboard and let's not view the dashboard quite yet.
+Let's create one more visualization to create our next visualization.
+Let's click back on events and let's still use index equals internal.
+Let's erase this and we'll do stats count by status.
+We'll still use last 24 hours.
+Now you can see this brings up 690,000 events.
+And we have statuses that are numbers.
+And we have one status that is success.
+And we have a different counts for each of those statuses.
+And even though right now we don't know what these status numbers actually mean, for the purpose of
+this demo, in making this dashboard, we're going to assume that the company knows what these status
+numbers mean.
+Alternately, we could create a lookup table that renames these numbers To status descriptions, but
+that's a little bit more of an advanced topic.
+So let's make a visualization.
+And this time change the chart to pie chart.
+Okay.
+Now we have a pie chart that shows a comparison of all of our statuses.
+And status number 200 is by far the largest status.
+Success is very very small, just a sliver, which might be concerning.
+But let's create this as another dashboard panel.
+So save as existing dashboard.
+And we called our dashboard the error dashboard.
+And the panel title should be Comparison of status.
+Click save to dashboard.
+And this time let's view the dashboard.
+Here's our dashboard.
+And if we edit it we can do even more things with it.
+Like move these panels side by side as they should be.
+Click save.
+And now we've built a very basic dashboard in Splunk Cloud using Splunk internal data.
+I hope that was fun and I hope that inspires you to continue on in the rest of this class, because
+the rest of this class is fun as well.
+Congratulations!
+You made it through the very first section of this course!
+I'm so excited that you're still with us!
+In this course we introduce you to the course.
+Of course we told you how to be successful and where to get help.
+We gave you a brief introduction to Splunk, Splunk Enterprise and Splunk Clouds.
+We talked about Splunk products, apps, add ons.
+We talked about how you can train Splunk with your data and build intelligent systems that actually
+make sense to people.
+We talked about how Splunk can turn any type of data into insights.
+We discussed the difference between Splunk Cloud Platform and Splunk Enterprise and how you can extend
+Splunk.
+Thank you for joining me in this section, and I'll see you in the next section.
+
+
+=== Basic Searching ===
+
+
+--- Deploying Splunk and the Splunk Data Pipeline ---
+
+Deploying Splunk.
+Welcome back.
+And in this section we'll talk about Splunk data pipeline deployment models using Splunk validated architecture
+for both Splunk Enterprise and Splunk Cloud platform.
+We'll discuss how Splunk stores data on disk.
+We'll talk about licensing and configuration files and apps and add ons.
+There's a lot of content in this section, and I hope you are as excited as I am to get started.
+The Splunk data pipeline.
+This is one of those core things about this class that you should understand and keep with you throughout
+the duration of this course.
+The Splunk data pipeline has four pieces input, parsing, indexing, and searching.
+No matter the type of deployment, the Splunk data pipeline is the same.
+And I remember it with APIs in Splunk Enterprise.
+To scale your system, you can split this functionality across multiple specialized instances of Splunk
+Enterprise.
+That's right.
+All of these things happen in Splunk Enterprise installation just configured differently.
+The exception, of course, is the Universal Forwarder, which we'll talk about a bit later.
+During the input phase, Splunk consumes data from sources, either directly or through forwarders,
+or file uploads, or the HTTP event collector, or other ways.
+It's important to note that Splunk does not look at the contents of the data during the input phase.
+That's reserved for the parsing phase.
+Parsing usually happens on the indexer in a small deployment.
+It can happen on the search head slash indexer combo, and in a really large deployment, it might happen
+on a heavy forwarder.
+Parsing is where Splunk takes the raw data and creates events out of the data.
+Remember, an event is just one line of data that contains, at a minimum, the Splunk default fields.
+Splunk also identifies timestamps at this stage and annotates the data with some metadata.
+During the indexing phase, Splunk takes the parsed data and writes it to indexes on disk, which are
+just directories in the file system of the indexer.
+These are just flat files that are stored in various directories, and Splunk calls them buckets.
+The searching phase is the one that perhaps we are all familiar with.
+This is the phase that manages all aspects of how the user interacts with the data.
+
+
+=== Splunk Knowledge Objects ===
+
+
+--- Splunk Architecture and Deployment Models ---
+
+The Splunk documentation is a great resource for Splunk approved, validated architectures.
+So let's talk about deployment models.
+While Splunk has several products, as we've talked about before, in this course we will focus on the
+core, which is the Splunk platform.
+The Splunk platform includes the core products of Splunk Enterprise and Splunk Cloud Platform.
+The primary difference, of course, between these two products is that one is Splunk as a service Splunk
+cloud platform.
+This is where Splunk handles all the infrastructure for you.
+The other Splunk Enterprise is the traditional model of building out your own distributed Splunk environment.
+So I want to talk about Splunk Enterprise deployment models first.
+Remember from our last discussion that the architecture of Splunk Enterprise is built on Splunk components?
+Components are simply instances of Splunk Enterprise.
+Again, I have to say, except universal forwarders.
+Okay.
+Let's look at some Splunk validated architectures.
+Of course there are a lot of them.
+And we can't talk about all of them in this course.
+But I want to go through some basic ones.
+And you can study the others on the Splunk docs if you like.
+The first one is called Single Server Deployment or S1.
+In the previous slide, we saw Splunk components that would go into each of these areas.
+Do you know what they are for fun?
+Pause the video here and think about which Splunk components might go into each of these boxes.
+Ready?
+In an S1 single server, we have a search head and indexer, and they're the same component S1.
+Deployments are designed for a daily data ingest of 500 gigs and a small number of users.
+Splunk recommends S1 for non-critical data.
+So back up to our S1 architecture.
+We actually don't need a management component.
+However, the Splunk Monitoring Console is a free component that comes with your Splunk Enterprise license
+and helps you have visibility even into your small deployment.
+And then, of course, in the collection tier, we have network inputs or forwarders or other types
+of data collection.
+The next validated architecture is the C1 or distributed clustered environment for a single site.
+In this architecture, we separate the search and indexing tier so that we can deploy indexer clusters
+to get more Splunk advantages like high availability.
+We're building modular, composable, and scalable architecture as we get into these larger Splunk deployments.
+Now again, pause the video here and see if you can guess which components go into which tier.
+In the C1 distributed cluster deployment for a single site, we have one or more standalone search heads,
+not in a cluster.
+We have an indexer cluster with data replication and we have multiple load balanced collection inputs
+often forwarders.
+And in the management tier we have a license manager, the monitoring console, the indexer cluster
+manager and a deployment server to help manage all the deployment clients.
+Now let's talk about the C3 or C13 architecture.
+And this is called Distributed Clustered Environment with search head clustering for a single site.
+It's the same basic architecture as the last one, C1.
+But this time we're also creating search head clusters in addition to indexer clusters.
+So in this configuration we build a search head cluster governed by a deployer, not a deployment server.
+The deployer governs the members of the search head cluster.
+It distributes apps, files, configuration updates, and more to all of the members through what is
+called a configuration bundle.
+A search head cluster is a group of search heads that serves as a central resource for searching.
+You can run the same searches, view the same dashboards, and access the same search results from any
+of the search heads in the cluster.
+One of the cluster members is assigned to be the search head cluster captain, and schedules jobs and
+replication activities among the cluster.
+So in the C3 architecture, we have a search head cluster managed by a deployer.
+We have an indexer cluster managed by the cluster manager.
+And we have load balanced distributed collection tier components managed by the deployment server.
+And the license manager of course manages all of the licensed components.
+They all check in with the license manager to make sure they have a legitimate Splunk license.
+Now let's talk about basic architecture for Splunk Cloud Platform.
+Splunk Cloud Platform is delivered and maintained by Splunk.
+It's Splunk as a service.
+It's delivered as a cloud based service where Splunk manages all the infrastructure, and you get most
+of the same benefits of building your Splunk Enterprise deployment, with a few key differences that
+I want to discuss.
+In this architecture, you are in charge of the collection tier and some parts of the management tier,
+but for the most part the other components are managed by Splunk.
+Splunk Cloud Platform can accept and process almost all of the same types of data as Splunk Enterprise
+Plus.
+It has some unique input options.
+Most of the time, you'll get data into Splunk Cloud by using forwarders, but there are lots of ways
+to get data into Splunk Cloud.
+As you can see here, we can still do directory, file and network inputs, but we send them to forwarders
+first, and then the forwarders send the data to Splunk Cloud, where directory or file input might
+be a direct collection event in Splunk Enterprise.
+One really nice thing about Splunk Cloud is you can use AWS Data Firehose.
+This streams your data from AWS directly into Splunk Cloud, and if you want to do advanced data processing,
+you can use the Splunk Edge processor.
+And these are solutions provided by Splunk that can be used for advanced data processing and routing
+before it gets to Splunk Cloud.
+Let's talk about subscription types.
+Like most cloud offerings, Splunk is subscription based and the costs can either be based on workload.
+This is the usage of compute and storage or data ingestion based based on how many gigabytes of data
+Splunk consumes per day.
+There are some restrictions on Splunk apps when you're using Splunk Cloud.
+Only vetted and compatible apps are approved to use on Splunk Cloud.
+Some apps can be self installed through the app browser, others require a support ticket to be submitted
+to Splunk.
+Private apps that you build yourself are supported, but they're vetted by Splunk before you can install
+them.
+Also, in Splunk Cloud, you don't have access to the command line interface or any underlying infrastructure.
+That means you won't be able to edit configuration files or do any CLI functions without submitting
+a support ticket to Splunk.
+
+
+=== Visualizing Your Data ===
+
+
+--- How Splunk Stores Data ---
+
+How Splunk stores data.
+Data is stored in indexes in Splunk.
+And I am going to say indexes, because saying indices sounds really weird to me.
+An index is simply a repository for Splunk data.
+When Splunk consumes and processes raw data, it first transforms that data into events and then it
+stores it in indexes.
+And indexes are just directories in the file system.
+In other words, they're just mapped places on disk.
+And Splunk calls these buckets.
+Splunk comes built in with several indexes.
+And you can create your own indexes as well.
+The default index is called main.
+Splunk also has an underscore internal index and some other internal indexes as well.
+Remember that an event is a single row of data.
+So inside an index is a bunch of events.
+Here are two example events for fictional hosts web one and web two.
+An event is a single row of data made up of fields.
+Fields are key value pairs.
+They have a field name and an associated value with that field.
+So IP address equals and then the IP address that would be a field.
+Much of the time raw data being ingested by Splunk does not have clear key value pairs.
+So the Splunk engine detects key value pairs in the data and automatically assigns them to fields.
+Splunk adds default fields as well to all events.
+These fields are underscore, time index, host source, and source type.
+Here's an example of an Apache log that I found on Apache's website.
+Notice we have values but no keys.
+Let's try to be human Splunk and match the default fields to the values in this Apache log.
+For the time field, Splunk automatically extracts the timestamp from the beginning of this log line,
+so the time field would be Friday, September 9th.
+It looks like 2011.
+For the host field, Splunk just assigns the hostname of the machine sending the data in most cases.
+So this is something that's unknown right now.
+The source field refers to the file or input from which Splunk received the event.
+For logs, it's typically the full path to the log file, which again we don't know, but it could be
+the default path to Apache log files.
+For example var log apache2 slash error log and source type identifies the data type Splunk has built
+in knowledge for various data types, and Apache error is a common source type for Apache error logs.
+In Splunk, an index contains compressed raw data and associated index files.
+These index files are spread out into different directories depending on their age.
+Splunk calls these directories buckets.
+There are five buckets and a fish bucket, but the fish bucket is outside of the scope of this class.
+I encourage you to read the docs on the fish bucket.
+So let's start with the hot bucket.
+The hot bucket contains newly indexed data.
+The hot bucket is actively written to an index can have one or more hot buckets.
+Once aged out, the data is rolled to a warm bucket.
+Warm buckets have no active writing and an index can have many warm buckets.
+Next, the data is rolled on to the cold bucket.
+An index has many cold buckets.
+Next, the data goes to the frozen bucket.
+The Splunk indexer deletes frozen bucket data by default, but you can choose to archive that data.
+And then when you need to unarchive that data, it goes to the thawed bucket.
+Thawed buckets contain data that are restored from an archive.
+You can set the index bucket ages by modifying the configuration file index dot conf.
+Here's where the buckets are stored on disk in these directories.
+And these buckets are subdirectories of the index directory.
+In this case, default db is the index directory for the index called main, which is the default index
+of Splunk.
+For example, in the hot path after the db slash, we can have multiple hot buckets.
+That's why I put an asterisk there.
+Buckets have specific naming conventions within their subdirectories, but we don't need to go into
+that right now.
+A newer and interesting component of Splunk is the smart store.
+As a deployments data volume increases, demand for storage typically outpaces demand for compute resources.
+Smart store allows you to manage your indexer, storage, and compute resources in a cost effective
+manner by scaling those resources separately.
+Smart store is an indexer capability that provides a way to use remote object stores like Amazon S3,
+Google Cloud Storage Buckets, or Microsoft Azure Blob Storage.
+
+
+=== The Splunk Common Information Model ===
+
+
+--- Splunk Enterprise Licensing ---
+
+Splunk Enterprise Licensing.
+Everybody loves talking about licensing.
+I know how excited you are for this segment.
+Each Splunk Software instance requires a license.
+Anything that indexes data requires a license.
+And there are two types of license for Splunk enterprise volume based and infrastructure.
+In volume based licensing, you get all the access to Splunk features, and your license is measured
+by data indexed per day on a 24 hour clock, not data stored.
+Keep that in mind.
+Data indexed per day.
+Data indexing volume is measured from midnight to midnight by the clock on the license manager.
+There is also data that is indexed that does not count against your volume based licensing, and that
+is Splunk internal log data, duplicate data and metadata.
+The second choice is infrastructure licensing.
+As organizations have moved more data to Splunk and their usage patterns evolved.
+Example lots of data ingested but less frequently searched or very high search activity on smaller data
+sets.
+The ingest based model sometimes felt misaligned with the value customers derived.
+It also incentivized data filtering at the source, potentially losing valuable context.
+So Splunk comes up with this infrastructure licensing model.
+These are physical or logical cores, virtual cores, etc., and Splunk uses the CPU's reported by the
+operating system.
+Splunk.
+Internal log data.
+Duplicate data and metadata don't count against your licensing.
+And remember, all search heads and indexers count towards Vcpu capacity.
+Just like all search heads and indexers count towards data ingestion and the other licensing type.
+These are the components that need to be licensed back to volume based licensing for a moment.
+What if you exceed your Splunk volume?
+If you exceed your licensed daily volume on any one calendar day, you get a warning, but search is
+not disabled.
+But here's the tricky part licenses volume of less than 100GB per day.
+If you generate 45 license warnings within a 60 day period, you're in violation and that license stack
+will not be searchable.
+You need to contact Splunk to reset that license.
+So if your volume is over 100GB per day, Splunk does not disable your search.
+I guess they assume you're paying more money for Splunk, so they're not going to disable your search.
+Anything that indexes data needs a license.
+So that could include heavy forwarders though not always.
+There is a forwarder license as well that doesn't cost any money.
+Search heads and indexers definitely need licenses.
+In a distributed environment.
+You will set up a license manager and have all licensed components of Splunk.
+Talk to the license Manager to get their license.
+License pools are created from licensed stacks.
+Specific quantities of licensing volume can be allocated for specific purposes.
+The License Manager manages all the license pools, indexers, and other Splunk Enterprise components
+that need licenses are assigned to a particular license pool.
+Splunk recommends not assigning forwarders to a license pool since they have unique license types,
+usually a forwarder license.
+So here's how this looks a license group is a set of licenses that can be installed together.
+A license manager can only manage one license group.
+So this is your big bucket.
+All of your licenses are in your license group.
+When you purchase licenses from Splunk, they come in a license file.
+You can purchase more than one license file that has different capabilities.
+And you can stack those license files.
+So the capabilities add up.
+That's called a license stack.
+Now you can take the combined resources of a license stack and assign them to a license pool.
+The pool can contain all of the license stack or some of the license stack.
+License pools are created to assign to specific resources that need specific capabilities.
+I know this is a little bit confusing, but I encourage you to read the Splunk docs on licensing as
+well.
+
+
+=== Intermediate Searching and The Future with SPL2 ===
+
+
+--- Configuration Files, Apps, and Add-ons ---
+
+Configuration files and apps.
+And this will just be an introduction.
+We'll have more to say on configuration files and apps throughout the course.
+Everything Splunk does is governed by configuration files.
+Configuration files are stored in the Etsy directory, either in the root Splunk Etsy directory or in
+the app Etsy directory, and they have the dot conf or conf extension configuration files are layered.
+That is, you can have configuration files that have the same name in different directories, and the
+precedence depends on what you're actually doing.
+In Splunk there's a tool called Be tool that shows you exactly how Splunk is determining which configuration
+files to use.
+The Etsy app name default directory contains pre-configured versions of conf files.
+You shouldn't edit these conf files.
+You should edit the local directory conf files.
+If you look inside a configuration file, it's really pretty simple.
+They're built on stanzas and then under stanzas they have attributes and values.
+It is important to note that Splunk s global configuration files are found in the directory Etsy and
+then system.
+And you can see a list of the global configuration files here under default.
+Remember don't ever edit the default files.
+That's what the local directory is for.
+And just for fun, let's have a look inside the inputs conf file a very important configuration file.
+And here we see how configuration files are built.
+They're built on stanzas and attributes.
+The majority of apps in Splunk are made from configuration files as well.
+Apps extend Splunk functionality and enhance the user experience with built in dashboards, reports,
+alerts, saved searches, and all kinds of other things.
+There's another category called add ons.
+Add ons primarily support apps.
+They enrich the incoming data with tags, data models and data sets.
+Apps and add ons can be created by individuals, third party companies, or Splunk.
+Apps and add ons built by Splunk carry the Splunk build logo apps and add ons that are certified by
+Splunk carry the Splunk certified logo.
+An app is a collection of mostly Splunk configuration files, but also includes views, knowledge objects,
+and sometimes add ons.
+An add on is a subset of an app, and they specify data collection, but don't have graphical user interfaces
+that you can interact with.
+Okay, we covered a lot in this section.
+We covered Splunk deployment topologies and when to use them for both Splunk Enterprise and Splunk Cloud
+Platform.
+We talked about indexes and how Splunk stores data.
+We went over the exciting world of licensing, and we talked about extending Splunk with apps and add
+ons.
+I really thank you for joining me in this section, and I'll see you in the next one.
+
+
+=== Splunk Practice Tests ===
+
+
+--- Getting Data In and The Splunk Data Pipeline ---
+
+Welcome to this short but very important topic of getting data into Splunk.
+In this section we'll talk about Splunk data pipeline.
+We'll go over general input types for Splunk.
+And then we'll talk about heavy and universal forwarders.
+After this section, we'll be well prepared to build our lab and start installing Splunk.
+In the next section the Splunk data pipeline.
+Let's review the Splunk data pipeline recall from earlier in the course where we talked about Splunk
+data pipeline.
+I said we'd talk about it again later.
+And well, that time is now.
+So we have input parsing indexing and search.
+And we have specific things that Splunk does at each of these stages.
+And we also have specific components that Splunk uses at each of these stages.
+In the input segment, Splunk software consumes the data.
+It acquires the raw data stream from its source, breaks it into 60 4k blocks, and annotates each block
+with some metadata keys.
+This is from Splunk documentation.
+The keys apply to the entire input source.
+Overall, these are the default fields.
+They include host, source and source type, among others.
+It is important to note that during this phase, Splunk Software does not look at the contents of the
+data stream.
+So the key is applied to the entire source, not to the individual events.
+In fact, at this point, Splunk Software has no notion of individual events at all, only the data
+stream.
+During the parsing segment, the Splunk software examines, analyzes, and transforms the data.
+This is also known as event processing.
+This is where it actually creates events out of the raw data stream.
+Remember, events represent a single line of data that has, at a minimum, the Splunk default fields
+of time, host source, and source type.
+And it does any transformations needed on the data.
+So if you have a specific regex field extraction for that data source that's taken care of in the parsing
+phase during indexing, Splunk indexes the data.
+It stores the data on disk in buckets.
+It writes both compressed raw data and the corresponding index files into those buckets.
+And finally, in the search phase, this is where Splunk and the user manages all aspects of how the
+user accesses, views and uses the indexed data.
+When we're interacting with Splunk, web building reports, alerts and dashboards, building and storing
+other user created knowledge objects, and of course, the search engine or the search process itself.
+
+--- Splunk Inputs ---
+
+Let's take a look at Splunk general input categories.
+Data comes from somewhere in the organization.
+Often it's a data lake that has unstructured or semi-structured data.
+And also often it comes from databases that really contain structured data in rows and columns and related
+tables.
+It's becoming more common to have message queues, and Splunk can accept message queue data through
+scripted and API inputs.
+This is like pub sub data, if you're familiar with that.
+Software as a service and platform as a service, data is super important to consume.
+So we're talking about things like HubSpot, Salesforce, ServiceNow, slack and Teams workday.
+All of the SaaS and pass platforms that modern workplaces use.
+Splunk can and should consume all of this data for analysis and also infrastructure as a service.
+If you have infrastructure on Amazon Web Services, Google Cloud Platform, Microsoft Azure, or even
+Oracle Cloud Infrastructure, then we have file and directory inputs.
+We can monitor files and directories both locally, meaning on the same search head instance or remotely
+using a forwarder.
+Or we can actually just send TCP data straight to Splunk if we want to.
+Although best practice is to use a forwarder.
+Splunk can also monitor compressed files.
+We can upload data to Splunk.
+Uploaded data is usually used for one time analysis, which is what we will do with our sample homework
+data.
+And it's important to note that Splunk has a monitor no handle.
+This is for windows hosts and monitors files and directories that the system rotates automatically.
+This is a windows thing where there are certain directories that windows will rotate automatically.
+Splunk has a input category that can handle that data.
+Next is network inputs.
+This is data from TCP and UDP.
+Splunk does not recommend sending UDP data to Splunk because there's no guarantee that it'll actually
+get there.
+So TCP is the standard we should use.
+Although Splunk can accept data from UDP, syslog is really popular, but it's not best practice to
+send syslog straight to Splunk.
+You should use the Splunk Connector for syslog.
+And then of course we have windows inputs.
+I already talked about monitor no handle, but Splunk can also monitor and forward event logs, registry,
+Active Directory, windows Management, Perfmon, etc..
+Some other data sources that we should talk about that are important Fifo first in first out queues
+is data that you don't intend to keep in the Splunk environment.
+Perhaps the data is stored somewhere else, but you still want to run it through Splunk for analysis.
+So this data is not stored in Splunk, but you still want to analyze it even though it's stored somewhere
+else.
+So we can do that with Splunk using Fifo queues.
+Metrics.
+Metrics represent a single measurement at a specific point in time.
+They are multidimensional.
+So many databases or SaaS applications might send metric based data.
+SNMP or network monitoring data could very well be metric data.
+So Splunk can handle this type of data as well.
+And then modular inputs allow you to build functionality for ingesting unique data inputs.
+For example, if you have a little script that has to query a specific thing on a database, that would
+be a modular input.
+It's also good for handling sensitive or complex data.
+And I would be remiss if I didn't talk about the heck the HTTP event collector the heck comes built
+into Splunk Cloud, but for Splunk Enterprise you can install the heck and collect web based data.
+So HTTP Event Collector lets you send data and events over the HTTP.
+
+--- Configuring Inputs ---
+
+Basic settings for an input.
+There are really three ways to set up an input in Splunk.
+The first one is through an app.
+Many apps have pre-configured inputs.
+When you install an app from Splunk base, either a vendor app or Splunk made app, they often come
+with pre-configured inputs.
+For example, the Splunk app for Microsoft Exchange comes with a bunch of pre-configured inputs that
+are just built to handle Microsoft Exchange data.
+We can also configure inputs through Splunk Web.
+We just go to settings and then Data inputs.
+There's also guided data onboarding or Gdo.
+If you go to settings and then add data, you can go through a little wizard that asks you what kind
+of data do you want to import?
+And it will guide you through getting that data into Splunk.
+And then everybody loves the command line interface, the CLI.
+So we can, as we did earlier in this course, Splunk add monitor path that's in Linux or in windows.
+Splunk add monitor path.
+We can also edit configuration files directly for forwarders.
+The inputs conf file controls how the forwarder collects data and the outputs conf file controls how
+the forwarder sends data.
+
+--- Forwarders ---
+
+Splunk forwarder types.
+We've talked about these before, but Splunk has two main forwarder types and there are others as well.
+But these are the ones that you will most often see.
+The universal forwarder and the heavy forwarder.
+The universal forwarder collects data from a data source and forwards it to a receiver.
+And that's about it.
+You configure data that you want it to forward and it just forwards it.
+It's kind of a dumb but lightweight agent.
+We configured a universal forwarder earlier in the course.
+Interestingly, the source could be another forwarder in a highly distributed Splunk environment, but
+it's most often data that you want to capture from a remote system.
+Both types of forwarders forward data to either indexers or index clusters, or index search head combos.
+The universal forwarder is the only component that is not a full Splunk Enterprise instance.
+Heavy forwarders, on the other hand, are full enterprise Splunk instances.
+It's an advanced type of forwarder and you do need to apply a forwarder license.
+Forwarders can parse and index data as well as forward data.
+Quick review of steps to configure a universal forwarder.
+And we went over this in detail earlier in the course.
+But basically you can figure receiving on a Splunk indexer or search head.
+You download and install the Universal forwarder on the remote system.
+You configure the least privileged user in Linux, which is Splunk.
+Then you configure the universal forwarder to send data and where to send it to, and you can configure
+it to collect data from the host system before it sends.
+Quick note in ubuntu to start it is Splunk start in windows.
+You can do Splunk Start or you can go to the Windows Services panel.
+Right click on the forwarder service and start it that way.
+And high level overview of heavy forwarder configuration steps.
+Still, we configure receiving on the indexer or search head.
+We install a full Splunk Enterprise instance.
+We enable forwarding on the instance by going to Settings Forwarding and Receiving and Configure forwarding.
+So it's kind of like configuring receiving except it's just configuring forwarding.
+That was a fun section wasn't it.
+In this section we covered the Splunk data pipeline.
+We talked about types of inputs for Splunk.
+And we talked about heavy and universal forwarders and the basic steps to install them.
+Thank you for joining me in this section and I'll see you in the next one.
+
+--- Introduction ---
+
+Installing Splunk.
+In this section we're going to install Splunk search head slash indexer combos as well as Splunk Universal
+and Heavy Forwarders and will forward data into our search head slash indexer combo.
+Before we do that, I want to show you how I created my lab that I'm using to create this class.
+We'll walk through every step.
+We'll download and install a hypervisor, in my case, VirtualBox.
+We'll download and install a Linux operating system image.
+In my case Ubuntu Server.
+We'll install and configure ubuntu on the virtual machine.
+Then since I'm operating in a windows environment, I'll download and install Putty, which is a remote
+access terminal for windows users.
+That's a lot easier to use, at least in my opinion, than VirtualBox.
+Then I'll show you how to clone the virtual machine, and we'll use the Linux machine to forward data
+into the first Linux machine, which is our search head indexer combo.
+Then I'll show you how to create a windows Virtual machine by downloading the Microsoft Windows trial
+and installing that on a virtual machine.
+After we create the lab, then we'll install Splunk on the virtual machines.
+We'll install Splunk on the Linux machine.
+That's going to act as my main search head, index or combination.
+Then we'll clone that machine so it will have the exact same version of Linux and the exact same settings,
+but it will begin as a heavy forwarder.
+The third machine, the windows machine, will serve various purposes, and I will also install Splunk
+on a mac, but that's not going to be part of my virtual machine stack.
+That's actually going to be my Mac laptop.
+Then we'll install and configure heavy forwarders.
+We'll do heavy forwarders before we do universal forwarders because in my opinion, heavy forwarders
+are actually easier to install.
+Then we'll install universal forwarders and I will do windows, Mac and Linux for all of these.
+At the end of building my lab, here's what it looks like.
+I have two Ubuntu Linux machines, one called Splunk.
+That's my main search and indexer combo, and one called Splunk.
+Then I'm going to use for Linux forwarders and a third machine called Splunk Windows that I'm going
+to use for various purposes.
+And again I have my Mac laptop as well.
+We'll also talk about how to get data into Splunk Cloud platform with a forwarder.
+You should have installed Splunk Cloud Platform in section one, but it's really easy.
+You just go to Splunk Comm and create yourself a 14 day free trial.
+So let's get started building the lab.
+And again, this is optional, but I'll see you after the lab video.
+
+--- Building a Lab (With Demo) ---
+
+To install VirtualBox we're going to first go to virtualbox.org.
+And then over in the Get Started box click download.
+Then on the left you'll see all the options for downloading.
+Pick the operating system that you're using I'm using windows, but as you can see Mac, Linux and Solaris
+are all supported.
+Once you download the VirtualBox installer from VirtualBox, it brings up the standard windows installation
+wizard, and you can just click on next.
+On most of these things.
+However, there is one thing I will change.
+I don't want a shortcut in the quick launch bar.
+Now we have VirtualBox up and running, which is the hypervisor.
+But to create a virtual machine we actually need an operating system.
+So let's download a distribution of Linux called ubuntu.
+If you're more familiar with another version of Linux, you're welcome to download that one as well.
+And here I have ubuntu.com and I'm going to download Ubuntu Server.
+And to do that we go up to products and then click on Ubuntu Server.
+Then click on Download Ubuntu Server.
+Then grab the latest version and we'll have the ISO in our downloads folder.
+Now we can create a new virtual machine because we have an operating system.
+So click on new and we'll fill out the virtual machine information.
+I'm going to call this one Splunk.
+The ISO image will have to point it to which is in our downloads folder.
+And make sure everything looks good.
+Linux ubuntu, ubuntu 64 bit I like the unattended install.
+It's really nice.
+Make note of your username and password.
+These will be your admin credentials on your new Linux machine.
+And we're going to pump up the hardware a little bit because I know we're going to install Splunk on
+this.
+So let's make the base memory eight gigs and give it at least two processors.
+And on the hard disk we don't want a wimpy 25 gig.
+Right.
+Let's make it at least 50 gig for Splunk.
+Everything else is fine.
+So let's go ahead and click finish.
+Oh, don't forget to put that password up there for the unattended install.
+Now we can simply click start to start the virtual machine and start the unattended install which VirtualBox
+is now doing.
+If we open the virtual machine we can actually see Ubuntu Linux being installed.
+Once it's finished to clear some of this screen.
+I'm just going to type the word clear.
+Now notice we are the root user.
+So after Linux installs in the unattended install it gives us root user access.
+So I'm going to use this opportunity to do a Linux update in ubuntu.
+That means apt get update.
+I also want to be able to remotely connect to this machine using SSH.
+So once this update is installed, I'm also going to install OpenSSH server.
+And to do that I'll use apt space install.
+OpenSSH server.
+This will let us connect using our terminal in another Linux box, or our terminal in a mac OS environment,
+or a program called Putty in windows and I'll be using putty.
+So I will show you how to download putty next.
+Keep in mind, though, that it's almost never a good idea to operate as the root user in a Linux system.
+Since I've installed everything I want to install, I'm going to make one more change in VirtualBox
+to this virtual machine, and then we'll restart the system and log in as VBox user.
+I'm going to change the network adapter on this system from Nat to bridged so that it's actually part
+of my network.
+So we're going to go to settings and then network and then change that to bridged adapter.
+And then promiscuous mode allow all just for fun.
+Click okay.
+And let's go back into the machine and simply type reboot.
+And that will reboot our machine.
+And now we can log in as VBox user and the password we created when we created the machine.
+We need to make note of two things.
+What is our IP address by typing IP addr.
+And there it is 192.168.1.46.
+We also need to know whether SSH server is running.
+We can find that out by typing systemctl status ssh.
+Looks like it's disabled.
+So we need to actually start it.
+And we can start it by typing sudo systemctl start ssh sudo gives us temporary root access for this
+one action.
+So we do need our vbox user password.
+This command will make sure that the SSH server is enabled every time you reboot your machine.
+The next thing we need to do if you're on a windows machine is download and install putty.
+Putty makes it so we can remotely connect to any of our machines through SSH, and it gives us an enhanced
+user experience and the ability to copy and paste which VirtualBox console does not allow us to do.
+From putty.org.
+Click on Download Putty and then let's download the MSI installer for 64 bit.
+Because I'm running Windows 11 for the sake of time, I won't show you me going through the windows
+installation wizard for putty.
+Once you have putty installed and our virtual machine is operating, we need to type in the IP address
+here in the hostname.
+Remember what it is 1.46.
+Click open.
+Accept that and we'll log in as VBox user and the same vbox user password.
+Now we're in our machine remotely.
+Since I've configured everything I need to configure in this virtual machine, I'm going to consider
+it my gold standard virtual machine.
+For this course, we'll need a few virtual machines.
+So let's shut this one down.
+As the gold standard.
+We can use the shutdown command or simply right click on the machine in VirtualBox.
+Choose stop, then choose Acpi shutdown.
+Once it's fully shut down, we will clone the machine to make an exact copy by right clicking and choose
+clone.
+Now let's name this new machine Splunk F1, because we're going to install a Splunk forwarder on it
+later.
+Click finish and the machine will begin copying.
+Now we have Splunk machine.
+I want to change one setting on it by selecting the virtual machine, then clicking settings at the
+top and then network so that the network doesn't think it's the same machine.
+So just refresh that Mac address a few times and click okay.
+To create a windows Virtual machine we first need to download windows.
+So I went to the Microsoft Software Download Center and Windows 11 using this URL.
+And make sure you use the ISO for x64 devices.
+Choose Windows 11 and download.
+Now choose your language and confirm.
+And then choose 64 bit download and save it in your downloads folder.
+This is a large file, so it could take some time.
+Once the file is downloaded, we can create a new virtual machine by clicking on new.
+I'm going to call this machine Splunk Windows.
+Then for ISO image I'm going to point it to the ISO image we just downloaded.
+It's in our downloads folder.
+So I'm going to choose other and it will go to our downloads folder.
+And there's our file right there.
+The type looks good and the version looks good.
+So let's do our unattended install.
+This is where it installs without much user input at all.
+I'm going to use the VBox user default username, and I'm going to check that guest edition's box.
+This will install VirtualBox Guest Additions, which has a lot of tools that enhance the virtual machine
+experience under hardware.
+I'm going to give this machine at least eight gigabytes of Ram or memory and at least two processors.
+Remember, this is windows and I'm going to give it at least a 100 gig hard drive.
+Everything else looks good.
+But where is that finish button not lighting up?
+Oh, I forgot to put the password in the unattended install.
+Now you can see VirtualBox is starting the unattended install and we can watch it happen.
+It does need your input for the product key.
+For our purposes we can just select I don't have a product key.
+And it will let us do a free trial of Windows 11 which is sufficient for this course.
+While it's getting things ready for us, I'm going to go back to VirtualBox And change our network adapter
+by going to settings, then network, and then change that Nat to bridged.
+That way it will be on our network and we can allow all promiscuous mode just to be crazy.
+And click okay.
+And our windows machine is finally finishing up.
+And the next thing I want to do is install VirtualBox guest additions.
+So I'm going to go to File Explorer and you'll see a CD drive there with VirtualBox guest additions
+mounted.
+We're just going to run this little script and it will install guest additions for us automatically.
+Then I'm going to restart the machine.
+And now we have a running Windows Virtual machine.
+
+--- Forwarding Data into Splunk Cloud Platform ---
+
+Instructor: Forwarding data
+into Splunk Cloud platform.
+And for this we're going to use a Windows Forwarder.
+I'm gonna list the steps here as an outline,
+but then of course, follow along as I do the demo.
+So the first step is to go back
+to our Splunk Cloud Platform search head
+that we already provisioned.
+We're gonna click on the "Universal Forwarder" button
+to download the Universal Forwarder Credentials package.
+This is unique to forwarding data to Splunk Cloud.
+We're gonna copy the Universal Forwarder
+credentials package, which is an SPL file
+to the machine from which we intend to forward data.
+It's obviously not going to be the same machine,
+we would never install a forwarder
+on the same machine
+that an index or search head is on.
+On the forwarding machine or the same machine,
+go to Splunk and download the Universal Forwarder
+and run the installer package, the msi package.
+Remember this is Windows.
+On the Wizard setup screen,
+accept the license agreement
+and select a "Splunk Cloud instance".
+We're gonna click the "Customiz Options" button
+and make sure we run the Universal Forwarder
+as a local system account.
+In a production environment,
+you might wanna run it as a domain account,
+but we're just doing a demo,
+so we're gonna run it as a local system account.
+On the Credentials screen,
+uncheck "Generate random password".
+We're going to need to know the username and password
+when we provision the Universal Forwarder
+credentials package.
+The next screen will ask for a deployment server,
+which we don't have, so skip it
+and then click "Install" on the final screen.
+This will install the
+Splunk Universal Forwarder
+in Splunk home for Windows Forwarders,
+which is in "c:\Program Files\Splunkuniversalforwarder\".
+Next we're gonna open an elevated command prompt
+by typing "cmd" into the search bar.
+And then right click on "Command Prompt"
+and select "Run as administrator".
+Once we're in the command line,
+we're gonna go to the Splunk home directory
+and the bin subdirectory.
+Remember, a lot of the Splunk executables
+are in the bin subdirectory.
+So we're going to go
+"cd\Program Files\Splunkuniversalforwarder\bin".
+Then we're going to install
+the Splunk Universal Forwarder credentials package.
+In my case, I just stuck it in the downloads folder
+when I moved it to the forwarding machine.
+So this would be my command line,
+"Splunk.exe install app"
+and then "c:\users\&lt;user name>"
+which in my case is going to be vboxuser,
+and then,"\downloads\splunkclouduf.spl".
+You may have put the splunkclouduf.spl
+in a different folder.
+Just modify this command as you need.
+And then finally,
+we will restart the Splunk forwarder
+using "Splunk.exe restart".
+And down at the bottom is the relevant Splunk doc
+that you can also follow.
+Now that we have our Splunk Cloud search hit
+up and running, let's get some data into it
+by downloading the Universal Forwarder credentials.
+So I'm gonna click on "Universal Forwarder" over here
+and then click on the "Universal Forwarder
+Credentials" button.
+This is gonna download a file
+called "splunkclouduf.spl".
+And then I'm gonna move that file over
+to my Windows virtual machine
+that I'm using for forwarders.
+And there it is in Downloads.
+We only need to use this spl file
+to connect forwarders to Splunk Cloud instances.
+So once I have that file downloaded,
+the next step is to download the Splunk Universal Forwarder.
+And I'm going to be using this Windows machine
+to download the universal forwarder for Windows.
+So first, let's go to splunk.com
+and log in with your account
+or create a new account
+by clicking on that "Free Splunk" button up there.
+That will take you to the downloads page again,
+and we can just click "Free Trials and Downloads".
+Scroll down to Universal Forwarder
+and click "Get my free download".
+And let's download the one for Windows 11,
+since that's what my virtual machine is.
+And we have to accept the terms
+and click access program
+and it will download the file.
+We'll go ahead and run it,
+and we'll get the Wizard
+to install a Windows Universal forwarder.
+In this case, we're gonna choose a cloud instance.
+Go to "Customize Options",
+make sure you rent it as a local system account,
+and let's check all the boxes.
+We want as much data as we can possibly get in here.
+Click "Next" and put in a username
+and make sure you uncheck
+that little "generate random password" box
+because you'll see later that we'll actually need to know
+what the password is when we install that spl file.
+So put in a username and a password
+and click "Next".
+We don't have a deployment server,
+So click "Next"
+and then go ahead and click "Install".
+And once it's installed, click "Finish".
+And let's go to the command prompt
+by typing "cmd" in the search bar.
+Right click on that and run as administrator.
+We're gonna go to program files.
+And then the directory "Splunk Universal Forwarder",
+which is the default Splunk directory
+for Windows Universal Forwarders.
+And let's go to the bin directory.
+Remember, bin is where a lot
+of the Splunk executables are.
+So we wanna do Splunk.exe, install app,
+and then the file path to the spl file we downloaded.
+In this case, it's
+"c:\users\vboxuser\downloads\"
+and then the file name.
+And this is where it will ask
+for the credentials you came up with during installation.
+And now that's installed,
+we need to restart the Splunk Forwarder for it to work.
+So we just do "Splunk.exe restart".
+And now let's check our cloud instance
+and see if data is coming in.
+So go to "Search and reporting"
+and just type in "index=*".
+Leave the time picker, it lasts 24 hours.
+Click on the magnifying glass
+and see all that beautiful data coming in.
+
+--- Install Splunk Enterprise on Linux ---
+
+Installing Splunk on Linux, and this will be the search head that I'll use throughout the course.
+So we need to go to splunk.com.
+And we can either create an account or log in now or just click Trials and Downloads.
+It will make us create an account or log in later.
+Under Splunk Enterprise click Get My free trial.
+And now it's going to make me create an account or log in with an existing account.
+And we'll be brought to this page where we can choose windows, Linux or Mac OS choose Linux.
+And of the choices here, I like the tarball or the.
+We're going to copy the wget link.
+And paste it.
+But first typing sudo into our Linux machine I've logged in to this virtual machine using putty, and
+I'm using sudo before I paste the wget string so that I can get temporary Superuser access to take this
+action.
+And type the password for vbox user.
+This is what we set up when we actually built the machine.
+Now we're going to verify that the file has been downloaded.
+And there it is.
+The file is a tgz file which is colloquially known as a tarball which means it's a compressed package.
+So we need to untar it and we can do that.
+And at the same time copy it to the directory in Linux that we want that Splunk wants to live in, which
+is the opt directory.
+Now let's untar it.
+We're going to use sudo then tar xvf the name of the file dash capital C and slash opt because Splunk
+likes to live in the opt directory in Linux.
+Then it's going to unpack that tarball into the opt directory.
+And once we're done, let's move to the opt directory, then to the Splunk directory, then to the bin
+directory.
+And we'll start Splunk by typing sudo dot slash Splunk start.
+And here's a little trick you can do dash dash accept license.
+And you won't have to read the license agreement.
+Now it's going to ask you to create an administrator username and password.
+I'm just going to use admin and a password of my choice.
+Then Splunk will start.
+And it'll say waiting for the host to be available.
+Once it's available we can see the URL.
+Since I don't have DNS set up in my lab, we're just going to use the IP.
+I'm going to clear the screen.
+And then to get the IP address we simply type IP space addr.
+And there we can see the IP address is 192.168.1.152.
+So we simply need to put that in our browser and add on a colon.
+Then 8000 for port 8000.
+Now we'll simply open our browser and go to our IP address colon 8000.
+And we'll log in with the admin credentials that we created earlier.
+And now we've installed Splunk Enterprise on Linux because this is going to be a search head I always
+like to make sure I configure receiving.
+So I don't forget about it later because we're going to be forwarding data to this search head.
+So we want to make sure this search head is listening for that data.
+So let's go to settings.
+Forwarding and receiving.
+Configure.
+Receiving.
+Choose new receiving port.
+And the default port for receiving is 997.
+So we will use that port save.
+And now we have a listen on this port 997.
+And our Splunk Enterprise search head is ready to go.
+
+--- Forwarding Data into Splunk on Linux ---
+
+Installing and configuring universal forwarders.
+Now, weirdly, sometimes installing and configuring universal forwarders is a little bit more involved
+than installing and configuring heavy forwarders.
+So we'll start with the most involved one.
+And that's Linux universal forwarders.
+The basic steps are to of course enable receiving on the search header indexer or search index or combo
+first.
+We've already done this part.
+This is why we enabled receiving.
+Each time we install the search head indexer.
+Then we'll download the Splunk Universal Forwarder for Linux.
+And then in Linux, create a dedicated user and group called Splunk for.
+This is security best practice you would never want to.
+For example use a root account for Splunk forwarding.
+Then we'll extract the tarball into opt, which is where Splunk likes to live.
+Then we'll start the Splunk forwarder and it will ask us to create admin credentials, just like starting
+the Splunk search head for the first time.
+Then we'll add the search head indexer as a target and it will actually modify the outputs dot conf
+file.
+And we'll begin monitoring data from specified locations.
+In our case we'll use var log.
+To download the Universal Forwarder for Linux, log in with your Splunk account.
+Go to Trials and Downloads.
+Click on Linux and then select the correct installation package for your distribution of Linux.
+For me it's Ubuntu Server 64 bit, so I'm going to use the 64 bit installation package.
+Then I'll simply click on copy wget link and copy that link.
+And then in putty I'm going to type sudo.
+So I can do this as a superuser User temporarily.
+Then I'm going to right click and it will paste the wget link.
+I'll of course have to type in my credentials and it will download the Splunk forwarder tarball the
+tgz.
+As you can see there, now we have to extract the Tgz as well as copy it over to opt where Splunk likes
+to live, just like when we installed the search head.
+So we'll do tar Xvf Xzf.
+Then the file name dash c slash opt.
+Now if we move to the opt directory.
+We can see that we have a Splunk forwarder directory now.
+So let's go to the Splunk forwarder directory.
+And we can see we have some of the same subdirectories as Splunk search head.
+kid.
+The universal forwarder expects a least privileged user called Splunk.
+So what we need to do is create that user and put it in a group of the same name, and then we'll modify
+the Splunk forwarder directory so that Splunk food user is the owner of that directory.
+We do this for a security best practice.
+It's unwise, of course, to run your Splunk forwarder as root or even under sudo.
+To do this I'm going to move back to the root directory.
+And then I'm going to make myself.
+The root user of this machine by doing sudo dash I.
+Now that I'm the root user I can create our Splunk user and group at the same time by doing user add
+dash m Splunk.
+F.
+After I create my user and group, I'm going to change the permissions of the Splunk Forwarder directory
+such that the owner is this new user, Splunk.
+We do this using Owen R, Splunk, Splunk F, then specify the directory for which we want to change
+ownership.
+In this case it's opt Splunk forwarder.
+For our final step we just need to add a forward server.
+And then we need to add some data to monitor and forward.
+Before we do that, I'm going to clear out some of the clutter on the screen by using the clear command.
+And let's go back to opt Splunk Forwarder and the bin directory.
+And notice that I'm still in route and I don't recommend this.
+So if you're using a Non-root account, make sure you type sudo before the following commands.
+Now this writes directly to the outputs conf file, but it's easier to do it this way.
+So we go splunk add forward dash server and then the IP address of the search head colon 9997 which
+is the port.
+And the server is the search head that I created a while ago.
+And don't worry about the IP address.
+It has changed since I rebooted it since I created that search head.
+But of course we're going to do port 9997.
+Read and accept the terms of service and then create an administrator username and password.
+Again, I'm just using admin and a password of my choice.
+And now it says we've added forwarding to that address.
+Now that adds that to the outputs conf file.
+Now we forward the data, we have to give it some data to forward.
+And like I said var log in Linux systems is usually pretty busy.
+So when we're doing tests like this I like to do var log as the data source.
+So all we do is Splunk ad monitor var log.
+Now let's go back to our search head and see if that data is actually coming in.
+I'm going to choose on the time picker the last 15 minutes.
+So we're sure that it is indeed the data that I just tried to send to this search head.
+And I'll just do a simple broad search of index equals main.
+And there it is.
+Look at all that beautiful data.
+
+--- Install Splunk Enterprise on Windows ---
+
+Installing Splunk on windows is pretty straightforward.
+Since this is a fresh install, it's going to give me the first time user experience for edge.
+But all we need to do is go to Splunk Comm and either create a new account or log in.
+And click on Trials and Downloads.
+And then scroll down to Splunk Enterprise and choose Get My Free Trial.
+And now we're already on Windows 10.
+So click Download Now.
+Read and accept the Splunk general terms.
+And it will begin the download.
+Now we simply need to run the downloaded MSI file.
+And go through the installation wizard.
+Accept the license agreement again.
+I like to click on Customize Options.
+Make sure it's installing it where I want to install it.
+Next we need to choose local System or domain account.
+If you are in an Active Directory domain, you probably will want to set this up in a domain account.
+For now I'm going to choose local system.
+Now we're going to create admin credentials.
+And make note of these.
+Click next and then install.
+Then the setup wizard runs the installation for Splunk Enterprise.
+And I'm greatly speeding this up.
+This can take a few minutes.
+And once it's done we can simply leave that checked.
+That says Launch Browser with Splunk Enterprise.
+And then log in with the admin credentials that we already specified.
+One thing I'm going to make sure we do on all of our Splunk search head installations is enable receiving.
+Because when we start forwarding data to this Splunk search head, we have to make sure receiving is
+on and enabled on the right port.
+So let's go to settings and then forwarding and receiving.
+And then configure receiving.
+And new receiving port.
+And the default port for forwarders is 997.
+Click save.
+And now we can see that receiving is turned on or listening on port 997.
+
+--- Forward Data into Splunk on Windows ---
+
+Installing a universal forwarder on windows.
+First, we'll configure the indexer in firewall on Windows, we need to set up the firewall so that
+port 997 is open for receiving data.
+Then we'll download the Splunk Universal Forwarder from Splunk Comm.
+We'll download the windows MSI installer and then we'll run it selecting the virtual account user.
+So first of all.
+Let's go to our Windows Firewall by searching for firewall.
+Right click on Windows Defender Firewall with Advanced Security run as administrator.
+And we're going to go to inbound rules.
+And on the right side let's choose new rule.
+We'll select port and we will apply it to TCP.
+And on the specific ports we're going to put 9997.
+We'll choose Allow the connection and domain, private and public are fine.
+And let's just name it Splunk.
+So we know what the rule is and what it's for.
+And there we can verify our rule is now in the firewall rules.
+Now let's start Splunk.
+And even though I know we've already configured receiving let's just double check that receiving on
+port 9997 is active.
+So we'll go to Settings Forwarding and Receiving and then configure receiving.
+And we can see there that 997 is enabled.
+Now check this out.
+We are also on Splunk ten.
+I upgraded this from Splunk nine to Splunk ten.
+It's very easy to do that.
+You just download the newest Splunk MSI installer and simply run it.
+The installer will detect that you already have Splunk installed and ask whether you want to upgrade
+when you upgrade, whether in Windows or Linux, it will not touch your configurations or your configuration
+files.
+So we'll run through the Linux upgrade.
+In the next section, I'm going to move to the Windows Forwarder machine and download the Splunk Universal
+Forwarder for windows by going to Splunk Comm and logging in with my account.
+And I'm going to go to trials and downloads and scroll down, find the Universal Forwarder.
+Click Start Download and choose the appropriate one for you.
+I'm on Windows 11 so I'm going to choose Download now.
+And accept the Splunk General License terms by clicking the box and then Access Program.
+And it should automatically begin your download.
+Once the download is finished, you can find it in your downloads folder.
+And just double click to install.
+In the installer, we'll choose an on premises Splunk Enterprise instance, and we'll make sure to check
+the box that says accept this license agreement.
+And I like to do customize options.
+It gives me a little more control over the process and I don't really care where it's installed.
+The default file path in program files is just fine.
+And I'm going to skip the SSL certificate.
+I'm going to choose virtual account for the user.
+This is a good idea and it's somewhat new in Splunk.
+Universal forwarder using the virtual account can still access all the data you need without some of
+the security risks.
+Here's how you grant that virtual account permissions.
+And for fun, I'm just going to check all of these boxes because I want to get the most data in in the
+least amount of time.
+And you do have to create a username.
+But I like to just keep it as a generate random password.
+You almost never need it for deployment server.
+We can skip this screen.
+We're not running a deployment server right now, and on the next screen we'll put in the IP address
+of the Splunk Windows search head.
+And the port is 9997 next.
+And then install.
+And this will take a few minutes I'm speeding it up in this video.
+And then click finish.
+And let's go back to our search head.
+And click on the Search and reporting app.
+And I'm going to change the time picker to last 15 minutes.
+And I'm going to do a very broad search.
+Index equals main.
+Click search.
+And watch all that beautiful windows data coming in.
+
+--- Install Splunk Enterprise on Mac ---
+
+To install Splunk on a mac, we go to Splunk Comm.
+Then either create a new account or log in with your existing account.
+And click Trials and Downloads.
+And then under Splunk Enterprise click Get My free trial.
+And select the Mac OS tab.
+Now you can install this in the same way as any Linux Splunk installation, but for Mac I'm going to
+use the DMG, which is the Apple disk image, and it contains a compressed copy of all of the contents
+that we need.
+Save the file.
+And once it's done downloading, I'll run the installer.
+And Mac's going to have a lot of pop ups about different security features.
+Do you want to allow Splunk to do this and this.
+You'll just have to agree to all of them.
+And then Splunk will pop up a terminal once you click okay on Splunk's little helper.
+And it'll ask you to create an administrator username and password.
+I'm just going to go with admin and a password of my choice.
+Now you'll get Splunk Little Helper.
+Again.
+Just click on Start and Show Splunk and it will run the Splunk starting script.
+And then it says waiting for the web server to be available.
+And once that's done.
+Open a browser and go to localhost colon 8000.
+And log in with the admin credentials that we created.
+And now we have our Splunk instance fully up and running.
+And since I know this is going to be a search head, I'm going to configure receiving before I forget
+later and have to troubleshoot.
+So let's go up to settings and then forwarding and receiving.
+And then configure receiving.
+And then we'll choose new receiving port.
+And we'll use the default port of 997 and click save.
+And now we've successfully installed Splunk on Mac OS.
+
+--- Heavy Forwarders ---
+
+Configuring a heavy forwarder in Splunk.
+No matter what operating system you're using is the same when you're using Splunk user interface.
+So I'm now logged in to my Splunk machine that we created in another video.
+So let's go to settings.
+Forwarding and Receiving.
+And let's look at two things forwarding defaults and then configure forwarding.
+If we go to forwarding defaults we'll see that we can save a local copy of forwarded events on this
+Splunk instance.
+And we can configure forwarding by of course clicking on Configure forwarding.
+Now there are no forwarding configurations yet.
+We haven't told it to forward any data.
+So all we need to do is click on New Forwarding host.
+And then type in the IP address of Splunk search head or indexer.
+Or in our case the search head indexer combo that we've already created.
+Now don't worry if the IP address has changed since the last video you watched.
+As I'm restarting my virtual machines when I'm doing demos, my DHCP server may have given the machine
+a different IP address, so just check the IP addresses of your machines as you're forwarding data to
+them.
+So my search head is at 1.52.
+And then the port of course is 9997.
+Then we'll click save.
+Now we've told it to forward data, but we haven't told it which data to forward.
+So let's go back to settings and let's go to Data Inputs.
+For this demo let's just forward data that's already on this machine.
+So let's do files and directories.
+And then we'll choose new local file and directory.
+And now we can actually browse the file system.
+I'm going to pick a directory that I know has a lot of activity in it, and that is the var directory.
+The var directory holds the majority of logs on a Linux system.
+So let's choose the var directory and select and then click next.
+Now the input settings.
+We'll set the source type to automatic.
+And let's change the app context to search and reporting.
+And let's make the host field value something that makes it obviously this machine.
+And since the machine's name is Splunk I think we'll know that it's coming from this machine.
+But let's do underscore Linux.
+So we know it's coming from a Linux machine.
+And for index let's just choose main.
+And we'll click review.
+And submit.
+So now we've built a heavy forwarder.
+Let's go to our search head and see if we can see that data coming in.
+And to access the Splunk UI we do colon 8000 for port 8000.
+Okay.
+The easiest way to check and make sure this data is coming in is to go to the search and reporting app.
+Remember what we put in our host field value.
+We can just search for that host.
+And let's change the time picker to all time just in case.
+And click search.
+And now we have a bunch of data coming in from the host Splunk for Linux.
+In the world of windows.
+I'm essentially going to do the exact same thing.
+Like I said, building a heavy forwarder in any operating system is essentially the same, except when
+you go to the file system, it looks a bit different.
+In windows, most of the logs are stored in windows and then system32.
+So I'm going to monitor that directory.
+And I'm going to change the app context again to search.
+In reporting I'll leave the host value at Splunk Windows since it's obvious that's our windows machine.
+And of course I'll change the index to main.
+And let's go back to our search head and see if there's some windows events coming in.
+And by the way, quotes or no quotes, it doesn't matter at this point.
+Oh look at all that data from Splunk Windows.
+Okay.
+We built a windows and a Linux heavy forwarder.
+
+--- Upgrading Splunk ---
+
+Upgrading Splunk.
+Upgrading Splunk to the latest version is super easy.
+You simply install the new version on top of the existing version.
+That means in windows, you just download the Windows Installer package of the newest version and run
+it like normal.
+The installer will detect that Splunk is already installed and ask you if you want to upgrade.
+And it's pretty much the same with Linux or Mac.
+You download and run the tarball or whatever Linux package you are comfortable with, and you run it
+in the same way that you would run a first install of Splunk.
+The installer detects Splunk already installed and says this looks like an upgrade.
+Do you want to upgrade yes or no?
+So I'll show you how to do that on Linux.
+We'll essentially follow the exact same installation steps as installing a brand new version of Splunk.
+So we'll go to trials and downloads then under Splunk Enterprise Start trial.
+Click on the Linux tab and I'm going to download the Tgz.
+But again you can use whatever package you are most comfortable with, I'm going to copy the wget link
+and paste it into my Linux virtual machine that already has Splunk installed on it.
+Don't forget to do sudo.
+Now it's going to download the Tgz, just like when we installed Splunk for the first time.
+And we can see that it has downloaded version ten.
+And I still have my version nine tgz from when we installed it the first time.
+So I'm going to untar the version ten file.
+So I'm going to do sudo tar xvf.
+And then I'm going to start typing Splunk dash ten and then tab and it will complete that.
+I'm going to do dash C and slash opt.
+So it will copy it into the right directory.
+And now I'm going to navigate to the opt Splunk and bin directory.
+Reminder that for a Splunk install or upgrade to work, Splunk cannot be currently running.
+So if you ran the script that had Splunk start up on machine Start, your Splunk might be running.
+So you might need to do sudo dot slash splunk stop before you do this.
+Okay I'm going to do sudo slash splunk start.
+And it will make me read the end user license agreement unless I do dash dash except dash license which
+of course I didn't do.
+Now notice what happens.
+The installer detects that Splunk is already installed and it says do you want to perform a migration
+and upgrade.
+And it goes through the installation.
+And start Splunk.
+Stance on my network IP addresses change all the time.
+I'm just going to check the IP address of this machine.
+It looks like it's 192.168.1.1.
+So I'll go ahead and put that in the browser with port number 8000.
+And we'll see the regular Splunk login.
+And if we go up to help.
+And then about.
+We'll see that we are in fact now on version ten of Splunk.
+Congratulations on getting to the end of this module.
+We did a lot in this module.
+We built a virtual lab.
+We installed search head and indexer combinations in Linux, windows and Mac.
+We installed and configured both universal and heavy forwarders in Linux, windows, Mac and Splunk
+Cloud Platform, and we upgraded Splunk on both Linux and Windows.
+I hope you enjoyed this section.
+I thank you for joining this section and I look forward to seeing you in the next section.
+
+--- Introduction to Searching and Tour of the Search App ---
+
+Welcome to the core of this course.
+And that is searching.
+This is one of the most important activities we do in Splunk.
+So in this section we're going to talk about searching and what search processing language is also known
+as SPL.
+SPL has two versions SPL and SPL.
+Version two SPL version two is new in Splunk and only used in certain situations.
+However, I want you to be prepared to use SPL two.
+So we'll talk about SPL and SPL two in this course.
+Then we'll talk about the anatomy of a search.
+We'll try to understand the mysteries of time, and I'll walk you through some basic SPL and SPL two.
+They're really not that different from one another.
+Search.
+Processing language.
+Search processing languages Splunk's own language to search through data.
+It's a set of commands used to search, filter, modify, Manipulate, insert and delete data.
+There are two versions.
+SPL and SPL two.
+SPL two is the future of searching in Splunk.
+I expect SPL two to become the only way to search in Splunk in the future.
+Right now, Splunk supports both SPL and SPL two.
+As long as you have Splunk version 9.4 or higher.
+And again, we'll discuss both SPL and SPL two in this course.
+I want to start off with a very easy comparison of SPL and SPL two, just to show you that they're actually
+not really that different.
+I want to do a hypothetical task, and that is counting the number of 404 errors.
+Say the data is Apache logs and displaying a single value in regular SPL.
+It would look something like this.
+If our index was called main and our host was called Web Server one, and we were searching for status
+of 404, then we do a pipe and stats count.
+Pretty simple in Swpl2.
+It's roughly just as simple.
+However, in Swpl2 we use more SQL like terminology.
+So we say from main, and then we do a pipe where host equals web server one and status equals 404.
+And then another pipe stats count with no arguments.
+So swpl2 looks a little bit more like SQL if you are familiar with that.
+However, the thing I like about swpl2 over SQL is there's still no nesting.
+Nesting gets really confusing in SQL.
+So what does it actually mean to search in Splunk?
+As I said, this is the heart of this course.
+It's the primary way we interact with data in Splunk.
+We use SPL to calculate, correlate, manipulate, organize, predict, transform, visualize and more.
+And I think that sounds like an amazing 90s hip hop song.
+Searching is done and the search and reporting app.
+It is the default app.
+It comes installed on all Splunk web interfaces and Splunk Cloud, and it's the primary way to search
+and analyze data.
+In Splunk.
+We can both search and we can build reports and visualizations using the search and reporting app.
+Let me give you a quick tour of the search and reporting app.
+So on your Splunk instance, just click on Search and Reporting.
+And here you'll see at the top the Splunk Bar.
+This is where you edit your Splunk configuration view system level messages and get help on using the
+product.
+It also has the applications menu where you can switch between Splunk apps.
+Next, we have the Apps Bar.
+This will let you navigate between different views in the application you're currently in, which is
+of course search and reporting.
+So for searching reporting we have analytics, data sets reports alerts and dashboards.
+Next we have the all important search bar.
+This is where we will spend a lot of time.
+And next to the search bar we have the time range picker and the search magnifying glass.
+And below that we have the search mode picker.
+And this is important to understand right now what's in smart mode.
+That's its default mode.
+But there are two other modes fast mode and Verbose mode.
+Fast mode prioritizes the performance of the search and doesn't do any field discovery beyond default
+fields.
+So if your data has very explicit fields and you already know which fields you want to search on, and
+you explicitly tell Splunk, you can use fast mode for a much faster search.
+Smart mode is the default mode, and all reports run in Smart Mode after they are first created.
+The Smart Mode returns the best results for whatever search or report you run.
+It detects the results you want to see.
+And finally, verbose mode returns all of the field and event data it possibly can, even if it means
+the search takes longer to complete.
+So if you're working with data that's completely unknown, the verbose mode might be an option.
+A little bit further down, we have search history.
+One of the cool things about Splunk is it keeps all of your search history.
+So you can go back to any of your previous searches.
+Then we have links to some help documentation and how to search, including this very helpful little
+button here called Data Summary, which shows you a summary of all the data that's come into your Splunk
+search head thus far.
+It will show us based on host source or source type.
+As you can see, I only have one source of data coming in.
+And finally we have analyze your data with table views.
+This allows you to create curated collections of data into datasets that you design for a specific business
+purpose.
+We'll spend a lot of time in the search and reporting app throughout this course.
+
+--- The Anatomy of a Search ---
+
+The anatomy of a search.
+Whether you're using SPL or SPL two, a Splunk search is all about reducing complexity in unstructured
+or semi-structured data so that it provides value to data analysts and users.
+A basic search pipeline looks like this.
+We retrieve a big glob of events.
+This data could come from forwarders network inputs, scripted inputs, uploads really anywhere.
+Then we perform some broad searches on it so that we filter out some of the data that we don't want.
+In the second step of our pipeline, we have an intermediate glob of events.
+We have a slightly better dataset to work with because we've filtered during the first part in our pipeline.
+Now we can perform further searches, commands, and transformations until we get the data we want into
+the format we want.
+Now we have to decide what to do with it.
+And in this step, this is where we create reports, dashboards and alerts.
+And in between each step is the pipe operator.
+The pipe operator is located usually right above your enter key on American keyboards.
+Here's another way of looking at it.
+The pipe operator tells Splunk to take the output of the previous searches or commands, and input it
+to the next step.
+We do this until we have the data we want in the format we want.
+
+--- Time ---
+
+Time.
+How Splunk handles time is important.
+Data analytics rely on timestamps in the data.
+It doesn't make sense to know, for example, how many failed login attempts there were.
+If we don't have a time window in which we are interested, here's how time works in Splunk.
+Timestamps are converted to Unix time and stored in the underscore time field.
+Unix time, if you are unfamiliar, is the number of seconds that have elapsed since January 1st, 1970,
+also known as Epoch Time.
+Splunk assumes that any data indexed is in the time zone of Splunk instance.
+In the case of Splunk Cloud, it would be the region.
+The underscore time field is a default, and absolutely essential.
+Field values in the time field are stored in Unix time, but when Splunk displays time to us, it converts
+it to a human readable format.
+However, we can use Splunk SPL to put the time in any format we want using string format time, which
+originated in the C programming language, and it looks kind of funny.
+It has percent signs and then letters after them.
+I'll show you string format time, also known as str t-i-m-e.
+But first, how does Splunk deal with time in new data?
+As we know, Splunk is really good at dealing with unstructured data, and unstructured data often has
+timestamps that are not in traditional formats, or sometimes no timestamps at all.
+So here are the steps that Splunk takes.
+It looks for timestamps in the event data.
+This is the easiest and most straightforward way for Splunk to catalog time.
+If there are no timestamps in the event data, Splunk looks at the file name or source name itself for
+time information.
+If it can't find time information there, it'll look at the file modification time.
+If it can't find time information there.
+Finally, it will use the current system time of the system on which Splunk is installed or in Splunk
+Cloud, the region.
+Before we talk about String.format time, let's talk about the Splunk Web UI and how Splunk has tried
+to make time a little bit easier for us.
+As part of the search bar, we have the Splunk Time Range picker when we pick a time from the time range
+picker, of course, that gets translated back to Unix time for Splunk.
+In the time range picker, we can choose real time, relative, or other categories, and we can even
+do some advanced stuff.
+Let's talk about String.format time or Strftime.
+We can use this directly in our SPL to specify absolute time ranges.
+We can say, for example, earliest and latest and that's how string.format time looks.
+It has percentages and letters after the percentages, the Splunk documentations have a full reference
+on this and you can also just Google it.
+But here's how this one particularly translates.
+And here are the time variables that I used.
+Percent lowercase m displays month as a decimal from zero 1 to 12%, lowercase d, day of the month
+as a decimal, etc..
+Specifying relative time is a little bit easier to understand.
+We just use plus or minus to indicate the offset, and then a time unit and a number and the time units
+are a little bit easier.
+Why is year?
+Q is quarters, etc. so -30 is 30 minutes ago, -70 would be seven days ago and plus one D would be
+one day from now.
+Here's some more string format time variables to look up.
+These are useful and you might want to memorize just these ones if you're going to be dealing with time
+a lot in Splunk.
+I love percent lowercase c that just displays the date and time format in whatever the format of the
+Splunk server is.
+Percent capital H is an hour 24 hour clock, percent capital.
+I will do a 12 hour clock.
+Present capital M will do.
+Minutes 0 to 59%.
+Lowercase P will display Am or PM percent.
+Capital S will display seconds 0 to 59.
+And we can also do the same thing for dates.
+And I won't read all these off to you, but percent F will do the date and iso8601 format, which is
+year first, then month, then day percent.
+Capital A will do a full weekday name like Monday, and the rest you can look at on your own.
+We can convert the time into the format we want during search using an eval expression.
+The string from time statement and time variables on the time field it looks like this eval.
+Then whatever your new field is going to be equals strftime.
+And then in parentheses the time field and the format time field is underscore time.
+So we'll look like this eval.
+And then my field is going to be called new time.
+And then we do strftime.
+Parentheses underscore time and then some time variables of how we want the time to be displayed in
+swpl2.
+We can also use two underscore string as a replacement for strftime.
+And this will look like this.
+In Unix time we have 160617990.
+And in my new underscore time field, I've directed it to display it as 105 and then capital PM.
+Okay, here's a pop quiz.
+It's currently Monday, January 1st, 1900 at 5 p.m..
+How will the following string format this time and date?
+We have present capital A comma percent, capital B percent, lowercase d comma percent, capital y,
+dash percent, capital I, colon percent, capital m, space percent lowercase p.
+Pause the video and see if you can get it right.
+Here's the answer.
+
+--- Basic Searching ---
+
+Basic searching.
+Whether you are using SPL or SPL two, there are two types of searches.
+Raw event searches retrieve specific events from usually large data sets, and they're helpful for doing
+investigations and problem analyses.
+And then there are transforming searches.
+That's where we take that set of results from the raw event search and perform statistical calculations
+on it, or pipe it to other search commands.
+There are five types of search commands.
+All searches start out with a generating command.
+In SPL.
+The generating command is almost always search, and it's implied you don't actually have to type search,
+but in SPL two you have to have an explicit generating command of either search from or union searches
+in blue.
+Because it works with both SPL and SPL, two streaming commands operate on each event as they are returned
+by search in real time.
+A great example of a streaming command that we'll be using is the eval command.
+Transforming commands.
+Order the search results into a table and they're required for building visualizations.
+Some that we will use in this course are stats, time chart and top.
+There are two others that are sort of outside of the scope of this course, and those are orchestrating
+commands and data set processing commands.
+All searches begin with a generating command in SPL.
+It is almost always search, though you don't actually have to type search if it's at the beginning
+of your search statement.
+It is implied.
+And then the most basic of searches in SPL uses keywords and booleans.
+You can literally just type error in the search bar, and Splunk will find every instance of the word
+error in your data.
+You can also use booleans like error or 404.
+Then Splunk will bring in all data that contains either error or 404.
+You can do not and and as well.
+Remember Splunk has default fields that it adds to all data.
+Those fields are index source.
+source type, and underscore time.
+We can use those fields in our search.
+We can also use phrases surrounded by quotation marks.
+Phrases have more than one word with a space in between them, so failed space login would be a phrase.
+We can use fields if we know the fields in our data that we want to search for, such as a specific
+user, we can filter by user equals user1 dot Domain.com.
+In this case, we can also use wildcards in SPL.
+The wildcard is an asterisk.
+In SPL two it's a percent sign.
+And remember we can also use booleans on any of these other terms.
+Here's some basic search commands.
+Chart and time chart return results in tabular format meant to be visualized.
+Rename renames a specific field sort.
+Sorts results by specific fields.
+Stats builds a statistical table which can also be visualized.
+Eval calculates an expression.
+There's a lot of different things you can do with eval.
+Dedupe Removes duplicates.
+Table builds a table with specified fields.
+Here's how we construct a basic search.
+We begin with broad search terms.
+If we know any of the metadata, it's wise to start filtering based on that.
+For example, in this search, we have specified the host and the source.
+That takes a potentially huge burden off of the system, because now there's a bunch of data that Splunk
+doesn't need to worry about.
+We're also specifying a specific field user and an asterisk or wildcard.
+That means we want Splunk to search the user field for any value.
+We assume this user field contains usernames.
+Here's the same search in Swpl2.
+Notice Swpl2 is a little more wordy.
+It's a little more explicit, and that is by design.
+Also in the search we're specifying two additional fields.
+Message equals fail or message equals lock.
+Both with wildcards.
+So this is going to search for fail failure failed or lock locked locking etc..
+After our broad search is complete it's time to do some commands.
+So we have the pipe symbol and we want to manipulate the results to get them in the format we want.
+You can put the pipe on a different line, or you can have your search string all on one line.
+I've done two commands here.
+The first one is to build a basic table with three fields the time field, the user field, and the
+message field.
+And then I've sorted by the time field in descending order.
+That's the minus time.
+And notice in swpl2 instead of table we use select.
+Select tells Swpl2 what you actually want to view.
+So I did select and then all the columns I want separated by commas.
+So underscore time user and message.
+And I've still sorted in the same way.
+And here's what that will return three fields in a table time sorted by descending.
+Let's talk specifically about Swpl2 for a minute.
+It begins with an explicit generating command.
+Remember in Swpl1, most search strings begin with search, but you don't actually have to type search.
+It's implied Swpl2 doesn't let you imply things from is the most commonly used generating command in
+swpl2.
+But if you want to combine multiple data sets together, you can use union.
+And of course search is there too.
+But use search when you know one or more of the fields that you actually want to search.
+So here's what that might look like.
+At this point, let's say we have a data set called Fake Apache logs, which we will when we upload
+the homework data.
+Then we can add filters.
+The Where clause is the most common way to filter.
+We can also group by which aggregates data.
+And after we use group by we can use the having filter on that aggregate data.
+So now our search might look like this from fake Apache logs where status equals 400.
+Notice no pipe yet.
+But suppose we don't just want a table that shows every time status equals 400.
+We actually want to count the number of times the status of 400 has appeared in our data.
+So we could build a search like this in swpl2 from fake Apache logs where status equals 400, and then
+pipe that into a stats count.
+
+--- Search Demo ---
+
+Let's practice some real searches.
+We'll upload some fake Apache logs and search using that data.
+We're going to search in SPL because SPL two is only available at the time of this recording.
+In Splunk Cloud Victoria experience, which you don't get with the Splunk Cloud Trial account and the
+Splunk Edge processor, which we won't be using in this course, I will show you the equivalent SPL
+two searches, however, and we'll also build a basic dashboard with three visualizations.
+So let's get started.
+Before we start searching in Splunk, of course we need data.
+This is a fresh new installation of Splunk, and we can see that by clicking here on Data Summary.
+And there's nothing there.
+Let's upload our fake Apache logs by going to settings and then add data.
+Then we'll choose upload.
+And we'll select a file.
+And here's my fake Apache logs dot txt file that's also included with this course.
+Once it says file successfully uploaded click next at the top.
+Here we have a chance to specify the source type.
+However Splunk has already determined that the source type is access combined, which is correct.
+We can also tell Splunk where the timestamp in the data is if it's not already detected.
+But look, Splunk has already detected the timestamp in this data, so we actually don't have to do
+anything.
+Let's click next.
+On input settings, we can specify a host and an index for the host.
+Let's change it from Splunk which is extremely general, to fake Apache logs.
+And for index instead of default let's choose main, click review and click submit.
+Now if we click on start Searching, we can see the SPL one search string that Splunk has built for
+us.
+Source equals fake Apache logs dot txt.
+Host equals fake Apache logs.
+Index equals main and source type equals access combined, which is an Apache source type.
+Notice the time range picker is all time.
+I recommend for this course that we use all time most of the time.
+What type of search is this?
+This is a raw event search.
+As you can see, it's only brought up the raw events.
+And on the left it's detected interesting fields.
+Since this is a standard log format, all the fields have been detected now in Apache logs.
+Since Apache is a web server, we might want to know a few different things about our fake web server.
+For example, we can click on this status field and see 21 different statuses that are found in the
+data.
+We can see the top ten values 404, 301, 203, etc. we can see a count and percentage of each of those
+values.
+That might be a useful metric to display on a dashboard.
+404 is an error that's not found.
+The requested resource could not be found.
+301 is moved permanently.
+203 is non-authoritative information and 200 is everything's good.
+So one thing we might want to do is show a visualization that compares error codes 200, which are successful
+web requests compared to error codes 400 and 404, which are bad requests.
+So let's go back up to our search bar.
+And in addition to this search that's generated by Splunk, I'm also going to put a boolean operator
+in here.
+So now we're going to look for all events with status code 200 or 400 or 404.
+Remember to leave your time picker in all time and click search.
+And before we click search notice how many events we have.
+We have 10,000 events.
+When we click search it will significantly narrow this down.
+Now we have 1499 99 events.
+Do you see how we've captured a big glob of data and then narrowed it down to a smaller glob of data?
+Now we can do a few different commands.
+First, let's do a pipe.
+And the simplest thing to do is table.
+And then list all of the fields you want to show in the table.
+So let's try table status and see what happens.
+Now we have a table with all of the codes.
+But that doesn't really tell us a lot does it?
+What if we did table underscore time in status.
+Now we have time stamps associated with each error code.
+More powerfully we can use the stats command and count by status.
+Now we have one column with our status codes and the other column with a count of how many times each
+status code occurred.
+And we also have a comparison among those three status codes.
+So this is actually great to build a visualization.
+So we can click on the visualization tab.
+And Splunk tries to decide the best visualization.
+It's chosen column chart.
+But I think this makes for a better pie chart.
+Now we have a comparison of all statuses and how often they occur.
+Let's save this pie chart as a dashboard panel.
+In a dashboard we're going to build and this will be the first panel in a new dashboard.
+So if we go to save as new dashboard we name the dashboard I'm going to call it Web Dashboard.
+And we'll leave the description blank for now.
+Let's choose for the permissions shared in app.
+And let's choose Dashboard Studio.
+And I'd like to choose absolute.
+But you can choose grid if you want specific boxes to put things in.
+And the panel title, No.
+Let's call it error codes compared to success codes.
+And we'll have a pie chart.
+And let's click Save to dashboard.
+And let's not view the dashboard yet.
+Click the X.
+Let's create one more visualization for this dashboard.
+Let's delete our stats command.
+And we'll search again.
+Bring back all the data.
+Another interesting field that we can build a visualization on in Apache logs is bytes.
+And in Apache this is bytes sent.
+So we can actually track the average sent response size to detect anomalies.
+To do that let's delete our statuses.
+We'll do pipe and let's do the time chart command.
+Space avg for average.
+And then bites.
+Remember to leave the time picker at all time and click the magnifying glass.
+Now we have timestamps and average bytes sent.
+Let's click on visualization.
+And obviously a pie chart is not going to work well for this since this is a time series.
+What we want to do is a line chart.
+Now we have timestamps on the bottom and average bytes sent on the y axis.
+If we go to format, we can do all kinds of stuff with this line chart.
+I'd like to show min max data values for example.
+Let's see what else we can do.
+On the x axis let's change the title to time.
+So it's not underscore time.
+And on the y axis let's change the title to average bytes sent.
+We can also do chart overlay if we want another metric and we can change the legend.
+Let's save this as our second dashboard panel in our dashboard.
+So we'll go to save as existing dashboard.
+And we'll choose our web dashboard panel title average bytes sent.
+We'll keep it as a line chart and click Save to Dashboard.
+Let's not view the dashboard yet, because I think we need at least one more visualization to complete
+our dashboard.
+So let's delete our pipe and everything after it and bring up all the data again by searching.
+There's another interesting field that I think we could use for another visualization.
+And it is referrer.
+And referrer shows inbound traffic by sources.
+Search engines, social links, internal navigation, etc. so let's add perhaps stats count by referrer
+and search.
+Now, because these are fake logs, there's going to be probably an endless number of referrers.
+But let's replace our stats command with our top command.
+The top command will show the top ten occurrences of whatever field we choose.
+So let's do top referrer.
+And now this doesn't necessarily lend itself too well to a visualization, but a table, especially
+a small table like this one, is a type of visualization.
+And I think it will work well in our dashboard.
+So let's save as.
+Existing dashboard, and we'll select our web dashboard and the panel title will be top Referrers.
+And click Save to Dashboard.
+Now this time let's view the dashboard.
+And now we have a dashboard.
+But Splunk just sort of stacks everything on top of one another.
+If we click edit we can make this pretty.
+I think leaving the line chart at the top in a long horizontal panel is appropriate.
+A pie chart, a small square panel is appropriate.
+And I think for our table, I think a small square panel is appropriate as well.
+And we can just sort of move it by the pie chart and make it a little bit bigger and sort of resize
+things so that they all match.
+And let's change the global time range to all time.
+And let's save the dashboard.
+Now, once we save the dashboard, of course we can view the dashboard.
+So let's view it.
+And there's our beautiful web dashboard.
+Here are two of the primary searches we used in SPL.
+And in the gray boxes they are converted to SPL two.
+Notice that the searches are not that much different.
+The swpl2 searches are just more explicit.
+We have to actually say from Maine for example, and where source equals.
+Okay.
+Thank you so much for joining me.
+In this section we covered SPL and SPL two.
+We talked about the anatomy of a search and how Splunk handles data.
+We talked about search types and we talked about timestamps and dealing with time.
+Again I thank you for joining me in this section and I look forward to seeing you in the next one.
+
+--- Introduction to Knowledge and Fields ---
+
+Splunk Knowledge Objects.
+In this section we're going to talk about Splunk knowledge fields and field extractions.
+Event types and transactions, lookups tags and aliases.
+And we'll do an introduction to data models.
+The five pillars of Splunk knowledge are data interpretation, data classification, data enrichment,
+data normalization, and data models.
+And each of these pillars of Splunk Knowledge have associated Splunk Knowledge objects.
+Beginning with the first pillar of Splunk Knowledge Data interpretation, we have fields and field extractions.
+A field in Splunk is a searchable key value pair.
+So user equals S jobs.
+That is a field IP underscore addr equals an IP address.
+Message equals error.
+Host equals web server.
+You get the idea.
+These are fields.
+A field has a field name and a field value.
+Splunk automatically discovers some fields.
+First, it discovers its default fields.
+Then it looks for obvious key value pairs in the data.
+Then it builds fields using custom field extractions that are built by users.
+The default fields in Splunk.
+As we've discussed before, are primarily index, host, source, and source type.
+There are a lot of other default fields that Splunk uses for internal purposes as well.
+There are three search modes in Splunk.
+Selection of these search modes have significant impact on the performance of your Splunk environment,
+and there are use cases for each mode.
+The default one is Smart Mode and Smart Mode.
+Splunk attempts to determine what results you are looking for and return them as quickly as possible.
+We saw Smart Mode search when we were doing our demo earlier.
+By default, Smart Mode attempts to discover fields in the data by looking for obvious key value pairs.
+Fast mode is great when you know all the fields you want to search, when you really know your data.
+You can use fast mode and get results very quickly, and verbose mode is the opposite of fast mode when
+you don't know much about your data.
+For verbose mode should be used when you need Splunk to expand its full resources to auto discovering
+fields in your data, verbose mode returns all event and field data it can possibly find at the cost
+of a slower search.
+Field extractions in Splunk are knowledge objects created by the user.
+Custom field extractions can be built using the Splunk Field Extractor, which we will show you.
+We can also use straight up regular expressions, either in the search string or in configuration files.
+In the search string, we use the command Rexx.
+For regular expressions.
+A regular expression is a pattern matching set of characters.
+Actors.
+Let's do some field extractions using the field extraction tool in Splunk.
+In the Field extraction tool gives us two options using regular expressions which Splunk generates.
+Or we can write our own regular expression and delimiters.
+And I'll show you both.
+The first thing we need to do is search for some data.
+So let's bring up the data we've been using.
+And we can look at our search history to bring up our host equals fake Apache logs and add to search
+and make sure that time range picker says all time.
+Click search.
+And now we have our fake Apache logs.
+Let's suppose here that there is a value without a field and Splunk hasn't detected it.
+So we want to extract new fields using this field extractor tool.
+Now we have to choose a sample event that we want to define a field from, and any one of these will
+work.
+But I'm just going to choose this first one here and it brings up the event.
+And we can choose to write the regular expression ourselves.
+If you know regular expressions very well, or we can have Splunk do it for us by clicking next.
+Choosing regular expression.
+Next.
+And highlighting the value that we want Splunk to extract and make a field out of.
+So let's say this says opera.
+So it's probably a browser field.
+So let's extract a new field and call it browser.
+Click Add Extraction.
+And then we'll see that Splunk has determined using regular expressions where that value is in all of
+our data looks accurate.
+So click next and notice it saves it as extract.
+Dash browser.
+Let's make sure the permissions say all apps.
+So everyone in our Splunk environment can use this field extraction.
+And there's the regular expression if you're interested.
+And we'll go ahead and click finish.
+And explore the fields I just created in search.
+Notice on the Field Explorer.
+Now we have our browser field.
+This is the field we just extracted.
+So now we can say browser equals Mozilla.
+And it will bring up all of the data in which that field has a value of Mozilla.
+Let's clean this up a bit.
+And we'll just go source type equals access combined.
+And we're just bringing up our general data set.
+So choose all time on the time picker.
+And let's extract another field, but this time using delimiters.
+So again choose a sample event and I'm going to choose the second one down.
+It doesn't matter I could have chose the first one again.
+Click next and this time choose delimiters.
+Now if your data does not have explicit delimiters, you might want to select space.
+But if there are pipes or commas in your data that are delimiters, you can certainly choose that.
+Apache logs.
+Don't really have pipes, so you'll see if I click on pipe it won't do much.
+But if I click on space, we can see that Splunk has separated all the values out, but it doesn't have
+field names for them.
+So we can pick one of these and give it a field name.
+And let's pick field three because that's clearly a user ID.
+And we'll just name it user underscore ID, even though this is probably already a field that Splunk
+auto detected.
+This is just a demo, and we're going to now have a user and a user ID field.
+And that's okay.
+So click next.
+We do have to actually manually name an extracted field when we use the delimiter.
+So we'll name it report dash user ID.
+Make sure the permissions are for all apps.
+So all of our Splunk users can use this.
+Click finish and we can go back to explore the fields I just created.
+And now we'll see that we have a new field called user ID.
+And it's the exact same field as user.
+But that's okay.
+So now let's create a simple table showing our two new fields.
+We'll do table, user ID and browser.
+And again make sure that Time Picker says all time and click search.
+We have two columns user ID and browser.
+
+--- Event Types ---
+
+The second pillar is data classification, and under data classification we have event types and transactions.
+And a transaction is just a specific type of event type that's bound by time.
+Remember that in Splunk an event is a single line of data, like a row in a database that contains,
+at a minimum, the default fields of timestamp, host source, and source type.
+When you search in Splunk, the first thing that comes up are events.
+We can group together events using event types.
+An event type is a field that represents a category of events, and so we can save a useful set of events
+as an event type.
+Here's a good use case for an event type.
+Suppose you have login data and you want to keep track of known versus unknown users.
+You could create an event type where everything that has a username is valid, and everything that does
+not have a username is invalid, then you could build a search that says stats count by event type,
+and you could know how many valid or invalid attempts at logging in to the system there were in a given
+time frame.
+So let's create an event type.
+Since we already have an extracted field that displays which browser people are using, let's bring
+up a historical search that searches for the Mozilla browser.
+And let's suppose that we want to create an event type for all Mozilla users.
+So I'm just going to add this one to the search.
+Make sure the time picker is on all time click search.
+And now we have about 7948 events with browser Mozilla.
+I'm going to clean up this search a little bit and search it again.
+And now we can actually save this search as an event type by going to save as and then event type.
+And I'm just going to name it Mozilla Users.
+We can add an optional tag.
+And I like to change the color because it looks cool.
+Click save and then done.
+And then we can actually search our event types using the event type command.
+Remember what we named it?
+Mozilla users.
+Make sure that says all time and click search.
+And there's all of our Mozilla users just by using that event type.
+We can look at our event types by going to settings and then event types.
+And we can see all of the event types that either Splunk or we have created.
+And we can also modify the permissions for those event types.
+
+--- Lookups ---
+
+The third pillar of Splunk knowledge is data enrichment, and the knowledge object associated with data
+enrichment is the Splunk lookup.
+Suppose you have data in your data set that isn't really human readable, like a region code or an Apache
+error log or hex values, or some other machine generated data that isn't really human readable.
+You can use a lookup table to associate that data with a new column that describes that data in a human
+readable way.
+For example, let's say we have data that has a regions in it, and the regions have a code that probably
+means something to a machine, but nothing to humans.
+I can create a lookup table using a regular CSV document, and have the region code on the left, and
+a description or the region name on the right.
+Then when I build my Splunk tables and visualizations, I can use the region name instead of the region
+code, or I can put them side by side.
+We can do this in SPL and SPL two.
+We can also use the Splunk graphical user interface.
+So in our demo, what we'll do is I'll create a CSV file with two columns Status and Status underscore
+DSC for description.
+I'll use Google Sheets for this, but you can use Excel or even just a text document.
+Just separate your columns with commas.
+I'll populate the first column with some Apache status codes like 200 or 404.
+Perhaps you've heard of these?
+I'll populate the second column with status code descriptions.
+Then I'll create a new automatic lookup using the Splunk graphical user interface.
+And there are three steps to that upload the lookup table which is our CSV file, create a lookup definition
+and then create an automatic lookup.
+Let's do a broad search for our data again by going to the Search and reporting app.
+And I'm just going to look at the search history and choose a broad search that we've done in the past.
+And click Add to Search.
+There we go.
+Host equals fake Apache logs.
+Make sure the time picker is set to all time and click search.
+And there's our 10,000 event data set.
+And in Apache Data we have status codes.
+But it doesn't tell us what those status codes actually mean.
+Now some of you may know what they mean and that's okay.
+But we want to make data usable.
+So I'm going to create a lookup table for status codes.
+The first column is going to be status and the second column is going to be status underscore desk for
+description.
+So the first column is going to be the original values in the data.
+And the second column is going to be a description.
+I'm just using Google Sheets.
+You can use Excel or a text editor or whatever you like.
+And I'm going to download this as a CSV and I'm going to use that as a lookup table.
+So let's go to settings and then lookups.
+And it's as easy as one two, three to build a Splunk lookup.
+The first thing we need to do is upload the lookup table file.
+Click on new lookup table file.
+And upload that file that you just created.
+And the destination file name can be whatever you want, but I like to name it something similar so
+I know what it is.
+Click save and there it is.
+And the second thing we need to do is go back to settings and then lookups.
+Now we need to look up definition.
+Click on new Lookup definition.
+And we'll call this status lookup.
+It's going to be file based.
+And we're going to choose our status lookup dot CSV that we just uploaded and named click save.
+And it says successfully saved it.
+Now we can go to settings and look us once again for the third time and choose Automatic lookups.
+And then choose New Automatic Lookup.
+and let's call it HTTP status.
+And the lookup table is going to be the one we just created, which is called status underscore lookup.
+And we're going to apply it to host named fake Apache logs.
+And our lookup input fields and output fields.
+This is the field we created in our table and the field in the event data I named them the same thing
+to make it easier for me.
+And so let's just input those values.
+It's status and status.
+And then the output field is status underscore desk.
+And click save.
+There is our automatic lookup and I like to change the permissions, especially in a demo, to all apps
+so that we don't run into any issues.
+Click save.
+And now let's go back to our search.
+And bring up our full data set again by choosing Host equals Fake Apache logs.
+Click add to search.
+Make sure the time picker is on all time and click search.
+And now we can see a new lookup field appear right here called Status underscore DSC.
+That has all of the values that we had in our CSV file.
+So now we can create a simple table with status and status DSC that shows many of the statuses and their
+descriptions.
+We could have made the CSV lookup table longer and included all the statuses, but that wasn't necessary
+for a demo.
+
+--- Tags and Aliases ---
+
+The fourth pillar of knowledge is data normalization.
+And for data normalization we have tags and aliases as our knowledge objects.
+Tags are helpful for assigning names to specific field and value combinations.
+For example, we might find that we have two host names that refer to the same computer for some reason.
+Or a host name and an IP that refer to the same computer.
+And we want to search for that computer or that server by one tag.
+We can give both of those values the same tag.
+Tag equals computer one or web server one.
+Tags are also helpful for tracking abstract field values, those that you might not want to type in
+or search for all the time.
+You can make them a lot easier by assigning them a tag.
+And we can also give multiple field values the same tag.
+So suppose we have three web servers.
+They have different names and different IP addresses.
+And we can create a tag that's just tag equals web servers.
+And it will pull up all of the web servers.
+A field alias is simply an alternate name you assign to a field.
+Multiple fields can have the same alias, which makes this really convenient, and multiple aliases
+can be assigned to the same field.
+It's really easy to rename a field, for example in SPL and SPL two.
+We can also use one of my favorite commands, the Coalesce command, to combine multiple fields into
+the same new field name.
+In our demo though, we're going to use the Splunk user interface, so we'll create a tag for our fake
+Apache Logs data using the field value combination URI underscore path equals forward slash Ebusiness.
+And we're going to use a tag that's tag equals e-biz.
+So that way when we want to find out our e-business information we just have to type in tag equals e-biz
+instead of the whole URI path.
+Then we'll create a field alias for a field that I find a little bit annoying in our Apache logs, and
+that is bytes, because it's really not obvious what bytes means in Apache Bytes means response size.
+So I'm going to create a field alias that is response size that maps to the bytes field.
+Let's create a tag for our e-business.
+So let's go to settings and then tags.
+And then list by field value pair.
+We can click on Add New here.
+Or we can click on list by field value pair and then new tag.
+In the top right corner.
+The field value pair is URI underscore path and then slash e-business.
+This is just one of the URI paths that are in our fake data.
+And I'll name the tag E-biz.
+And let's make sure our permissions are set appropriately.
+In this demo I usually just set permissions to all apps can read.
+Now let's go back to our home page and then click Search and Reporting.
+Now you'll see we can search by the actual tag.
+Doing tag equals e-biz.
+Make sure you choose all time on the Time picker.
+And we see that now we only have 36 events out of our 10,000.
+That's usually how I know that something like a tag is working.
+Next, let's create a field alias by going to settings, and then fields, and then field aliases and
+then New field alias.
+The field alias I want to create is for the field bytes because it's not really clear what bytes means,
+but in Apache Bytes means response size.
+So I'm going to create a field for bytes that is called response size.
+We can apply it to a source type of access combined, or a host of fake Apache logs.
+It doesn't matter.
+It will all bring up the same data in the field aliases field.
+We need to put the original field and then the alias we want.
+So I'm going to put bytes here and then response underscore size as my field alias.
+And click save.
+And again I'm going to make sure the permissions are set appropriately for a demo.
+I don't want to run into any problems.
+So I'm just going to say everybody can read.
+Now that we have our alias, let's go back to the home screen.
+Go to Search and Reporting and let's search our field alias now.
+Response underscore size.
+And I'll put an asterisk because I don't really care.
+Make sure that says all time.
+Now.
+It should bring up all of the data, because all of the Apache data has this bytes field and there's
+10,000 events.
+So that's correct.
+Now let's do a proper search using our tag and our field alias.
+So I'm going to do source type equals access combined for my broad search I'm going to bring in the
+field response size I don't care what it is.
+So I'll put an asterisk and then I'll bring in our tag equals e-biz.
+Now again make sure your time picker says all time.
+And when you click on search notice it brings up only 36 events.
+If we create a table with response size, we can see these 36 events and their response size.
+If we use the top command before we do the table command on response size.
+We will sort by the top ten in response size.
+
+--- Data Models ---
+
+Our final pillar of knowledge is data models.
+Data models in Splunk exist to make machine data easier to use and to understand.
+Think of them as a structured layer that sits on top of your indexed data, simplifying complex data
+sets into focused, business relevant views.
+The aim is to abstract complexity and the audience, our data and business analysts who want to be able
+to build reports, alerts, and dashboards without knowing or learning SPL data models also allow us
+to group specific types of data and perhaps most importantly, they power Splunk's pivot tool.
+The pivot tool is a visual way to build visualizations without knowing SPL.
+A data model is simply a hierarchy of datasets.
+It's a structured hierarchy, like building blocks that organize your data into logical groupings,
+and that data is enhanced by knowledge objects.
+And we already know what knowledge objects are.
+They include lookups, field extractions, tags, and more.
+These knowledge objects add meaning and context to transforming raw data into something much more usable
+and searchable for business users.
+Data models are hierarchical.
+They start with either a root event or a root search.
+You can also have a root transaction, but one of the other two roots have to exist.
+First.
+Root events have a simple and very broad constraint.
+And that constraint requires an index.
+So you have to specify which index.
+Usually index equals main root.
+Searches are based on saved searches rather than raw events.
+They include search constraints and can contain extracted and calculated fields in the root search.
+Data model datasets fall into two categories.
+Event datasets are by far the most commonly used.
+And remember, event constraints must include an index constraint.
+Search datasets are composed of Splunk saved searches.
+Transforming commands and calculated fields.
+Data model fields.
+The default fields are brought into the data model.
+Then we can add fields to the roots and to the children.
+The children inherit all fields from their parents.
+Types of fields include auto extracted eval and lookup fields and regular expressions.
+So let's build a data model.
+In this demo, we're going to build a data model using our Apache weblogs as the dataset.
+The root object, which is the root event we will call web access.
+We'll put the constraints index equals main which is required, and index constraint is required.
+Acquired and also source type equals access combined.
+Then the fields we will add are client IP, user method, URI path, status bytes, referrer and user
+agent.
+Then we'll use the pivot tool to build a simple visualization using our data model.
+Remember, data models are collections of one or more data sets.
+We already have a data set.
+It is the fake Apache logs that we uploaded.
+So let's create a data model with that data set.
+First we need to go to settings and then choose data models.
+We'll see that we have no data models yet.
+So let's create a new data model and let's title it Web Access.
+We can leave the app context at home.
+Now you'll see we have datasets and there are no data sets in this data model yet.
+So click on Add Dataset and we can add either a route event or a route search.
+Again, route events are by far the most common routes in data models.
+So let's add a route event called Web Access.
+And now we need a constraint.
+And these are broad searches.
+And they require at least one index.
+So we'll do index equals main source type equals access combined.
+That will bring up our fake Apache logs.
+Click save.
+And now you'll notice we have a route event of web access.
+And it has our constraint there.
+And it also has the Splunk default fields of host source and source type.
+Now we can begin adding additional fields from our dataset by clicking on Add Field.
+Here we can add auto extracted fields, eval expressions, lookups, regular expressions, and geoip
+fields.
+Let's do auto extracted and remember the fields that we wanted to add.
+Client IP user method URI path, status bytes, referrer and user agent.
+And I'm going to speed this up here.
+Now once we have all these selected notice that we can change the type and the flags of each field.
+So what I want to do is just go through and make sure that the types are all correct.
+So all of these are strings except status is a number.
+And Splunk has detected that.
+So that's correct.
+So let's click on save.
+And now we can see all of our extracted fields in the data set as well.
+To further build out our data model we can add more data sets, including child data sets.
+However, this is a pretty simple data model, and we only have one data set, so we won't need to do
+that.
+The next step after building a data model is to use the pivot tool.
+Data models power the pivot tool.
+So let's build a quick pivot or a quick visualization using this data model.
+Click on pivot and then select our data set.
+And now we enter the pivot tool where we can filter and split by columns and rows and column values.
+The first filter is always time.
+Let's leave this at all time.
+But I want to add another filter of status.
+And we'll leave that as an asterisk.
+Now I want to split rose by the same.
+I want to split rose by status and I'll label it status with a capital S to make it look nicer.
+Add to table.
+Now we have statuses, status codes, and counts of their occurrences.
+It says count of web access, so let's just rename that to just count.
+Now we have statuses and counts of their occurrences.
+And this makes for a perfect pie chart.
+So we just click the pie chart visual on the left side.
+It's not really a perfect pie chart.
+It's kind of a messy pie chart.
+So we can fix this by adding a limit.
+Click on limit under filter and then it automatically limits it to the top ten, which is still kind
+of busy.
+So I'm going to change that to five highest five.
+And now we have probably a useful pie chart if this were real data.
+So we can save this as a report or dashboard panel.
+Let's save it as a dashboard panel.
+And we'll create a brand new dashboard called Pivot Web Dashboard.
+And make sure it's shared in app.
+And the panel title will be top five statuses.
+Click on save.
+And view dashboard.
+And there's our beautiful pivot built dashboard.
+Thank you for joining me in this section.
+In this section we talked about the pillars of knowledge in Splunk.
+We also talked about knowledge objects including event types, lookups, tags and field aliases.
+And we talked quite a bit about data models and did a data model demo.
+Again thanks for joining me in this section and I look forward to seeing you in the next one.
+
+--- The Basics of Visualization ---
+
+Visualizing data.
+In this section we're going to talk about the basics of visualization in Splunk.
+We'll go over reporting and alerting.
+And we'll do a deep dive into the pivot tool.
+The basics of visualization.
+One of the best books on visualization is called storytelling with data, a data visualization guide
+for Business professionals.
+And one of the quotes from that book is success in data visualization does not start with data visualization.
+Before you even begin to make a visualization, start with purpose.
+You must first understand the question you're trying to answer, the decision to be made, or the story
+you want to tell.
+Then know your audience.
+How much context do they have?
+What do they care about?
+What do you want them to do with the information?
+And then you need to understand your data clean.
+Explore and interpret the data to uncover the key message before deciding how to visualize it.
+Why visualize data?
+Data alone is not very interesting to look at.
+Non-technical people might not be interested in tabular or raw data.
+Visualizing data makes it more human centric.
+Humans are pattern recognizing machines.
+We love patterns when we show patterns in data.
+It can connect with people from an early age.
+We're taught to visualize data.
+Think about your childhood.
+Storybooks.
+Visualizations are art, and therefore they do have an emotional impact on us.
+So what does it mean to understand your audience?
+Well, executives usually have different needs than individual contributors with regards to data and
+decision making.
+Publicly available dashboards might display different data than internal only reports or dashboards.
+Understand your own goals.
+What is the message for which you are using this visualization?
+Like the famous author's purpose, consider the pie.
+Do you want to persuade, inform or entertain or all three?
+Here are some common types of visualizations in Splunk.
+The pie chart shows a single dimension that is a single description of the data, and the slices represent
+the frequency or density of the values in a field.
+A line chart shows how a value changes over time.
+An area chart shows changes in an aggregated view over time.
+A column or bar chart shows discrete values great for comparing.
+A table shows tabular data, and in Splunk we can also make the table a heat map that shows density
+of data as well.
+Never underestimate the single value in Splunk.
+When you have a number to communicate, the single value is awesome.
+And finally the gauge.
+The gauge shows an aggregated metric compared to a range 0 to 60, for example.
+Behind visualizations are the idea of a dimension.
+A dimension is something you want to measure.
+Think of a dimension as one side of a cube.
+That's why we call cubes three dimensions.
+What are the dimensions of a cube?
+Height, width and depth.
+But what if we want to measure something else?
+Say date, time, customer and purchase price.
+Well, those are dimensions.
+Now we have a bunch of dates times, a bunch of customers, and a bunch of purchase prices.
+We have a cube that's made up of smaller cubes.
+Each small cube is one date time, one customer, and one purchase price.
+This is called the grain of our data.
+The grain is the lowest level of detail that satisfies the business requirements in our dataset.
+In Splunk, a cube is also a table, and a table is also a dataset.
+A dataset is a collection of data that usually Splunk knowledge managers define and maintain for specific
+business purposes.
+A dataset is full of dimensions by which you measure the data.
+These are often the columns.
+Data models, as we've seen, are made up of data sets.
+The pivot tool we saw earlier in class is powered by data model datasets.
+Knowledge managers in Splunk create data models so that data analysts can easily consume the data and
+use the pivot tool to create reports, dashboards, and alerts, and other visualizations.
+This allows data analysts and business users to create powerful visualizations without needing to know
+SPL or the inner workings of Splunk.
+
+--- Reporting and Alerting ---
+
+Reporting and alerting in Splunk.
+Reports and alerts are, of course, knowledge objects.
+So what's the difference?
+A report is a bunch of saved searches that can run on a schedule and perform an action.
+You can send an email to report consumers.
+It can embed on a web page.
+It can update a dashboard panel, or it can even run a script.
+Scheduled reports can run every hour, every day, week, month, or on a cron schedule that you define.
+You can and should stagger the report running window if you have multiple reports running.
+This way you won't bog down your Splunk system.
+Alerts can be scheduled or in real time.
+Alerts are triggered when the results of a search meet a specific condition that you define.
+So, for example, if the search is host firewall one user equals star authentication equals failed.
+If that returns anything it will trigger an alert.
+Alerts can have actions.
+These actions can include of course send an email, trigger a script, use a webhook list in triggered
+alerts, or use an app like Pagerduty or Slack.
+
+--- The Pivot Tool ---
+
+The pivot tool.
+The pivot tool is a powerful tool that's included with Splunk that allows business users and data analysts
+to create dashboards, reports, and alerts without using SPL.
+It has a drag and drop graphical user interface for Splunk users, and the pivot tool is driven by data
+models behind the scenes.
+There are some basic pivot functions that we'll see in the demo, and these are.
+Filter filtering reduces the size of the result set.
+The more you can filter at the beginning, the more efficient use of Splunk resources.
+All pivots are filtered by first a time range.
+The narrower you can define the time range, the better.
+Then we have splits by row and by column split by row splits out the pivot results by row, of course,
+and split by column splits out the pivot results by column.
+And then we have column value.
+This is often a count.
+It's a numeric and represents aggregates like sums and averages where the field is not inherently numeric.
+This field is a count of the occurrences of that field.
+The reason it's called the pivot tool is just like in Excel, you can literally create pivot tables
+that power visualizations.
+In our pivot tool demo, we'll explore the pivot tool using our existing data model.
+And we'll build a basic dashboard using the pivot tool.
+
+--- Building a Dashboard with the Pivot Tool ---
+
+The quickest way to get to the pivot editor is to go through our data models.
+So let's go to settings and then data models.
+And we see the data model we created earlier called web Access.
+And under actions let's just click on pivot.
+And then we need to select our data model dataset which we also called web access.
+And when we enter the pivot editor we can see on the left all of our visualization options.
+And we see in the main working pane simply a count of all events over all time.
+We have filters, splits, and column values.
+The first visualization that we're going to make is a stacked area chart that shows Apache codes over
+time, because these are fake Apache logs and they have fake timestamps.
+I'm going to leave my filter at all time.
+But in the real world with real data, you should filter by time as narrowly as possible, because the
+more narrow your filters, the better your reports and dashboards will run and behave.
+So the first thing I'm going to do is split columns by status.
+And I'll leave the default settings and click Add to Table.
+Now we have a column for each Apache status, and we have a count for how frequently those statuses
+appear in all time.
+Now I'm going to split rows by time.
+And I'll leave the defaults there and click Add to Table.
+Now we have timestamps, Apache codes, and counts of the appearances or instances of those codes on
+those specific timestamps.
+This works well for an area chart.
+So let's click here on area chart.
+And let's create a limit because this looks really busy.
+So under filter click Add Filter.
+And then we'll filter by status.
+And then let's do limit.
+And by default it limits to the highest count and top ten.
+But that even seems a little too busy.
+Let's do top five.
+And now we have a usable area chart.
+Let's do some cosmetic touch ups.
+So x axis is time.
+Show the label.
+All of that looks great.
+Y axis is count of web access.
+But the label count of web access doesn't really mean much to the average data consumer.
+So let's just call it occurrences.
+Currencies.
+Now you can see on the y axis it says occurrences on the colored areas.
+We don't really need to change anything in the general area.
+We can change the chart to stacked or not stacked, which creates kind of an interesting transparency.
+Or we can change it to stacked 100%, but that looks way too busy for me.
+I think stacked is the best one.
+So now that we have the chart how we want it, let's save it as a dashboard panel and at the same time
+create a new dashboard.
+So we'll go to save as.
+Dashboard panel.
+And let's create a new dashboard.
+And let's just call it web performance.
+And on the dashboard permissions I always like to choose shared in app because we're just doing a demo
+environment and our panel title will be HTTP status over time.
+Let's click save.
+Let's not view our dashboard yet.
+Let's create a few more panels.
+So simply click the X.
+And to go back home click home.
+And to go back to the pivot editor just click on the table icon.
+Let's clear out all of our filters and splits.
+I'm going to simply click on the pencil icon and remove.
+And I'm going to remove column values which will give me an error.
+But I'll put it back because I want it to be at its default.
+Now I'm just going to add column values back and count of web access.
+No label.
+Now we're back to default.
+Let's make another visualization.
+And this time I want a line chart that shows traffic volume over time.
+So again I'm going to leave my filter at all time because this is fake data and it has fake timestamps.
+I'll leave column values at count of web access for right now.
+I'm going to split rows by time.
+And for fun, I'm going to filter by successful web requests, which are in the Apache 200 range.
+So I'll add a filter and status, and I'll do less than or equal to 300.
+Now this shows me time stamps and count of successful web requests over time, so this will make for
+a perfect line chart.
+I'm going to change the y axis label to just be count instead of count of web access.
+That's not going to make a lot of sense for the average viewer.
+Now I'm going to save that as a second dashboard panel.
+I'm going to choose existing dashboard, and I'm going to choose our web performance dashboard.
+Our panel title will be Successful Web Requests over time.
+Okay.
+Now let's not view our dashboard quite yet.
+Let's make at least one more visualization.
+So let's go back to our table and I'm going to remove all of our filters and splits.
+I'm going to put back count of web access.
+Now let's make a visualization that identifies maybe the top five requested pages.
+So again I'm going to use all time.
+But I'm going to split rows by URI path.
+So I'm going to add a filter on URI path.
+And instead of match I'm going to do a limit.
+And I'll do hi and then five.
+So there are the top five places on our fake website that people are visiting.
+So we can make this a pie chart, but I think it might be better as a bar chart.
+And this pie chart looks fine, but this might be better served as.
+A bar chart.
+Let's change the y axis label again to page.
+And then let's save it as a dashboard panel.
+On our existing dashboard.
+And we'll call this most frequent pages visited.
+Click save.
+And now let's view our dashboard.
+This is a nice looking dashboard by itself.
+And if we want we can edit the cosmetics of the dashboard by clicking edit.
+And for example we can move these two next to each other and put this one on top.
+And save the dashboard.
+Now we have a nice web performance dashboard from the home page.
+Let's change this dashboards app context and permissions.
+So we need to go to settings and then User interface.
+Then views.
+And find our dashboard here.
+There it is.
+Web performance.
+The owner is admin.
+That's good.
+But the app context is launcher.
+So let's change permissions here under sharing.
+And choose all apps and then click save.
+Let's go back home.
+Now when somebody clicks on search and reporting and dashboards they can find our dashboard.
+In this section we talked about some of the theories behind why we choose certain visualizations.
+We explored the pivot tool and we built a really nice dashboard.
+I thank you for joining me in this session as always, and I'll see you in the next one.
+
+--- The Splunk Common Information Model ---
+
+The Splunk Common Information Model.
+This is really important to understand and a powerful tool to use in Splunk.
+So in this section we'll talk about what the SIM actually is and what it does.
+We'll examine some of the SIM data models and we'll talk about SIM knowledge objects.
+Most importantly tags which are required to make your data SIM compliant.
+So what is the common information model.
+It's referred to as the SIM and it's an add on.
+Remember a Splunk add on enriches your data but doesn't necessarily have a graphical user interface,
+whereas a Splunk app almost always has a graphical user interface plus its add on capabilities.
+This add on contains data models, documentation tools, and other knowledge objects to make your data
+SIM compliant.
+The Common Information Model is a shared semantic model focused on extracting value from your data and
+giving you a consistent, normalized treatment of that data.
+A semantic model means a model of meaning, a model of shared meaning, to be exact.
+This means that when we have diverse data sources that might have their own ways of formatting data
+and naming fields, when we make that data SIM compliant, we can more easily build integrated dashboards,
+reports, and alerts.
+The SIM takes your source data and creates a schema on the fly, which is a search time schema.
+This allows you to essentially create views in database terminology without affecting your source data.
+Of course, you may want to leave your source data the way it is for various reasons.
+Let's have a look at a few of the SIM data models.
+Same data models include inherited, extracted, and calculated fields, and some data models include
+fields with expected values.
+The first snapshot of a field I want to show you is the alerts field, and the alerts field has one
+data model data set called alerts.
+And some of the interesting fields are app body severity and type.
+So if we had some alert data from some resource and it already had this information, but maybe the
+fields were named differently.
+We would make it Scim compliant by renaming or using field aliases for these fields.
+The next thing I want to show you is called malware.
+And it has two data sets malware attacks, malware operations.
+And it has these fields category file name, destination, entity domain, and vendor product, among
+many other fields.
+So you can see how you could use these standardized CIM fields in malware data.
+And the third interesting one that I liked is called Network Traffic.
+And it has one data set called All Traffic.
+And the standardized CIM fields are App bytes, destination IP, destination port, and a bunch of others.
+But you can see how we might make our fake Apache Logs CIM compliant using the Network Traffic Data
+model in the Splunk CIM.
+Because the Apache logs don't actually have field names with them.
+So we would use the field extractor to extract an app field, a bytes field, a destination IP field.
+That data is there.
+It's just not associated with a field name in the Apache logs.
+Other SIM knowledge objects.
+The SIM comes with tags and aliases and fields, and the most important here is tags.
+Tags are actually required to make your data SIM compliant.
+So SIM data models contain tags, and we need to apply these tags to make the data SIM compliant.
+After we apply the tags, we should verify that they work.
+And the easiest way to do that is using the pivot tool.
+We can also explore the data model or we can explore the data model configuration file.
+Here's the process for tags identify, observe, apply and verify.
+So identify the data model and dataset relevant to our event data.
+Then we observe which tags are required for that data set.
+Are there any other constraints.
+Then we apply create event types and tag them with the appropriate tags.
+And then we verify that the tags work as expected.
+And I like to use the pivot tool.
+There are a couple of ways to do that.
+do that.
+Examine the data model.
+Examine the data model configuration file.
+Then we move on to fields.
+SIM data model data sets also include extracted, inherited, and calculated fields.
+Some of these fields have expected values to help in normalization efforts.
+So here's the process for fields.
+Compare the fields, specifically the field names in the data model with fields in your data.
+You may already have SIM compliant data.
+If it's a perfect match, you're done.
+But if not, you need to map your field names to the SIM field names.
+Typical ways to do this are through field aliases, field extractions, which is what we will use,
+lookups and others.
+And finally, we validate once we've normalized our data we validated against the SIM.
+Again I like to use the pivot tool.
+But there are a few different ways to do this.
+So let me show you the sim in action.
+I'll download and install the SIM add on.
+I'll examine the data models, and we'll make some SIM compliant data out of our Apache fake logs.
+
+--- Splunk CIM Demo ---
+
+The Splunk Common Information Model.
+This is really important to understand and a powerful tool to use in Splunk.
+So in this section we'll talk about what the SIM actually is and what it does.
+We'll examine some of the SIM data models and we'll talk about SIM knowledge objects.
+Most importantly tags which are required to make your data SIM compliant.
+So what is the common information model.
+It's referred to as the SIM and it's an add on.
+Remember a Splunk add on enriches your data but doesn't necessarily have a graphical user interface,
+whereas a Splunk app almost always has a graphical user interface plus its add on capabilities.
+This add on contains data models, documentation tools, and other knowledge objects to make your data
+SIM compliant.
+The Common Information Model is a shared semantic model focused on extracting value from your data and
+giving you a consistent, normalized treatment of that data.
+A semantic model means a model of meaning, a model of shared meaning, to be exact.
+This means that when we have diverse data sources that might have their own ways of formatting data
+and naming fields, when we make that data SIM compliant, we can more easily build integrated dashboards,
+reports, and alerts.
+The SIM takes your source data and creates a schema on the fly, which is a search time schema.
+This allows you to essentially create views in database terminology without affecting your source data.
+Of course, you may want to leave your source data the way it is for various reasons.
+Let's have a look at a few of the SIM data models.
+Same data models include inherited, extracted, and calculated fields, and some data models include
+fields with expected values.
+The first snapshot of a field I want to show you is the alerts field, and the alerts field has one
+data model data set called alerts.
+And some of the interesting fields are app body severity and type.
+So if we had some alert data from some resource and it already had this information, but maybe the
+fields were named differently.
+We would make it Scim compliant by renaming or using field aliases for these fields.
+The next thing I want to show you is called malware.
+And it has two data sets malware attacks, malware operations.
+And it has these fields category file name, destination, entity domain, and vendor product, among
+many other fields.
+So you can see how you could use these standardized CIM fields in malware data.
+And the third interesting one that I liked is called Network Traffic.
+And it has one data set called All Traffic.
+And the standardized CIM fields are App bytes, destination IP, destination port, and a bunch of others.
+But you can see how we might make our fake Apache Logs CIM compliant using the Network Traffic Data
+model in the Splunk CIM.
+Because the Apache logs don't actually have field names with them.
+So we would use the field extractor to extract an app field, a bytes field, a destination IP field.
+That data is there.
+It's just not associated with a field name in the Apache logs.
+Other SIM knowledge objects.
+The SIM comes with tags and aliases and fields, and the most important here is tags.
+Tags are actually required to make your data SIM compliant.
+So SIM data models contain tags, and we need to apply these tags to make the data SIM compliant.
+After we apply the tags, we should verify that they work.
+And the easiest way to do that is using the pivot tool.
+We can also explore the data model or we can explore the data model configuration file.
+Here's the process for tags identify, observe, apply and verify.
+So identify the data model and dataset relevant to our event data.
+Then we observe which tags are required for that data set.
+Are there any other constraints.
+Then we apply create event types and tag them with the appropriate tags.
+And then we verify that the tags work as expected.
+And I like to use the pivot tool.
+There are a couple of ways to do that.
+do that.
+Examine the data model.
+Examine the data model configuration file.
+Then we move on to fields.
+SIM data model datasets also include extracted, inherited, and calculated fields.
+Some of these fields have expected values to help in normalization efforts.
+So here's the process for fields.
+Compare the fields, specifically the field names in the data model with fields in your data.
+You may already have SIM compliant data.
+If it's a perfect match, you're done, but if not, you need to map your field names to the SIM field
+names.
+Typical ways to do this are through field aliases, field extractions which is what we will use, lookups
+and others.
+And finally, we validate once we've normalized our data we validated against the SIM.
+Again I like to use the pivot tool.
+But there are a few different ways to do this.
+So let me show you the sim in action.
+I'll download and install the SIM add on.
+I'll examine the data models, and we'll make some SIM compliant data out of our Apache fake logs.
+
+--- Using eval and let ---
+
+Intermediate searching and the future with SWPL two.
+In this section, we're going to talk about some intermediate searching techniques using eval stats
+and predict.
+And then we'll talk about the future of Splunk with Swpl2.
+Eval and let.
+Eval creates new calculated fields from existing ones.
+Eval is for SPL one and an SPL two.
+We use let.
+Here's the format eval or let the new field you want to create equals and then the eval expression.
+Common expressions include math conditionals and booleans like and or.
+Let's run an eval search that classifies Apache statuses like 203, 404, etc. and they tell you various
+things about the web requests.
+So what this does is it takes the status, divides it by 100.
+Drops the remainder.
+That's what floor is.
+And then multiplies that number by 100.
+And then it creates a new column called success.
+And if the status is less than 500, it puts a one in that column, which means success.
+And if not, it puts a zero in that column.
+Then we'll do a simple table command bring up time src, which is the IP address method, which is post
+or get URI, which is the URL, the original status, and then the status class, and then whether it
+was successful.
+Now in Swpl2 this is essentially the same, except we use from let and select.
+In the demo, I'm also going to replace the table command with the stats command and create a quick
+visualization.
+First let's bring up our main data set.
+And we can do that by going to the search and reporting app and bringing up source type equals access
+combined.
+Or we could use source equals fake apachelogger.
+TXT or even index equals main.
+Make sure the time picker is on all time.
+And it should bring up our full 10,000 events.
+Now remember the search we wanted to do.
+We'll categorize events based on their status.
+So what it's doing here is taking the Apache status code, dividing it by 100, dropping the remainder,
+and then multiplying that by 100.
+So we get a clean status code.
+And it can be easily categorized.
+And then a success measurement zero for not successful and one for successful.
+For fun, let's remove that table command and replace it with stats.
+Now if we do stats count by success, we can make a nice visualization in a column chart or a pie chart.
+And this will look really great on a dashboard.
+
+--- Searching with stats and streamstats ---
+
+Stats and stream stats.
+Stats calculates aggregate statistics such as sums and averages, and the format is really easy stats
+and then the calculation and then the field.
+So here's what we'll do in the stats demo.
+It's a lot like the eval demo we did before.
+So we're still going to categorize our Apache statuses.
+But then we're going to count how many total requests are in each class.
+Then calculate the average payload size per request.
+And finally group the results by status class in Swpl2.
+This is essentially the same we use from and.
+Let and count has those two parentheses after it in Swpl2 because it's calling a function.
+Before we do the demo, let's quickly go over stream stats.
+Stream stats is a running version of stats that shows streaming data in near real time.
+Its format is a little bit more complicated than stats.
+You usually want to sort by time first, and then there's a command, a function, a field, and a time
+window.
+So here's an example.
+So sort by time and then stream stats count as the field name running count.
+Sum up the bytes as running bytes.
+And then by status class.
+Now unfortunately we don't have streaming data.
+We just have our uploaded fake Apache logs.
+So I'm not going to show you stream stats.
+But let's get started on our stats demo.
+Let's go to the search and reporting app and bring up our main dataset with source type equals access
+combined.
+And then we'll put in this eval statement which takes the Apache status code, divides it by 100, drops
+the remainder and then multiplies that by 100.
+And what that does is give us a number that we can put into a class 100, 200, 300, etc. then we'll
+do a stats command.
+Count as hits.
+So we're making a new field called hits and then average.
+And then we're taking the average of the bytes field.
+And we're making a new field called avg underscore bytes.
+And finally we're going to group the results set by status underscore class which is the field we created
+in that eval statement above.
+In Swpl2 we would explicitly say group by status class.
+And that gives us a nice table with status classes, how many hits they've received and the average
+bytes.
+This doesn't really make for a good visualization other than a table, but we should not discount the
+power of a table.
+
+--- Predicting Data ---
+
+I actually really love this Splunk command predict forecast time series data.
+It applies statistical models to predict future values based on past data.
+And I get the most use out of predict when I use it with time chart.
+And that's what we'll do in the demo.
+At the very end of our search string you will see just predict.
+And then the field we're using in our demo let's predict some data.
+So of course the first thing we're going to do is bring up our data set by going to search and reporting.
+And then enter source type equals access combined.
+Make sure the time picker is on all time.
+And that will bring up all 10,000 of our events.
+Now these events are static events.
+They're not streaming in.
+We uploaded a file.
+Let's find out what the latest date of these events are.
+Since we're going to use the Predict to predict into the future, let's see what the latest date is
+by using this small search.
+And that's stats max time as late as time and then eval latest date string from time latest time comma
+percent C and percent C puts the time in a human readable format.
+So the latest date and time is Thursday October 9th.
+Ninth.
+So just keep that in mind as we make this prediction.
+Okay.
+Now let's erase that.
+So now let's do time chart.
+And then span equals one day.
+That means each row will have a one day difference.
+And we'll do average on the bytes field as avg bytes.
+That's going to be our field name.
+Now we're going to use the predict command on avg bytes.
+Make sure your time range picker is set to all time.
+And look it predicts into October 10th, 11th, 12th, 13th and 14th with lower and upper 95 percentile
+bracketing.
+And we can see this beautifully on a line chart.
+We can see the percentiles and we can see the prediction there in the middle.
+Now if you want to zoom in a little bit, you can change the span from one day to something like say
+60 minutes.
+Now of course it's only going to predict 60 minutes into the future, but we can see the real average
+bytes and the prediction.
+So this is a pretty nice Splunk tool to have in your tool bag.
+
+--- The Future and SPL2 ---
+
+The future of Search with Swpl2.
+Throughout this course, I've shown you what our searches look like in both SPL and Swpl2.
+Swpl2 is the future of Splunk, so I recommend, as you learn, searching in Splunk to focus on Swpl2,
+but also understand SPL one because it's not going anywhere.
+SPL two allows for a lot better reusability across Splunk products, and it bridges security, observability,
+and AI analytics while preserving the speed and flexibility that defines Splunk.
+SPL and SPL two, you will find, are really not that different.
+Thank you for joining me in this section.
+In this section we did some intermediate search in Splunk.
+We use the eval command, the stats command and the predict command.
+And by the way I love the visualization that the Predict command can make.
+It's really quite pretty.
+Then we talked about the future with SPL two and that you should focus on Swpl2 while still keeping
+in mind the SPL one basics.
+Again, thank you for joining me in this section.

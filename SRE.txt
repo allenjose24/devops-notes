@@ -1,0 +1,2307 @@
+
+
+=== Introduction ===
+
+
+--- The SRE Journey ---
+
+0
+Hello, welcome to the course Site Reliability Engineering - The Big Picture.
+1
+Here starts your SRE journey. If you are as curious as me, you might be wondering: Why should I know about SRE?
+2
+How this knowledge can be useful for my company and how this knowledge can be useful for my career.
+3
+Instead of starting by presenting some concepts, I think it's a better idea to start telling just
+4
+a story, this story, it's fictional but could happen in the real world.
+5
+The story should give you a good insight of the reasons behind SRE.
+6
+I hope you enjoy it, so let's get started.
+7
+Let's start from the beginning.
+8
+Imagine that one day you have a great idea.
+9
+Really original, you are a specialist in this area and you have no competitors.
+10
+You decide then to launch your services on multiple platforms.
+11
+Like mobile...
+12
+...a website and maybe why not? Even a smart TV.
+13
+Right after the launch, customers start to come.
+14
+All indicators show incredible growth.
+15
+It seems that your products have been well accepted and all customers are happy.
+16
+Time goes by...
+17
+And what seemed to be promising before, starts to show some negative signs, the number of unhappy customers
+18
+start to grow. The evaluation
+19
+of your customers, it's no longer the same. From a 4.0 during the dream days
+20
+Now, the app rating dropped to a 3.0.
+21
+The worse! Customer satisfaction.
+22
+started to impact the numbers.
+23
+Your idea was truly original, but in the short time competitors got into the market with similar but
+24
+more stable services. Little by little you see your customers leaving you.
+25
+On the other side...
+26
+In your I.T. department, the heart of the company, your developers and the operations teams do not
+27
+get along.
+28
+One blames the other for the bad numbers. For the developers, the operations team is responsible because
+29
+most complaints are related to errors during the peak times and the high response times.
+30
+For the operation teams,
+31
+The reason is the poor quality of the code that goes into production.
+32
+And that reckless developers that keep pushing things to production all the time.
+33
+Many times, with bugs.
+34
+Release days, which were previously a reason for celebration, are now less and less frequent. It is a
+35
+real dilemma to decide between new features or fix
+36
+so many bugs and technical issues.
+37
+Eventually, an outage happens.
+38
+All company services are down for half of a day.
+39
+The image of the company was impacted, leaving investors in a bad mood.
+40
+You, the company's founder and CEO, don't know what to do if the numbers and problems continue at
+41
+this pace, you foresee the company having to be closed or sold to some competitor.
+42
+One fine day, one of your assessors advises you to adopt SRE.
+43
+He tells you that some companies adopted this methodology and are achieving good results.
+44
+Why not?
+45
+You wonder... You have nothing to lose by simply trying.
+46
+After research SRE is adopted in the company. You leave the CTO in charge of that mission.
+47
+Both, the developers and the operation teams are not sure what it's all about, but they are willing
+48
+to do their best.
+49
+Time goes by...
+50
+And only some months after.
+51
+Your developers and operations teams start to work together.
+52
+Now they share responsibilities and the whole company is aware of the importance of providing reliable
+53
+services.
+54
+On the other side of the wall.
+55
+The numbers get back on track.
+56
+Your service rates improved to incredible 4.5. Your customer seems to be happy and your user
+57
+base is growing again.
+58
+Releases of new features are more frequent than ever.
+59
+Despite this, customers are not being impacted even when this happen during the peak hours.
+60
+You achieved the right balance between innovation and reliability.
+61
+Your services are now stable, fast and secure, your company has successfully implanted SRE.
+62
+And that is the SRE journey.
+
+--- What SRE Stands for? ---
+
+0
+What SRE stands for.
+1
+Let's take each word in the term SRE. The first term,
+2
+meaning the letter "S" came from "site" or from "website".
+3
+But not only websites
+4
+Let's assume "site" as any digital service delivery through the Internet
+5
+It can be, of course, a website
+6
+It can mean some website transmitted by tablet, cell phone
+7
+Some Smart TV app
+8
+Even Video Games are also digital services
+9
+Smart devices present in our homes
+10
+The second word, its "Reliability", it cames, of course, from how reliable something is or some services is...
+11
+For now, let's understand "Reliability" as: How stable, how fast, and how secure something is.
+12
+It's enough for now.
+13
+Stable meaning that it...
+14
+...does not present errors or failures.
+15
+Speed, meaning that it's fast enough for the customers and, of course, it needs to be secure to be
+16
+truthful.
+17
+In the last |letter|, the "E"
+18
+Came in from "Engineering".
+19
+From software engineering. But not only engineering, you can also see the term as "SRE".
+20
+Both for "Engineering" or for "Engineer", depending on the context, we can see referring to a engineer.
+21
+I've put here some engineers working to represent that
+22
+So let's just recap.
+23
+"site" in SRE stands for not only websites but any digital product delivery through the Internet
+24
+"Reliability", meaning how stable, fast, and secure the service is. And "Engineering" or "Engineer" referring
+25
+as the scientific methods or the roles the person entitled to perform the Site Reliability Engineering does.
+26
+That's what S.R.E stands for.
+
+
+=== What you need to know about Reliability ===
+
+
+--- The Origin of SRE ---
+
+0
+The origin of SRE
+1
+You probably know Google.
+2
+Google is well known worldwide for its search engine and for delighting us with innovations.
+3
+We can say that SRE was born at Google.
+4
+(Clearly), this is a very good sign.
+5
+The history goes like this... Benjamin Sloss, or Ben Traynor
+6
+A senior software engineer at Google, with years of experience, become responsible for a production team,
+7
+this happened in 2004.
+8
+There he realized that it makes total sense to apply some of the software engineer techniques and practices
+9
+when we are operating large-scale systems.
+10
+When it comes to Google, this means hundreds, maybe thousands of servers.
+11
+From that came the famous phrase: "SRE is what happened when a software engineer does operation".
+12
+This happened in 2004.
+13
+During the next 10 years, SRE was improved, spread, and adoptable internally at Google as being
+14
+the best practices regarding how can we operate large-scale systems
+15
+Ten years later, in 2004, the first SREConf happened.
+16
+The SREConf was promoted by USENIX. USENIX is the Advanced Computer Systems Association.
+17
+At that time, SRE was not well known and it was more known as "production engineering".  The term SRE was
+18
+not well known.
+19
+The conference's goal was to promote the sharing of the best practices regarding how we build,
+20
+design, architect, and operate large-scale systems. That's was all about large scale systems like
+21
+Google.
+22
+At that conference.
+23
+Benjamin's loss or Ben Traynor Slos presented to the world, "The keys to SRE"
+24
+On his keynote, he listed some of the "Key practices"
+25
+Regarding SRE.
+26
+The practices were eleven in that presentation and then later become the
+27
+seven (7)
+28
+SRE practices that we are going to present and discuss.
+29
+Nowadays, it's common to find companies looking for SRE professionals.
+30
+SRE is a new I.T. field, we can say that SRE as a new I.T. field born in that presentation.
+31
+And it's being adopted by many Fortune 500 companies as well.
+32
+We still can watch that presentation on the USENIX.org website
+33
+There you can see the picture of the Benjamin Sloss, and also the abstract of his keynote.
+34
+Watch or listen to the audio.
+35
+And that was the origin of SRE.
+36
+Started at Google.
+37
+It becomes famous and presented to the world on the first SREConf.
+38
+And from there to nowadays, it has become a new field.
+39
+We now have a lot of Linkedin job offers for SRE professionals, and also it's been more and more adopted
+40
+by the Fortune 500 companies.
+
+
+=== The SRE Principles explained ===
+
+
+--- It is All About Customer's Expectations ---
+
+0
+Customer's expectations.
+1
+Reliability, it's all about expectations.
+2
+We as customers have expectations about services and objects that we use...
+3
+...in a daily basis. We can say that something it's reliable when it does what we expect...
+4
+....the thing to do.
+5
+With almost no errors during its lifetime.
+6
+Let's take the two cars as an example, the first one, the Jeep, is expected to be able to ride on
+7
+difficult terrains like a beach or maybe mountain.
+8
+The expectation for the second car are quite different.
+9
+We expect that it does a good job in cities, maybe being easy to park, but that's all.
+10
+No beaches, no mountains.
+11
+If we swap the two car's owners, both can be frustrated.
+12
+This means that it's important to know what our customers expect from our services.
+13
+Also, the expectation level also varies, we expect a calculator to adjust to some simple calculations,
+14
+and that's all.
+15
+But for a stock market website, we expect more.
+16
+We expect high security, high speed, we expect stability and data being updated all the time.
+17
+Digital services are the focus of SRE.
+18
+And for digital services, our expectations are more related to how fast, how stable,
+19
+how secure,
+20
+If the digital service innovate all the time.
+21
+Recapping... Our customers expect reliability.
+22
+They expect innovation, as well... For digital services in particular.
+23
+And the expectations varies from person to person.
+24
+But, why this is so important?
+25
+Why?
+26
+This is so important?
+27
+This is so important, because the reliability, it also can be compared as a feeling.
+28
+In the end, the reliability translate to our feelings.
+29
+When our expectations are frustrated, we can feel...
+30
+Maybe fear.
+31
+Who would be adventurous enough to cross that bridge?
+32
+We rely on that bridge? Probably not! We can fell insecurity.
+33
+You don't think twice before taking that plane?
+34
+We can feel frustrated...
+35
+Or frustration... Imagine that you are traveling and your car broke on the road...
+36
+We can also get angry.
+37
+Imagine that you cannot talk with anyone to cancel your plan subscription.
+38
+But, when we have all our expectations met, we also can become happy.
+39
+We say that a happy customer, it's the best advertisement, and this is exactly the case.
+40
+SRE, it's all about meeting customers expectations regarding reliability so that they can be
+41
+happy, they can feel happiness.
+42
+Concluding...
+43
+SRE, is all about meeting
+44
+the customer...
+45
+...expectations
+46
+OK, that's the main message for this lecture. SRE, it's all about meeting the customer expectations.
+
+
+=== The SRE Practices explained ===
+
+
+--- How We Measure Reliability ---
+
+0
+How we measure reliability?
+1
+We learned that our customers expect reliability. They have some expectations regarding if the product does what
+2
+it's expected and how frequent it fails.
+3
+But we cannot measure feelings.
+4
+It's too subjective.
+5
+Actually, we can measure facts.
+6
+In this case, we measure facts that impact the reliability feeling.
+7
+It's a simple process.
+8
+We pick some facts and classify them between good or bad.
+9
+The rate between good and bad events indicates if we are achieving or not, the customer expectations.
+10
+Let's see some examples.
+11
+Everybody must agree that getting a tire flat it's not a good experience.
+12
+We expect the tire to work as we expect.
+13
+But in case the flat tire.
+14
+We can.
+15
+Put that, or record that as a bad event, and then compare with something else.
+16
+Here we have one.
+17
+Ten thousand miles versus flat tire rate
+18
+This is a good indicator.
+19
+Depending on the result, we can choose between one.
+20
+One manufacturer and another
+21
+And the measuring that we are actually measuring is the expectation of the user, the user or the customer
+22
+expect to run more than ten thousand miles without having a flat tire.
+23
+If this (flat tire) becomes some (usual), then.
+24
+This is a bad sign.
+25
+Let's pick this payment machine as an example.
+26
+We can have one indicator called a "Success Transaction Rate " that compares good events successfully,
+27
+that it's what a customer expect (instead of) failures.
+28
+What customers are not expecting it's a bad event, which impacts negatively the reliability.
+29
+Another example that works more for websites, "pages loaded in less than half second rate".
+30
+If the page-load that is more than half-second, we consider that or put that, count that, as a bad event,
+31
+if the page load, and loads in less than
+32
+half a second, we put that as a good event.
+33
+The rate or the cooperation between good and bad events.
+34
+Give to us an indicator if you are achieving or not, the customer expectations. Of course, I picked
+35
+some arbitrary numbers.
+36
+It depends on the business.
+37
+It depends on the context.
+38
+Like I said, we have different expectations.
+39
+From different objects and even similar objects, customers have different expectations.
+40
+Maybe for a website, it's Okay the page loading in half a second, for another website maybe it's not.
+41
+The key word for this lecture is SLI. Service Level Indicator.
+42
+the Service Level Indicators are how we measure reliability.
+
+
+=== The SRE Role ===
+
+
+--- Reliability: The Good, the Bad, the Ugly ---
+
+0
+Five-Nines, SLAs, and SLOs - The Good, the Bad and the Ugly.
+1
+There is a famous Western movie from the 70s from Sergio Leone called The Good, The Bad, and the Ugly.
+2
+It shows three different cowboys.
+3
+One, it's the good.
+4
+Meaning the unachievable perfection.
+5
+The second, it's the bad.
+6
+Meaning that it causes more problems than it solves.
+7
+And the Ugly, meaning it far away from perfection, but solve problems and we can add under the
+8
+budget.
+9
+Comparing to this famous expression from the western film.
+10
+We can say that.
+11
+The "Good".
+12
+Are the Five-Nines (99,999).
+13
+They mean almost 100 percent reliability and availability.
+14
+The "Bad".
+15
+Meaning the SLA service level agreement.
+16
+And the "Ugly".
+17
+That is not perfect.
+18
+It's far away from perfection, but solving our problems under the.
+19
+Budget.
+20
+SLO the service level objective.
+21
+During the section we going to present you.
+22
+The Five-Nines, what are the SLAs, and what are the SLOs. The "Good", the "Bad", and the "Ugly"
+23
+about SRE.
+
+
+=== Adopting SRE ===
+
+
+--- The Highest Reliability Level ---
+
+0
+For the highest reliability level, we have a term called the "Five-Nines" that is not limited to five, and I need
+1
+to clarify, it can be (five-nines), (eight-nines), (twelve-nines) it doesn't matter.
+2
+That usually are used for availability... The availability
+3
+is just one of the multiple reliability dimensions because our customers want not only available services,
+4
+but also fast services and sometimes what they expect regarding reliability.
+5
+It's not related to to be available.
+6
+But to behave as expected and the five nines means that we are trying to achieve perfection.
+7
+To have an idea Five-Nines (99.999%) is just twenty-six seconds in
+8
+the month.
+9
+It means that we were available almost 100 percent of the time.
+10
+If we reduce from Five-Nines (99,999%) to Four-Nines (99,99%), is this still
+11
+Just a small time, four minutes and 22 seconds.
+12
+For Three-Nines (99,9%) forty three minutes and for Two-Nines (99%), seven hours.
+13
+And we can also have One-Nine that means 90% percent.
+14
+The Five-Nines (99,999%) we could say that it's the perfection
+15
+It's the good analogy with the western movies, but we need to make clear that usually we depend on
+16
+other services and we cannot
+17
+Deliver Five-Nines (99,999%).
+18
+Another important thing that we also should ask ourselves: is acceptable to stop on
+19
+the weekends?
+20
+Because imagine that we stop totally our services during seven hours in a month.
+21
+This is less than one day.
+22
+Should we stop our services on the weekend?
+23
+How much money can we save doing that? Depending on the business, depending on the service
+24
+It's OK (acceptable).
+25
+It's not a big deal.
+26
+We also should know that more reliability than we need is a waste of money.
+27
+Do our services really need Five-Nines reliability level?
+28
+I don't think so.
+29
+How many users would be bothered by 26 seconds of slow down or your service down?
+30
+Probably no one would notice.
+31
+Of course, there are some critical scenarios where we have lives involved that we need to achieve
+32
+five-nines, but in the most of the time, it's not the case.
+33
+Does not make sense! We can say that also are 100 percent reliability
+34
+is not realistic.
+35
+Because even for critical services, bad things can happen.
+36
+The main idea that I want to share with you in this class is that the Five-Nines
+37
+is expensive, very expensive.
+38
+We you should be aware that is costly and that can be also counterproductive.
+39
+To achieve what we want, fulfilling the customer's expectations, let them happy, it can
+40
+actually, produce the opposite effect.
+41
+We can get in a state of inertia where no new features, no innovation is delivered, and
+42
+our customers don't want that at all.
+43
+And that was the Five-Nine (99,999%), the highest reliability level.
+
+
+=== Wrap-Up and Nexts Steps ===
+
+
+--- The Minimum Reliability Level ---
+
+0
+SLA, the minimum Reliability level.
+1
+This is the bad guy in the Western movie analogy.
+2
+SLA means Service Level Agreements. They are commitments.
+3
+We need to compensate our customers in case we don't deliver what was agreed.
+4
+It's a must have.
+5
+We need to compensate. We pay in case we don't deliver what was agreed.
+6
+I'll give an example.
+7
+Imagine that our business is to deliver stuff.
+8
+And...
+9
+We have a contract that says that if we don't deliver the package in less than two days, we need to
+10
+compensate our customers.
+11
+Then we have a goal, the minimum goal that we need to do that or we lost money, that it's the SLA. We
+12
+can say that when we use SLA in Site Reliability Engineering,  that SLA is the minimum reliability
+13
+level.
+14
+It's the minimum.
+15
+We should start from there.
+16
+It's the minimum.
+17
+Nothing below the SLA should be acceptable.
+18
+And usually, they are there not because we want them.
+19
+It's because by force of the law,
+20
+some regulation,
+21
+or because we made a contract with our customers.
+22
+That's the reason for the SLA. Usually, the SLAs are assumed as goals.
+23
+And that it's not a good practice we should not assume the SLAs as goals because they are there to
+24
+show us the cross line that we should not pass.
+25
+I'll put here.
+26
+They are bad when we try to follow the SLAs as goals.
+27
+We are not achieving or delivering what the customers expect.
+28
+Maybe we are, but usually, we give no margin for failures.
+29
+My main message for this lecture is: SLA is not our goal!
+30
+This is the main message. Keep that in mind: The SLA is not our goal!
+
+--- The Desired Reliability Level ---
+
+0
+SLO - The desired reliability level.
+1
+SLO stands for Service Level Objectives.
+2
+They are reliability objectives. We define them, we choose them.
+3
+We already seen the "Good", and the "Bad".
+4
+Now it's time to see the "Ugly". Comparing to the western movie,
+5
+the SLO is the ugly guy.
+6
+The ugly cowboy, in this case.
+7
+SLOs have some characteristics.
+8
+The SLOs should be realistic.
+9
+They should respect the budget.
+10
+They should be something that we can afford for... that we can pay for.
+11
+They are more aggressive or more ambitious than the SLA, the service level agreements.
+12
+We can say that they are the "Desired Reliability Level".
+13
+Neither too
+14
+high, neither too low.
+15
+I think this image is a good example that we can compare with.
+16
+In it, we can read this sentence contains three errors.
+17
+However, it still passes the message. We can conclude from that message that it's OK not to be perfect.
+18
+The same applies to Reliability.
+19
+We don't need to be perfect.
+20
+The closer we are to the ideal level - The reliability Level. It's more difficult for our customers to perceive
+21
+the difference between the perfect and the good.
+22
+Also.
+23
+Quite important is that our customers want more than just reliability.
+24
+They expect more than just reliability.
+25
+Let's see this example over here.
+26
+This image shows the rating of a famous mobile app.
+27
+It is very likely that you have it installed on your smartphone.
+28
+This app received a 4.5 rating.
+29
+On a scale of 10, it would be a nine.
+30
+To have an idea, compared to the reliability levels that we learned, this means just One-Nine (90%) instead
+31
+of the Five-nines (99,999%).
+32
+The perfect, the perfection. We can conclude from that, that it's okay not to reach the Five-Nines (99,999%). It's
+33
+okay.
+34
+But, this app become popular not only for being stable.
+35
+This app is quite stable and fast... but also for innovating all the time.
+36
+And innovating without impacting the users.
+37
+Probably, their SLOs were defined with their customer's expectations in mind.
+38
+After all, they have a good.
+39
+Far from perfect evaluation.
+40
+And this is the main message for this lecture.
+41
+Let's first recap.
+42
+The SLOs should be realistic.
+43
+Something tangible. They should also be under the budget. Respect the budget.
+44
+They are more aggressive or ambitious than SLAs. But the most important: they MUST give a margin
+45
+to innovation.
+46
+They must give margin to innovation. And that's the main idea for this class, guys.
+47
+When someone talk about SLO, the Service Level Objectives.
+48
+Just remember that they NEED, they MUST give margin for innovation.
+
+--- The Reliability x Innovation Equilibrium ---
+
+0
+Error Budget - Reliability vs Innovation
+1
+Well, let's start with the customer's expectations. Our customers want innovation, that's clear.
+2
+We saw, in the previous lecture that a nine (90%).
+3
+Can give billions for a company.
+4
+But at the same time, customers want reliable services.
+5
+And how can we approach that?
+6
+We have something called the Error Budget.
+7
+It means.
+8
+We have SLO, the objective.
+9
+And we have releases. We have innovation. We have deployments. We have changes in production.
+10
+If those changes do not impact our goals or our reliability levels our SLIs.
+11
+We are free to innovate.
+12
+It's like, while we are respecting the speed limit.
+13
+We can accelerate.
+14
+It's all about balance! Balancing reliability and innovation.
+15
+If we cross that line.
+16
+It means that we accelerated too much.
+17
+And now we are crossing the line that we should not cross.
+18
+We are not achieving our goals regarding reliability.
+19
+We are impacting negatively our customers.
+20
+Then we need to slow down.
+21
+We need to brake.
+22
+But how we brake? In this case, we just interrupt the flow.
+23
+We stop.
+24
+New releases. Nobody can release.
+25
+Until we have budget again.
+26
+This is like... like a counter.
+27
+If we, during the whole month, have a stable system, we gain some budget to spend.
+28
+Some reliability budgets.
+29
+It's important to say that Error Budgets impact Devs, Ops, and business. And they most impact the
+30
+business than Devs and Ops.
+31
+This is the most important to change the organization culture.
+32
+Because usually.
+33
+Bad reliability levels...
+34
+...impacts only the Operations guys.
+35
+They are impacted with more tickets.
+36
+More nights awake. Working on the weekends.
+37
+And more reliability impacts the Devs. They want new features, they work until night to deliver
+38
+new features and the business wants those features...
+39
+...in the hand of our customers. When we use our error budget until stop, if we are crossing it, If we spent all our
+40
+budget of reliability.
+41
+We start to have an awareness between the whole company that Reliability is important. We should not aim the five-nines,
+42
+of course.
+43
+And at the same time, if it's impacting, we can.
+44
+evaluate:
+45
+Do we really need that goal?
+46
+That was stipulated.
+47
+Can we stop at the weekends?
+48
+Can we stop our services at night?
+49
+The Error budgets, it's what makes the Reliability versus innovation
+50
+to be balanced. We reach equilibrium and (make) everybody (feel) in the same boat.
+51
+The main idea that I want to share about this lecture is that Error Budgets allows us to safely innovate.
+52
+If someone asked you about the Error Budget, this is what gives us.
+53
+The possibility to safely innovate.
+
+--- The 7 SRE Principles ---
+
+0
+So now let's talk about the SRE principles
+1
+We have 7 principles in SRE.
+2
+1. Embrace Risk, 2. Service Level Objectives, 3. Eliminate Toil, 4. Monitoring, 5. Automation, 6. Release Engineering, and...
+3
+7. Simplicity.
+4
+It's important to know that principles are like foundations.
+5
+They must be there.
+6
+We can also compare the principles as the pillars.
+7
+They are the heart of the SRE.
+8
+And, the most important: they should be the same in all organizations.
+9
+We know that different organizations have different sizes, different departments, different ways to work...
+10
+...different businesses. But, something that you must have clear is that the SRE principles should be
+11
+the same in all implementations.
+12
+Those are immutable, we should follow these and have these in mind when we are applying...
+13
+...SRE.
+14
+That's all for this lecture. In the next lecture,
+15
+Let's start digging into each principle explaining it means.
+16
+Thank you very much.
+17
+See you in the next lecture.
+
+--- Embrace Risk ---
+
+0
+The first.
+1
+SRE principle is Embrace Risk.
+2
+Let's explain that! What means embrace risk?
+3
+Embrace Risk means that we know that there is no 100% reliability.
+4
+This is impossible, simply impossible.
+5
+There is no way to reach that.
+6
+Mainly when we are dealing with the Internet, digital services, digital products.
+7
+We depend on other services that can fail.
+8
+So, we are aware of that.
+9
+There is no 100 percent reliability.
+10
+This also means that we know that reliability costs, it's not for free.
+11
+And we have limited money to spend, with reliability.
+12
+We could say that the perfect is the enemy of the good.
+13
+It means that we need to be balanced.
+14
+We need to give what our customers want, they want new features, they want to be amazed with innovation.
+15
+And that's the main idea! Embrace Risk means amaze our customers with innovation, amaze our customers with what
+16
+they want, new features.
+17
+And know that...
+18
+reliability costs...
+19
+In order to deliver innovation! To deliver new features, we need to take the RISK!
+
+--- Service Level Objectives ---
+
+0
+The second principle is called Service Level Objectives.
+1
+This principle teaches that we should define some objectives for reliability.
+2
+But first, let's review what we already know.
+3
+We know that we measure... and we can measure the reliability.
+4
+And define...
+5
+...some indicators. If you are achieving or not reliability. We call that "SLI", it's measuring
+6
+what impacts reliability.
+7
+We know that we have the minimum Reliability Level or what we are...
+8
+...obligated to fulfill that it's the SLA. This principle dictates that we should define also our...
+9
+...desired reliability level or "SLO".
+10
+The SLA.
+11
+They fits here, it's not our goal, it's.
+12
+It's more here.
+13
+It's not near our goal...
+14
+The SLO should be aggressive.
+15
+But at the same time, realistic, we know that 100 percent reliability is...
+16
+...expensive and sometimes don't make sense.
+17
+It's impossible to achieve.
+18
+So let's put our SLO.
+19
+The more realistic place here, a 8. It's OK.
+20
+Another important concept that we should be aware of when we think about the Service Level Objective is that...
+21
+...we have multiple, multiples SLOs, we can have multiples SLAs and multiples SLOs. Maybe we...
+22
+...have more requirements like one for latency, another one for...
+23
+...amount of errors, so let's.
+24
+Put more SLAs... And the same happens consequently for the SLOs.
+25
+Because maybe more than one factor affects reliability.
+26
+Some more aggressive or the less aggressive, less aggressive.
+27
+But all the SLOs must be, realistic.
+28
+This principle, the main idea is that we should amaze the customer with a reliable system, reliable
+29
+services, and to achieve that, we need to set our goals or objectives regarding reliability.
+
+--- Eliminate Toil ---
+
+0
+So the next principle is Eliminate Toil.
+1
+I'll start was asking: Who likes to do the laundry?
+2
+I don't like.
+3
+And why you don't like do the laundry?
+4
+Usually we don't like to do repetitive tasks.
+5
+Usually because they are boring, we do that today.
+6
+We needed to do that yesterday.
+7
+They become like a routine.
+8
+It's OK to this once, eventually, but when we do this regularly, those tasks become boring.
+9
+This is "toil", it's not so easy to identify on the first sight.
+10
+Toil are tasks that bring no value.
+11
+In the long term.
+12
+They bring no value in the long term...
+13
+It means that they are not the focus of our businesses.
+14
+And usually.
+15
+Toil means that we need more people when we increase the work. Do you have more laundry?
+16
+We need more people, and that doesn't scale.
+17
+We can also say that: "Grain by grain, the hen fills her belly!". It means that...
+18
+Maybe it seems that we are not waste too much time, maybe are just some minutes, but...
+19
+...we have many tasks all the days of the long journey, we are wasting a lot of money, a lot of time.
+20
+Eliminate Toil it's also related to how can we manage...
+21
+...big and complex systems if we need to hire.
+22
+Every time we have a new component.
+23
+I new... a new employee.
+24
+How a single team can manage a big and complex system? You need to eliminate all toil, you need to
+25
+eliminate everything that it's waste.
+26
+In the end eliminate toil means;
+27
+INVEST ON PEOPLE, that's the main message here.
+28
+This is the Eliminate Toil principle
+
+--- Automation ---
+
+0
+The next SRE principle is called Automation.
+1
+So, what it's automation? Automation is when we let a machine do our job.
+2
+Machines are good, very good, doing repetitive tasks, usually simple works.
+3
+We take those repetitive tasks and let the machine do our job, but not all kinds of jobs! Usually those
+4
+jobs that are boredom, that are simple, that doesn't require a lot of brain.
+5
+With automation, there is no human involved, so there is no chance of some human make some mistake
+6
+because is tired. Or lack of attention.
+7
+We can see that automation reduced risks.
+8
+And also faster process since a machine can be.
+9
+Much more efficient than a human.
+10
+That ends...
+11
+Saving time and saving money.
+12
+With automation, the main message that I want to pass in this principle is that it's through automation
+13
+that we are able to scale.
+14
+When... When our business succeeds, we have more customers.
+15
+We have more work to do.
+16
+And without automation to do that work, we would need to scale...
+17
+...the amount of people.
+18
+With automation, we don't need that, we can scale the amount of work without needing to scale the
+19
+amount of people.
+20
+And that's the automation principle.
+
+--- Release Engineering ---
+
+0
+The next SRE principle is called Release Engineering
+1
+So, what is Release Engineering? Release Engineering it's all about having control over what it's delivered.
+2
+But it's not only having control over what it's delivered, but having control of what's delivered during
+3
+the whole process. We can compare the Release Engineering to an assembly line from a factory.
+4
+With release engineering, we know all the processes or all the steps involved...
+5
+...that we need to do from conception to production.
+6
+And the most important.
+7
+We can put some quality gateways.
+8
+Between each process.
+9
+And why we need release engineering? One of the main reasons, it's because it's common to bad things
+10
+happen at that moment.
+11
+It's usually,  it's at the moment of a change in production. Or a deployment or a launch that we...
+12
+...have problems, outages.
+13
+Or just, just after we detect some bugs.
+14
+It's common.
+15
+Bad things happen at that moment.
+16
+And we use Release Engineering at the end to increase the quality of our products.
+17
+The launch moment, it's critical.
+18
+The message for this principle that I want to bring is: it is through the release engineering that we
+19
+can SAFELY deliver without impacting reliability.
+20
+And that was the release engineering principle.
+
+--- Simplicity ---
+
+0
+And the last principle is Simplicity.
+1
+Simplicity means that we focus on what is essential.
+2
+We should focus on what matter for our customers.
+3
+Simplicity also means that we think about the final user experience, both for internal and external...
+4
+...users.
+5
+It's also related to noise reduction.
+6
+Sometimes we are overwhelmed for/by information, too many info, too many data, and not all data, not all...
+7
+...info...
+8
+...are important
+9
+Sometimes we can lost.
+10
+The most important, just because we are involved in noise.
+11
+We can say that complexity, it's harmful.
+12
+It's impossible to say that we rely on something that we can not comprehend.
+13
+Simplicity, it's also related to cost reduction.
+14
+Because we can reduce the usage and the resources to the bare minimum.
+15
+With simplicity, we also gain some knowledge sharing because simple solutions, simple, simple
+16
+systems are easy to handover.
+17
+Something that we should have clear, it's that Simplicity is difficult.
+18
+It's not something easy to achieve.
+19
+It requires efforts.
+20
+Discipline! The main message for the SRE Simplicity principle.
+21
+Is that simplicity, it's needed for reliability.
+22
+We cannot say.
+23
+That's something it's reliable if we cannot comprehend.
+24
+And that was the last SRE principle: Simplicity.
+
+--- The 7 SRE Practices ---
+
+0
+Since learned about the SRE principles,
+it's time to learn about the practices
+1
+like the SRE principles, we have seven practices to list.
+They are not the only one.
+2
+(But) the most common and famous practices.
+3
+So, what is a practice?
+4
+practices
+5
+are what turn theory into reality.
+6
+We can put that way!
+7
+Different from the SRE principles, that should be
+the same for all organizations when we start applying
+8
+the practices, we should shape them (practices) to our organizations.
+9
+We have the practices here, but depending on
+the organization, the organization size.
+10
+The organisation units we can.
+11
+Have different ways to apply.
+12
+Also, depending on the tool.
+13
+The size of the team.
+14
+We can say that SRE practices are
+when we get their hands dirty.
+15
+And before we dig into each of them,
+I'll put here the main message about SRE practices.
+16
+That's the main message that we should
+learn when we talk about this practice.
+17
+Each SRE practice, it's a step towards reliability.
+18
+We can think that way.
+19
+So let's move on and start learning about each practice.
+
+--- Monitoring ---
+
+0
+The first SRE practice, it's called monitoring.
+1
+Monitoring is at the same time a principle and practice,
+the monitoring practice consists of collecting,
+2
+analyzing and processing relevant events and facts
+from our services, usually by pulling or pushing
+3
+those events from logs or apps.
+4
+Then after aggregation, we translate them into
+understandable collections called metrics.
+5
+Those measures can be by its then displayed in dashboards.
+Compared with the expected behavior so that
+6
+we can be notified when the service
+is not behaving normally.
+7
+We monitor our services for many reasons.
+8
+Let's list some...
+9
+We monitor to know what's happening, to respond to
+incidents, to identify the root cause of problems,
+10
+To know the bottlenecks in order to improve
+performance, to detect trends, to identify waste,
+11
+to see the impacts of a change and
+to understand user behavior.
+12
+The monitoring practice enables us to know when
+the service is behaving well and when it's not, when it's
+13
+saturated and when it's idle.
+14
+The monitoring as a practice...
+15
+...is the foundation of all other practices.
+The main message for this lecture is that we should
+16
+consider monitoring as the mother of all other
+practices. All other practices depend on monitoring to exist.
+17
+That is the main message.
+18
+Monitoring is the mother of all other practices.
+
+--- Incident Response ---
+
+0
+The Incident Response practice.
+1
+We need to be prepared for incidents. Eventually,
+bad things happen and we should be prepared for the
+2
+worst.
+3
+To be prepared, firefighters perform some
+safe exercises called Fire-Drills.
+4
+This exercise simulates real incidents, trying to
+identify how people behave during an incident and
+5
+to plan the best strategy beforehand.
+6
+The Incident Response practice suggests the same.
+Perform some simulations of situations that could eventually
+7
+happen to know the system behavior.
+8
+Who should be involved in the case that
+happens and the impact on customers.
+9
+It's all about being prepared.
+10
+We call "On-Call" the practice of allocating people to
+monitor and be ready in case of an incident.
+11
+As we said during the monitoring practice, the monitoring
+is set to automatically notify potential
+12
+problems.
+13
+The notification plan.
+14
+Is a document that describes who and how people
+involved should be notified, the notification plan
+15
+is set based on the monitoring numbers, considering
+considering the impact on customers to avoid any
+16
+alerting noise.
+17
+A lot of noise is false flags that do not impact anybody,
+but triggers the notification alerts.
+18
+I'll give you an example.
+19
+Imagine that the number of errors for an important
+service increases and persists over the expected threshold
+20
+for some period, the monitoring set up automatically
+tries to reach the On-Call
+21
+An engineer responsible for that service.
+22
+In case the alert does not impact anyone
+this is noise.
+23
+This all needs to be planned in advance.
+24
+We also need to coordinate the action, having clear
+the people that should be involved, their roles
+25
+and responsibilities during things then.
+26
+For small occurrences, maybe just the
+on-call engineer is enough
+27
+For an outage, probably the entire
+department should be involved.
+29
+Like the firefighters, they have a fire
+truck with water, hose, and prepared stairs.
+30
+The engineers should have all the equipment needed to act.
+31
+We call this "Logistic Plan". In that plan...
+32
+...we consider all logistics.
+33
+it's needed to solve the problem. From transportation,
+in case the engineer needs to commute to the office,
+34
+to the emergency equipment.
+35
+Another aspect regarding how to respond to an incident,
+sometimes overlooked, is the "Communication Plan".
+36
+who should know that something is happening?
+37
+Managers? On-call workers? Customers?
+38
+A "Communication Plan", is all about effective communication.
+To answer that question, we need to know who
+39
+is being impacted and who can help to solve the problem.
+40
+The main idea for this lecture is TO REDUCE THE DAMAGE.
+41
+Bad things happen eventually, and the "Incident Response Plan"
+or the incident response practice help us
+42
+to reduce the damages and go back to normal as fast as possible.
+43
+And that is the Incident Response
+44
+Practice
+
+--- Root Cause Analysis and Postmortems ---
+
+The next SRE practice is called "Root Cause Analysis and Postmortem".
+Let's start with the meaning of root cause analisys.
+What is root cause analysis?
+Root Cause Analysis, also known as RCA, is the
+process of investigating what caused the incident
+This practice is directly linked to the previous one,
+is directly linked to the "Incident Response" practice.
+Once you know that something happened, we try to
+Solve that problem as fast as possible.
+The priority during the incident is to reduce the blast radius.
+It means reduce the impact on our customers.
+It's just like a real fire. Like a real fire, during the fire
+We focus first on extinguish the fire and only
+afterwards we try to or initiate the investigation about
+the root cause.
+An initial cause analysis can occur during the resolution
+of the incident, of course, sometimes it's obvious
+what caused the incident and we can just act, but sometimes don't.
+Some incidents are solved without knowing the root cause.
+Imagine that for some reason, the database
+got full and all connections stucked.
+The first step may be to form a clean up
+on the database or increase the storage the size.
+So that...
+...we reduce the impact on our customer and
+we got some time to investigate the root cause and actually
+solve the problem.
+We can say that the root cause analysis must... Not must!
+But, maybe should... should be done with calm.
+It's preferable if every time it's possible to perform
+the root cause analysis a day after the incident
+after we collect all the data required for that
+in order to identify what really happened.
+After the investigation, the root cause analysis,
+we should produce a document, a formal document
+listing all the relevant facts that caused the incident
+Or related to the incident. We put in the "Postmortem",
+everything that it's related to the incident. Like...
+The specific hour we were notified also the specific hour
+we communicated to our customers that something
+was not working as expected
+And at the specific hour that we solve the problem and
+the system started to return to normal, to normality.
+The post-mortem records all relevant facts
+in a timeline order.
+And why we...
+create Postmortems? One of the main reasons,
+is because with the postmortems we learn from our
+mistakes.
+We make more difficult to happen the same thing,
+and also sometimes we have some, also some good practices
+like revisit old postmortems so that new employees
+and new engineers know about what happened in the
+past and also share postmortems
+stories beetween different companies so that all the
+companies that are passing for the same incident can
+easily investigate and solve their problems
+Postmortems can make the resolution of recurrent problems
+faster if we already know how to solve that and
+the same problem arises
+we will not spend time
+trying to many alternatives
+The main idea behind the root cause analysis and post-mortems
+that I want to share with you, it's.
+It's a method to learn from our mistakes.
+To continuously improve.
+That's quite important, and this is a vital!
+A vital practice like the previous one, the root cause
+analysis mounts over the incident response that depends
+totally on the monitoring.
+We can see some codependencies between the different practices in the SRE.
+And that's it!
+That was the root cause analysis and post-mortem practice.
+
+--- Testing and Releasing ---
+
+About the next SRE practice.
+That it's "Testing and Releasing".
+Let's start with the test part.
+Who wants to drive a car that wasn't tested?
+Probably, nobody!
+Tests ensure that the minimum quality.
+They works like some quality gateways that blocks bad design
+or service with bugs, go to live.
+We can put here that tests prevent bugs/bad design
+to cause incidents. Like we saw before,
+in "Incident Response", comparing a firefighter
+that respond to an fire alert.
+We we also have the root cause analysis and
+a postmortem after some incident occurs and testing...
+...is all about "prevention".
+We are preventing bad things happen.
+We can consider the test quality gateways, as we said here,
+and also to ensure that what we are building
+works as expected.
+It's also a way to ensure that.
+It also helps us to know all the parts, because usually
+we have something called code coverage that
+shows to us with some reports if you are testing all
+all parts of our code or not. And that helps us to identify
+some small parts that are quite important
+and know the big picture.
+We usually have some different tests, types of tests.
+The most common are Unit, Integration, and System.
+We usually do more Unit tests.
+A little bit Integration test, and a little bit
+more Integration Test and Systems tests, and we also
+can have more tests.
+I'm listing just some here, like a smoke test
+that ensures that the system it's up with the minimal
+features working as expected. With regression tests
+that ensures that we are not inserting a new bug
+or reversing a previous feature from work and
+load tests and performance tests that ensure that under
+the high load, our systems behave as expected.
+So testing, it's all about prevention.
+It's all about using some safe environments
+to guarantee that everything is working.
+as expected.
+Release Engineering, it's (linked to) testing
+because when we are thinking about Release Engineering,
+we are planning all the pipeline from the
+development or the conception until goes live, goes to our
+customers.
+And the test are some parts in this process
+The release engineering plans what is the best
+process to deliver, and not only to deliver, but sometimes
+to roll back when bad things happen to a previous version.
+We can say that.
+Release engineering is all about care in
+delivering without bothering our customers.
+And usually we follow some some practice and
+there are some techniques like create different environments
+like development, test, staging
+and production, the most common to separate.
+And we also have a clear pipeline from where
+our products navigates until they reach our customers.
+And we have more opportunities
+to catch bugs and bad behaviors.
+The release engineering, it's also
+about reduce the many steps during that process.
+It's all about automation, the automation of
+the pipeline process we have some techniques are very
+common nowadays, like continuous delivery and
+deployment that make things more effective and also configuration
+management that takes care of changes that
+are not code but can affect the overall production environment.
+We will not dig into too much details here,
+but the main idea is that Release engineering plan the best process
+to delivery, and roll-back, when the case,
+care in the delivering without bothering our customers and makes
+the delivery process more secure and faster.
+How much time takes from the conception of a new
+feature until the that feature goes through to the
+customer with the expected quality level?
+The main idea that I want to share with you
+about Testing and Release Engineering is prevention.
+That's all about prevention and efficiency.
+Efficiency means that we have the best proccess
+process that makes we work faster and reduce the time
+between we concept the new feature and
+amazer our customers with that innovation.
+And that was all about Test and Release engineering.
+
+--- Capacity Planning ---
+
+Capacity Planning
+The "Capacity Planning" practice is a little different
+from the previous one. The Capacity Planning practice
+is more a kind of optimization.
+But we should not reduce the importance of Capacity Planning.
+It's quite important, I would say, that it's vital for any company.
+We can say that when we have everything working fine,
+it's time for optimization. And this is true! Usually, we
+do capacity planning when we don't have any outage or
+any incident to solve. It is something that we don't
+do every day.
+We do it on a regular basis, maybe once a semester,
+or once or twice a year.
+The capacity plan is based on the previous practice,
+because we use the monitoring history to base our
+decisions and make our plans.
+Capacity planning is important because underutilized
+resources mean wasting. We have more resources
+that we actually need to do the job and we are just wasting money.
+Depending on the how big your it's your company,
+we can say that the capacity plan has a huge impact
+on our bills. But not only for big companies, small companies and startups that have a more
+conservative budget...
+...also needs Capacity Planning.
+And in the other side, when we have overloaded
+resources, they are impacting reliability. Because we
+can clearly see when we observe a monitoring history
+that there is a correlation between overload
+resources and increasing of errors and latency.
+The same that happens with computers and servers
+happens in real life, I choose this picture to represent
+that. Probably this cow is...
+...not moving as fast as it could because it's overloaded.
+We should plan our capacity
+Depending on the variation of load that
+can happen in minutes, hours, days, weeks or years.
+When we are talking about small time ranges,
+we are talking about the scaling.
+Usually we say that we scale in...
+out...
+up or down...
+Meaning that sometimes, if we are not using the
+right amount of resource that we need, we can switch that
+resource for a more powerful, or if you
+are just wasting resources, we can.
+Change that big powerful server for some less powerful,
+but that do the job for a best price or depending
+on how the variation works, we can have some hours
+in your peaks, more servers serving
+our customers or less servers serving us our customers.
+And when we are talking about capacity planning
+for days, weeks or years, we usually usually they
+are related to plan for big events, and to anticipate the usage.
+I can have... I can give you some examples like
+the Black Friday, probably in the Black Friday.
+We have more customers using our services
+and we need more servers for that, more computers.
+More storage...
+And also, when we learn from our mistakes,
+maybe that was the day that we had the outage just because
+we didn't had enough servers to to satisfy all the load.
+The main message that I want to share with you about
+the Capacity Planning practice is that with that we can make
+more, with less. We save money and we also
+reduce errors related to overload.
+So it impacts positively the reliability
+when we do capacity planning.
+And it also has a huge impact on our bills and our budgets.
+And that that is the Capacity Planning practice.
+
+--- Development ---
+
+The Development practice.
+The development SRE practice is related to the development
+world or software engineering world, we must understand that
+SRE is just a specialization inside the software engineering field.
+It means that
+who does SRE are engineers.
+We call them Site Reliability Engineers and they
+Follow the same practices, good practices
+and process that other software engineers do.
+But instead of focusing on the external products
+that our customers uses, they focus on developing internal
+products and tools.
+We can compare the Site Reliability Engineer with blacksmith.
+A blacksmith can make tools for its own usage and
+tools for being used by some colleague in the same company.
+It's a good analogy.
+The Site Reliability Engineers they are like blacksmiths, they like to build tools.
+Site Reliability Engineers beside like to code,
+automation and solve problems using code, they distribute
+their time 50 percent for the development tasks
+related tasks and 50 percent to operations and incident
+response tasks.
+It means that they should be dedicated to automate
+process on a daily basis to build and integrate different
+tools and components and the other 50 percent
+dedicated to other practices like monitoring, incident
+response, postmortems and capacity planning.
+Half of their time, they should be dedicated to solving engineering tasks.
+The main idea, guys, that I want to share with you, it's the idea behind the development.
+It's the using or having a dedicated team to build your own tools and automate our process.
+We can speed.
+And that's the main goal of the development.
+It sits on top of other SRE practices and allows the company allows us to gain speed.
+And that is the development practice.
+
+--- User Experience ---
+
+The last SRE practice that we're going to present is
+at the same time a SRE practice and at the same our goal.
+The user experience, or UX, sits at the top
+of what we call reliability piramid.
+It means that.
+As we go up.
+In this pyramid
+We are increasing the reliability level.
+And the topics that we have in the bottom,
+we need to do more. We do more monitoring.
+Then Incident Response we do less,
+but sits over monitoring.
+And the same applies for each practice as we go up.
+When we talk about the user experience,
+we are talking about two different points of views, one
+for internal users.
+For internal users, usually we think about
+simplicity, how can we make tools that facilitates their
+lives?
+How can we automate process to make their lives easier?
+How can we build internal tools that abstracts
+all the complex involved in managing systems... distributed
+systems and complex services. And for the external users
+Our goal is the right balance between innovation.
+It means new features and reliability.
+Faster and stable.
+Fast and stable systems.
+The main idea behind these practice that I want
+to share with you guys that I want you to keep in mind,
+it's "Goal" that it's the keyword for the this lecture.
+When we are performing the other tasks, we
+need to have clear goals, the internal and external user
+experience.
+And that was the user experience practice.
+Thank you, guys.
+
+--- What is a Site Reliability Engineer? ---
+
+Okay, so what is the site reliability engineer?
+We know what a software engineer does or is.
+He's the engineer dedicated to building software.
+He's specialized on this and know all the techniques,
+tools, everything needed to build good software.
+We also know what a Sysadmin or System Administrator is.
+He is a IT professional, specialized in
+maintaining systems in production.
+He knows about techniques, tools and everything
+necessary to manage the production workload.
+From hardware passing through operating systems,
+networks, protocols, et cetera.
+Now, what is a Site Reliability Engineer? Or SRE.
+They can follow the same logic and say that a SRE is the
+engineer, specialized in reliable sites or reliable
+websites. Or better, we can inprove that phrase. We can
+say that an SRE is an engineer specialized in building
+and maintaining highly reliable, large scale systems.
+Highly Reliable.
+and not only highly reliable, large...
+...scale systems.
+and that's true.
+There is not false, but not quite. Or rather, we can say that
+there is no college course or specialization
+to become a SRE.
+We can find some specialization courses or certifications
+to become a sysadmin or software engineer,
+we don't have a college to become a SRE.
+That's the exact reason why it's so difficult to find an SRE.
+When we are seeking for one.
+So, We can say also.
+That the Site Reliability Engineer,
+I'll put it in here... is a
+Software Engineer or a Sysadmin experienced
+A Site Reliability Engineer must be an experienced sysadmin or
+software engineer before. Not necessarily
+a senior level or the best software engineer or sysadmin.
+Far from that, but they need to have at least some
+previous experience in those roles.
+So let's recap. What is a to engineer?
+Site Reliability Engineer, is a regular software engineer or sysadmin,
+specialized in highly reliable large scale systems.
+And, of course, for doing that, they need some experience in the previous roles.
+
+--- What does a Site Reliability Engineer do? ---
+
+What does a Site Reliability Engineer do?
+We know that a Site Reliability Engineer is a regular
+Software Engineer or Sysadmin dedicated
+to SRE requirements
+To build and maintain highly scalable large scale systems
+But they keep being regular Software Engineers and sysadmins, that means.
+Not only regular,
+we can say that SRE is a specialisation.
+They are different kinds of specialists because they
+continue being software engineer and sysadmin.
+But when they are doing more Dev tasks
+they are focused on some specific tasks.
+What do they do? They perform application performance
+monitoring, that it's that type of performance
+or that kind of performance focused on
+the application, not on hardware.
+They are also responsible for defining and
+writing the pipelines that are that automation
+that takes some software from Dev to Prod.
+They are also responsible for some coding
+to write some automations, to automate some process
+and also write some internal tools.
+And also to helping design software with the software engineers
+dedicated to the product teams, because
+they will serve in this case more like a consultant helping
+they design faster, stable
+simple to operate and secure software.
+As sysadmins
+The SRE will perform the infrastructure, monitoring
+more focused on the hardware or the virtual machines
+that is running, all the cloud services.
+They will also be responsible for the incident response.
+Be on-call when bad things happen.
+It's also responsible for the capacity planning
+to observe if we are wasting resources, if they are prepared
+for some peak during some hour of the day
+to write the postmortems after some outage or incident
+and also write all the procedures that we need to
+know in order to operate well or services in the
+regular basis or after some incident.
+And, of course, different from the software engineers
+and sysadmins, they need also to ensure
+that the principles and practices are being applied.
+In this case, it's more as a SRE specialist or a consultant.
+And this is all that the Site Reliability Engineer does,
+if you are wondering to become a Site Reliability Engineer,
+you need to understand each of these points and
+You will know what you will do on a regular basis.
+We can say the main goal for this lecture, the SRE is the practical Dev+Ops
+It is not that kind of the DevOps more focused on the whole the DevOps,
+for the company... the culture change, the mindset.
+A hands dirty Dev+Ops, it is the bond between
+the devs and ops world when we talk about reliability.
+
+--- Who can be an SRE? ---
+
+OK, now we know what is a Site Reliability
+Engineer, what does he do... Now, who can be?
+An SRE?
+As we know, Site Reliability Engineers are regular software engineers and sysadmins.
+But they are more, they are not only software engineers
+and sysadmins. They must be experienced
+software engineers and sysadmins. They need
+to some work done on these fields. But,
+they don't need to be the best or seniors in these fields.
+Here, I am presenting a good profile for SRE, it's also
+a way to facilitate, if you are preparing
+some job interviews for your SRE to see some aspect
+on the on the design profiles for the candidates
+if you are interviewing a software engineer to become SRE.
+The software engineer must like to "automate their job away"
+They like to perform automation, they like to
+find ways to automate their job.
+They should know about monitoring. The monitoring principles,
+how to measure or how to see logs
+in their applications.
+For instance, how can measure the performance of their applications
+Of course, as a software engineer, he should knows how to code
+Probably write some scripts, some well-known programing languages
+But he should know how to code and he should also be
+conscious about the relationship between hardware, software,
+and people.
+We can translate that for communication.
+He should be someone that should know that
+site reliability engineering is not a hardware problem.
+Sometimes it is. But it's not only a hardware a problem, s
+ometimes is a software problem. Sometimes it is.
+But it's most about people.
+It's about communication.
+It's a triad hardware, software, and people that make a
+good reliability. And, if you are interviewing a sysadmin.
+The same he should be someone that like to "automate their job away",
+that get bored easily when it's performing the same task twice.
+You should know about monitoring. In this case, probably not
+application monitoring, but more infrastructure monitoring
+and all the monitoring aspects that are involved on this
+Cloud monitoring, for instance. He should also knows
+how to code, but as a sysadmin, the requirements
+are lower, probably not to write the best object
+oriented or functional programming software, but how to
+automate things using scripts, at least Bash script.
+I would say, maybe Python or Node.JS, something like that.
+And should also be conscious about the
+relationship between hardware, software and people.
+And both,  in the both case, a SRE should be a SRE specialist.
+To become a SRE, he should know everything
+about the principles and practices.
+Should know the reliability pyramid
+Because those are the tools that the any software engineer
+or sysadmin by profession will use
+to apply, Site Reliability Engineering in the company.
+Some people thinks that the Site Reliability Engineer
+must be a superhero. Like a superhero.
+That's the reason I put the Spiderman here.
+But they don't they don't need.
+They just need to be to have the right profile,
+the right profile and to know about SRE. And that's
+all no need for it to be
+a super senior, in its field just have some experience
+as a software engineer or sysadmin.
+
+--- The first steps ---
+
+Adopting SRE The First Steps.
+So your company decided to adopt SRE.
+OK, this can be considered the first step, but from there, where to go?
+We know that SRE defines a hierarchy of reliability,
+where each practice it's built over the previous one.
+This means that we follow a natural path or
+road map until we achieve the reliability goals.
+But the first step in the road map is monitoring!
+Everyting start from there! And the monitoring is all about communication.
+It's about our services communicating their
+current behavior or health through metrics.
+Only after we have the monitoring put in place that we can
+start talking about as SLAs, SLIs, and SLOs.
+Only after that!
+Then, once we have the monitoring put in place,
+we can start identifying our SLAs.
+Again! SLAs are our obligations or duties.
+It's natural that the business guys, the legal department,
+the lawyers and the security must be involved.
+In identifying our SLAs. But remembering that SLA is just the minimum.
+They are not our goals, they are the minimal reliability level.
+Once we have identified our SLAs,
+it's time to choose the SLIs.
+Or maybe not choose, but identifying. The SLIs are the measurement indicators.
+Simplifying: the good and bad events that impact our SLAs.
+Once we have the SLAs and the SLIs, then we can start setting some goals.
+More ambitious than the SLAs, but realistic.
+The objectives, they must be based on
+the customer expectations, therefore...
+...UX and UI specialists, product owners,
+architects, they should be involved.
+We can notice that different roles and many
+people are involved in the SRE adoption.
+The developer and operational teams even more.
+The SRE adoption change how they perform their regular work.
+Just for instance, I'll give a single example.
+The release process changes after adoption SRE!
+It doesn't matter how you do this now. For instance, maybe we have a CAB meeting
+twice a week... maybe you have some self self-assessment...
+form to fulfill... it doesn't matter.
+The SRE adds a gate based on the error budget.
+That must be respected.
+And that changed how everything works in our processes.
+And also the Devs and the Ops guys, they had more
+tasks their to-do lists.
+The main message for this lecture is that COMMUNICATION IS VITAL.
+For the success of SRE adoption, or successful SRE adoption.
+The precondition to SRE adoption success is
+everybody being on the same page.
+That's my main message for this lecture: "Communication is Vital".
+We can see here that the SRE adoption
+involves too many people, too many roles, and
+they must be on the same page.
+
+--- The Groundwork ---
+
+SRE teams the groundwork.
+It's important to say that before implementing SRE,
+there are some tasks that can lay the groundwork,
+prepare the SRE adoption.
+We can list some like creating a communication plan.
+start spreading the SRE principles.
+Everything that we can do for preparing
+the SRE implementation is a good approach.
+The spread of the SRE principles alone
+Can bring many benefits to any organization
+We can also define some SLAs, SLIs, and SLOs and promote blameless postmortems.
+Do release engineering, improve incident response, foster simplicity and automation.
+All of this can be done before adoption or
+creation of the first SRE team: The groundwork!
+It's important to say that, before hiring the first SRE
+there are some groundwork that can be done.
+Can be done for any organization in anticipation to the SRE adoption.
+
+--- SRE Teams Formats ---
+
+Forming SRE teams.
+Or SRE teams formats.
+Well, every organization is unique.
+What fits well, in some company, maybe not works in other.
+This reflects in how we organize the teams.
+We can organize the SRE teams in different ways.
+Each team model has its own tradeoffs, its own pros and cons.
+It's all about tradeoffs! We should consider the pros and
+cons before choosing the right team model.
+Usually it's preferable to avoid any risk doing some
+experimentation, testing some formats and evolving
+from there according to the achieved results.
+I will list here some other SRE formats, they have
+some like: a) Dedicated SRE team serving other teams
+as consultants.
+b) The operation teams being the SRE. c) SRE being allocated
+in other development teams. d) Dedicated SRE teams...
+We have different formats!
+Let's see some.
+The first one, it's dedicated SRE team, serving other
+teams as consultants or we can also call as "Dedicated SRE team"
+This model works well when all the companies is open to the SRE principles.
+That way, the dedicated SRE team handles training,
+consultancies about the principles and practices.
+However, the SRE team is responsible for guiding other teams without
+working together on their daily tasks.
+This model also involves some risks, the SRE team can be seen
+as an external agent that adds little
+or only take part in the team's achievements.
+When this happens, the teams can feel
+unmotivated to follow the SRE team guidance.
+And also, the dedicated SRE team must be
+large enough, big enough to match or to meet the needs of
+the company and to have the power to influence
+the priorities of the other teams.
+This model is more indicated as the initial model
+during the SRE implementation, since it's based
+on the consultants, SRE consultants.
+For companies that has spread the SRE
+principles and it's already open to them.
+And also for companies that are not so big and a
+single SRE team can meet all the company's needs.
+We have other SRE format.
+In this case, the SRE are the Ops,
+or the Ops team is the SRE.
+It's natural for operations teams to have a
+good background in some of the practices, they are performing
+the SRE practices for a long time...
+the operation teams have a privileged view of the company's services as well.
+They are admins, they are aware of the recurring problems, all the outages.
+They are used also to do some on-call shifts and
+they know what are the expected system behaviors,
+because usually are the operations guys that monitor.
+Following this model enables the ops team to manage
+more services without needing to increase the number
+of people because the SRE model makes
+the operation teams more effective.
+It also promotes a better relationship between the developers.
+And foster eliminating toil through automation.
+We can compare this to a DevOps implementation...this model.
+This model also demands few SREs to be hired, since
+the operations teams usually are already there.
+They are already exists.
+So maybe not all these guys were hired
+as SRE, but just a few of them.
+Some were already there as operations guys.
+The drawback of this model is that the Devs and Ops keeps separated.
+It's not a true work together.
+They are not working together.
+They do not share the same pool of engineers.
+They do not share the engineers between the teams and also
+some operations guys or some Ops might not be willing to become SRE.
+It's a little different.
+This model also requires a strong sponsorship
+from the high management so that the Ops recommendations
+can influence the devs priorities.
+Are the SRE guys that controls the release gateway
+and that way, probably the Devs will not be so happy.
+This model, the Ops team is the SRE team is more indicated as initial model
+during the SRE implementation also for companies
+where services are similar to to each other.
+In this case, imagine that we have multiple services
+that are almost the same, maybe some software
+as a service model like that.
+And when the Ops (are) open to the SRE principles, it's not always that the operation is open or aware
+of the SRE principles.
+Another approach or another SRE team format is the three being
+part of the Devs teasm. Tn this case, the SRE members
+are embedded in the product development teams.
+The red ones here, they are SREs, working together
+in the product development teams.
+Usually the product development team focus on delivering
+new features and forget about the process improvements.
+They are focused on delivering innovation.
+The SRE members can help setting up some monitoring
+or perform some release engineering, improving
+the release process and assuming the the service
+operations work, that is something that
+cannot be avoided.
+This model means that we what the development team builds, they operate.
+This is true, a truly DevOps mindset! Small companies that do not
+have dedicated operations teams favors this formation.
+A single SRE can be allocated in this case for
+more than one team, depending on the situation.
+When they build part of the same product or
+the they used similar technology.
+So imagine that this team Devs and these team devs,
+they developed a a similar service, the same service
+are using this similar technology.
+We can share some SREs between the teams.
+This model is more indicated when we have critical services
+that demand high reliability levels, because
+in this case the SRE is truly embedded in the
+development of the product and the Dev team
+are also open to the SRE principles.
+In this case, the developers must know all the benefits of the SRE.
+It's also a good approach for companies with no or a
+small operations staff, because since, imagine
+that we have just two teams in this case,
+probably only four SRE are alocated and they keep doing
+some product development.
+For companies where the development teams are cross-functional.
+The guys in the development team, they know more than one discipline
+and for companies where services
+are very different from each other.
+Because in this case, I imagine that you have a separated SRE.
+It's quite difficult to understand all the different
+technology and all the different aspects of each
+service. In this case, we know that one team is focused
+on one technology stack and one service.
+Those SREs can become specialist on the reliability for that service.
+Other SRE team format is Dedicated SRE team
++ SRE in other Teams.
+This model requires greater investments for larger companies
+having a dedicated SRE team and SRE members
+alocated in Devs and Ops makes perfect sense.
+This model favors the dissemination of the SRE culture in
+all areas on the Ops and the devs and also
+the formation of a shared pool of engineers.
+Because, after all, all SREs are also Ops and Devs, and they
+can be shared between the SREs for the company.
+When these mixed model is implemented, it's necessary to promote the rotation from time to time
+between the SREs of the different teams.
+And think about maybe SRE career ladder in order to retain the talents.
+Because in this case, the SRE, it's a specific role and
+they switch back and forth between the teams.
+Then they are not restricted to a team in this case,
+it's good to have a career ladder, just the SREs,
+so that they can reach the seniority without
+following the same projects that others Devs and Ops guys.
+This model is more indicated for large
+companies that can afford to have dozens of SREs.
+For companies mature enough in the SRE principles
+and practices. When not all development teams need a dedicated SRE team.
+Because in this case, imagine that we have team
+of development that don't need a dedicated SRE.
+It can just follow the guidance from the full SRE team.
+And also in all, services are critical and demand high reliability levels. This one, it's more for...
+Imagine that we are building a cloud platform where other companies build over your services.
+This is a good model in this case because all...
+It's more flexible... all teams are impacted by the SRE culture.
+And last, I would like to share about SRE guilds, it's not a SRE formation or format.
+But more a recommendation, because it's interesting
+to the SRE member do not be isolated.
+Mostly when the SRE members are part of different teams.
+Like this one.
+It's good to share knowledge, so a guild or the guild member meetup,
+they can meet on a regular basis
+to exchange, exchange some experience, discuss some standards
+for the company and evaluate adopted tools.
+The SRE guilds are indicated more when we have, like I said, SRE members are
+part of different teams... working on different teams...
+To share knowledge between the different teams.
+The good experiences, the bad experiences.
+And for all SRE formats....
+Form all SRE formats that embed SREs in other teams. This I need to change...
+Let's fix! For all SRE format that embed SREs in other teams.
+That's what I wanted to share with you regarding the different SRE models.
+Those are the basic ones, of course, the SRE teams and different models must fit the reality of
+your company.
+It's not something static, but they can give you.
+A clear picture of the perfect one to adopt in the beginning of the journey.
+
+--- Challenges ---
+
+The SRE adoption challenges.
+It's natural to face some challenges and resistances when adopting SRE.
+We can list some reasons.
+The company and the teams may not be willing to change.
+We know that hire a SRE is difficult.
+They are scarce.
+The SRE approach can also be rejected by
+the teams that focus only on deliver features.
+Also, the iT management can resist to the SRE
+way of doing the work, mostly on the how releases are managed.
+There is a lack of training about the SRE principles
+and practices and also there are some misconceivings
+about what is SRE in practice. Sometimes SRE is compared to
+DevOps, to ITIL, and to other disciplines.
+So, it's vital the sponsorship from the high management
+and the clear company communication to overcome
+all those challenges. Usually, companies with the agile
+mindset and an established DevOps culture tend
+to be more open to SRE.
+This because DevOps was built upon the Agile principles and
+the SRE was built upon the DevOps principles,
+We can undoubtedly say that SRE is implementation of DevOps.
+Like in DevOps, the success of SRE
+adoption has much more to do with the culture, communication
+and organization changes than just tools and processes
+Regardless of the size of the company and
+the SRE teams format, it's possible to adopt SRE in
+a evolutionary way, step by step.
+And it's expected to see the results just few months after
+start and over the time, the positive impact of the SRE
+in teams and business becomes more perceptive.
+Like in the most or in the other areas we can say that
+the first step, it's the most important.
+
+--- What we've learned so far ---
+
+It's close to the end, we are about to finish the course, I must say.
+Thank you very much!
+But before we leave, let's make a wrap up and review
+what we've learned so far and also prepare you
+for the next steps.
+So, after this course now you know what SRE is and about its origins
+on Google, we learn about important concepts
+like SLOs, SLAs, SLIs, and Error Budget.
+The importance of balance reliability and innovation.
+We learned also about what are the SRE principles,
+the seven SRE principles, the seven SRE practices,
+the reliability pyramid.
+We learned more about the SRE role.
+Who is the Site Reliability Engineer, what he does and
+what it's the perfect profile for a SRE and
+also the first steps when adopting SRE.
+It think we reach our goal for this course.
+Now it's time to see the next steps.
+
+--- Managers and c-levels - Next Steps ---
+
+That's for managers and C-level executives.
+First, you should evaluate where you are regarding the SRE practices.
+It's possible that some of the SRE practices are already being performed in your company.
+Maybe they just need to be... improved.
+Also, check for internal talents that fits the SRE role profile before looking outside.
+Sometimes it's easier to teach someone some technical skills.
+Than fit someone in the organization culture
+also are the internal talents that knows more about your
+company, about the services.
+And we know that we have a learning curve.
+Before being highly effective,
+so check first the internal talents and also.
+Form the SRE team in a form that fits into your reality
+with your company mind, and this can be a evolvable process.
+it don't need to be perfect at the first try.
+It can start small and grow as you need
+
+--- Software Engineers and Sysadmins - Next Steps ---
+
+And for Software Engineers and Sysadmins
+I would list the next steps as: 1. Focus on the SRE practices,
+you should master each practice.
+Each practice is a whole discipline.
+We can find books about each of that practices,
+how to perform the best incident response, how to write
+postmortens.
+How to monitor...
+Also being part of the community, it's important, so
+participate in conferences about SRE participate in
+local meet-ups, read good books about SRE and also
+learn about some most used tools you can see
+Job offers and learn more about the tools that are being required.
+And those are the next steps for someone, for some
+software engineer or sysadmin that want to become
+a site reliability engineer.
+Thank you very much.
+See you the next course.

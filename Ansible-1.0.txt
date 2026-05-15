@@ -1,0 +1,3142 @@
+
+
+=== Introduction ===
+
+
+--- Introduction ---
+
+-: Hello and welcome to the Ansible
+for the Absolute Beginners course.
+My name is Mumshad Mannambeth
+and I'll be your instructor for this course.
+I'm a DevOps trainer at codecloud.com and I've been working
+in the industry as a consultant for
+over 13 years and have helped hundreds of thousands
+of students learn technology in a fun and interactive way.
+(graphics whooshing)
+In this course, you will learn Ansible
+through a series of lectures that use animations
+and fun illustrations to simplify complex concepts,
+and we have demos that will show you
+how to install and get started with Ansible.
+Most importantly, we have hands-on exercises
+that you can access right in your browser.
+Yes, you don't need to have a high-end system
+or access to cloud platforms or worry
+about cloud costs to gain practice.
+We will provide you access to actual lab environments
+and challenges to practice on.
+Our labs are unique as in, we don't provide
+a blank environment and give you instructions
+to copy and paste blindly.
+Instead, every lab is created specifically
+for the topic you just learned,
+and you're asked questions to explore
+and identify information in the lab or do specific tasks,
+and your job is to figure out how to do those tasks.
+We will validate your work and give you feedback instantly.
+(graphics whooshing)
+At the end of the course, you will work
+on a real-world project of deploying
+the Code Cloud E-commerce application
+using simple playbooks.
+Let's now look at the objectives of this course.
+Since this is for the absolute beginners,
+we go all the way from basics,
+covering everything you need to know to get started.
+You don't need any prior coding experience
+or scripting experience.
+We will get started with understanding what Ansible is
+and what it can do, and we'll go
+through how to set up Ansible in your environment
+using a simple virtual machine deployed using Virtual Box,
+and then we'll get started with an introduction to YAML,
+which is the language that Ansible uses.
+All Ansible playbooks are written in YAML.
+One of the common challenges that beginners face
+in Ansible is understanding how to work with YAML files.
+We have a number of coding exercises that will get you
+all set with YAML in no time by hands-on exercises
+that give you enough practice to be confident
+in automating with Ansible.
+As with all of our other courses, we have hands-on exercises
+that you can access right in your browser.
+The browser gives you a quiz portal with a set
+of questions and an editor to answer the question,
+so develop the YAML files required
+for each task and the playbooks to solve each quiz.
+If you run into issues, you may view the hints
+or the solution sections for the answer
+or reach us through our Q&amp;A section.
+Well, I'm excited to get started.
+I'm ready whenever you are.
+(bright music)
+(typewriter buttons clicking)
+
+--- Introduction to Ansible ---
+
+Instructor: In this lecture, we will get introduced
+to what Ansible is.
+If you're a systems engineer or IT administrator
+or just anybody working in IT,
+you're probably involved in doing a lot
+of repetitive tasks in your environment,
+whether it be sizing and creating new hosts
+or virtual machines every day,
+applying configurations on them,
+patching in hundreds of servers, migrations,
+deploying applications, or even performing security
+and compliance audits.
+All of these very repetitive tasks involve execution
+of hundreds of commands on hundreds of different servers
+while maintaining the right sequence of events
+with system reboots and whatnot in between.
+Some people develop scripts to automate these tasks
+but that requires coding skills and regular maintenance
+of these scripts, and a lot of time
+to put these scripts together on the first place.
+That's where Ansible helps.
+Ansible is a powerful IT automation tool
+that you can learn quickly.
+It's simple enough for everyone in IT,
+yet powerful enough to automate
+even the most complex deployments.
+In the past, something that took developing
+a complex script, now takes just a few lines
+of instruction in an Ansible automation playbook.
+Whether you want to make that happen on your local host
+or on all of your database servers
+or all of your web servers on cloud or just the ones
+on your DR environment, all it takes is modifying one line.
+Now, don't worry about the playbook itself
+or its syntax for now.
+We will get into that in a bit,
+and we have lots of fun exercises coming up
+that will get you all set with this in no time.
+Let's take a look at a simple use case.
+Imagine you have a number of hosts in your environment
+that you would like to restart in a particular order.
+Some of them are web servers and others are database servers
+so you would like to power down the web servers first,
+followed by the database servers, and then power up
+the database servers and then the web servers.
+You could write an Ansible playbook to get this done
+in a matter of minutes and simply invoke
+the Ansible playbook every time you wish to restart
+your application.
+Let's take a look at another example.
+In this case, we are setting up a complex infrastructure
+that spans across public and private clouds
+and that includes hundreds of VMs.
+With Ansible, you could provision VMs on public clouds
+like Amazon and as well as private cloud environments
+like VMware, and move on to configuring applications
+on those and setting up communication between them,
+such as modifying configuration files,
+installing applications on them,
+configuring firewall rules, et cetera.
+There are a lot of built-in modules available
+in Ansible that supports these kind of operations.
+You can easily integrate Ansible with the rest
+of your environment so that you can pull information
+to be used in the automation process,
+such as data from a CMDB database
+to get the list of VMs you wanna target
+or you can configure Ansible
+to trigger automation automatically when from tools
+like ServiceNow, when a workflow gets approved.
+The Ansible documentation pages hosted at docs.ansible.com
+are comprehensive and contains all information required
+to get started with Ansible, and there are hundreds
+of examples of playbooks in these pages.
+We will be referring to these while setting up
+and installing Ansible.
+So that's a quick introduction to what Ansible is,
+why you might want to consider it and what it can do.
+Going forward, we will look at how to quickly get started
+by setting up an Ansible lab environment,
+and I will see you in the next lecture.
+
+
+=== Configuration and Basic Concepts ===
+
+
+--- A Quick Reminder ---
+
+-: Hey, so here is a quick reminder
+and I hope you don't mind me jumping in like this.
+I wanted to take a moment to remind you
+about the importance of staying focused
+on the labs and videos that are provided in this course.
+Now, I understand that you may be eager
+to create your own local setup to practice,
+but I recommend that you resist that urge
+until you have completed the course.
+Our labs and videos are designed
+to give you a seamless learning experience
+that will help you gain the most out of the course
+in the time that you have available.
+By sticking to the labs and videos provided in the course,
+you can minimize distractions and interruptions
+and ensure that you have a clear path from start to finish.
+And this will help you stay focused on your learning goals
+and make the most of your time with us.
+Rest assured, we will provide you with resources
+to create your own local setup
+at the appropriate time in the course.
+For now, let's focus on the labs
+so you can gain the knowledge and skills you need
+to succeed.
+Thank you for choosing our course.
+Thank you for choosing KodeKloud,
+and we look forward to helping you achieve
+your learning goals.
+(dramatic music)
+
+
+=== Ansible Inventory ===
+
+
+--- Download Presentation ---
+
+[No transcript available for this lecture]
+
+
+=== Ansible Variables ===
+
+
+--- Introduction to Ansible Configuration Files ---
+
+Instructor: In this lecture,
+we will look at configuration files in Ansible.
+When you install Ansible, just like any other software,
+it creates a default configuration file at the location,
+/etc/ansible/ansible.cfg.
+The Ansible configuration file governs the default behavior
+of Ansible using a set of parameters.
+An Ansible configuration file is divided
+into several sections, the default section at the top,
+and others like inventory, privileges_escalation,
+ssh_connection, and colors to name a few.
+Within each of these sections, you have a number of options
+and their values, most of them being in the default section.
+For example, the default location
+of the Ansible inventory file,
+the location of the logs file,
+the location to the modules or roles, or plugins directory,
+whether Ansible should be gathering facts by default
+for all executions,
+how long to wait before giving up
+on an SSH connection attempt,
+or how many hosts should Ansible target
+at a time when executing playbooks
+against multiple hosts?
+Out of the inventory section,
+you have options for enabling certain inventory plugins.
+Now, we don't have to understand
+all of these options for now.
+We will look at some of these options in more detail
+when we cover the respective topics.
+For now, let's look at how to work with configuration files
+in general and how these values are interpreted
+and how to override some of them.
+Now, we know the default location
+of Ansible's configuration file
+is at /etc/ansible/ansible.cfg path,
+and those are values Ansible will consider
+when you run the playbooks
+from anywhere on the controlled machine.
+Say I have multiple different playbooks
+in different locations on my host, like one for web,
+another for database, and another for networking,
+and say I require different settings in each of these.
+For example, when I run the playbooks for web,
+I do not want facts to be gathered;
+when I run the playbooks for database,
+I do want facts to be gathered, but I do not want
+to display colored output for some reason.
+When I run the network playbooks,
+I want to extend the SSH timeout to 20 seconds
+instead of the default 10.
+I just picked one example for each
+for now, but you might have a requirement
+to change many such values based on your use case.
+In that case, you make a copy
+of the default configuration file
+into each of these directories
+and make the necessary changes in them.
+Next time you run Ansible Playbook,
+it picks values from the config file
+within those directories.
+That's one way to override default parameters in Ansible.
+What if you plan to store one of your configuration files
+in a directory other than your Playbooks directory?
+For example, you want to store the web configuration
+to a file at location opt/ansible-web.cfg
+and use that for multiple Ansible playbooks going forward.
+In such cases, before running the Ansible playbook,
+you can specify the location to this configuration file
+through an environment variable, ansible_config,
+and set it to the path to the new config file.
+This time, when the playbook is run, Ansible picks up
+that file instead of the default configuration file.
+So we saw different ways
+of specifying the configuration file, by specifying the path
+in an environment variable, by creating the config file
+in the playbooks directory or from the default location.
+What if you have all of them configured,
+and different values for different parameters
+in each of them?
+Which one does it consider,
+and what order does Ansible pick the configuration files in?
+The first priority is always to the parameters configured
+in the file specified through an environment variable.
+Any values configured
+in this file overrides the values configured
+in all other files.
+followed by the ansible.cfg file in the current directory
+from which the Ansible playbooks are run,
+followed by the .ansible.cfg file
+in the user's home directory.
+Yes, that's one place that we didn't mention earlier.
+And lastly, the default Ansible configuration file
+at /etc/ansible/ansible.cfg.
+Remember, these files don't have to have all values.
+You only need to override the parameter
+you want to override.
+Default values
+for other parameters will be automatically picked
+from the next config file in the priority chain.
+Okay, so let us now look
+at the values within these files themselves.
+Say for instance, I developed a set
+of new playbooks for my storage environment.
+I have decided to go
+with the Ansible configuration parameters
+defined in the default configuration file
+so I don't really have to make a copy
+of it into my playbooks directory.
+When I execute Ansible from my storage directory,
+it first looks
+if there is an ansible.cfg file available there.
+If not, it's going to use the one in the default location.
+But I realized that there is this one parameter
+that I need to change, just one for gathering facts.
+I want to turn it off.
+So I don't really want to copy the entire ansible.cfg file
+to make that one change.
+What I could do is override that single parameter
+using an environment variable.
+You can set an environment variable right before
+executing the Ansible playbook to change that behavior.
+So how do you figure
+out what the environment variable should be?
+For most options in the configuration file,
+you can figure out the corresponding environment variable
+by changing the whole parameter to uppercase
+and prefixing ANSIBLE_ to it, like this.
+In this case, gathering is the parameter,
+so it would be ANSIBLE_GATHERING in uppercase.
+But you must check the documentation as well
+to confirm that's the right one.
+You could use the Ansible config command
+to view that information, and of course, on a Linux shell,
+use Export to set the environment variable.
+Now remember, any value set through an environment variable
+like this takes the highest precedence.
+All other values specified
+in any configuration file are ignored
+if a corresponding environment variable is set
+with a different value.
+There are different ways
+to pass this environment variable in.
+You could simply specify it
+in a key equals value format
+right before executing the playbook like this.
+But remember, this setting is then only applicable
+to this single playbook execution, this single command.
+If you want to persist that throughout
+your shell session, you could use the export command
+and set the environment variable shell wide,
+until you exit from your shell, this setting will be active.
+If you want to make the change persistent
+across different shells across different users
+running this playbook on different systems,
+then the best approach is to create a local copy
+of the configuration file
+in the Playbooks directory and update the parameter in it.
+That way, you can even check in the configuration file
+into your code repository.
+So how do you find out
+what the different configuration options are,
+what the corresponding environment variables are,
+and what they mean.
+Use the ansible-config list command to see a list
+of all different configurations, their default values,
+and the values you can set.
+We learned that you can have
+multiple different configuration files on your system.
+For example, one in the present directory and another
+in the user's home directory, and another
+in the /etc/ansible directory.
+How do you see which one is active?
+You can run the ansible-config view command
+to see the config file that's currently active.
+We also learned different ways
+to specify configuration parameters
+to different configuration files, environment variables,
+a mix of config files and environment variables.
+What if you're not sure which setting
+have been picked up by Ansible?
+Now to my favorite command, the ansible-config dump command.
+This will show you a comprehensive list
+of current settings Ansible has picked up
+and where it's picked that from.
+For example, here I'm going to set an environment variable
+to set facts gathering to the value explicit.
+Then, running the ansible-config dump command
+and looking for the gathering keyword,
+you see it's set to explicitly
+because of the environment variable ansible_gathering.
+It tells you exactly how it picked that value.
+This is especially useful when you're troubleshooting issues
+with configuration.
+Well, that's it for this lecture.
+
+
+=== Ansible Playbooks ===
+
+
+--- Introduction to YAML ---
+
+Instructor: Hello, and welcome to this lecture.
+In this lecture, we take a look at what YAML files are.
+All Ansible Playbooks are written in YAML.
+If you are familiar with YAML already,
+feel free to skip this section
+and head over to the next section.
+If you have not worked with YAML in the past,
+I would highly recommend going through this
+because the rest of the course depends entirely on YAML.
+Ansible Playbooks are text files
+or configuration files rather,
+that are written in a particular format called YAML.
+If you have worked with other data structure formats
+like XML or JSON, you should be able to easily pick it up.
+Don't worry if you haven't worked on any of these,
+you should still be able to easily pick it up
+going through the coding exercises
+that accompany this course.
+A YAML file is used to represent data,
+in this case, configuration data.
+Here is a quick comparison of a sample data
+in three different formats.
+The one on the left is XML where we display a list
+of servers and their information.
+The same data is represented in JSON format
+in the middle and finally in YAML format to the right.
+Take a minute to compare the three formats.
+Let's take a close look at YAML.
+If you take the data in its simplest form
+such as key value pair,
+this is how you would define it in YAML.
+Key and value separated by a colon.
+The keys are fruit, vegetable, liquid, and meat
+and the values are apple, carrot, water, and chicken.
+Remember, you must have a space followed
+by colon differentiating the key and the value.
+Let's take a look at how an array is represented.
+We would like to list some fruits and vegetables.
+We would say fruits followed by a colon.
+On the next line, enter each item with a dash in the front.
+The dash indicates that it's an element of an array.
+How about a dictionary?
+A dictionary is a set of properties
+grouped together under an item.
+Here, we try to represent nutrition information
+of two fruits.
+The calories, fat, and carbs are different for each fruit.
+Notice the blank space before each item.
+You must have equal number of blank spaces
+before the properties of a single item
+so they are all aligned together.
+Let's take a closer look at spaces in YAML.
+Here we have a dictionary representing
+the nutrition information of banana.
+The total amount of calories, fat, and carbs are shown.
+Notice the number of spaces before each property
+that indicates these key value pairs fall within banana.
+But what if we had extra spaces for fat and carbs?
+Then they will fall under calories
+and thus become properties of calories,
+which doesn't make any sense.
+This will result in a syntax error,
+which will tell you that mapping values
+are not allowed here because calories already
+have a value set, which is 105.
+You can either set a direct value or a hashmap.
+You cannot have both.
+So the number of spaces before each property
+is key in YAML.
+You must ensure they're in the right form
+to represent your data correctly.
+Let's take it to another level.
+You can have lists containing dictionaries containing lists.
+In this case, I have a list of fruits
+and the elements of the list are banana and grape,
+but each of these element are further dictionaries
+containing nutrition information.
+A lot of students new to YAML have reached out to me
+asking when to use a dictionary or a list.
+So let me explain this a little bit better.
+First of all, it is important to understand
+that all of what we discussed so far,
+such as XML, JSON or YAML are used to represent data.
+It could be data about an organization
+and all of its employees and their personal details,
+or it could be data about a school
+and all of its students and their grades.
+Or it could be data about
+an automobile manufacturing company
+and all of its cars and its details.
+It could be anything.
+Let's take an example of a car.
+A car is a single object and it has properties
+such as color, model, transmission, and price.
+To store different information or properties
+of a single object, we use a dictionary.
+In this simple dictionary,
+I have properties of the car defined in a key value format.
+This may not be as simple as this,
+for example, in case we need to split the model
+further into model name and make year,
+you could then represent this
+as a dictionary within another dictionary.
+In this case, the single value of model
+is now replaced by a small dictionary with two properties,
+name and year.
+So this is dictionary within another dictionary.
+Let's say we would like to store the name of six cars.
+The names are from by the color and the model of the car.
+To store this, we would use a list or an array
+as it is multiple items of the same type of object.
+Since we are only storing the names,
+we have a simple list of strings.
+What if we would like to store all information
+about each car, everything that we listed before
+such as the color, model, transmission, and price.
+We will then modify the array
+from a list of strings to a list of dictionaries.
+So we expand each item in the array
+and replace the name with the dictionary we built earlier.
+This way, we are able to represent all information
+about multiple cars in a single YAML file
+using a list of dictionaries.
+So that's the difference
+between dictionary, list, and list of dictionaries.
+I hope you understood the difference
+between the three and when to use each of these.
+Before we head over to exercises,
+let's take a look at some key notes.
+Dictionary is an unordered collection
+whereas lists are ordered collection.
+So what does that mean?
+The two dictionaries that you see here
+have the same properties for banana.
+However, you can see that the order of properties
+fat and carbs do not match.
+In the first dictionary, fat is defined
+before carbs and in the second dictionary
+carbs comes first followed by fat,
+but that doesn't really matter.
+The properties can be defined in any order,
+but the two dictionaries will still be the same
+as long as the values of each property match.
+This is not the same for lists or arrays.
+Arrays are ordered collection,
+so the order of items matter.
+The two lists shown are not the same
+because apple and banana are at different positions.
+This is something to keep in mind
+while working with data structures.
+Also remember, any line beginning
+with a hash is automatically ignored
+and considered as a comment.
+We are now ready to head over to the coding exercises
+and have fun playing with YAML files.
+
+
+=== Ansible Modules ===
+
+
+--- Accessing the Labs ---
+
+Instructor: Hello, in this video,
+I will explain how to access labs,
+part of this course.
+This course comes with real hands-on labs
+that you can access right in your browser.
+Unfortunately, Udemy does not have native support
+for embedding real hands-on labs in the course,
+and that's why these labs are hosted on KodeKloud.
+Students who purchase this course on Udemy can get access
+to the labs for free on KodeKloud.
+You don't have to make any extra payments.
+To access the labs, there's a lecture named Access Labs
+in your course,
+right before the first lab starts.
+Use the link to go to the checkout page on KodeKloud.
+If you haven't signed up on the KodeKloud website before,
+you will need to provide your email address.
+KodeKloud and Udemy are different platforms,
+and unfortunately, there is no option available yet
+to share the same user accounts between the two.
+So you must create an account
+and sign up on KodeKloud to access the labs.
+Remember, your Udemy credentials won't work on KodeKloud.
+If you're accessing through Udemy for business,
+then your company credentials won't work either.
+You must create a new account on KodeKloud.
+Once logged in, you can find your course
+under the courses page.
+Lab courses start with the term labs in their name.
+Once the labs are open, use the maximize button
+to hide the course curriculum
+to get more space for your labs.
+And if you want to see the course curriculum again,
+click on the same button.
+Once you're done working on a lab,
+mark it complete using the Mark Complete button.
+As you can see, there are multiple lab scenarios
+for each course.
+And when to access which lab,
+the detail of that will be given within the course
+as in when you progress through the course on Udemy,
+you will know when to access what lab.
+Well, that's it for now.
+I wish you all the best.
+And if you run into issues with accessing labs,
+please write to support at support@kodekloud.com.
+I hope you have a great learning experience from us.
+
+
+=== Ansible Handlers, Roles and Collections ===
+
+
+--- Course setup ---
+
+[No transcript available for this lecture]
+
+
+=== Advanced Topics ===
+
+
+--- Coding Exercise - YAML ---
+
+[No transcript available for this lecture]
+
+
+=== Appendix ===
+
+
+--- Ansible Inventory ---
+
+-: We will now look at configuring inventory in Ansible.
+Ansible can work with one
+or multiple systems in your infrastructure at the same time.
+In order to work with multiple servers
+Ansible needs to establish connectivity to those servers.
+This is done using SSH
+for Linux and PowerShell Remoting for Windows.
+That's what makes Ansible Agentless.
+Agentless means that you don't need to install
+any additional software
+on the target machines to be able to work with Ansible.
+A simple SSH connectivity would suffice Ansible's needs.
+One of the major disadvantages
+of most other orchestration tools is
+that you are required to configure an agent
+on the target systems
+before you can invoke any kind of automation.
+Now, information about these target systems is stored
+in an inventory file.
+If you don't create a new inventory file
+Ansible uses the default inventory file located
+at etc/Ansible/hosts location.
+Let's take a look at a sample inventory file.
+The inventory file is in an INI like format.
+It's simply a number of servers listed, one after the other.
+You can also group different servers together
+by defining it like this under the name
+of the group within square brackets, and define the list
+of servers part of that group in the lines below.
+You can have multiple groups defined
+in a single inventory file.
+Let's take a closer look at inventory files.
+For example, I have a list
+of servers named from one to four.
+However, I would like to refer
+to these servers in Ansible using an alias such
+as web server or database server.
+I could do this by adding an alias for each server
+at the beginning of the line and assigning the address
+of that server to Ansible underscore host parameter.
+Ansible underscore host is an inventory parameter
+used to specify the FQDN or IP address of a server.
+There are other inventory parameters too.
+Some of them are Ansible underscore connection
+Ansible underscore port, Ansible underscore user
+and Ansible underscore SSH underscore pass.
+Ansible underscore connection is what defines how
+Ansible connects to the target server.
+As we discussed in the previous slide.
+Is this a SSH connection to a Linux server
+or a WIN RM connection to a window server?
+This is how we define if the target host we wish to connect
+to is a Linux or a Windows host.
+You could also set it to local host to indicate
+that we would like to work with the local host
+and not connect to any remote hosts.
+If you don't have multiple servers to play around with
+you could simply start with a local host
+in your inventory file.
+Ansible underscore port defines which part to connect to.
+By default, it is set to port 22 for
+SSH, but if you need to change, you can set it
+differently using Ansible underscore port parameter.
+Ansible underscore user defines the user used to
+make remote connections. By default
+this is set to root for Linux machines.
+If you need to change this, define it as shown here.
+Ansible underscore SSH underscore pass defines
+the SSH password for Linux.
+Note that storing passwords in plain text format
+like this may not be very ideal.
+The best practice is to set
+up SSH key based passwordless authentication
+between the servers, and you should definitely do that
+in your production or corporate environments.
+But for now, we wanna start
+with the absolute basics of Ansible
+without getting too much into security or other topics.
+So to begin with, we'll start
+with a really basic setup with a username and password.
+Otherwise, you would be stuck configuring
+and troubleshooting security issues
+for the most part of this course.
+Well, that's it for this lecture.
+Head over to the Coding Challenges
+and practice working with Inventory Files and Ansible.
+I will see you in the next lecture.
+
+--- Coding Exercise - Ansible Inventory ---
+
+[No transcript available for this lecture]
+
+--- Inventory Formats ---
+
+Instructor: Let's take the example of two companies.
+The first is a small startup
+with a few service handling basic functions
+like web hosting and database management.
+The second is a multinational corporation
+with hundreds of servers spread across the globe,
+handling diverse functions like e-commerce,
+customer support, data analysis, and more.
+For the small startup,
+a simple INI format inventory would suffice.
+It's like a basic organizational chart
+with only a few departments.
+However, for the multinational corporation,
+a more detailed and structured inventory would be needed.
+This is where the YAML format comes in.
+It's like a complex organizational chart
+with various departments, sub-departments, and teams.
+The different inventory formats also offer flexibility,
+allowing you to group your servers based on their roles,
+like web servers, database servers,
+and application servers in a company,
+their geographic location,
+like servers in the U.S., Europe, or Asia,
+or any other criteria
+that makes sense for your organization.
+Ansible supports two main types of inventory formats,
+INI and YAML.
+INI format is the simplest and most straightforward.
+It's like a basic organizational chart for a small startup.
+Here's an example.
+The YAML format is more structured and flexible
+than the INI format.
+It's like a complex organizational chart
+for a multinational corporation.
+Here's an example.
+Just like a company chooses the right organizational chart
+for its operations, you should choose the inventory format
+that best suits your project's needs and complexity.
+Whether you choose the INI or YAML format,
+the key is to ensure your servers, departments
+work together to achieve your organizational objectives.
+Well, that's it for this lecture,
+we'll see you in the next one.
+
+--- Grouping and Parent-Child Relationships ---
+
+Narrator: Imagine you're an IT administrator
+in a large organization with a complex IT infrastructure.
+You have hundreds of servers,
+spread across multiple locations,
+serving different purposes.
+Some are web servers, some are database servers,
+and others could be application servers.
+Managing these servers individually can be a daunting task.
+For instance, if you need to update the web servers,
+you would have to manually specify each web server.
+This is not only time-consuming but also prone to errors.
+In managing a complex IT infrastructure,
+wouldn't it be convenient if we could categorize servers
+based on their roles, locations, or any other criteria
+that makes sense in our environment?
+For instance, imagine if we could collectively
+identify all our web servers under a common label,
+say web servers.
+This would mean that when an update is needed
+for the web servers, instead of manually specifying
+each server, we could simply target the web servers label.
+The changes would then be applied to all servers
+associated with that label, saving us time
+and reducing the risk of errors.
+This is not just a hypothetical scenario.
+This is precisely where Ansible's grouping feature
+comes into play.
+With Ansible's grouping, we can create these common labels
+or groups to efficiently manage and operate
+on a set of servers at one.
+Now, when you need to update the web servers,
+you can simply target the web servers group
+and Ansible will apply the changes
+to all servers in that group.
+But what if your web servers
+are spread across different locations
+and servers in each location
+need to have some location-specific configurations?
+You could create separate groups for web servers
+in each location but that would mean duplicating
+a lot of common configurations.
+This is where Ansible's parent-to-child
+relationships come in handy.
+You can create a parent group called web servers
+and child groups for each location, for example,
+web servers US, web servers EU, et cetera.
+You can define the common configurations
+at the parent group level
+and location-specific configurations
+at the child group level.
+This way you can manage your servers more efficiently
+and avoid configuration duplication.
+In the INI format, groups are defined using square brackets
+and hosts are listed under their respective groups.
+Parent-child relationships are defined
+using the :children suffix.
+In this example, web servers US and web servers EU
+are groups and web servers is a parent group
+that includes both web servers US
+and web servers EU as child groups.
+In the YAML format, groups are defined
+using the keyword hosts and parent-child relationships
+are defined using the keyword children.
+Below is the same example presented in YAML format
+for better readability and understanding.
+
+--- Ansible Variables ---
+
+Instructor: We will now look at variables in Ansible.
+So what are variables?
+Just like any other scripting or programming language,
+variables are used to store values
+that varies with different items.
+For example, let's say we are trying to perform
+the same operation of applying patches
+to hundreds of servers,
+we only need a single playbook for all hundred servers.
+However, it's the variables that store information
+about the different host names, usernames, or passwords
+that are different for each server.
+We have already worked with variables earlier
+when we worked in the inventory section.
+If you remember, in an inventory file that looks like this,
+the ansible_host, ansible_connection, ansible_ssh_pass
+are all examples of variables.
+We can define as many variables as required like this.
+We could also define variables inside the playbook.
+This is a playbook we created earlier to add a DNS entry
+into the etc/resolv.conf file.
+To add a variable, we could simply add a vars directive,
+followed by variables in a key-value pair format.
+In this case, dns_server followed by the DNS server IP.
+We can also have variables defined
+in a separate file dedicated for variables.
+We will learn about this more later
+when we talk about includes and roles.
+So, we have now defined variables,
+but how do we use them?
+In the previous playbook,
+we have defined the variable dns_server,
+but we have not used it anywhere.
+What would be the right place to use that?
+In this line here where we defined
+the nameserver IP address,
+we could replace the hard coded value
+with the value from the variable.
+To use a variable, simply enter the variable name
+enclosed in double braces or curly brackets like this.
+When we run the playbook, Ansible will replace it
+with the value in the variable.
+Let's look at another example.
+This is a longer playbook
+that is used to set multiple firewall configurations,
+which has a number of values hard coded in it.
+If someone else wanted to reuse this playbook,
+he would have to modify the playbook to change these values.
+If these values that can vary are moved
+to the inventory file
+and refer to it in the playbook using double curly braces,
+we could get away with modifying
+the inventory file alone in the future
+and not have to modify the playbook itself.
+And even better way to do this
+would be to move the variables into a file
+in the name of the host, in this case, web.yml.
+This is now a host variable file,
+and all values defined in this file
+are available for use by the playbook
+when it is run for that host.
+This way, it is better organized.
+Remember, this format we are using
+to use variables in playbooks
+is called Jinja2 Templating.
+We have an entire course on Jinja2 Templating
+for the absolute beginners on KodeKloud,
+so check it out when you get time.
+Finally, while using variables with Jinja2 Templating,
+remember to enclose it within quotes
+if you're starting your assignment with the variable.
+However, if the variable is in between a sentence like this,
+then that is not really required.
+Let's head over to exercises
+to play around with variables
+in coding exercises.
+
+--- Variable Types ---
+
+Instructor: Let us take a look at variable types.
+String variables in Ansible are sequences of characters.
+They can be defined in a playbook, inventory,
+or passed as command line arguments.
+In the example shown,
+username is a string variable with the value admin.
+The second type is number variables.
+Number variables in Ansible
+can hold integer or floating-point values.
+They can be used in mathematical operations.
+In the example shown,
+max_connections is a number variable with the value 100.
+Another type of variable is a Boolean variable.
+The Boolean variables in Ansible
+can hold either truthy or falsy values.
+They're often used in conditional statements.
+In the example shown, debug_mode is a Boolean variable
+with the value true.
+Possible truthy and falsy values
+are shown in the table displayed.
+We use list variables in Ansible
+to hold an ordered collection of values.
+The values can be of any type.
+In this example,
+packages is a list variable that holds three string values.
+You can reference this variable in your playbook
+in double curly brackets.
+If you want to access a specific item in the list,
+you can do so by its index, as shown in the example.
+We also have dictionary variables in Ansible
+that can hold a collection of key-value pairs.
+The keys and values can be of any type.
+In this example, user is a dictionary variable
+that holds two key-value pairs.
+You can reference this variable in your playbook
+by using double curly brackets.
+If you want to access a specific value in the dictionary,
+you can do so by its key, as shown in the example.
+
+--- Registering Variables and Variable Precedence ---
+
+Instructor: Discussed about variables
+in the beginner's course.
+They are used to associate information to hosts,
+information that varies, that's different between each host.
+It's information that is used by Ansible itself
+to, say, establish connectivity to the hosts.
+That's information that could be used by your playbooks
+or place to configure hosts with such as DNS server IP,
+NTP server IP, IP tables, firewall rules, et cetera.
+So what is variable precedence?
+What if you have a variable defined in two different places?
+For example, in this inventory file,
+I have a variable defined for each host as their IP address.
+The ansible_host is a host variable.
+I have the host part of a group called Web Servers.
+I know that all of my hosts in this group
+are to be configured with the same DNS server,
+so I set up a group variable called dns_server
+with the IP of the server.
+Now, when the Ansible playbook is run,
+Ansible creates these host objects in its memory.
+It then identifies which group each host belongs to
+and then associates the group variables to each host.
+Each host gets its own copy of that variable
+and that is used throughout the playbook execution.
+What if I define the same variable on the host as well?
+For web2, I say the DNS server is something else.
+Which one would be considered by Ansible?
+When Ansible playbook is run, it first associates
+the group variables and then associates the host variables.
+And so the variable defined at the host level
+takes precedence over the variable defined
+at the group level, and that's variable precedence.
+Host variables takes precedent over group variables.
+What about variables defined within a playbook?
+Say, for example, inside my playbook that configures
+the DNS server, I have defined a variable
+with a different value for DNS server.
+I have the same variable defined at the group level,
+host level, and at the play level.
+In that case, whatever I define at the play level
+overrides the variables set on the others.
+I can even pass in the same information as an extra variable
+while running the playbook using the extra-vars option.
+Well, in that case, that takes the highest precedence.
+The value passed in as an extra variable
+to the command line is considered highest priority
+and overrides all other values specified
+in all other places.
+Well, those were just a few of the many ways
+you can pass in a variable to an Ansible playbook.
+A comprehensive list of the different options
+and their precedence is given
+in the Ansible documentation here.
+Note that the order of precedence is from top to bottom.
+The role default variables have the lowest precedence
+and the extra-vars passed through the command line
+has the highest precedence.
+At times, you may have a requirement
+to store the output of one task to use it later.
+For example, in this simple playbook,
+I have a task that prints the output
+of the file etc/hosts on a server.
+I'd like to add another task to print the output
+of the first command on screen using the debug module.
+So how do I capture the output of the first command
+and pass it to the second command?
+Use the registered directive with the first command
+and specify a variable name.
+The output will now be captured into this variable.
+Then specify the same variable
+in the VAR option of the debug module.
+The variable named result is now accessible
+for the duration of display.
+This is the output when you print the variable.
+Now the data stored in the variable
+depends entirely on what module was run.
+Different modules output data in different formats.
+In this case, the variable stores the result
+of the command execution since we use the Shell module.
+The result includes the return code specified by RC.
+This would be zero if the command runs successfully.
+Anything other than the zero
+indicates that the command may have run into a problem.
+The result also has the start time of the command,
+end time of the command, and the delta indicating the time
+it took for the commands to complete execution,
+as well as the standard out
+and standard error of the command, if any.
+Since we tried to print the contents of the etc/host file,
+they're stored in the STD out or STD outlines parameter.
+So instead of printing all of the contents,
+what if you just want to print the file contents alone?
+The output of the command we tried to run,
+then you specify the variable to print as result.stdout
+and same goes for the return code.
+If you want to print this return code, specify result.rc.
+So what is the scope of such registered variables?
+Any variable created using the registered directive
+falls under the scope of that host.
+That variable is associated to that host
+and is available for the rest of the playbook execution.
+In this case, the result variable has the results
+of the command execution for its respective host.
+So remember, they're under the host scope,
+meaning they can still be used in the next play if required
+and they can only be used within the scope of that host.
+Another easy way to view the output of a task
+if you don't really want to use the debug module
+is to pass in the -v option while running the playbook.
+Well, that's it for now.
+
+--- Variable Scoping ---
+
+Instructor: So what is the scope
+of a variable in Ansible?
+Say for example, in this simple inventory file,
+we have a DNS server specified for host web two.
+Is that value available for the other hosts
+web one and web three?
+No, because the scope
+of that variable is within the host web two.
+A scope defines the accessibility
+or the visibility of a variable.
+Just like in programming languages,
+a variable is accessible depending on how
+and where it is defined.
+So that's the first scope right there.
+The host scope, a variable defined
+as a host variable is accessible within a play
+that is run for that host.
+Now, when I say defined as a host variable,
+I mean any variable defined anywhere for that host
+whether it be in the inventory file
+or as part of a group variable
+or as part of a group of group variable.
+Ultimately, when the Ansible playbook is run,
+the first thing that it does is it breaks down the groups
+and associates variables to hosts.
+So when the playbook is run,
+there is just one scope, the host scope.
+So here I have a simple playbook that sets a value
+for NTP server and prints it to the screen.
+The value for NTP server is only defined
+in the first play,
+so it prints successfully in the first play.
+But that variable is not accessible in the second play
+because the scope of that variable
+is only within the first play.
+And so that's the second type of scope, the play scope.
+And finally, there are global variables,
+variables that are accessible everywhere
+throughout the playbook execution.
+We have seen that already,
+an example is passing in a variable
+as an extra variable in the command line, like this.
+Having a good understanding of variable scope is important
+as they're required for you to understand
+the concepts of magic variables
+that are coming up in the coming lectures.
+Well, that's it for now.
+Thank you for watching
+and I'll see you in the next lecture.
+
+--- Magic Variables ---
+
+Instructor: This lecture, we will discuss
+about magic variables in Ansible.
+Earlier, we discussed the scope of a variable.
+We learned that the host variables
+are associated to each host.
+With this inventory file,
+we have a DNS server specified for host web2.
+When Ansible playbook starts,
+it first creates three sub-processes for each host.
+Before the tasks are run on each host,
+Ansible goes through a variable interpolation stage
+where it picks up variables from different sources
+and associates them to the respective hosts.
+Each variable is only associated to the host
+on which it was defined, so it is unavailable on the others.
+The DNS server's IP address is unavailable on web1
+and web3, but how do you get it if you really want it?
+How can one Ansible subprocess running tasks
+for one host get the variables defined on another host?
+How can web1 and web3 get the DNS server's IP address,
+which is specified on web2?
+That's where we use magic variables.
+A magic variable called hostvars can be used
+to get variables defined on another host.
+In this case, hostvars of web2.dns_server
+will get you the DNS server defined on the web2 node,
+and this will work for all hosts.
+You can get any information about the other hosts this way.
+To get the host name or IP of the other host,
+use the ansible_host parameter.
+If facts are gathered, you can access additional facts
+about other hosts, such as their architecture,
+information regarding their devices, mounts,
+processors, et cetera.
+Anything within the facts of a host
+can be retrieved like this.
+Also, note that you can write the same expression
+like this using brackets and single quotes.
+Both these expressions yield the same results.
+You might see this in different formats
+in the documentation.
+So that was one kind of magic variable that are used
+to get variables from other hosts.
+Another magic variable is called groups.
+Groups return all hosts under a given group.
+Group names is the other way around.
+It returns all the groups the current host is part of.
+In this case, when you use group names in a play
+for host web1, it returns web_servers
+and Americas, which happens to be the groups
+that this particular host is part of.
+Inventory_hostname is a magic variable
+that gives you the name configured for the host
+in the inventory file and not the host name or SQDN.
+Well, those are a few, and there are others as well
+that we can see in the documentation page.
+In the documentation section,
+magic variables are documented
+under the Using Variables section
+under Working with Playbook section in the user guide.
+Refer to these while working
+with the upcoming coding challenges on magic variables.
+Well, that's it for now.
+
+--- Ansible Facts ---
+
+Instructor: This lecture, we will look at Ansible Facts.
+When you run a playbook
+and when Ansible connects to a target machine,
+it first collects information about the machine,
+such as its basic system information,
+like the system architecture, version of operating system,
+processor details, memory details, serial numbers,
+et cetera.
+It collects information
+about the host's network connectivity,
+the different interfaces, IP addresses, FQDN,
+MAC address, et cetera,
+as well as device information like the different disks,
+volumes, mounts and the amount of space available on them,
+the date and time on those systems
+and other settings as well.
+These information are known as facts in Ansible.
+Ansible gathers all these facts using the setup module.
+The setup module is run automatically by Ansible
+to gather facts about the hosts when you run a playbook,
+even if you didn't use this module in your playbook.
+For example, in this sample playbook
+where we print a hello message,
+we only have one task, the task that uses the debug module
+to print a message.
+But in the output, you see that it's actually run two tasks.
+The first one gathers facts
+and the second one prints the message,
+which was the only one we specified in our playbook
+actually.
+The first task is where Ansible
+runs the setup module automatically
+and gathers facts from the hosts.
+So how do you see those facts?
+All facts gathered by Ansible are stored in a variable
+named ansible_facts.
+Let's update our playbook to print that variable
+instead of the message.
+Use the VAR option on the debug module
+and specify ansible_facts variable.
+The output should display a lot of information
+about the host's IPs,
+whether it's a 64 bit or a 32 bit system,
+with flavor, version, DNS server configurations,
+FQDN, interfaces, memory details, device information,
+processor details, et cetera.
+These details could come in handy within your playbooks.
+For example, if you were configuring devices
+and logical volumes on your nodes,
+you could make certain decisions
+based on the information about disks gathered as facts.
+Now, what if you don't want Ansible to do that?
+Say for example, your playbook does not rely on
+any information gathered from facts,
+so you would like to disable gathering facts.
+You could do that by adding an option
+gather_facts to no on the play like this.
+You would then see only a single task
+and known facts gathered.
+The behavior of gathering facts
+is also governed by a setting
+in the Ansible configuration file called Gathering,
+as we saw in one of the previous lectures.
+It is by default set to implicit,
+meaning Ansible will automatically gather facts
+whether you specify it or not.
+Explicit is the opposite,
+where Ansible does not gather facts by default,
+but you can turn it on by setting the gather_facts to true
+in the playbook.
+What if you have it specified in both places,
+in the playbook as well as in the configuration file?
+The setting in the playbook always takes precedence
+over the one in the configuration file.
+One more thing, remember that Ansible only gathers facts
+against hosts that are part of the playbook.
+In this case, I have an inventory file with two hosts,
+web1 and web2,
+and an Ansible playbook which targets only one host, web1.
+In this case, facts will be gathered only
+for that host, web1.
+So anytime you come across a situation
+where facts for some hosts are unavailable,
+that could probably be because you have not targeted
+those hosts in your playbooks.
+Later in this course, we will discuss more about
+how to parse these facts,
+and when we discuss about variables and templates,
+we'll look more into using some of the information
+in these facts.
+
+--- Coding Exercise: Ansible Variables and Facts ---
+
+[No transcript available for this lecture]
+
+--- Ansible Playbooks ---
+
+Instructor: We will now look at Playbooks in Ansible.
+Ansible Playbooks are Ansible's orchestration language.
+It is in Playbooks where we define
+what we want Ansible to do.
+It is a set of instructions you provide Ansible
+to work its magic.
+For example, it can be as simple as
+running a series of commands on different servers
+in a sequence, and restarting those servers
+in a particular order.
+Or it could be as complex as deploying hundreds of VMs
+in a public and private cloud infrastructure,
+provisioning storage to VMs, setting up their network
+and cluster configurations, configuring applications on them
+such as web server or a database server,
+setting up load balancing, setting up monitoring components,
+installing and configuring backup clients
+and updating configuration database with information
+about the new VMs, et cetera.
+Let's take a closer look at how Playbooks are written.
+Remember, all Playbooks are written in YAML format,
+which is why we spent some time earlier
+getting our hands dirty with YAML.
+A Playbook is a single YAML file
+containing a set of plays.
+A play defines a set of activities to be run
+on a single or a group of hosts.
+A task is a single action to be performed on a host.
+Some examples of a task are executing a command
+or a script on the host, installing a package on the host,
+or performing a shutdown or a restart operation.
+Let's take a look at an actual playbook.
+Shown here is a simple Ansible Playbook
+that contains a single play named play 1.
+The goal of this play is to run a set of activities
+one after the other on the local host.
+Remember that the host you wanna run these actions
+is defined at the play level.
+In this case, we just want to test on the local host,
+which is why it is set to local host.
+This could be anything from your inventory file.
+Next, we run a set of commands
+one after the other on the host.
+First, we print the date, then we run a script
+on the server, followed by installing the httpd package
+using the YAML module, and finally starting the web server
+using the service module.
+Let's look at this sample playbook format
+and try to relate it to what we learned
+in the YAML section earlier.
+I have made a minor change and split the list of tasks
+into two separate plays.
+The YAML file, which is our playbook,
+contains a list of two plays.
+This is noted by the dash.
+So the playbook is a list of dictionaries in YAML terms.
+Each play is a dictionary
+and has a set of properties called name, hosts, and tasks.
+Remember, these are properties of a dictionary
+and so the order doesn't really matter.
+So even if you swap the position of name or host,
+it's still a valid play.
+However, this is not the same for tasks.
+The tasks, as you can see, is a list or an array,
+as denoted by the dashes.
+Lists are ordered collection,
+so the position of entries matter.
+If you swap the position of entries here,
+we're instructing Ansible to start the web service first,
+before installing the httpd service, which is not desired.
+So the YAML format is key while developing Playbooks,
+you must pay extra attention to the inundation and structure
+of the file.
+The host parameter indicates which host you want
+these operations to run on.
+Remember, the host you want to perform these operations
+against is always set at a play level.
+Currently, this is said to local host,
+which means that all these actions listed under tasks,
+is going to be performed on the local host.
+You could have any host or group specified here,
+but you must ensure that the host or group
+is first defined in the inventory file we created earlier.
+The host defined in the inventory file
+must match the host used in the Playbooks,
+and all connection information for the host
+is retrieved from the inventory file.
+If you specify a group, instead,
+the listed tasks will be executed
+on all the hosts listed under that group simultaneously.
+Let's move on to modules.
+The different actions run by tasks are called modules.
+In this case, command, script, yum and service,
+are Ansible modules.
+There are hundreds of other modules available
+out of the box.
+Information about these modules is available
+in the Ansible documentation website,
+or you could simply run the ansible-doc-l command.
+To get familiar with the basic playbook structure
+in the upcoming exercises,
+you simply need to know the basic command module.
+Later on, we will go through some other basic modules
+in more detail.
+Finally, once you successfully build the Ansible playbook,
+how do you run it?
+It's very simple.
+Execute the ansible-playbook command
+and specify the name of the Ansible playbook
+you just created, and that's it.
+If you do ansible-playbook-help command,
+you will get to know more about
+some additional parameters available for this command.
+We will go through some of them in a later section.
+
+--- Verifying Playbooks ---
+
+Instructor: Let's say you're tasked
+with deploying a critical software update
+across hundreds of servers in your organization.
+You write an Ansible playbook to automate this task
+and confident in your work you decide to run it immediately
+in your production environment.
+However, due to an unnoticed error in the playbook,
+instead of updating the software,
+it unintentionally shuts down the service on all servers.
+The result, a significant downtime
+and a frantic scramble to restore the service.
+This scenario underscores the importance of a critical step
+in the playbook development process, which is verification.
+Now, why do we need to verify playbooks?
+Verifying a playbook before executing it
+in a production environment is a crucial practice.
+It's like a rehearsal
+before the actual performance allowing you to catch
+and rectify any errors or unexpected behaviors
+in a controlled environment.
+Without this verification step,
+you run the risk of introducing unforeseen issues
+into your systems as illustrated in the scenario shown.
+These issues can lead to system downtime, data loss
+or other serious consequences,
+and can be much more difficult and time consuming to resolve
+than the initial problem
+the playbook was intended to address.
+By verifying your playbooks,
+you can proceed with confidence knowing
+that your playbook will behave exactly
+as expected when it's run in your production environment.
+This not only helps to maintain the stability
+and reliability of your systems
+but also saves you from potential headaches down the line.
+Let us now see how we can verify playbooks in Ansible.
+Ansible provides several modes for verifying playbooks
+out of which the check mode and diff mode are the main ones.
+The check mode is a dry run mode
+where Ansible executes the playbook
+without making any actual changes on the hosts.
+It allows you to see what changes the playbook will make
+without applying them.
+To run a playbook in check mode,
+use the --check option.
+Let's say you have a simple Ansible playbook saved
+as install_nginx.yml that installs the nginx web server
+on a host.
+To run this playbook in check mode
+you would use the --check option.
+In check mode,
+Ansible will not actually install nginx on the hosts.
+Instead, it will tell you what it would do if it were
+to run the playbook for real.
+In this output you can see
+that Ansible says it would change the state
+of the web server one host by installing nginx.
+However, because you ran the playbook in check mode,
+no changes were actually made.
+Please note that not all Ansible modules support check mode.
+If a task uses a module that doesn't support check mode,
+the task will be skipped when you run the playbook
+in check mode.
+Another mode for verifying playbooks is diff mode.
+Diff mode when used with check mode shows the differences
+between the current state and the state
+after the playbook is run.
+It provides a before and after comparison,
+which can be useful for understanding
+what changes a playbook will make.
+To run a playbook in diff mode,
+use the --diff option.
+Here's an example playbook that ensures
+a specific line is present in a configuration file.
+You can save this playbook as configure-nginx.yml.
+To run this playbook in check mode and diff mode,
+you'd use the check and diff options.
+The output might look something like this
+if the line is not already present in the file.
+In this output you can see the exact change
+that would be made to the ETC nginx nginx.config file.
+The line with the plus symbol shows what would be added
+to the file.
+In addition to the check and diff modes,
+Ansible also provides a syntax check mode.
+This mode checks the syntax of your playbook for any errors.
+It's a quick way to catch syntax errors
+that could cause your playbook to fail.
+To run a playbook in syntax check mode use
+the --syntax-check option.
+Here's how you can use it.
+Let's say you have the following playbook saved
+as configure_nginx.yml.
+You can run the syntax check with the following command.
+The output will simply confirm
+the playbook syntax is correct as you can see on the screen.
+Now, let's introduce a syntax error
+into the playbook by removing the colon after line in file.
+If you run the syntax check again,
+you'll receive an error message indicating the problem.
+This error message tells you exactly
+where the problem is making it easier to fix the issue.
+The syntax check mode is a quick way to catch such errors
+before running the playbook on your hosts.
+Well, that's it for this lecture.
+We'll see you in the next one.
+
+--- Ansible-lint ---
+
+Instructor: In our last lesson,
+we delved into the importance
+of verifying playbooks in Ansible.
+We learned how to use check mode and diff mode
+to ensure our playbooks behave as expected.
+But let's take a step further.
+Picture yourself as a DevOps engineer
+in a bustling software company.
+You have been using Ansible to automate your infrastructure.
+And over time, you have written a multitude of playbooks.
+As your infrastructure expands,
+so does the complexity of your playbooks.
+Some playbooks start to become more difficult to understand
+and maintain than others.
+You realize that you need a mechanism
+to ensure consistency and quality across all your playbooks.
+This is where Ansible Lint enters the scene.
+Ansible Lint is a command-line tool
+that performs linting on Ansible playbooks, roles,
+and collections.
+It checks your code for potential errors, bugs,
+stylistic errors, and suspicious constructs.
+It's akin to having a seasoned Ansible mentor guiding you,
+providing valuable insights and catching issues
+that might have slipped past your notice.
+Let's have a look at an example
+to understand the full power of Ansible Lint.
+All right, so here's our stylish Ansible playbook
+named style_example.yaml.
+It has some tasks to install and configure NGINX,
+but there are some style-related issues.
+First, we have an inconsistent indentation in the playbook.
+Some tasks have two spaces of indentation,
+while one task has four spaces.
+Second, we notice that the task names are inconsistent too.
+One task follows a sentence-like style,
+while the other goes with the concise approach.
+Let's run Ansible Lint on this playbook
+to see what it finds.
+The output will be something like that shown on the screen.
+And there you have it,
+Ansible Lint catches all these style-related issues
+and provides us with warnings.
+It tells us about the incorrect indentation,
+the deprecated apt and service modules,
+and even the missing name attribute for one task.
+You can use this feedback to refine your playbook.
+If the command completes without any output,
+that means no issues were found.
+Well, that's all for now.
+I'll see you in the next one.
+
+--- Coding Exercise: Ansible Playbooks ---
+
+[No transcript available for this lecture]
+
+--- Conditionals ---
+
+Instructor: In this lecture we will look at conditionals.
+Let us start with a simple example.
+I have two playbooks here that does the same thing,
+install NGINX on a host.
+But as you know,
+different OS flavors use different package managers.
+WN uses APT and Red Hat uses Yum
+but these are two separate playbooks
+and you will have to use the right playbook
+for the respective servers.
+I want to create a single playbook that works
+for both of these operating systems for all hosts.
+So based on the operating system flavor
+my playbook must run the appropriate task
+and that's where a conditional statement comes in handy.
+I could use the when conditional statement to
+specify a condition for each task,
+only if the condition is true, that task is run.
+So what is a condition?
+It could be any check that we perform,
+such as checking in if the OS family is Debian or Red Hat.
+Ansible underscore OS underscore family
+is a built in variable that Ansible populates
+with the flavor of operating system.
+Make sure to use double equal sign when checking equality,
+in conditional statement.
+You may use an or operator to
+specify either of two conditions.
+Use the yum module to install package if the OS family
+is Red Hat or Suse or an and operator.
+So it must satisfy both conditions.
+In this case we use the APT module only if
+the OS family is Debian and the version is 16.04.
+You may use conditionals in a loop as well.
+Say for example, instead of a single package, we have a list
+of packages that needs to be installed.
+We have an array named packages that has the list.
+Each item in the list has the name of the package
+to be installed as well as a property called required.
+Install the packages only if the required property is set
+to true.
+First, we specify the loop directive to execute
+the installed task in a loop.
+The name of the package to be installed is now item.name
+and this will install all three packages specified.
+To visualize this better, if you kind of expand the loop
+you'll see that the loop is in fact three different tasks,
+one for each package.
+Each task has the variable on it called item
+and the item has the respective package details.
+So if I wanted to write a conditional for each of the item,
+I would say when item.required equals true.
+and so back in my main playbook, that's what I would put in.
+When item.required equals true
+and that's how you use conditionals in loops.
+Let's look at one final example.
+To use conditionals with the output of a previous task
+we have a requirement to develop a playbook
+to check the status of its service and email if it's done.
+So there are two tasks.
+The first task checks the status
+of a service and the second task sends an email.
+We have learned previously that to record the output
+of one task, we could use the registered directive.
+So we say register the output to the result variable
+and then in the second task we use the when conditional
+on that result variable to say check
+if result.stdout has down in it.
+The defined method looks for a string
+within a variable and returns its position.
+If it's not found, it returns minus one.
+So our condition would be if it's not minus one,
+meaning that the output does not contain the word down,
+send an email.
+Well that's it for now.
+Head over to the recording challenges
+and practice working with conditionals.
+
+--- Ansible Conditionals based on facts, variables, re-use ---
+
+Instructor: Now, let us imagine your company
+has a mix of different servers.
+Some are running Ubuntu 18.04,
+some are running CentOS 7,
+and others are running Windows Server 2019.
+Your task is to automate the deployment of a web application
+across all these servers.
+This means the playbook needs to perform
+a different set of actions for different servers.
+So in scenario 1,
+you need to install a specific version of NGINX web server,
+but only on the servers running Ubuntu 18.04.
+How do you determine which version of OS
+is running on a server?
+Our inventory only has basic information
+about the server that we know of.
+This is where Ansible's facts come into play.
+Ansible facts are system-specific variables
+that can be used in playbooks.
+They collect information about the servers
+during the execution of the playbook.
+You can use the ansible_facts os_family
+and ansible_facts distribution_major_version
+to determine the operating system of the target servers
+and install the specific version of NGINX
+only on the servers running Ubuntu 18.04.
+Let's move to scenario 2.
+Your web application
+has different configuration requirements
+based on the environment,
+which are development, staging, or production.
+You can define a variable, say, app_env,
+to specify the environment.
+Then in your playbook, you can use this variable
+to deploy the appropriate configuration file
+for the specified environment.
+This is an example of using conditionals based on variables.
+Next, in scenario 3, you have a common set of tasks
+that need to be performed on all servers,
+such as installing necessary software packages,
+creating required directories, and setting up permissions.
+However, you want to start the web application service
+only on the servers in the production environment.
+You can achieve this by defining a variable,
+say, environment, and then using this variable
+in a conditional statement to start the service
+only when the environment is set to production.
+This is an example of using conditionals for reuse.
+In all these scenarios,
+Ansible's powerful features such as facts, variables,
+and reuse of tasks allow you to handle complex requirements
+with ease and flexibility.
+This is the power of Ansible's conditionals.
+They enable you to control the execution of tasks
+based on specific conditions,
+making your playbooks more efficient and manageable.
+
+--- Coding Exercise: Ansible Conditionals ---
+
+[No transcript available for this lecture]
+
+--- Loops ---
+
+-: In this lecture we will look at loops
+let's look at this example where we are
+creating an Ansible playbook.
+To create users in a system
+using the user module.
+The user module helps you create users
+on the target systems.
+In this case we are just creating one user.
+But what if we have multiple users.
+What if we have a lot of users to create.
+Well, one way to do this would be
+to duplicate these lines as many times as required.
+But that is not very elegant,
+and as there is a lot of duplication.
+A better way to do this
+would be to have a single task loop over all the users.
+That's were we use loops.
+Loop is a looping directive
+that executes the same task multiple number of times.
+Each time it runs,
+it stores the value of each item
+in the loop in a variable named "item".
+So you can simply replace the user name,
+in this case Joe with the item variable
+inside double braces like this.
+This makes your playbooks much more organized,
+and with reduced repetition.
+In this case
+you are not repeating the lines of the user module
+or the state.
+If you didn't get how the part about item works,
+let me visualize that for you.
+So any time you come across a play book
+probably written by someone else,
+and the loop part is confusing,
+I would recommend visualizing it like this.
+For visualization purposes
+a loop would break down into multiple tasks;
+within each task you have a variable defined,
+which is by default named "item".
+And it has the value of each item in the list.
+In this case the loop breaks down into 10 or more tasks,
+that uses the same user module.
+Each task has a variable item,
+whose value is set to each item in the loop.
+The first task has a value of items with "Joe" the second,
+with "George" third "Ravi" and so on it goes.
+When the playbook is executed,
+this is how it will be ran.
+In this case the loop is an array of string values.
+Just the user names.
+But what if I want to specify the user id as well.
+That would mean each item in the loop
+would have to have two values;
+the user name and user id.
+But how do you passing two values in an array,
+instead of passing in an array of strings through the loop.
+I would pass in an array of dictionaries.
+Each dictionary will have two key value pairs.
+The keys would be name, and uid,
+and values would be name, and ids
+of each user.
+If you do that what would you specify inside the task.
+You can no longer use just "item"
+because item is now not just the string.
+So lets try to visualize that
+to find out what you can specify inside the command.
+As before lets break down the loop into multiple tasks.
+We'll just look at the first four.
+Each task uses the name module and parameters.
+We still don't know what to specify for name or uid.
+And we can see that each task has a variable item defined.
+How does item look in this case?
+As before, move each item in the loop
+under the item variable in the tasks.
+We can now see that the item variable inside each task
+in the loop
+is a dictionary which has the name as uid of each user.
+So within each task to get the username
+I could do item dot name.
+And to get user id I could do item dot uid.
+And that is what we will have in the task section
+back in our playbook.
+So that's how loops work with array of strings
+and array of dictionaries.
+With array of dictionaries
+remember that you could simply use item dot property name
+in the dictionary to get an item
+within each dictionary in the list.
+But I did all of that to show you how it works
+when the data in the array gets really complex
+using this kind of visualization technique
+of breaking the loop down might help you understand
+it a little bit better.
+Also note that an array of dictionary
+can also be represented like this in a json format.
+The loop directive we just saw are used to create
+simple loops that iterate over a lot of items.
+There's another way to create loops in playbooks.
+And that is using the with underscore directives.
+This playbook the we developed can also be written
+using the with underscore items directive like this.
+In fact the loop directive is newly added in Ansible.
+In the past we just had the with underscore items directive.
+In this case both playbooks yield the same results
+and there is not much difference between the two.
+For simple loops like the ones we have been working on,
+it is recommended to use the loop directive itself.
+However in some of the older playbooks,
+you might come across the
+with items directive so you should understand
+what that means when you see that.
+Now lets look at the advantage of the with directives.
+With items just iterates over a list of items.
+We have other directives such as,
+with files that iterate over multiple files,
+with url that connects to multiple urls,
+with mongodb that connects to multiple mongodb data bases.
+And these are just a few.
+So are these all or are there more,
+if so how many are there?
+It so happens that these are just a few among the many
+with directives available.
+In fact everything you see after the with underscore string
+is a look up plugin.
+So whatever look up plugin you have or you create
+you can use with underscore with that.
+So what are look up plugins?
+Just think of them as custom scripts
+that can do specific tasks like read files,
+connect to a url or connect to a data base,
+or connect to other systems like copernicus or open shift.
+Well more on that some other time,
+for now head over to coding exercises
+and practice working with loops.
+
+--- Coding Exercise: Ansible Loops ---
+
+[No transcript available for this lecture]
+
+--- Ansible Modules ---
+
+Instructor: We will now look at modules in Ansible.
+Ansible modules are categorized,
+into various groups based on their functionality.
+Some of them are listed here.
+System modules are actions to be performed,
+at a system level such as modifying the users
+and groups on the system, modifying IP tables,
+firewall configurations on the system,
+working with logical volume groups,
+mounting operations or working with services.
+For example, starting, stopping
+or restarting services in a system.
+Command modules are used to execute commands
+or scripts on a host.
+This could be simple commands using the command module
+or an interactive execution using the expect module,
+by responding to prompts.
+You could also run a script on the host,
+using the script module.
+File modules help work with files.
+For example, use the ACL module,
+to set and retrieve ACL information on files.
+Use the archive and un-archive modules to compress
+and unpack files.
+Use find, lineinfile and replace modules,
+to modify the contents of an existing file.
+Database modules help in working with databases,
+such as MongoDB, MySQL, MSSQL or PostgreSQL,
+to add or remove databases
+or modify database configurations.
+The cloud section has a vast collection of modules,
+for various different cloud providers,
+like Amazon, Azure, Docker, Google, Openstack
+and VMware being just a few of them.
+There are a number of modules available for each of these,
+that allow you to perform various tasks,
+such as creating and destroying instances,
+performing configuration changes in networking and security,
+managing containers, data centers, clusters,
+virtual networking, VSAN and a lot more.
+And then there are Windows modules,
+that help you use Ansible in a Windows environment.
+Some of these are wincopy to copy files,
+wincommand to execute a command on a Windows machine
+and there are a bunch of other modules available,
+to work with files on Windows.
+Create a IIS website,
+install a software using MSI installer.
+Make changes to registry using reg edit
+and managed services and users in Windows.
+These are just a few modules in few categories.
+There are a lot more
+and a comprehensive list can be found docs.ansible.com,
+along with detailed instructions on each of them.
+Let's look at few of these modules in detail,
+to understand how you can use them
+and how to read the documentation page.
+We will start with the command module.
+The command module is used to execute a command,
+on a remote node.
+The parameters of the command module,
+as listed in the documentation page is shown here.
+Shown is a sample Ansible playbook using the command module.
+As you can see, to use the module,
+you simply create a key value pair of the module name
+and the parameter, which is the command in this case.
+In this case,
+we are instructing Ansible to run the date command,
+on the host, followed by executing,
+the cat etc resolv.conf command,
+to list the contents of the file.
+In case you needed to change directory,
+before executing a command.
+For example, I will rewrite the second command,
+in a different form now by removing etc from the cat command
+and setting change directory parameter to /etc.
+This will ensure that Ansible changes directory,
+to /etc before executing the command.
+This is how a parameter
+and value is passed to this command module.
+The creates parameter is used to perform a check,
+before the command is run.
+For example, this command to create the folder,
+will only run if the folder does not exist.
+The remaining parameters are self explanatory,
+so we will skip them.
+Except for this one right here called free form.
+This is worth looking at as you may see it,
+in different modules.
+Free form indicates that this module,
+takes a free form command to run.
+So what does that mean?
+You will not be able to input a parameter,
+with the name free form, like how we just used,
+change directory or creates options.
+Our command input such as cad etc resolv.conf
+or make directory/folder is the free form input.
+Not all modules support input like this.
+For example, the copy module, which is used to copy files,
+from a source to a destination,
+only takes parameterized input and not free form input.
+So as you can see here, copy requires a source file,
+as SRC parameter and destination as test parameter.
+However, the previous command module,
+did not really require you to specify,
+key equals value format for the command to run.
+The command in the command module is a free form parameter.
+Another module to look at is the script module.
+The script module executes a script,
+which is located locally on the Ansible controller machine,
+on one or more remote nodes,
+after transferring it over.
+To run a script on one or hundreds of servers,
+you really don't have to copy it over to all the servers.
+Ansible takes care of automatically copying the script,
+to the remote node and then executing it,
+on the remote systems.
+This is done through a very simple play,
+that looks like this.
+Use the script module and specify the location,
+of the script on the Ansible controller machine
+and the arguments.
+Let's look at the service module.
+The service module is used to maintain services,
+on a system such as starting, stopping
+or restarting a service.
+This Ansible playbook is used to start,
+various services in a particular order.
+First we start the database service,
+using the service module.
+Then the service module, unlike the previous modules,
+do not have a freeform input,
+which means you have to pass input,
+in a key value pair format.
+We use the name parameter,
+to specify the name of the service we wish to start,
+in this case, postgresql
+and the state parameter indicates the operation,
+we would like to perform, in this case started.
+Now, if you're wondering why is it started,
+instead of start, well hold onto your thoughts
+and we will come back to that in a bit.
+Now, there are two ways of writing this statement,
+you can either write it like this
+or write it in a dictionary or map format like this.
+They're one and the same.
+Remember, in YAML terms, name and state,
+are properties of service.
+Let's add a few more tasks to start,
+httpd service followed by nginx service like this.
+So back to our question on,
+why the action is started and not start?
+If we were to instruct Ansible to start a service,
+we would say start the service httpd
+and not started the service httpd.
+So then why is it started and not start?
+We're not instructing Ansible to start the service.
+Instead, we are instructing Ansible,
+to ensure that the service httpd is started.
+That essentially means if httpd service,
+is not already started, started.
+If httpd service is already started,
+then don't do anything.
+This is called idempotency.
+As per the Ansible documentation
+an operation is idempotent,
+if the result of performing it once,
+is exactly the same as the result of performing it,
+repeatedly without any intervening actions,
+thus started, stopped and restarted actions,
+instruct Ansible to ensure the service,
+is in a particular state.
+Majority of the modules in Ansible,
+are idempotent and Ansible highly recommends this.
+The overall idea is that,
+you should be able to run the same playbook again
+and Ansible should report,
+that everything is in expected state.
+If something is not,
+Ansible takes care of putting it to the expected state.
+The lineinfile module is used to find a line in a file
+and replace it or add it if it doesn't already exist.
+For example, we're given a task to add a new DNS server,
+into the etc resolv.conf file.
+This simple Ansible playbook using the lineinfile task,
+adds the new name server information,
+into the etc resolv.conf file.
+Remember, the lineinfile module is idempotent.
+Let's compare this Ansible playbook,
+with a simple script that tries to achieve the same results.
+If this script is run multiple times,
+it adds a new entry into the file each time,
+which is not desired.
+If you run the Ansible playbook multiple times,
+it will ensure there's only a single entry in the file.
+Neat.
+Well, that's it for now on modules in Ansible.
+Head over to the coding exercises section
+and practice working with modules.
+I will see you in the next lecture.
+
+--- Introduction to Ansible Plugins ---
+
+Instructor: Now, considering you have
+a complex infrastructure with multiple VPCs,
+virtual machines, and load balancers
+spread across different regions,
+your goal is to automate the provisioning
+and configuration of these resources using Ansible.
+While Ansible provides a rich set
+of built-in modules and features,
+you soon realize that you need additional functionality.
+You might need an inventory solution
+that can dynamically fetch real-time information
+about your cloud resources,
+such as instances, security groups, or tags
+directly from your cloud provider's API
+to ensure that your inventory remains up to date
+and reflects the current state of your infrastructure.
+But here, Ansible's static inventory file falls short
+in managing the dynamic nature of your cloud environment.
+Another requirement could be creating AWS EC2 instances
+with specific AMI versions instance, types,
+and security groups
+tailored to your application's unique requirements.
+That means you require the ability
+to provision cloud resources with custom configurations
+that go beyond what Ansible provides out of the box.
+You may also need a solution that allows you
+to dynamically configure load balancing rules,
+SSL certificates, and health checks
+based on the specific needs of your applications.
+This advanced load balancer management capability
+enhances the performance and reliability
+of your cloud-based services.
+To address these challenges,
+you can leverage Ansible plugins,
+which provide extensibility and customization options
+beyond the core Ansible features.
+In Ansible, a plugin is a piece of code
+that extends or modifies the functionality of Ansible.
+Plugins can be used to enhance various aspects of Ansible
+such as inventory, modules, callbacks, filters, and more.
+They provide a flexible and powerful way
+to customize Ansible's behavior
+and tailor it to your specific requirements.
+An Ansible plugin can be in the form of an inventory,
+plugin, module plugin, action plugin,
+callback plugin, or any other plugin type.
+Each plugin type serves a specific purpose
+and offers unique capabilities
+for extending Ansible's functionality.
+Now let us see how Ansible plugins
+overcome the challenges mentioned previously.
+Ansible offers a wide range of plugins
+to address these issues.
+Let's take a look at these.
+By creating a custom inventory plugin,
+you can fetch real-time information
+about your cloud resources
+directly from your cloud provider's API.
+This dynamic inventory plugin
+enables you to have an up-to-date view
+of your infrastructure,
+ensuring accurate and reliable automation.
+Next is the module plugin.
+When you develop a custom module plugin,
+you gain the power to provision cloud resources
+with custom configurations.
+This plugin integrates seamlessly
+with your cloud provider's API,
+allowing you to create instances with specific AMI versions,
+instance, types and security groups
+tailored to your applications requirements.
+Lastly, we have the action plugin.
+This plugin simplifies load balancer management.
+With an action plugin,
+you define high level tasks in your playbooks,
+making it easy to configure load balancing rules,
+SSL certificates, and health checks.
+The action plugin handles the underlying API calls
+and ensures consistent and reliable load balancer management
+across your hybrid cloud environment.
+Apart from these plugins,
+Ansible offers other plugins
+that can further extend its functionality.
+Lookup plugins are handy tools that fetch data
+from external sources, like databases or APIs,
+and let you use that data within your playbooks.
+Filter plugins offer additional data manipulation
+and transformation capabilities within your playbooks,
+allowing you to modify variables or format output.
+Connection plugins enable Ansible to connect and communicate
+with various target systems,
+such as SSH, WinRM, or Docker.
+In addition, dynamic inventory plugins
+allow Ansible to retrieve inventory information
+from various sources
+like cloud providers or configuration management databases.
+Callback plugins provide hooks
+into Ansible's execution lifecycle,
+allowing you to capture events and perform custom actions
+during playbook execution.
+By exploring and utilizing these Ansible plugins,
+you can extend Ansible's capabilities even further
+and address a wide range of automation challenges
+in your hybrid cloud environment.
+
+--- Modules & Plugins Index ---
+
+Instructor: Let's consider an example scenario
+where you need to manage the configuration
+of network devices in your infrastructure
+using Ansible.
+You want to find a module or plugins
+that supports the specific type of network device you have,
+such as Cisco routers.
+By utilizing the modules and plugins index,
+you can search for modules or plugins
+related to network device management.
+You can filter the results
+based on the category or keyword,
+such as Network or Cisco.
+The index will provide you
+with a list of modules and plugins that match your criteria
+along with detailed documentation
+explaining how to use them effectively.
+In this case,
+you might discover the cisco.ios module,
+which is designed specifically
+for managing Cisco iOS devices.
+The documentation for this module
+provides examples and guidelines
+on how to configure and manage Cisco routers using Ansible.
+Armed with this information,
+you can seamlessly integrate the cisco.ios module
+into your automation workflows
+and efficiently manage your network devices.
+The modules and plugins index
+serves as a centralized and organized resource
+that provides detailed information
+about the available modules and plugins in Ansible.
+It offers a convenient way to discover and explore
+the vast ecosystem of modules and plugins,
+enabling you to find the right tool for the job
+and make the most of Ansible's automation capabilities.
+Without a comprehensive index,
+it would be challenging to keep track
+of the numerous modules and plugins available
+and understand their specific functionalities.
+Let us now go over the key features and benefits
+of the modules and plugins index.
+First off, you've got search and filtering.
+It's like having your own personal assistant
+dedicated to helping you find the perfect tools for the job.
+Whether you need to search
+by keywords, categories, or specific criteria,
+the index has got you covered.
+It's a real time-saver, trust me, and that's not all.
+Detailed documentation is another fantastic feature.
+Each module and plugins in the index
+comes with its own user manual.
+You'll know exactly what each tool does, how to use it,
+and even get some examples to follow.
+It's like having a tutor by your side
+guiding you through your automation projects,
+and here's the best part.
+With version compatibility,
+you no longer have to worry about trying a tool
+only to discover it doesn't work
+with your version of Ansible.
+The modules and plugins index have you covered.
+It provides clear information
+on which versions each module or plugin supports,
+ensuring you have a seamless experience
+without any compatibility issues,
+but what truly sets the modules and plugins index apart
+is the power of community contributions.
+It's not just a one-man show.
+It includes contributions from the whole Ansible community.
+This means you get to benefit
+from the collective wisdom and experience
+of all those smart folks out there.
+In a nutshell, the modules and plugins index
+is like your one-stop shop for all things Ansible.
+It gives you access to tons of tools
+that can help you automate tasks
+across different systems and platforms.
+It's like having a Swiss Army knife for automation.
+
+--- Coding Exercise - Ansible Modules ---
+
+[No transcript available for this lecture]
+
+--- If you like it, share it! ---
+
+[No transcript available for this lecture]
+
+--- Introduction to Handlers ---
+
+Instructor: Imagine you are managing
+a web server infrastructure with multiple servers.
+You frequently make changes to
+the web server's configuration file
+to adjust various settings.
+However, modifying the configuration file alone
+does not apply the changes immediately.
+To ensure that changes take effect,
+you need to restart the web server service.
+In this scenario, you would have to manually execute
+a task to restart the web server service.
+after every configuration update.
+This manual intervention becomes time consuming
+and prone to errors as the infrastructure grows.
+This is where Ansible handlers become handy.
+With handlers, you can define an action
+to restart the web server service
+and associate it with the task
+that modifies the configuration file.
+This creates a dependency between the task and the handler.
+Now, whenever the configuration file
+is modified during the Playbook run,
+the associated handler is triggered,
+ensuring that the web server service
+is automatically restarted.
+By utilizing handlers, you eliminate the need
+for manual intervention, and ensure that
+the web server service is always restarted when necessary.
+This simplifies the management of your infrastructure,
+reduces human error, and improves
+the efficiency of your automation processes.
+Handlers in Ansible are special tasks
+associated with specific events or notifications.
+They're typically defined in a playbook,
+and are executed only when triggered
+by a task notifying them.
+Handlers enable you to manage actions
+that depend on the state,
+or configuration changes of your systems.
+Here's an example playbook that demonstrates
+the use of handlers.
+In the example shown, the task Copy Application Code
+uses the Copy module to deploy
+the application code to the target servers.
+It includes the notify directive,
+which triggers the associated handler
+named Restart Application Service
+when this task completes.
+The handler restart application service uses
+the service module to restart the application service
+by specifying the service name
+and the desired state as restarted.
+This ensures that the application service
+is automatically restarted on all servers
+whenever the application code is deployed.
+
+--- Ansible Roles ---
+
+Instructor: In this lecture
+we discuss about roles in Ansible.
+Just like how you would assign roles
+to different people in the real world, making them doctors
+engineers, astronauts, policemen, or chef.
+In the Ansible world, you would assign roles
+to blank servers to make them a database server
+or a web server
+or a Redis messaging server or a backup server.
+Assigning a role in the real world
+means doing everything one needs to do
+to make someone a doctor or an engineer
+like for example, sending the person to a medical school
+earning a medical degree, completing a residency program
+and finally obtaining a license to practice.
+Or with an engineer
+it would be going to an engineering school
+earning a bachelor's degree, gaining field experience
+or getting a postgraduate degree.
+In the automation world
+assigning a role means doing everything you need to do
+to make a server a database server
+such as installing the prerequisites required for MySQL
+installing MySQL packages themselves
+configuring the MySQL service
+and finally configuring database with our users.
+With a web server
+it would be, again, installing the prerequisites for Nginx
+installing Nginx packages, configuring Nginx services
+and configuring the custom webpages.
+By now, we know how to get these tasks done
+using Ansible playbooks.
+We have done these a lot.
+Here's a simple playbook that can do this.
+But then, if you can do this in a playbook
+why do you need roles?
+This set of tasks, to install and perform basic
+configurations on a MySQL database is going to
+remain mostly common.
+Once a person develops this Ansible playbook
+it can be shared with hundreds of thousands
+of others trying to do the same thing, install MySQL.
+Instead of all of them rewriting this piece of code
+you could package it into a role and reuse it later.
+Next time, you could simply assign the role you created
+and in a playbook like this, be it a single server
+or hundreds of servers, that's all you need.
+So that's the primary purpose of roles
+to make your work reusable
+be it for other tasks or projects
+within your organization or outside for others globally.
+Roles also help in organizing your code within Ansible.
+Roles introduce a set of best practices
+that must be followed to organize all tasks
+into a task directory.
+All variables used by these tasks in the vars directory.
+Any default values goes into the default directory.
+All handlers go into the handlers directory.
+And any templates used by the playbooks
+go into the templates directory.
+Roles also help in sharing your code
+with others in the Ansible community.
+Ansible Galaxy is one such community
+where you can find thousands of roles
+for almost any task you can think of.
+Installing and configuring different web servers
+different database servers, automation tools
+monitoring tools, packaging tools
+security software, et cetera.
+So before you start writing those playbooks
+I highly recommend taking a look at this community first.
+There must be a role created for that already by someone.
+So how do you get started with roles?
+It's easy, as we discussed in the previous slide
+first, we create the directory structure required for a role
+but you don't have to do that manually.
+Ansible Galaxy has a neat tool that can
+create a skeleton for you.
+Use the Ansible dash galaxy init command to initialize
+and create a directory structure.
+Remember, this is to create your own role
+from scratch and then move all of your code
+into the task directory into a file, and that's it.
+So how do you use your role within your playbook?
+Say I have my playbook
+within a directory called my playbook.
+My playbook dot yml file contains a simple play
+to install and configure MySQL on my TP server.
+I would like to assign the role I created using
+the roles directive like this, but if I were to do that
+how does my playbook know where that role is?
+I could have created that role anywhere on my system.
+How can my playbook find that role?
+There are different ways to do that.
+I could create a directory called roles
+within my playbook folder
+and move the role I created under it.
+When the playbook runs, Ansible looks for a role named MySQL
+under the roles directory, and that's one way of doing it.
+Or you can move the roles
+to a common directory designated for roles on your system
+at etc Ansible roles location.
+That's the default location where Ansible searches for roles
+if it can't be found in your playbooks directory.
+Of course, that's defined in the Ansible configuration file
+as roles path, which you can modify if required.
+Once you have created your role and placed it
+in your roles directory and used it in a playbook
+you may share it with the community by uploading it
+to Ansible Galaxy through a GitHub repository.
+Now, what if you don't want to use a role from Galaxy?
+Instead, you want to find an existing role
+and use it in your playbook.
+To find roles, you could search from the Ansible Galaxy UI
+or do it from the command line interface using
+the Ansible dash galaxy search command.
+To use a role, run the Ansible dash galaxy install command
+with the name of the role.
+The role is extracted to the default roles directory
+at etc Ansible roles location.
+The roles can now be used in your playbook
+by specifying the same name like this
+as an array of strings, as role names.
+Another way to specify roles, as an array of dictionaries
+this will allow you to pass in additional options
+to the role, such as to execute the role
+by escalating privileges, by specifying the become directive
+or to pass in additional parameters like the MySQL
+underscore user underscore name option like this.
+To summarize, roles make it really easy to develop, reuse
+and share Ansible playbooks.
+To configure a single server
+with both database and web application on it
+assign both roles to it.
+To configure it separately on separate servers
+create two plays in the playbook, one for each server
+and assign the respective roles to them.
+To view a list of roles currently installed
+on the Ansible Galaxy list command
+to view the location where roles would be installed
+check the Ansible configuration using the
+Ansible config dump command.
+The default role path is where the roles are installed.
+While installing roles
+you may use the dash P option to install it
+in the current directory under roles like this.
+Well, that's it for this lecture.
+
+--- Ansible Collections ---
+
+Instructor: Let's consider a scenario.
+You work as a network engineer responsible
+for managing large network infrastructure.
+You need to automate the configuration
+and management of network devices
+from various vendors such as Cisco, Juniper, and Arista.
+While Ansible provides a set
+of built-in modules for network automation,
+you require additional vendor-specific modules
+and functionalities.
+In this scenario, you can leverage Ansible Collections
+to access specialized network automation content.
+Collections such as network.cisco, network.juniper,
+and network.arista offer vendor-specific modules, roles,
+and playbooks tailored for managing network devices
+from each respective vendor.
+By installing these collections,
+you gain access to the specialized functionalities required
+to automate your network infrastructure effectively.
+Here's an example command
+to install the network.cisco collection.
+Once you have installed it,
+you can utilize the modules
+and roles provided by the network.cisco collection
+in your playbooks and benefit
+from the specialized functionality it offers.
+This allows you to seamlessly integrate network automation
+tasks specific to Cisco devices into your
+existing Ansible workflows.
+Now let us see what Ansible Collections are.
+Ansible Collections are a way to package
+and distribute Ansible content, including modules, roles,
+plugins, and other related assets.
+A collection is a self-contained unit
+that encapsulates these components,
+making them easily accessible and shareable.
+Collections can be created by both
+Ansible community members and vendors,
+offering a wide variety of specialized functionalities.
+With Ansible Collections, you gain some major benefits.
+The first one is expanded functionality.
+Let's take a look at an example
+of using a collection for the AWS.
+You can use a collection to manage AWS resources,
+extending Ansible's native capabilities.
+First, install the AWS collection,
+then you can use the modules
+from this collection in your playbook.
+Second is modularity and re-usability.
+Have a look at an example of creating
+and using a custom collection.
+You can create a collection
+that encapsulates specific roles, modules, and plugins.
+This is the directory structure for a custom collection.
+You can then use this collection in different playbooks
+promoting re-usability.
+Another benefit is simplified distribution and management.
+Let's take a look at this example
+of versioning and dependency management.
+You can specify the required collections
+and their versions in a requirements.yml file
+like the one shown on the screen.
+Then you can install all the required collections
+with one command.
+This approach centralizes the management of collections,
+ensuring that you have the correct versions
+and dependencies.
+Well, that's all for now.
+I'll see you in the next one.
+
+--- Coding Exercise: Ansible Handlers, Roles and Collections ---
+
+[No transcript available for this lecture]
+
+--- Introduction to Templating ---
+
+Instructor: This lecture, we will look at Jinja2.
+For those of you who are new to templating,
+let's first see what it is.
+Say for example, the CEO of a company wishes
+to send an invitation letter
+to all of his employees to invite them to a party.
+So he goes, "Hi, employee"
+And then, "I'm glad to invite you
+along with your family members -"
+followed by the names of the family members
+and then to attend the party arranged
+for the completion of 10 years, et cetera, blah, blah, blah
+and finally signed off by him.
+He wants to send the same email to all of his employees
+but addressed to each of them specifically.
+So you must customize the email for each employee.
+In this email, the addressee and their family members
+are what needs to be customized.
+We want to use the same email format, the same content.
+So the email becomes the template
+and the names are what varies,
+so they become the variables.
+You can have as many variables as you want.
+A templating engine is responsible
+for taking a template and applying
+a given set of variables to it
+to create usable outputs.
+It could be to generate one email
+or hundreds of such emails
+and that was a simple generic use case.
+In the IT space, it is commonly used in generating webpages.
+So you have a template of HTML webpage,
+uses set of variables
+and together they create a custom HTML page.
+Another popular use case
+is with automation tools like Ansible.
+Ansible uses templating extensively
+to customize playbooks to have custom information
+or to create custom configuration files.
+Here's a configuration file used for configuring
+MySQL database and with variables applied,
+the outcome is a valid configuration file that can be used.
+So what is a Jinja2 template?
+If you look up Jinja2 online,
+you'll see that it is a fully-featured
+templating engine for Python.
+It is beautiful and powerful
+and has a wide range of features.
+We will look at some of those
+and practice using them as well.
+A simple and easy use case is to substitute parts of a train
+with a value from a variable.
+If the value of the variable, my_name is Bond,
+then the template would resolve to the name is Bond.
+What if we want the name to be an uppercase?.
+Well, we could simply append the keyword upper
+to a variable separated by a pipe character.
+This way the value in the variable
+will be converted to uppercase.
+Similarly, we have lower to convert it to lowercase
+and title to convert a string to title case.
+These are called as filters in Jinja2.
+use replace to replace a character
+or part of a string to something else.
+In this case, we're going to replace Bond with Bourne.
+Ideally, if you don't declare the value for a variable
+the Jinja2 templating engine will fail
+with a message that it is undefined.
+Now, if you don't want the templating engine to fail
+instead use a default value for a variable.
+If it's not defined,
+then use the default filter.
+For example, if you hadn't defined
+the first name explicitly to a value,
+if you use the default filter to set a value
+it'll use that value and not fail.
+If you had defined a value for the variable
+then it will use that instead.
+Let's look at some list and set based filters.
+Say we have an array of three numbers.
+To get the smallest number in the array, use the MIN filter.
+To get the largest number in the array,
+use the MAX filter to get a list
+of unique numbers from an array,
+use the unique filter.
+Use the union filter to combine and retrieve
+the unique numbers from two arrays.
+Use the intersect filter to get the common numbers
+in two arrays.
+Use the random filter to get a random number
+between one to 100.
+Use the join filter to join an array of words.
+So far, we've just been looking at one-liners.
+At times, you may want to use a condition or a loop
+just like in programming languages.
+For example, to generate a file with a list of numbers,
+use a four-loop like this.
+Now, note that here, instead of double curly braces,
+you're using single curly braces
+and a percentage symbol that indicates
+that the Jinja2 code is a block and not a one-liner.
+You may also use conditional statements
+like an if statement to print only if the number is two.
+You could wrap the print statement
+within an IF and ENDIF block.
+Well, this it for this lecture.
+
+--- Jinja2 Templates for Dynamic Configs - Demo ---
+
+Instructor: In previous lecture, we saw Jinja2 as it is.
+In this lecture, we will see how Ansible implements Jinja2.
+These filters, along with many others
+documented in the Jinja2 website,
+are built-in filters that come with Jinja2.
+However, Ansible has extended those
+with its own set of filters.
+Jinja2 is extensible,
+so Ansible added its own set of filters to it,
+such as those specific to infrastructure use cases
+like converting to and from YAML and JSON,
+working with file names and directory paths
+in Linux and Windows, working with passwords,
+regular expressions, et cetera.
+Let's look at some file-related filters.
+To get the file name from a full path,
+use the basename filter.
+In this case, it will return hosts
+from the file path etc/hosts,
+but this won't work for Windows,
+as the path in Windows uses backward slash.
+So we must use win_basename.
+In Windows, to separate the drive letter from the path,
+use the win_splitdrive option.
+In this case, it returns an array
+where the first element is the drive letter
+and the second element is the path.
+What if we want just the drive letter?
+So we chain another filter called first to this expression.
+This returns the first element of the array,
+so this is something new.
+In this case, we are first using the win_splitdrive filter
+to separate the drive letter and the path,
+but that returns an array,
+so we are feeding that array as input to the first filter.
+You can chain as many filters as you want in this way.
+So how does Jinja2 work in playbooks?
+For example, here we have a simple inventory file
+with a few variables
+and a playbook that has a variable used in it.
+Before executing the playbook, Ansible runs the playbook
+through the Jinja2 templating engine,
+providing the set of variables it gathered
+through inventory parameters.
+The Jinja2 templating engine
+spits out a new version of the playbook
+with all the variables in place,
+which is then used for the actual execution.
+The Ansible documentation section has a section on filters.
+There are numerous examples here
+that will come in handy during the exercises.
+Let's start with a simple scenario.
+We're setting up web servers,
+and we wanna copy our webpage and index.html file
+stored locally to the web server's
+default index.html location.
+We use Ansible's copy module to copy the local file
+to the remote location on all web servers.
+Assuming that Nginx is already installed
+on these web servers, we are on the playbook now.
+The index.html file is copied to all of those web servers,
+and when you access the web server,
+we see the webpage that says, "This is a Web Server".
+We are requested to make the web server print its hostname
+and IP address when the webpage is displayed.
+One way to do that is to copy a separate version of the file
+to each server when they're copied
+which has the hostname in it.
+The files are still the same
+except for the value of the hostname.
+Only if we could replace the name inside
+with a variable like this as we do in the playbooks.
+So can we do that?
+Can we specify a variable inside a file
+that we want to copy like this?
+Well, we could, but not like this.
+The index.html file is no longer a valid HTML file.
+It is now our template that we will use
+to generate a valid HTML file for each of our servers.
+To be specific, it is a Jinja2 template
+like the ones we discussed before in the previous lectures.
+We wanna convert the index.html file into a Jinja2 template
+with some variables inside it,
+so the file extension to be used is .j2.
+A best practice is to simply add the .j2 extension
+to whatever file you have converted to a Jinja2 template.
+In this case, index.html.j2.
+So we now have a template file that needs to be processed
+to get the variables replaced with actual values
+before they can be copied over to the target hosts,
+but the copy module that we are using now
+does not have the ability to perform variable interpolation.
+It will simply copy the file as is.
+That's where we use the template module
+instead of the copy module.
+The options for both modules are similar,
+but this time, the source file is going to be
+the Jinja2 template file we used,
+and while we're at it, the actual variable that helps us
+in getting the name specified in the inventory file
+for a host is the inventory_hostname variable.
+So that's the right variable to use.
+When the playbook is run,
+Ansible first takes the Jinja2 template,
+then does variable interpolation,
+converts the template file into files
+to be copied into each server,
+and then copies them to the target servers.
+Let's see what happens when the playbook is run now
+in our visualization mode.
+When the playbook is run,
+Ansible creates three separate subprocesses for each host.
+Each process creates its own set of parameters
+for each host by performing its own variable interpolation.
+It then proceeds to gathering facts from the host,
+so each subprocess now has a lot more information
+about the host.
+Then, the process starts executing playbooks.
+Each subprocess executes the playbook
+targeting the respective host.
+Each subprocess executes the template task
+for the respective host by taking the index.html.j2 file
+and performing variable interpolation on it
+by replacing the variables with their values,
+thus generating an index.html file from it.
+The template module then copies over the files
+to the target hosts.
+The index.html file was just a simple example.
+You may use the same procedure
+for different configuration files,
+for example, an Nginx configuration file
+or a Redis configuration file like this.
+Remember that you can use Jinja2 filters within these.
+For example, we use the default filter
+to instruct Jinja2 to use a default value
+of 6379 for the port if it is not specified explicitly.
+You could use Jinja2 blocks as well.
+For example, to generate a list of nameserver entries,
+in /etc/resolve.conf file,
+you could use a Jinja2 for loop using an array
+to generate a target file.
+When using templates in roles,
+create them under the templates directory.
+
+--- Coding Exercise: Ansible Templates ---
+
+[No transcript available for this lecture]
+
+--- Lab - Revisiting Ansible ---
+
+[No transcript available for this lecture]
+
+--- Demo - Part 1 - Setup Lab - Install VirtualBox ---
+
+Presenter: Hello and welcome to this demo.
+In this demo we are going to see how to set up
+a lab environment to play around with Ansible.
+In this demo, we will be setting up
+an entire lab environment on our laptop from scratch.
+For this, we will use a virtualization tool
+called Oracle VirtualBox since it works with all flavors
+of operating systems like Windows, Linux, and OSX.
+So this is what we plan to do.
+We will first install Oracle VirtualBox on our laptop,
+and then we'll create a template system
+based on the CentOS operating system.
+Once we create the template,
+we will then be able to easily create
+multiple virtual machines as required from that template.
+For the purpose of this lab, we will first create
+a Ansible control machine from the template,
+and then we will move on to create two other machines
+which will act as the target machine
+for Ansible to perform configuration changes on.
+Okay, so in my case, I have a Windows system,
+so I will be setting up a lab environment
+on my Windows system.
+It doesn't really matter what operating system you're on.
+You could follow the same instructions
+to set up a lab environment on Linux
+or your Mac operating systems.
+So in our case, we're going to install VirtualBox.
+So go to virtualbox.org,
+and in the website you will find a link
+to download the VirtualBox software.
+In the download page, you will find links
+to download VirtualBox for specific operating systems.
+In my case, mine is Windows.
+I'm gonna click on Windows
+and I'm going to download the software.
+Once downloaded, run the executable
+and follow the instructions in the installation wizard
+to complete installation.
+In my case, I've already installed it,
+so I'm just going to cancel that.
+After you install,
+open up the Oracle VM VirtualBox interface
+and it will look something like this.
+Now the next step is to deploy virtual machines.
+In order to do that, you could either create a machine,
+attach a CD drive of an operating system,
+and follow the instructions to install the operating system
+as we are familiar with.
+However, there's also another easy way.
+There are pre-installed pre-configured
+operating system images available on the internet.
+We could use those to easily deploy
+as many virtual machines as we need.
+For this, if you go to the website osboxes.org,
+you will find a lot of pre-installed pre-configured images
+of various operating systems.
+Go to the site and select
+the VM Images VirtualBox Images link at the top.
+Then you'll find a list
+of various different operating systems.
+From this, we will select CentOS.
+And then it will take us to the CentOS page.
+Here you can see information
+on downloading the CentOS image.
+In our case, we're downloading
+the VirtualBox image for CentOS 7,
+and we're downloading the 64-bit version.
+So remember to download that particular version.
+We will then, it is downloaded as a .7zfile
+which is a compressed file.
+So you need a software to uncompress it
+like a TAR or a WinZip.
+In my case, I'm using the 7zip software
+to extract the contents of the file into a folder.
+Wait for it to finish the extraction process.
+Once finished, if you go into the folder,
+you will see that there's a folder called 64 bit.
+And inside that folder, you'll find a file
+with the extension .vdi.
+That stands for virtual disc
+and that is what we will use to create a virtual machine.
+We're now ready to create a new virtual machine.
+So we go back into the Oracle VM VirtualBox interface,
+click on New, and we fill in the name and operating system.
+Now I will name the virtual machine
+that I'm creating as CentOS-template,
+because, as we discussed, our goal is to create a template,
+and then use that template to create
+as many virtual machines as I need.
+So I'm going to name it as CentOS-template.
+I will now select the type as Linux.
+And the version, since it does not have CentOS listed,
+I could simply select Other.
+Now, as you can see under the versions,
+there are 32-bit as well as 64-bit options.
+In our case, we downloaded the CentOS 64-bit version,
+so we must select a 64-bit option.
+Now in case you do not see the 64-bit options in this list,
+now that is most probably because you do not have
+the virtualization technology enabled on your laptop.
+To enable virtualization technology on your laptop,
+it is usually under the BIOS settings.
+So if you simply Google enable virtualization in BIOS
+followed by your laptop model,
+you will see a set of results.
+It usually looks something like this.
+Under the BIOS, under the Advanced BIOS Features,
+you'll have something called as Virtualization Technology,
+and you must ensure that it is set to Enabled state.
+So once you do that, restart your laptop,
+and you will find the 64-bit option.
+Select the other Linux 64-bit option for this
+and click Next.
+In the next, here we select a memory size.
+By default it's set to 512 MB,
+and let's change that to around two GB.
+So we'll set it to two gigs.
+In the next step, we select
+the hard disk that we downloaded.
+So in this case, the default selection
+is create a virtual hard disk now,
+but that is not what we want.
+We already have a pre-built image of a hard disk downloaded,
+so we're gonna specify that.
+Select the use an existing virtual hard disk file option,
+and click on Browse, and browse to the file
+that we downloaded and extracted
+which is the CentOS 7 file with the VDI extension.
+Click on OK and that creates the file.
+Now before powering on the template,
+we will go into Settings and make a few more changes.
+Go to System and we'll increase the CPU to around two.
+And we go to Network section,
+and we will set the adapter one to Bridged Network.
+This way my virtual machine gets an IP address
+as well as it can connect to the internet
+to download and install packages as required.
+I will now go ahead and power on the system.
+Okay, I'm now at the login prompt.
+Select the default user which is osboxes.
+Now the password, to find out the password
+for any images downloaded from osboxes.org,
+go to the Info section,
+and then you'll see that the username is osboxes
+and the password is osboxes.org.
+So I'm gonna use that password osboxes.org.
+I'll click on Sign In to log into the CentOS system.
+I'll open up a terminal and type in if config.
+The if config command tells me the IP address
+currently assigned to the virtual machine.
+As you can see, it is 192.168.1.112.
+Now I will open up a SSH terminal
+to SSH into that virtual machine.
+And in my case, I'm using a terminal software
+called as MobaXterm.
+I like to use this.
+This is a free software that is available.
+You could use any SSH terminal software.
+You could simply use PuTTY as well.
+So create a new SSH session and specify the IP address
+which is 192.168.1.112,
+and the username is osboxes.
+Click on OK.
+I will specify the password
+which is osboxes.org, and I'm logged in.
+Once I verify that I'm able to SSH into it,
+I will now shut it down so that I can create
+clones of this virtual machine.
+
+--- Demo - Part 2 - Setup Lab - Clone VMs and Install Ansible ---
+
+-: Hello and welcome to this demo.
+Okay, the virtual machine is now powered off.
+I will now right click on it and select Clone.
+And, in the new virtual machine page,
+I'm gonna give it a name.
+So the first clone is going to be the Ansible master.
+So I'm going to name it as Ansible-controller.
+And make sure that you check the reset Mac address option,
+because I need a new Mac address
+for all my virtual machines.
+In the next page,
+I'm going to make sure I select a Linked Clone.
+A linked clone will basically is space saving.
+It does not consume the entire...
+It does not clone the entire virtual machine,
+so it does not consume that much space.
+I'm now going to click on Clone
+to create a clone of of the virtual machine.
+So I now have the Ansible controller
+and I'm going to create another clone
+for the Ansible target.
+For the first Ansible target,
+I will name it as Ansible-target1.
+I'll make sure I check the initialized Mac address option,
+and I will select the linked clone.
+So now I have a template,
+I have an Ansible controller, and an Ansible target.
+I will now power up the Ansible controller
+and the Ansible target.
+Once they're powered on,
+I will log into it using the osboxes password.
+I will open a terminal
+and run the IF config command to find out the IP address.
+Now the reason I find out the IP address
+and establish an SSH connection is that it is...
+I find it very easy to work with these virtual machines
+over an SSH session rather than
+through this terminal window.
+That way I can easily copy and paste commands.
+Okay, I will now establish an SSH session
+to my Ansible master.
+The IP address is 192.168.1.113.
+The username is osboxes.
+This time I will name the session as Ansible-controller.
+Okay, so I'm logged in.
+I will also establish a session to my target machine,
+which is at 192.168.1.114.
+And I will name the session as Ansible-target1.
+Okay, so I now have a session
+to the controller and the target.
+The next step is to rename the host.
+As you can see, both my controller and target
+are named as osboxes.
+I'd like like to name the controller as controller,
+and the target as target.
+So, the first step is to modify the /etc/hostname file.
+If you look inside the file, it is currently osboxes.
+So I'm going to remove that
+and replace it with the name that I want,
+which is Ansible-controller.
+Now going to save that.
+And the other place to modify is the etc/hosts file.
+So I'm going to edit the /etc/host file.
+And I'll get rid of whatever is already there
+and replace it with the name that I want it to have.
+I will leave the local host part as it is.
+And I can now restart my system.
+I will repeat the same steps for the target1 system.
+Okay, I will now restart my system.
+Now we're going to duplicate what we did with target1.
+We'll create another clone, called target2.
+Make sure we re-initialize the Mac address
+and select Linked Clone as the option for clone type.
+And then we will power on the target2 machine.
+Once it's powered on, we will log into it,
+open a terminal, and find the IP address of it.
+In this case, it is 192.168.1.115.
+We will now establish an SSH connection to the system
+from my SSH terminal.
+And I will name the session as Ansible-target2.
+I will now edit the host name to target2.
+We will shut it down and wait for it to come back up.
+I will now establish connectivity to my systems again.
+And as you can see, the name is applied.
+I can now see it as Ansible-controller.
+So the next step is to install Ansible
+on the Ansible controller.
+If you go to the Ansible documentation site
+and look at the installation guide,
+you will see instructions for installing Ansible
+on various operating systems.
+If you look at the instructions under CentOS,
+you can see that it's as simple as running the command,
+yum install ansible.
+So I'm just going to copy that,
+and execute that on my CentOS system
+and provide the confirmation to install the packages.
+Okay, once completed,
+you can run the Ansible--version command
+to confirm that Ansible is installed
+and to confirm the version of the Ansible
+installed on the system.
+So that concludes the Ansible installation part.
+
+--- Labs - FAQ ---
+
+[No transcript available for this lecture]
+
+--- Student Preferences ---
+
+[No transcript available for this lecture]
+
+--- Course Completion Certificate ---
+
+Trainer: Hello there.
+You're at the end of the course
+so congratulations once again.
+A lot of my students reach out to me
+asking how to generate their course completion certificate
+so I thought I'll quickly walk you through that process.
+When you select your course
+you will see your progress in the top, right corner.
+You should have completed a hundred percent of the course
+to get your course completion certificate.
+Now, I would completely understand
+if you had to skip a few lectures
+that weren't as interesting to you, so don't worry.
+I'll show you how to mark them complete manually.
+Firstly, you need to identify the lectures
+that were not completed.
+Each topic in the course curriculum
+has a check mark next to it.
+Go through and find out which ones are missing a check mark
+and click on them to manually mark them complete.
+Once you do that for all, you should see the progress
+set to hundred percent at the top
+and that's all you need to do.
+Refresh your page and give it a few minutes
+and you should see the Get certificate button.
+Click on the Leave a rating button to rate
+or update your rating on the course.
+I always aim for a five star rated course
+so write to me and let me know if you think otherwise.
+Now, click on the Get certificate button to
+get your course completion certificate.
+Click on the download button to download it
+or the share button to share it.
+When you share on LinkedIn, don't forget to tag me in it.
+Well, thank you for joining me in this course once again
+and I will see you in the next course.
+
+--- Bonus Lecture ---
+
+[No transcript available for this lecture]

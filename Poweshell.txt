@@ -1,0 +1,4025 @@
+
+
+=== Introduction ===
+
+
+--- Introduction ---
+
+[No transcript available for this lecture]
+
+
+=== Basic PowerShell commands ===
+
+
+--- Working with PowerShell console - VIDEO ---
+
+0
+PowerShell - working with console. In this lesson: how to start powershell console / useful keyboard shortcuts.
+1
+A couple of useful commands known as cmdlets and how they are built / how to understand a common error
+2
+regarding missing permissions and how to avoid it. To start PowerShell text console click Start and
+3
+type powershell or even only the first letters of that word. After pressing enter
+4
+you will start the text console of PowerShell.
+5
+You need to be able to work with PowerShell text console in case when the no other tool has been installed
+6
+on the server.
+7
+On the next lessons you will get some knowledge about other more user friendly tools. In the console
+8
+you can enter commands often named CMDlets.
+9
+Type in in for example get-date. To execute the command -  press enter.
+10
+This way you have displayed the current date of the moment when the movie was recorded.
+11
+All the standard commands are in the form of a verb dash noun.
+12
+This allows very often to guess the name of the command that you are looking for.
+13
+Commands usually have a lot of options but you are lucky you don't need to remember all of them.
+14
+Even the text console allows to use an auto complete mechanism after the command type space dash
+15
+and next press TAB key. As a result you will see the names of parameters. Some  of options require you to give
+16
+one of allowed in this place values.
+17
+In this case you are also allowed to use the tab key if you know the beginning of the option name or
+18
+its value.
+19
+Type it in and next press the TAB. The command constructed here allows to display only the time part
+20
+of the current date and time.
+21
+The console remembers commands entered during the session. To call one of previously entered command
+22
+press the up arrow.
+23
+Very useful is also F7 key. When pressed a separate window will be displayed with the history of commands.
+24
+Here in a really convenient way you can select the command that should be started again.
+25
+The text console and from the version 4 also the ISE environment that we will talk a little bit later in
+26
+the course allows you to use command
+27
+Start-transcript.
+28
+When entering the command try to use the tab key. Here I needed to use it twice.
+29
+The goal of the command is to save in a text file all the user activity from the session.
+30
+Starting from now older commands and also the results of the commands will be recorded in the file.
+31
+Let's check again the time. Let's display the list of installed printers
+32
+To stop tracing the session
+33
+just execute:
+34
+Stop -transcript.
+35
+Isn't it easy?
+36
+To display the file use command get-content. When typing the path to the file
+37
+remember to use the handy tab key.
+38
+It will help also in the case of path.
+39
+Look at what was recorded in the file.
+40
+I know it is a PowerShell course but from time to time you surely would like to start some external
+41
+to PowerShell commands. In the PowerShell
+42
+it is not a problem.
+43
+Type notepad and the path to the file and its content will be displayed in the notepad's window.
+44
+Well I also learned PowerShell some time ago.
+45
+I remember that the hardest problem was
+46
+to remember all those commands and when I have found a command
+47
+the problem was to select the correct options that the command expects. In such a case as CMDlet
+48
+named show-command may be very helpful.
+49
+This command displays
+50
+an  additional window or a full or a part of the command can be entered and as a result all commands
+51
+matching the search string
+52
+will be displayed
+53
+Next when the command has already been found just fill in the bottom part of the window.
+54
+After clicking RUN the command will be started.
+55
+It is really quite a good way to find out the command and find out the options accepted by the command.
+56
+If you already know the name of the command that should be started and you only don't remember the parameters
+57
+that can be passed to the command.
+58
+type Show-Command and next enter the name of the command.
+59
+In this case: get-printer
+60
+Again the same window will be displayed,
+61
+however this time you will just fill in the bottom part with the data related to parameters only
+62
+at the end click RUN again.
+63
+Well, the console is a text user interface but you still can use copy and paste mechanism. To copy
+64
+a text to clipboard select it with mouse and press enter. To paste it into a console just click with the
+65
+right mouse button.
+66
+Everyone makes error from time to time.
+67
+So let's make one
+68
+this error belongs to one of the most frequent errors made by administrators.
+69
+Command get-disk should display some information about local disks. But what's going on?
+70
+Error Message states "permission denied".
+71
+From the moment when the windows VISTA was released when you start a command that intensively works
+72
+on operating system components then it should be started as administrator.
+73
+So let's terminate current PowerShell session using the exit command.
+74
+Now let's start the PowerShell console again,
+75
+but that time use the mentioned "run as administrator"
+76
+command. Now get-disk should work as expected.
+77
+Powershell can be started in different ways for example using a command line.
+78
+Start CMD and next type:
+79
+powershell
+80
+as you can see you are working in powershell,
+81
+however the window is no more in characteristic blue color.
+82
+When working in multiple environments the information about PowerShell version currently used may be
+83
+very useful. To display the currently used version,
+84
+check the value of variable PSVersionTable. Names of variables in PowerShell should be prefixed
+85
+with the $ sign. In this case we are working with the version 3.0
+86
+If for some reason you would like PowerShell to simulate a lower version, PowerShell should be started
+87
+with option version.
+88
+Let's say 2 0.
+89
+Note that now the PSVersionTable shows the version equal to 2.0.
+90
+Of course powershell is usually used by administrators not by users.
+91
+Wouldn't it be practical always to start powershell  as administrator with elevated rights? Open properties
+92
+of the shortcut used to start powershell and in advanced settings set run as administrator.
+93
+Starting from now powershell will always be started as administrator and you will be able to avoid the previously
+94
+presented error.  Very useful option isn't it?  Also the appearance of the console window can be
+95
+slightly modified.
+96
+This can be useful if the font is too small to fuzzy, or you would like to make the window wider so that
+97
+commands  displaying a lot of text will be able to present all the output. Click system menu, and choose
+98
+Properties.
+99
+On the font tab size and font type can be changed. On the layout tab the height and width of window can
+100
+be set.
+101
+Please remember changing the size of window in a standard Windows way so dragging the window border
+102
+will not work with Powershell text console.
+103
+All the content of the console can be displayed only in the buffer of initially set high and width.
+104
+So if you would like to have a wider window you need to make that buffer wider.
+105
+Finally the color tab
+106
+will allow  to change the color of the console.
+
+--- Working with PowerShell console - LAB ---
+
+[No transcript available for this lecture]
+
+
+=== Passing Parameters to  Commands ===
+
+
+--- Working with PowerShell console - ANSWERS ---
+
+[No transcript available for this lecture]
+
+
+=== Working with pipeline ===
+
+
+--- Integrated Script Editor - VIDEO ---
+
+0
+PowerShell - Integrated Script Editor. In this lesson: What is integrated script editor
+1
+How to work with
+2
+Powershell ISE
+3
+Some useful keyboard shortcuts.
+4
+Shortcuts allowing to start
+5
+Powershell can be found in menu or even in control panel. Note the versions available.
+6
+There is also a dedicated editor that simplifies building your own scripts.
+7
+It's called Integrated script editor. Editor differs slightly from one version to another
+8
+The window is divided into three parts.
+9
+The top panel is where the script will be built.
+10
+Note that when you type a command PowerShell ISE tries to complete the command for you. This feature
+11
+is called Intellisense.
+12
+This is valid for commands and for options as well.
+13
+To run the entire script click the  icon with Green Arrow, the F5 key is a shortcut for this action.
+14
+The comments can be started in PowerShell pane in the bottom part of the window.
+15
+By the way this explains the name of ISE. This editor is indeed integrated with power shell.
+16
+what makes it really comfortable tool. Commands can be also entered directly in the PowerShell pane.
+17
+Also here the intellisense helps to complete the commands.
+18
+Copy and paste may be used as well.
+19
+The third panel is a command pane.
+20
+This is a very helpful window for the developer of the script.
+21
+It can be used to find the appropriate command. After the command has been found,
+22
+It's easy to fill in the form with all the options accepted by that command.
+23
+The shown here command
+24
+Stops service spooler.
+25
+We will stopp the printing services. To stop a service the editor needs to be started as an administrator.
+26
+We've elevator rights.
+27
+In very similar way.
+28
+command starting a service can be found. After adding a parameter the service spooler will be started again.
+29
+Let's now play with already presented
+30
+command
+31
+Start-transcript. To save the session trace in the file, the path to the file should be the parameter
+32
+for the cmdlet
+33
+unfortunately start-tanscript
+34
+is not working with PowerShell ISE in version 3.0
+35
+This is whether the command is working or not may depend on the software used to run the script.
+36
+You can control the layout of the panels of ISE, If you have two monitors and quite interesting option
+37
+can be to display the panes vertically.
+38
+Script can be edited on the one display and run on another. If you decide to maximize this pane, then
+39
+the powershell pane can be displayed again at any moment by pressing control+R.
+40
+If you click the button show-command and already presented window will be shown, allowing you to find
+41
+the command. The commands window can also be hidden after pressing the adequate icon on the menu.
+42
+Pressing the button "start powershell"  we run powershell in text console as it was already presented
+43
+in the previous lesson
+44
+ISE allows also
+45
+to connect a different computer in the network.
+46
+Scripts created in ISE can be easily debugged. If you have already some experience in programming,
+47
+for example with visual studio then you will probably note that even the keyboard shortcuts are the
+48
+same.
+49
+The authors of ISE provide that as even with some options allowing to customize the environment to personal
+50
+preferences.
+51
+In the menu "tools" >> "options" in the dialog box you can define how the ISE should look like.
+52
+These can be done on very low level or just by selecting one of available templates.
+53
+In the scripts pane, you have already wrote multiple lines of code but you would like to test only one of them.
+54
+You can select the required fragment of code and press "run selection" button or just press F8.
+55
+If only one line of code should be tested.
+56
+It's enough to move the cursor to that line and next press F8.
+57
+The selected part of script or only one line where the cursor was parking will be started and this should
+58
+allow you to test your code.
+
+
+=== Formatting output ===
+
+
+--- Integrated Script Editor - LAB ---
+
+[No transcript available for this lecture]
+
+
+=== Variables ===
+
+
+--- Integrated Script Editor - ANSWERS ---
+
+[No transcript available for this lecture]
+
+
+=== Program flow ===
+
+
+--- Aliases - VIDEO ---
+
+0
+Aliases in PowerShell. In this lesson:  Discovering predefined aliases in PowerShell /  Defining a new alias
+1
+-
+2
+Probably no one will be surprised that using a cd command,  the current folder can be changed.  However some
+3
+functionalities in PowerShell can be surprising. To display the content of a folder,
+4
+command ls can be used in the same way it is normally done in Unix but commands dir works as well, as many people
+5
+working previously on DOS used to do it that way.
+6
+Very good decision, as no one would be lost in PowerShell.
+7
+Actually ls and dir, are just too aliases defined for the command Get-ChildItem.
+8
+There is a lot of aliases and to display them use Get-Alias . Because the list is quite long its size can
+9
+be limited by passing a name of the alias as a parameter.
+10
+Type Get-Alias ls  and
+11
+as you can see that alias is just a shortcut to mentioned earlier Get-Childtem
+12
+Aliases can be defined on demand too.
+13
+Just use command Set-Alias.
+14
+Let's create a new alias that as ls or dir could be used to display the content of a directory.
+15
+The Set-Alias command should be started with two parameters.
+16
+The first one is the name of the new alias - here
+17
+Show-Files, and the second one is the name of CMDlet that should be pointed by the alias.
+18
+Now the show-file command can be used and it's even recognized by intellisense.
+19
+So Show_Files displays now
+20
+the content of current directory
+21
+To delete the alias, use command remove-alias or remove the item from the aliases drive.
+22
+If the second form of the instruction will be used the parameter should point to the path where the
+23
+alias is stored.
+24
+If you would try to start Show-Files, you will receive an error because the
+25
+alias has been for a moment removed.
+26
+Unfortunately after closing the current session of PowerShell, all so defined aliases will be lost.
+27
+In the next lessons you will see how to add alias definitions to user profile.
+28
+The profile script is started always when a new session begins.
+29
+So if it contains some lines with aliases definitions they will be defined when PowerShell starts.
+30
+Authors of PowerShell have pre-defined a lot of aliases, so the users used to work previously in DOS or Unix,
+31
+should have no problem with basic activities in power shell for example command type used in DOS
+32
+to display the content of a file, was defined in PowerShell as an alias  to the get content command.
+33
+It is worth to review shortly all  pre-defined aliases in spare time,  but be warned:
+34
+the names of aliases are short but not intuitive and if you would develop a script using intensively those less
+35
+known aliases,
+36
+the others would not be able to understand what your script is doing.
+37
+As usually: too much of a good thing,
+38
+is never a good thing!
+
+
+=== What next? ===
+
+
+--- Aliases - LAB ---
+
+[No transcript available for this lecture]
+
+--- Aliases - ANSWERS ---
+
+[No transcript available for this lecture]
+
+--- Getting help about commands - VIDEO ---
+
+0
+Getting help about commands. In this lesson: How to use Get-Help command and
+1
+how to find the correct command using Get-Command
+2
+When you don't know how to work with a command or you don't know it's options,
+3
+it's a good idea to use the help. Use for this Get-Help. For example to display help about Get-Service
+4
+cmd-let, type get-help space get-service.
+5
+Note that by default PowerShell will be installed
+6
+without  help files, but this is really not a problem.
+7
+When you tried the first time to use Help, the system will propose to download all the required files
+8
+using Update-Help
+9
+It's enough to accept starting the update and the help
+10
+files will be available
+11
+PowerShell is built on modules and the same is true about the help files.
+12
+If in the future you will decide to use a module provided by a vendor
+13
+ABC then the help for this module will be probably published on the website of this provider.
+14
+So after a moment the description of command Get-Service is displayed on the screen.
+15
+The help is divided into sections.
+16
+Name, Synopsis, Syntax, Description, Related links, Remarks. In the remarks section
+17
+you can find hints how to display more information about the command.
+18
+We have aliases for the to get-help command:
+19
+This is the word help or man.
+20
+The only difference when using the aliases is that the paging mechanism is enabled in displaying
+21
+the article. Enter allows to scroll down line by line and space scrolls screen by screen.
+22
+Let's take a closer look to one very useful help command's option.
+23
+This is showwindow. Adding this option will cause a special window to be opened.
+24
+The help will be presented in this window.
+25
+Text can be zoomed, text can be searched, and after pressing the settings button it can be decided which
+26
+part of the help should be displayed.
+27
+The most interesting part of the help are of course the examples. Here you can indeed see how to work
+28
+with the command.
+29
+One such example may give you more knowledge about the command then a long theoretical article.
+30
+If you agree with that opinion then you may like the next option of Get-Help.
+31
+This is examples. When this option is used, only the section with examples will be displayed.
+32
+To clear the screen use the clear command.
+33
+By the way, the alias for this command is CLS. Another useful switch in Get-Help is also online.
+34
+Now Internet Explorer was started displaying the article from technet site describing the Get-Service command
+35
+Reading the article in the web browser
+36
+may be more comfortable than reading the help in the console window.
+37
+Let's come back to already mentioned Get-Command.
+38
+You have already seen that this command allows to display a usually long list of available
+39
+in PowerShell instructions.
+40
+However if you are looking for a particular command then you can add as a parameter
+41
+the keyword
+42
+identifying  the instruction.
+43
+Let's search for a command performing some activities on IP addresses. Type Get-Command asterisk IP address
+44
+asterisk.
+45
+The command interprets asterisk as a meta character. Four commands have been found and all of them originate
+46
+from net NETTCPIP module of calls.
+47
+Of course this is only the very first step in the process of building your own command or script.
+48
+Now knowing the name of the command it's time to execute Get-Help Get-NetIPAddress.
+49
+That command can be started with two interesting parameters.
+50
+Parameter NOUN says that you are interested in all the commands having amatching
+51
+NOUN part of the command name and parameter VERB is pointing to the verb that is important to you at the moment.
+52
+Instruction:
+53
+Get-Command -verb get
+54
+Will show all the commands starting with the verb get.
+55
+Similarly Get-Command asterisk IP asterisk
+56
+will display only commands working on IP addresses.
+57
+Get-Command
+58
+displays only names of the found commands,
+59
+but get-help
+60
+displays the full information about a command or displays articles dedicated to some specific aspect
+61
+of PowerShell.
+62
+Let's search for an article describing how to work with meta characters. Get-Command is returning empty
+63
+set, but help correctly displays
+64
+article titled "about wild cards" describing the meta character.
+65
+Let's assume you have a module but you don't know what commands are available in it.
+66
+Use the option module, for example command Get-Command module NetTCPIP
+67
+shows commands from a specified module.
+68
+Having it, in the next step, Get-Help could be used to give you more details about how to use the command.
+69
+As you see sometimes constructing a single command required from you some preparation steps.
+70
+First can be to find the current command using the Get-Command and the second step can be to display
+71
+help for one of the selected command using Get-Help.
+
+--- Getting help about commands - LAB ---
+
+[No transcript available for this lecture]
+
+--- Getting help about commands -  ANSWERS ---
+
+[No transcript available for this lecture]
+
+--- The help system - VIDEO ---
+
+0
+The help system. In this lesson: Details of Get-Help, Get-Command and Show-Command /  How to pass parameters by name and by
+1
+position / how to update help / accessing the about files.
+2
+Let's see in details the content of help
+3
+in case of command  Get-Service this particular cmdlet
+4
+can be started  started in three ways.
+5
+We call them parameter sets.
+6
+The difference between them are the parameters that can be passed to the command.
+7
+Let's take a closer look to the first parameter set.
+8
+The command accepts name of a service or a list of names of services.
+9
+This list should contain names separated by commas.
+10
+Those names can however must not be proceeded with the parameter -name.
+11
+This is the meaning of the square brackets where the name is enclosed.
+12
+Such notation means that this part of the command is optional.
+13
+If you would like to ask about status of services on another computer then its name should be given
+14
+after parameter -computername but the -computername is a mandatory parameter because
+15
+-computername is not enclosed in the square brackets.
+16
+Let's test it.
+17
+Get-Service spooler displays information about printing service.
+18
+Note that the text spooler was not preceded with the name option, but this could be done.
+19
+Let's add the parameter -name. As you see the command is still working.
+20
+When you skip the name of parameter then we say that the argument was passed to the command by position.
+21
+Unfortunately in this case you need to remember the order in which the parameters can be passed to the
+22
+command.
+23
+This is an disadvantage of passing parameters by position. In the second example,
+24
+the parameter was passed by name.
+25
+It looks like the command in this shape is more convenient because you don't need to remember the order of
+26
+parameters but only the names of parameters which are quite easy to guess.
+27
+So let's add a parameter -computername. As you see just appending -computername localhost works
+28
+as expected.
+29
+But will this work if the computer name parameter would be given without preceding it with the
+30
+-computername?
+31
+Unfortunately it seems that we cannot parse the service name and the computer name at the same time.
+32
+Why? Look again into the help.
+33
+If you decide to query a remote computer,  the word computername is mandatory.
+34
+There aren't any square brackets enclosing the -computername.
+35
+Do you remember the Show-Command cmdlet?
+36
+It displays additional window allowing to type in the values of parameters.
+37
+The window can have different number of tabs. Each tab presents different parameters set as it was shown
+38
+in the help. These protects users using Show-Command from mixing parameters available in one parameter set
+39
+with parameters originating from the different parameter set.
+40
+After filling in the form and confirming the content of the window,
+41
+the command has been created, placed  in PowerShell and executed, showing the state of spooler service on localhost.
+42
+Remember that all info of such type is always near hand as those are located in the help system.
+43
+To see the entire help article, add to the Get-Help command
+44
+the full option.
+45
+Take a look how much info you have here
+46
+Look at the fantastic Examples section!
+47
+You have already seen the Update-Help command , earlier in the course. It has downloaded the help files,
+48
+if those were not being downloaded and installed earlier. This command can be started also manually. As this
+49
+command needs to modify some system settings,
+50
+don't forget to start PowerShell in elevated mode as administrator. By default this comand downloads
+51
+files only once a day.
+52
+If for some reason you need to run it second time add parameter -Force. Now PowerShell was forced
+53
+to download help again.
+54
+In production environment it's quite possible that servers don't have access to the Internet in such
+55
+situation.
+56
+Help can be downloaded and saved locally on a machine with internet access.
+57
+Those files can be later taken to the machine without internet access and installed there. To do so,
+58
+first use the safe help command and using the parameter destinationpath direct where the help should be saved.
+59
+Now we can install the help on a computer without internet access
+60
+To the Update-Help command add parameter
+61
+-SourcePath pointing to the same path as previously the Save-Help.
+62
+Please note that Get-Help and Safe-Help download only help for modules installed on local computer
+63
+and on destination's computer,
+64
+there can be additional modules installed.
+65
+In previous lesson you have already seen that help system contains also some help articles called about
+66
+articles or files. Let's display currently available about files.
+67
+Type Get-Help
+68
+about asterisk. Those articles contain information that is not correlated with only one command.
+69
+For example about_environment_variables contains description of environment variables available in
+70
+PowerShell.
+71
+To display that article type help about_environment_variables.
+72
+Now you can get familiar with every environment variable and read a little bit about each of them.
+73
+Remember about the possibility of adding more and more options to the command.
+74
+The very first example of this can be just adding the -ShowWindow parameter to Get-Help command
+75
+to display help in a dedicated viewer
+76
+The help can return similar results as Get-Command.
+77
+For example Get-Help  asterisk restart asterisk
+78
+will display info about those commands,
+79
+that have restart in the name.
+80
+So the next step you will probably decide to display help about one of those presented commands.
+81
+The search covers not only commands but also about articles and if only one entry will be found,
+82
+you will see immediately the full help on the only found command or article about. Let's build an example
+83
+for these. Type Get-Help asterisk
+84
+beep astrisk
+85
+There is only one place in the help telling us something about how to generate sound in PowerShell,
+86
+So this one article is immediately displayed.
+
+--- The help system - LAB ---
+
+[No transcript available for this lecture]
+
+--- The help system - ANSWERS ---
+
+[No transcript available for this lecture]
+
+--- Passing parameters to commands - VIDEO ---
+
+0
+Passing parameters to cmdlets. In this lesson you will take a closer look to parameters and their names
+1
+you will see how to pass parameters stored in a variable, list or file.
+2
+Commands available in PowerShell have a lot of parameters allowing you to change
+3
+the way how the commands operate.
+4
+The names of parameters are not just a one letter abbreviation that you cannot memorize.
+5
+Those parameters are in the form of longer expressions words allowing quickly to guess the meaning of
+6
+the parameter.
+7
+If you are just starting with powerful then this is great news for you.
+8
+It's easy but we time when you are becoming more and more experienced that feature can make you nervous.
+9
+That's why the names of parameters don't need to be used in the full form.
+10
+It's enough to type a part of it allowing it to identify the option.
+11
+Instead of name you can use NA and instead of computer name just use the comp.
+12
+Nice feature but if the script should be analyzed later once someone else then he or she can have huge
+13
+problems with understanding what's going on.
+14
+That's the reason why too many abbreviations or not very popular
+15
+aliases shouldn't be used.
+16
+Same commands can operate not only with one object like here with one Windows service but with many
+17
+objects at a time.
+18
+Let's display status for spooler, event log and EFS services.
+19
+The names of services need to be separated by commas.
+20
+This is how a list is built in PowerShell.
+21
+Let's try to do the same once again but in a little bit different way.
+22
+Yes I know this can be frustrating especially at the beginning but one task can be accomplished in PowerShell
+23
+in different ways.
+24
+First we declare a variable $services.
+25
+Remember variables in PowerShell always have the $-sign at the beginning.
+26
+To the variable we save a table of texts.
+27
+Those are again the names of services.
+28
+But this time they are noted in a different way. To create a list, start with @sign and next in
+29
+round brackets,
+30
+the names separated by a comma.
+31
+You can easily check the content of variable.
+32
+Just enter its name and press enter.
+33
+Note that now Intellisense can speed up your typing because intellisense is aware of the existence of
+34
+that variable.
+35
+If you have already $-sign and a few first letters, after pressing tab, the missing part of
+36
+the variable will be appended. The names of services have been displayed in new lines.
+37
+That's normal when a list or table is displayed.
+38
+It's time to use that variable in a command: type get-service $services
+39
+Great! PowerShell understood what's going on.
+40
+And now let's do this once again and again in a different way.
+41
+We will try to read the names of services from a file.
+42
+Let's first display the content of the file. In separate lines
+43
+there are the names of the same services as previously. To display information about each of those services,
+44
+we will create a command in the following way.
+45
+First we declare a variable
+46
+$ServicesFromFile
+47
+The value of that variable will be data read from a file.
+48
+First let's display the value of the variable.
+49
+It looks the same as when we declared the list.
+50
+It's time to call get-service with the name of the variable.
+51
+Well, it's working as expected.
+52
+We could try to build more examples on how to do these tasks using different techniques but I think
+53
+it's enough for the moment. Let's consider only why there are so many ways of how a task can be done.
+54
+The reason is probably that that are very different commands in PowerShell.  Some  commands accept options
+55
+with variable names.
+56
+The other prefers to read content from file or pipeline.
+57
+And now you already have knowledge about how to do your job in every of such conditions.
+
+--- Passing parameters to commands - LAB ---
+
+[No transcript available for this lecture]
+
+--- Passing parameters to commands - ANSWERS ---
+
+[No transcript available for this lecture]
+
+--- WhatIf and Confirm Parameters - VIDEO ---
+
+0
+Parameters whatif and confirm. In this lesson:
+1
+How do test the results of a command before that command will be indeed executed.
+2
+How to force command to ask additional question allowing to proceed.
+3
+When the variable $ConfirmPreference should be changed.
+4
+Let's recall: the command getservice spooler displays information about the printing services and it
+5
+status. The command
+6
+Stop-Service spooler will stop the service
+7
+To check if the spooler works or not,
+8
+you can issue the get-service cmdlet again.
+9
+This time the service is stopped.
+10
+It's easy to guess that the start-service will start the service again.
+11
+Let's check if the service is running,
+12
+issuing the get-service once again.
+13
+Now this service is running.
+14
+Let's consider those commands using administrator's  point of view.
+15
+As command like this can strongly influence the system,
+16
+additional parameter has been added.
+17
+Its name is whatif.
+18
+This switch causes that the command will not execute.
+19
+Instead of this user starting to come on he would see what would happen if the command would be indeed
+20
+started. Take a look at a stop-service spooler -whatif. This time the spooler service was not stopped.
+21
+On the screen you can see info, that if this command would be indeed started then on the service "print spooler"
+22
+action stop-service would be executed.
+23
+If you don't believe that spooler is still working just execute Get-Service. As you see the service
+24
+is still running.
+25
+Now it's time to present the second one parameter that allows to stop execution waiting for additional
+26
+confirmation.
+27
+The switch is called confirm. Stop-service with
+28
+the  switch confirm stops and asks for confirmation whether the service should be indeed stopped.
+29
+If we would answer NO, then the service still works. Each command  has internal setting informing if
+30
+that command
+31
+impacts the operating system strongly are not. If the impact is high,
+32
+then the user will probably be asked for confirmation anyway and if the command does not impact the
+33
+system so much then it will probably be executed immediately without any additional questions.
+34
+Each CM load can be assigned to one of the free groups basing on the impact on the system.
+35
+Low means usually that the command is not touching system settings.
+36
+Medium means that some system settings can be changed but that are not critical.
+37
+High means that the command is critical.
+38
+You as a person issuing command don't need to answer
+39
+Yes yes yes.
+40
+whenever you start a new execution. There is a special  environmental variable called ConfirmPreference
+41
+that controls behaviors of cmdlets in this aspect.
+42
+If you have some doubts and you are not sure if the command should indeed be started
+43
+you can set the value o f this variable to low.
+44
+This will cause that you will be asked for confirmation on every step.
+45
+If you are totally confident about the effects of the commands, you can change its value to high.
+46
+Then, you will need to confirm execution of those most critical commands only. Let's change the
+47
+value to medium.
+48
+Let's now try to stop printing service. Although the confirm parameter was not given,
+49
+we have been asked for confirmation about stopping the spooler.
+50
+If we decide to change confirm preference to low again this will not affect on commands only displaying
+51
+the values without modification.
+52
+Those commands can always be started without any confirmation. Time to conclude this topic.
+53
+When you start a command that has internal setting ConfirmPreferences higher or equal to the
+54
+$ConfirmPreference variable then you will be asked for additional confirmation before the command executes.
+
+--- WhatIf and Confirm Parameters - LAB ---
+
+[No transcript available for this lecture]
+
+--- WhatIf and Confirm Parameters - ANSWERS ---
+
+[No transcript available for this lecture]
+
+--- Working with pipeline - VIDEO ---
+
+0
+Working with pipeline. In this lesson:  what is a pipeline /
+1
+How to write data to a file /
+2
+How to view data in grid view / how pipeline works / when get-member should be used
+3
+The full power of PowerShell is visible first when the commands are connected with each other in a pipeline.
+4
+A single command like a get service can send the results to the next command,
+5
+for example out-file. Out-File will save those results in a text file.
+6
+Let's display the content of such a file
+7
+Heaving content in a file is practical if you would like to use the data later in the future.
+8
+But if you want to have a look at the data now then probably you should use another cmdlet called
+9
+Out-GridView.
+10
+After the Get-Service has been executed the results will be sent to Out-GreedView.
+11
+This will cause a graphical viewer to be started where the results can be presented.
+12
+Here you can define your own filters search the data search and search on.
+13
+Let's analyze now,
+14
+how technically the data is passed between commands in the pipeline.
+15
+A long time ago in the Linux or DOS scripts,
+16
+if the second command should take data  from the previous one, then it needed to parse that are returned
+17
+by the first command.
+18
+This resulted in a hard text parsing so that the next command could start with analyzing that text.
+19
+In the PowerShell the text is visible on screen.
+20
+is only a text representation of an object that is hidden behind the scene.
+21
+If you don't believe that this group is working on objects then look at this.
+22
+There is a special command named Get-Member.
+23
+The main task of command is to answer a question what an object we are currently working with.
+24
+Which parameters and methods
+25
+this object has.
+26
+It is enough to take a command and it's a result to send to get-member.
+27
+It is enough that the command just sends the results to get member.
+28
+Take a closer look into the results of this cmd-let.
+29
+First it is shown what the object name is.
+30
+Here we are working with this system service process service controller. Knowing that object you can start
+31
+search on it on programmer's Web sites like MSDN.
+32
+We have here for example some aliases. Alias  is just a short name for another property.
+33
+For example instead of typing ServiceName you can write Name. Objects usually you have a lot of properties
+34
+and methods.
+35
+Those properties contain some information that can be logical like True/False property of CanStop, telling
+36
+us if the service can be stopped.
+37
+The property can also have type of string.
+38
+As for example the MachineName. This particular property will allow to check on which computer the  service
+39
+is running.
+40
+There are also more complicated properties like ServicesDependentOn - that collection stores all those
+41
+services that need to be started before the current service can be started.
+42
+This property is a set of objects of type servies process servies controller that we are currently talking
+43
+about.
+44
+There are also some methods available in that type.
+45
+For example stop or start. Using those methods.
+46
+you can start or stop the service.
+47
+I know that administrators generally don't like the language of developers like object method or property
+48
+but PowerShell is a programming language,
+49
+so we need to be familiar a little bit  with that terminology.
+50
+Remember: Get-Member is one of our biggest friends because it tells us what can be done with the object
+51
+returned by a cmdlet in the next step.
+52
+Get-Member has an alias just GM.
+53
+Be warned that a command proceeding the get-member will be indeed executed. Next the result of
+54
+this command is sent to get-member which displays information regarding the type of passed data.
+55
+This is quite different than it was with
+56
+the WhatIf parameter which answers question
+57
+what would be done if I indeed would start the command.
+58
+Here the first command will be indeed run. Some commands return results of more than one type.
+59
+Some of them can return a mix of objects of different types.
+60
+Look at the Get-ChildItem started in the folder scripts.
+61
+The folder contains two subfolders named PS_1.0 and PS_2.0 and one file named services.txt
+62
+.
+63
+To make sure that the command returns objects of different type for files and folders
+64
+we pipe the results to get-member. Get-Member prints ino about type
+65
+System.IO.FileInfo and System.IO.DirectoryInfo. As as you see the output of single cmdlet  that can contain elements
+66
+of different types.
+67
+Those types can differ in amount of properties or methods.
+68
+Your scripts having those properties needs to continue their tasks.
+69
+Note one of property specific to files and directories named IsPsContainer..
+70
+This property allows to distinguish files and directories.
+71
+For files the value of that property is $False and for folders it is $True.
+
+--- Working with pipeline - LAB ---
+
+[No transcript available for this lecture]
+
+--- Working with pipeline - ANSWERS ---
+
+[No transcript available for this lecture]
+
+--- Sort-object - VIDEO ---
+
+0
+Sort-object. In this lesson: how do use sort-object in the pipeline.
+1
+How do sort by multiple properties.  A very useful command ready to use in the pipeline is sort-object
+2
+It allows to establish some order in the objects coming to that cmdlet through the pipeline.
+3
+In this example a list of services generated by a get-service will be sent to sort-object which will sort
+4
+them basing on a selected property. Here by the name
+5
+Because sort-object is quite often used in the scripts
+6
+you can call it using an alias sort. Parameter property
+7
+is also the default one.
+8
+So it can be omitted and passed by position.
+9
+The both visible commands will do exactly the same job.
+10
+Multiple columns can be sorted at once.
+11
+Simply enter the names of properties separating them by commas.
+12
+Here all the services will be sorted by the status of the service and when more services share the same
+13
+status then the name of the service decides on the order.
+14
+The results can be a bit surprising.
+15
+The sorting is not using the alphabetical order.
+16
+This is because the status of a service internally is stored as a number where the lowest value designates
+17
+top services,
+18
+the next one starting and the last one running. Sort order can be ascending or descending.
+19
+We will analyze this
+20
+taking a closer look to Get-Process command.
+21
+This command returns the name of a process,
+22
+the amount of taken memory and consumed processor time and many others.
+23
+Let's sort by Ram amount taken by the process. This property has alias VM.
+24
+This is important.
+25
+VM is an alias for another property returned by the get-process,
+26
+Which one?
+27
+This is not a problem to find this property because we are already know the Get-Member command.
+28
+The full name of the property is virtual memory size.
+29
+So it's possible to create a command,
+30
+getting the list of processes and presenting it ordered by the amount of consumed memory using the full
+31
+name or its alias. We will use the shorter form.
+32
+And what if the list should present on the top positions
+33
+the processes consuming the biggest amount of RAM?
+34
+Just add the switch descending!
+35
+The order is now correct.
+36
+Next example. Get-EventLog displays events from a Windows event log. the parameter LogName designates
+37
+which log should be shown.
+38
+Type in "security". Pipe the result to Sort-Object which will sort the input
+39
+by the time when the event was created in the order starting from the oldest one to the newest one
+40
+The list is quite long but it doesn't bother.
+41
+The order is here  important which is as expected.
+
+--- Sort-Object - LAB ---
+
+[No transcript available for this lecture]
+
+--- Sort-Object - ANSWERS ---
+
+[No transcript available for this lecture]
+
+--- Measure-Object - VIDEO ---
+
+0
+Measure-Object. In this lesson: how to count the number of objects / how to calculate other measures like
+1
+minimum maximum average / how to calculate basing on a selected property of the object.
+2
+Now you will see a command that is capable to count something for you.
+3
+Let's start with something really easy.
+4
+We will take a couple of numbers and we will send them in the pipeline to measure object. By default
+5
+Measure-Object counts only the number of passed objects.
+6
+Here the amount of numbers will be calculated. Count equals five.
+7
+You can point that a sum, minimum or maximum should be calculated.
+8
+Remember that when passing parameters their names can be shortened so you can use for example min instead
+9
+of minimum. After starting
+10
+command we can find out that not only count was calculated but we also have sum and  minimum.
+11
+By the way - if you wanted to execute a command for numbers like 1 2 3 4 5 you can use a shortened notation
+12
+in the form 1 ..  5.
+13
+This is the result. Of course administrators will probably calculate some other stuff than just the numbers.
+14
+There are better programs if you prefer to work with calculations.
+15
+Administrators are more interested on calculations of objects of properties or objects present in a
+16
+computer system.
+17
+So let's count the number of files.
+18
+Cmdlet Get-ChildItem
+19
+takes objects like files and subdirectories from a chosen directory.
+20
+Those objects contain properties specific to folders of files like
+21
+date of last modification, date of last access or size.
+22
+Let's assume we need to calculate the total size of all the files in the script folder with subdirectories.
+23
+Get-ChildItem
+24
+will send the list of objects to the measure-object command
+25
+In the Measure-Object you can give the name of property that should take part in the calculations
+26
+performed.
+27
+So let's choose the property Length.
+28
+This property represents the size of a file. That's the result. In the folder
+29
+there are 3 files and the total size is about 136 kilobytes.
+30
+By the way - don't you think that naming size of a file with the name Length is not intuitive?
+31
+Wouldn't names like Size or FileSize be better?
+32
+Well, we cannot do anything about this and there is some logic behind this scenes, because the Get-ChildItem
+33
+can return not only files but also certificates from certificate store databases from SQL server
+34
+keys from registry and so on.
+35
+That's why they Get-Member command is so important. Whenever you don't know how the name of property
+36
+should be,
+37
+just start Get-Member. When listing folders you will find two types:
+38
+FileInfo and the DirectoryInfo. When reviewing the properties of FileInfo type
+39
+you will find the searched property Length. Cmdlet Get-ChildItem called
+40
+for a chosen directory.
+41
+will generate a list of objects of type file or directory.
+
+--- Measure-Object - LAB ---
+
+[No transcript available for this lecture]
+
+--- Measure-Object - ANSWERS ---
+
+[No transcript available for this lecture]
+
+--- Select-Object - VIDEO ---
+
+0
+Select-Object. In this lesson: how to limit the number of objects returned by a command.
+1
+How to select only some of properties  / how to connect sort and select in the pipeline.
+2
+Command Get-Eventlog takes events from the Windows Event Log.
+3
+Those locks are usually big, and finding there the necessary information requires from users huge amount
+4
+of work even in PowerShell!
+5
+However this command has one very useful option "newest". With that option
+6
+you can determine how many newest messages should be displayed.
+7
+As you can see these works as expected.
+8
+Nice.
+9
+Unfortunately not every command has such a switch.
+10
+This means that sometimes that can be difficult to eliminate the information that is in the moment not
+11
+required.
+12
+Let's change example.
+13
+We want to find the top 3 biggest files in the folder.
+14
+First of all you will need to read them,
+15
+so we start with Get-ChildItem. Short review of parameters shows that there aren't any options available
+16
+that could accomplish solving that problem.
+17
+You need to find the biggest files on your own.
+18
+No problem we will use sort with descending order looking at property Length.
+19
+Quite good. After the command has been started,
+20
+we can see the files ordered by size starting with the biggest, but we were interested in only the
+21
+top 3 files.
+22
+How to limit the number of files?
+23
+Just sent this result to the cmdlet Select-Object
+24
+Also alias Select could be used.
+25
+One of the capabilities of this command is selecting only some amount of columns
+26
+or rows.
+27
+In our case we will take only three first positions using the option first.
+28
+Here are free biggest files from that directory.
+29
+But select object can do more.
+30
+Let's assume we know the biggest file in the folder and
+31
+in our mini report we would like to skip it.
+32
+So we want to display only the 2nd the 3rd and the 4th file.
+33
+sorting by the file size.
+34
+Add Just a parameter Skip. This parameter determiners
+35
+how many input objects should be skipped.
+36
+And now the next feature of select-object. Let's come back to the come and returning sorted files.
+37
+On screen
+38
+you can read the attribute of file, last modification time the size and the name of file.
+39
+If you want to display other properties
+40
+use again select. Sorry for this, but I will tell this again. Behind the scenes, between commands, PowerShell
+41
+sends objects and you can always see what an object is sending output to Get-Member. In this way you can
+42
+detect the object type,
+43
+and also all of its properties and methods. We decide to use extension containing the file extension,
+44
+name with the name of the, file property IsReadOnly that allows to check the read-only attribute
+45
+and creation time telling when the file was created.
+46
+Let's build the command. The sorted result of Get-ChildItem is sent to select
+47
+and here the parameter property allows to enumerate the properties that should be displayed.
+48
+Now on the screen only those properties are displayed that for some reason are important to you.
+49
+Also the object that was displayed has lost a lot of other properties.
+50
+Now this object contains only those 4 properties.
+51
+What is may be much more interesting is that Select can at once select only part of properties and display
+52
+only the free biggest files.
+53
+Add to the command parameter first and note that only 3 files have been displayed.
+54
+Each command contains a default set of properties that will be displayed, if you want to see all the
+55
+properties and then select-object can be used as well. In the parameter property
+56
+type in asterisk.
+57
+Now for every file and every directory
+58
+a complete set of properties has been displayed.
+59
+Parameter property is passed by position
+60
+so when you point to properties that should be displayed you can skip the word property.
+
+--- Select-Object - LAB ---
+
+[No transcript available for this lecture]
+
+--- Select-Object - ANSWERS ---
+
+[No transcript available for this lecture]
+
+--- Select and calculated properties - VIDEO ---
+
+0
+Select and qccalculated property. In this lesson: how to add a computed property to a result
+1
+What are the variables dolar underscore and dollar PSItem /  Constans like one kilobyte
+2
+one megabyte and one gigabyte / how to format calculated properties.
+3
+Now you will learn how to use select to compute quite new properties in the object.
+4
+Let's start with something really easy Get-ChildItem. We will list the scripts folder
+5
+By default
+6
+the command displays the size of files in bytes.
+7
+Well this is not too practical.
+8
+I would prefer to see the sizes in kilobytes or megabytes.
+9
+So first of all we send the result of the command to Select-Object
+10
+Now we can choose properties that we wish to display. At the moment
+11
+let's take the name of the file,
+12
+and its size in bytes
+13
+This is not a very nice result.
+14
+Now we will add to this select the definition of calculated property. Definition starts with the @-sign
+15
+and next the curly brackets. With such a syntax we built in PowerShell hash tables. In such a table
+16
+You define values saved under the name.
+17
+Indeed in our case we need to put two pieces of information: the new column has to have the name and
+18
+it needs to have some expression defining how to calculate the value.
+19
+Type N equals and in quotation marks give the name of the new property. Shortcut n is used instead of
+20
+the full name NAME.
+21
+You can also put here
+22
+Label equals or L equals.
+23
+but the last abbreviation is the worst one,
+24
+as small l letter is similar to 1 and generally should be avoided.
+25
+After semicolon you need to define the expression. Write expression equals or using observation E equals
+26
+and next in curly brackets give the expression that should be evaluated when computing the value.
+27
+Tp convert the file size from bytes to kilobytes, the length property should be divided by 1024.
+28
+Now, we need to take the length property of currently protesed file. To say currently processed object
+29
+in PowerShell
+30
+you should use one of the following methods.
+31
+The $PSItem is a variable that represents at the moment processed object.
+32
+Also dollar underscore
+33
+could be used.
+34
+However this notation was used in pre 3.0 PowerShell version, so the $PSItem is here
+35
+a file and has the property Length. The value $PSItem.Length
+36
+is the size of currently processed  file in bytes. So this value will be divided by 1024.
+37
+If you enclose the expression in the additional bracket then later it will be much easier to format the
+38
+output.
+39
+That's the result: we have size in kilobytes.
+40
+PowerShell knows seme observations.
+41
+For example it understands that 1KB is 1024 or 1MB is 1024 kilobytes.
+42
+So let's say replace 1024 by one kilobyte
+43
+This works as well.
+44
+More than one new column can be computed at time
+45
+type the coma,
+46
+@. curly brackets, N like name, the name in quotation marks,
+47
+we will now use this size in Megabytes
+48
+semicolon.
+49
+I like expression and in curly brackets type
+50
+$PSITEM . Length and divide it by one megabyte. That's all.
+51
+And this is the result.
+52
+If you are working in PowerShell  in the version earlier then 3 0 or you just prefer to use shorter names
+53
+of variables then you can also the $_ instead of $PSItem.
+54
+The old notation works in the new version without any problems.
+55
+The new columns are already nice computed but the way the results are presented is not acceptable.
+56
+We would like to limit the number of decimal digits.
+57
+For this we need a formatting string
+58
+and the option -f allows to combine string values with the numbers and formatting.
+59
+Type in apostrophes  zero colon n 2 and after that -f. 0 stands for the variable position after
+60
+the f option,
+61
+that should be put into this place. In PowerShell we count starting from zero not from 1. The N2 means
+62
+that the values should be formatted as numeric.
+63
+The 2 determines the number of decimal digits that should be generated when the string is formatted.
+64
+The same expression can be given
+65
+also in the second expression.
+66
+This is the final result.
+67
+Much better I think.
+
+--- Select and calculated properties - LAB ---
+
+[No transcript available for this lecture]
+
+--- Select and calculated properties - ANSWERS ---
+
+[No transcript available for this lecture]
+
+--- Convert, Export and Import - VIDEO ---
+
+0
+Export and import of data. In this lesson: how to convert to and convert from one type to another /
+1
+What kind of type is created when using the conversion functions / how to export and import from file
+2
+Till now the data returned by commands was usually displayed on the screen. As you already know commands
+3
+can send results to other commands in the pipeline,
+4
+and even finally save them in the file.
+5
+If you wish to save a file on a disk in a specific format then you can use one of the comments starting
+6
+with the verb ConvertTo.
+7
+Command
+8
+Get-help -Verb ConvertTo
+9
+shows all such cmdlets.
+10
+.
+11
+Now you can know what commands can convert objects from one type to another.
+12
+For example conversion can be made to
+13
+CSV  HTML, XML and more.
+14
+And more on the other side of the coin
+15
+you can also recreate the objects using commands starting with ConvertFrom.
+16
+To display all of them you use
+17
+Get-Help -verb ConvertFrom. For example cmdlet ConvertFrom-CSV
+18
+will try to take input and recreate PowerShell objects that earlier probably have been created
+19
+by the ConvertTo-CSV command. The command ConvertTO  converts data that probably later will
+20
+be saved in a file.
+21
+In PowerShell there are also some commands that we convert that out to a specific form and save it to the file at once.
+22
+Those commands start with ExportTo.
+23
+There are also commands allowing to read the content of file and convert the read text back into a
+24
+PowerShell object.
+25
+Those commands start with the verb import.
+26
+Get-Help -verb export
+27
+will show a list of commands exporting the data to files. If there are so many exporting
+28
+commands,
+29
+so probably there will be also plenty of importing commands.
+30
+Get-Help -verb Import
+31
+Now commands
+32
+importing data have been displayed.
+33
+It's time to see those commands in action.
+34
+The command has taken a list of services and it converted the list
+35
+in the CSV format. Note a specific text in the first line after the comment symbol there is text
+36
+allowing to determine, which object was the source for the converting operation.
+37
+Having that line the import command knows which type should be recreated during the import.
+38
+Usually when using conversion functions you convert the object to save it later in a file.
+39
+Next when importing the data we read the file and create a new object from it using convert again.
+40
+We will analyze here a little bit strange example but it will be quite a good example,
+41
+what is here going on!
+42
+We will connect in the pipeline
+43
+ConvertTo and ConvertFrom. What will be the result?
+44
+Let's test it.
+45
+Well it looks like we are still working with the original object, like the effect of
+46
+converting to and next converting from resulted in no action. Get-Service has taken all the
+47
+services, select has taken only the first 5, ConvertTo has changed the list to CSV and
+48
+next ConvertFrom immediately reversed the work of the previous command and has recreated the service.
+49
+controller type.
+50
+The results have been sent to Sort command where the objects have been sorted by name.
+51
+Finally select displayed all the selected properties.
+52
+Please take a look at still visible on screen
+53
+result of ConvertedTo.
+54
+Here you can see the properties that have been generated for each of the services.
+55
+Having this in mind you now see that a newly created objects have the same properties as the original
+56
+objects.
+57
+Looking at this example you may think that what ever has been changed in ConvertTo this can be reverted
+58
+by ConvertFrom Let's come back to administrator's life.
+59
+Here we want to receive a file with some data. To the previous example
+60
+one additional command has been added. This command should save the result of ConvertTo to file. If you look
+61
+into the content of the file then you should not be surprised. The content of the file is the same as
+62
+for the moment displayed result of the ConvertTo-CSV command.
+63
+And how to recreate the object,
+64
+If we only have a CSV file? It enough to read the content of the file using Get-Content command and
+65
+next push the data via the pipe to ConvertFrom command. We have exported five services to the file.
+66
+So now we have five services imported.
+67
+What has changed is only the way how the results have been displayed on the screen.
+68
+This form of display is called a list and allows to see all the properties of every service, but there
+69
+is one question.
+70
+Is there object service controller created basing on the file,
+71
+the same as the service controller object taken directly from the operating system?
+72
+Let's check this! How? Use your friend Get-Member!
+73
+As you can see those types differ slightly.
+74
+The name of the type of the restored object starts with prefix CSV:
+75
+This type has also a very limited number of methods.
+76
+It's not possible for example to start or stop the service.
+77
+The properties remain the same.
+78
+This logic will be also used in our next lessons where you will learn about remoting. In remoting session
+79
+objects are also going through a similar process called serialization and deserialization.
+80
+This example file can be read using the previously mentioned command Import-CSV. This way is much easier I think.
+81
+That's because you don't need to connect the command reading the file with the command performing
+82
+the conversion. Import-CSV does the both activities in one step.
+83
+Let's consider now situation where before the command performing convention a Select cmdlet  will be
+84
+added and it will select only one property.
+85
+Will this change anything in the process or in the results?
+86
+Till now the Select was not present
+87
+and we have worked on all the properties. It looks like in the pipeline after select the objects don't
+88
+have the majority of their properties.
+89
+Just only one name was left. As a result
+90
+also in the file, the amount of properties should be limited.
+91
+The first command creates such a file.
+92
+Look at the header.
+93
+The type is now Selected.System.ServiceProcess.ServiceController.
+94
+The word "selected"
+95
+tells the history of the object.
+96
+This object is only remaining after the original reach in properties object.
+97
+So if you now decide to recreate the service object using Import-CSV, then you'll receive very
+98
+poor object servies controller. Import-CSV was not able to recreate the service object because
+99
+such data was not present in the file.
+100
+Let's take a look on the last example with Export-CSV.
+101
+As you can see ExpertCSV command binds together functionality of ConvertTo-CSV
+102
+and Out-file.
+103
+This is really convenient. The command is shorter and the result is the same.
+104
+Import-CSV can read such a file and the basing on it can recreate the object.
+105
+So maybe it's good to be a bit lazy and use this command
+106
+if finally all the data should be saved in a file.
+107
+Why there are
+108
+two very similar commands available to us?
+109
+Remember command ConvertTo should be used in pipeline, if you wish to convert object send it to the
+110
+next cmdlet in the pipeline and do something with them.
+111
+If the goal is to have the information in the file without any additional processing then the Export
+112
+command would be better.
+113
+The export command would be the last command in the pipeline because it's not returning anything.
+114
+The same can be said about Import command. This command
+115
+usually we'll be put as the first command in the pipeline.
+
+--- Convert, Export and Import - LAB ---
+
+[No transcript available for this lecture]
+
+--- Convert, Export and Import - ANSWERS ---
+
+[No transcript available for this lecture]
+
+--- Where-object - VIDEO ---
+
+0
+Where-Object. In this lesson: you will learn how to build logical expressions  / how to use the where-object
+1
+command / you will know the differences between simple and advanced syntax of where / you will  get familiar with
+2
+some performance hints  for commands working in  pipeline.
+3
+In this lesson we will learn how to filter data produced in previous steps in the pipeline.
+4
+So we first need to know how to build logical expressions in PowerShell.
+5
+You may feel disappointed.
+6
+We have the message that in PowerShell in logical expressions those are very intuitive and well known mathematical
+7
+symbols like equals less than greater than and so on can not be used.
+8
+But if you know a bit scripting in bash then you surelly  guess what is going to happen.
+9
+For example to test if one number is bigger than another.
+10
+Use a shortcut -gt that's abreviation from greater than. Instead of equality sign
+11
+we need to use -eq like equal. Instead of less than symbol use -lt shortcut  for less than.
+12
+When you want to ask if one number is bigger or equal to another
+13
+Use a shortcut -ge  like greater than or equal. In a similar way to ask if one number is less than
+14
+or equal to another
+15
+use a shortcut -le. To test if two numbers are different
+16
+use -ne like not equal. All those shortcuts can be used for other types of data like strings
+17
+or dates.
+18
+However for string variables more operators can be used.
+19
+You can for example test if a variable content is adequate to a mask built with metacharacters.
+20
+And so asterisk stays for any amount of any characters.
+21
+Here we test if the text PowerShell given in lowercase can be matched to a mask
+22
+PowerShell asterisk starting with uppercase. To test a string value with a mask
+23
+use operator -like. Each of presented
+24
+till now operators can distinguish between lower and upper case.
+25
+It's enough to prefix the shortcut with letter C like English case.
+26
+Having this in mind
+27
+let's see if the powershell in lowercase can match the power asterisk where we start with uppercase.
+28
+The result is of course false
+29
+Additional useful operator is not.
+30
+Here we are testing what is the result of not $true and this is of course false.
+31
+It's a time to take a look also to slightly more advanced operations. Here we built the expression with
+32
+the "and". We test if one equals one,
+33
+and at the same time whether two equals two.
+34
+This syntax is a bit strange but it has its logic.
+35
+Let's analyze the expression starting with smaller sub expressions.
+36
+One -eq One tests
+37
+If one is equal one. Two -eq two tests if two is equal two. The operator -and tests if the condition
+38
+on the left side and on the right side are true.
+39
+I think that now when you already know how operator "and" works it's easy to understand the operator "or".
+40
+Sometimes when the expressions are more complicated
+41
+you may need to use brackets to group expressions together.
+42
+Take a look at -not, brocket, one, -eq one bracket. Power Shell will first test
+43
+if one equals one and next the result will be negated.
+44
+So the final result is false.
+45
+As a result
+46
+the expressions can be very complicated.
+47
+This slightly long introduction was necessary to present you how to work with the real objects that
+48
+you usually meet when administering windows.
+49
+Let's consider the example of listing a directory.
+50
+Our first goal is to display only the sub folders of a folder
+51
+and yes we could use for this one of the options available in the Get-ChildItem command, but this time
+52
+we want to do this without it.
+53
+The main difference between a file and a folder in PPowerShell is that folders have property PSIsContainer
+54
+set to true. For files the same property is set to false.
+55
+So to distinguish if an object describes a file or folder we can use this property. This command will
+56
+display the content of c:\scripts directory. The result is next sent to a special command Where-Object
+57
+which has alias where or just a question mark. The Where command takes each
+58
+object incoming from the pipeline and checks if the property PSIsContainer is equal true.
+59
+If yes then the object is sent to output of the pipeline.
+60
+So in this case just displayed on screen. If the condition is not met then the object will not be sent
+61
+to output and it's lost.
+62
+And here we have the result.
+63
+Only the subfolders have been displayed.
+64
+The command can be shortened using one of aliases mentioned earlier. Type Where or just questionmark instead
+65
+of Where-Object. The option Name property and value can be skipped as well.
+66
+Finally we have quite a short form: Where PSIsContainer -eq $true.
+67
+But wait a moment! PSIsContainer is of type Boolean so it shouldn't be required to compare it
+68
+to $true or $false.
+69
+This allows to make this command shorter again just where PSIsContainer. Iif you would decide to use
+70
+the question mark instead of Where,
+71
+then you have a very compact form.
+72
+Al till now present that syntaxes of the Where command are called sometimes of the basic or simple form.
+73
+Unfortunately that syntax sometimes is not working.
+74
+When the condition is becoming more and more complicated or you want to test properties of properties
+75
+of the objects in the expression then the Where with the basic syntax fails.
+76
+So maybe it would be much better to learn immediately the advanced syntax which is not so very complicated.
+77
+Take a look,
+78
+what is the goal of the next command.
+79
+We want to display only the files
+80
+so the PSIsContainer should be false.
+81
+We want to display only files with the extension TXT, so the extension property should be set to dot TXT.
+82
+The condition itself looks correctly but Where-Object used in the basic syntax cannot correctly
+83
+interpret it.
+84
+Here you see the same condition in the advanced syntax. In the advanced syntax,
+85
+you need to give only one parameter and it's called FilterExpression.
+86
+The filter expression must be enclosed in a brace bracket.
+87
+The expression will be evaluated for each incoming object and again if the result is true the object
+88
+will be sent to output.
+89
+Otherwise the object will not be processed anymore.
+90
+Whenever you want to check the value of one of the properties of the currently processed object then
+91
+you should use the already known to you
+92
+variable $PSItem or just $_. The entered  here script will be called so many
+93
+times as many objects are incoming to the Where-Object command from the pipeline.
+94
+Each time in the $PSItem or $_ there will be the currently processed object.
+95
+So the $PSItem.PSIsContainer contains information whether the object is a file or a
+96
+container.
+97
+This script will allow to go through the pipe only to those objects where the evaluated expression
+98
+returns true.
+99
+And here is the result - only the files have been displayed.
+100
+The next example presents that instead of the $PSItem, the $_ can be used
+101
+as well.
+102
+Try to remember that $_ can be used
+103
+h, as many ready to use scripts
+104
+downloaded from Web use and just $_ . Where-Object in the advanced syntax does not have
+105
+limitations specific to the basic syntax.
+106
+Let's come back to the example that previously has not worked. For each processed object we test
+107
+if the value of $_.PSIsContainer is equal $false,
+108
+so if this is file.
+109
+Additionally for each file we test if the extension of the file is .TXT. The condition requires
+110
+that both parts need to be true.
+111
+Now only text files have been displayed.
+112
+It's time for performance hint. Filtering in the pipeline should be done as quickly as possible.
+113
+This allows to eliminate objects that for some reason should not be processed.
+114
+So the next commands in the pipeline will have less work to do. For the same reason
+115
+if a command has some parameters that allow to do filtering, then it's usually better to use those parameters
+116
+instead of getting all elements and passing them to do Where-Object such a command is shown in the next line.
+117
+Parameter file causes that only the files will be displayed.
+118
+Parameter filter allows to display only files that match a mask.
+119
+The results of the commands are the same.
+120
+However if the huge number of files should be processed then the last command would be much faster.
+
+--- Where-object - LAB ---
+
+[No transcript available for this lecture]
+
+--- Where-object -  ANSWERS ---
+
+[No transcript available for this lecture]
+
+--- Foreach-Object - VIDEO ---
+
+0
+Foreach-Object. In thise lessons: you will learn how to call object's methods in pipeline
+1
+you will see the difference between simplified and advanced syntax of the command / how to execute some actions for
+2
+each object in the pipeline.
+3
+You know already that object returned by cmdlets  contain properties and methods.
+4
+Now you will see how to work with those objects in pipeline and specially how to call methods for those
+5
+objects in pipeline.
+6
+Lets start with a simple Get-ChildItem called on the folder c:\scripts. The command displays the
+7
+content of this folder. You can see here 2 CSV files. We would like to delete those files.
+8
+And again these could be done in quite another way.
+9
+For example using parameters of Remove-Item command.
+10
+By that time we will use the Get-ChildItem and Foreach-Object commands.
+11
+First let's take a closer look at the object returned by the Get-ChildItem. The most important at
+12
+the moment is if those objects contain a method allowing to remove the file. To check this we sent the
+13
+result of Get-ChildItem to Get-Member cmdlet.  Review the list of methods.
+14
+There is a method
+15
+Delete. This method does not require passing any parameter and calling this method on the object will
+16
+cause the file or folder which is associated with the object to be deleted.
+17
+And now the cmdlet Foreach-Object comes into play.
+18
+It will call the method delete on the files that should be deleted.
+19
+This command has two allowed syntaxes basic and advanced.
+20
+The result of the Get-ChildItem will be sent to the Foreach-Object. This cmdlet  will calle the delete
+21
+method.
+22
+In this way for each CSV file, the  command delete has been called and the files have been removed.
+23
+We can test it of course listing the folder content again.
+24
+The comment was easy short and has done what we expected.
+25
+Unfortunately that basic syntax does not allowed to execute more complicated scripts use properties
+26
+of objects and so on.
+27
+Again it looks that it's worth to learn the advanced syntax as it is much more powerful. The advanced syntax
+28
+is really not so complicated and using it you can do whatever you want.
+29
+Very similar like we have the where command.
+30
+you need to compose a script block with actions that will be executed for each object incoming from
+31
+the pipeline.
+32
+If in the script a currently processed object should be used then type $PSItem or $_.
+33
+Exactly as it was done with the Were-Object command. Here the first command in the pipeline
+34
+should filter files so that only text files will be processed and next the foreach-object will call a
+35
+method of each file object named CopyTo. This method copies the file into a new folder.
+36
+The name of the file will remain the same. As a result in the new location
+37
+new files have appeared. And now a bit more complicated example.
+38
+Let's assume you need to develop a script that will be started every hour and that should save in the
+39
+file in the c:\scripts folder information regarding
+40
+currently working on system processes.
+41
+The file should not be overridden but each time lines with new content should be added.
+42
+Because the script will be called quite often.
+43
+also information with the current date should be added to the file.
+44
+Just in a moment we will talk about the command
+45
+but first let's see how it works.
+46
+Let's see the content of the file.
+47
+Here there is the date  / and here information about processes. The file could be formatted better but for
+48
+the moment it's not so important.
+49
+So the file looks OK.
+50
+Now we can analyze the command. The first command in  the pipeline is Get-Process.
+51
+Each process, one by one is sent to do foreach cmdlet. The command foreach only once and only
+52
+when the very first object is processed  will sent to define the current date.
+53
+If some actions should be executed only once then enclose  them into bracket and proceed it the begin
+54
+option.
+55
+So here in the begin block the Get-Date returns  the current date and using an internal pipe sends the
+56
+the results into the file,  so that the line is appended to the file
+57
+if the file already existed. Option append caused this. The nextt part of command is responsible for appending
+58
+to the file the list of processes.
+59
+The code that should be run for every object so not only once at the beginning or not at the end but
+60
+for each object separately, should we proceed with the process parameter.  Here for each process we take
+61
+an object of the process represented by the PSItem,  we select from it
+62
+the interesting properties. It is done here by the command select name,
+63
+VM,
+64
+and finally we send them into a file using the out-file command.
+65
+If you would like to execute some actions once after the last object has been processed it will be enough
+66
+to add to do the command
+67
+the end block that is constructed in the same way as previously presented begin and process.
+68
+So now you know how powerful the advanced syntax is. In the foreach-object cmdlet
+69
+we have added something like internal pipelines that works
+70
+with separate single objects incoming
+71
+via the pipeline. With time you will see that this command can be used in many different situations.
+72
+For example for each active directory group - display members of the group for each cluster check
+73
+if some files are present in the file system for each SQL server create a loging on the server for
+74
+each object is something that you simply need to know.
+
+--- Foreach-Object - LAB ---
+
+[No transcript available for this lecture]
+
+--- Foreach-Object - ANSWERS ---
+
+[No transcript available for this lecture]
+
+--- Formatting output - VIDEO ---
+
+0
+Formatting the output.  In this lesson: you learn about the format wide, format list and format table commands
+1
+you will learn about the parameters of those commands.
+2
+You will learn how to format numeric values  / how to connect formatting commands with other commands
+3
+in the pipeline.
+4
+How do group data using one of the properties of objects.
+5
+You will learn how to format data into HTML and how to work with the GridView.  It's time to learn
+6
+how to format the data and PowerSHell. First take a look at a command that will display entries from
+7
+the security event log and being more specific
+8
+only the newest 10 entries.
+9
+Well now on the screen you can see some information taken from security log. What and how has been
+10
+displayed is defined in the shown on the screen folder.
+11
+You should find here a file named types.ps1.xml
+12
+Here the content of the file the content of the file. As you see here there are some definitions regarding types that
+13
+are available in PowerShel. Here for example type system.net.IP address is described.
+14
+Another interesting file is DotNetTypes.format.ps1xml
+15
+Here information can be found about the default formatting that will be used when the
+16
+object of a specific type will be shown on screen. When for a moment the Get-EventLog command was started
+17
+PowerShell searched in the file information how to display a single entry from an event log.
+18
+That's the definition used for System.Diagnostics.EventLog. Of course you should not modify that
+19
+file when you would like to change the formatting of a specific command.
+20
+For such purpos a dedicated command should be used.
+21
+Let's analyze the Get-Service output. The service returns the least of all the services started or stopped
+22
+currently on the system. The output contains information describing the name, status, and description of
+23
+the service.
+24
+The list is long,
+25
+so to display on screen more services at once but limit the amount of information regarding each service,
+26
+for example limited only to the name of the service send the output to format-wide command. Format-Wide
+27
+could be compared to a view defined in Windows Explorer,
+28
+when you switch from a detailed view to small icons view. Here the name has been re-arranged in two columns
+29
+on screen. Alias to Format-Wide is just FW. The result exact the same.
+30
+Now format-wide depending on what was received from pipeline decided automatically which properties
+31
+should be displayed.
+32
+These behavior can be changed using option property. Point to property ServiceName and the result will
+33
+be the same as previously. Change the property to DisplayName and as a result you will see descriptions
+34
+of the services.
+35
+Till now PowerShell decided by itself how many columns will be used to display the data, but after adding a
+36
+parameter col it depends on you
+37
+how compact the output will be.
+38
+Of course to much is never good.
+39
+If you decide to use 5 columns and the property to be displayed is long then the output will be totally
+40
+messed.
+41
+There is also a very handy parameter autosize. When used PowerShell will automatically compute the number of columns
+42
+that can be used to display the names.
+43
+The result may be sometimes surprising.
+44
+Here PowerShell decided to use only one column, because there are some services with extremely long name.
+45
+Now you'll really learn how to display information in the form of a list.
+46
+The result of a command is sent to Format-List.
+47
+The result is built as let's say sections of data and each section presents some data about only one
+48
+service.
+49
+All those sections are displayed one under another.
+50
+This form is useful when you have rather long text that cannot be displayed in the form of a table.
+51
+Each block represents a separate service Alias for Format-List is just FL. Like it is with
+52
+Format-Wide
+53
+you can start this command with parameter property. Using it
+54
+you can select which properties should be displayed. If after the parameter property you enter asterisk
+55
+then all the properties will be displayed.
+56
+This possibility is extremely useful when you don't know the name of the property but you know the value
+57
+that should be present in this property. OK. When you already know the names of properties that should
+58
+be used in your script.
+59
+Then in the next step give those names after  the property parameter like it is done
+60
+in this example. Here from quite a long list of properties we have selected only name and status.
+61
+In the next example you can see how this command can be shortened.
+62
+FL name,status  - will display the same result but is very compact command.
+63
+And now the most interesting. Formatting to table format. To accomplish that task
+64
+you should use command Format-Table. Alias for a format table
+65
+is FT. As in other commands from the format family after the parameter property
+66
+you can give the name of properties that should be displayed, but do not expect to match. Property asterisk
+67
+displays so much that nothing can be read.
+68
+So better get a shorter list of interesting to you
+69
+properties. The parameter property may be skipped.
+70
+Unfortunately when  format-table is used then usually some texts are too long and PowerShell
+71
+needs to shorten them.
+72
+You can try to use the autosize parameter,
+73
+however this not always solves the problem.
+74
+Here you can see: name status, DisplayName but the ServiceType is somewhere outside.
+75
+That's why we sometimes use the switch wrap.
+76
+The outcome is that long texts that don't fit will be broken and put partially into
+77
+next row.
+78
+This is how quite a long text can be somehow presented on the screen.
+79
+Let's go to the next topic. In this example you would like to display name of a file and its size in
+80
+kilobytes.
+81
+I hope that you remember how to build expressions like this one from previous lessons.
+82
+Usually we have placed them in the select-object command.
+83
+And here this expression is placed directly in a format table command.
+84
+We display the name of the file and an expression. The expression is built as a hash table where
+85
+there is a part for the name n and for the expression definition e. The name has been defined here a size
+86
+in kilobytes.
+87
+The expression is the size of a file divided by 1 kilobyte.
+88
+The result is quite acceptable. Quite because the number of decimal part is unequal.
+89
+This makes, so easy task is finding the biggest file really not so easy.
+90
+That's why it may be useful to add a formatting expression.
+91
+The format string equal N2 means that we won't always have all the numbers in the column with two
+92
+decimal digits.
+93
+Now the output is much much better.
+94
+Let's now add to this command the autosize parameter.
+95
+Let's check if this switch will make the output more readable.
+96
+Power Shell took into account the length of the columns that need to be presented
+97
+on the screen and the result looks very good and very compact.
+98
+Now we analyze how those format commands can be used in pipeline with other commands.
+99
+We will start with Get-Service and format's table.
+100
+This output is neither sorted by the Status nor by the Name.
+101
+So let's try to make some order.
+102
+Inserting between those two comands cmdlet sort-object allows to define the sort order.
+103
+Can the sequence of commands be changed?
+104
+Is it possible first to format the output to table and next sort it by status?
+105
+Let's try. As you can see it fails.
+106
+Why? To answer the question,
+107
+verify what an object is returned by format-table using the Get-Member command. Surprise! After processing
+108
+the data with format-table
+109
+you are not working with type ServieceController anymore.
+110
+Instead of this it is Microsoft.PowerShell.Commands.Internal.Format
+111
+The properties don't describe the service but instead of this there are a lot of properties
+112
+of a table.
+113
+This is the reason why sort by status is not working anymore.
+114
+If you decide not to use format-table but instead of this you will take select-object then information
+115
+about type will not be lost.
+116
+And such pipe will work correctly. To see this in detail
+117
+you can send the results to the Get-Member. Here you still have properties selected by select-object like
+118
+name, DisplayName or status.
+119
+That's why the order first select and then sort or first sort and later select  is not important.
+120
+The words selected in the name of type means that this type does not contain all the properties of the
+121
+original type but only some - those choosen in select.
+122
+This type is specific for objects that are created after Select  was used and only some properties from
+123
+the original object have been left.
+124
+Command format-table allows you also to group data. Sort used previously did order by Status
+125
+but the objects have been displayed in one continuous group.
+126
+You will need to find by yourself
+127
+the first is that is running and the last of that is stopped. Using the group functionality
+128
+could make such a task much easier.
+129
+So let's try the GroupBy parameter. Using the pipe the result from get-service is sent to format-table
+130
+and there grouped by statuses.
+131
+Unfortunately it's not enough. The input data was not sorted by status so the grouping functionality
+132
+created a lot of groups in the running status and additional in stopped status. To correct the situation
+133
+the data needs first to be sorted and next grouped.
+134
+So let's insert sort in-between the get service and formats table.
+135
+Now the result is much much better.
+136
+There is only one group for stopped services separated for running  services
+137
+and here also one separate group for starting services.
+138
+If your goal is just only count the amount of services per status,
+139
+use a dedicated command group-object.
+140
+In this case it's just enough to send the results of the first command directly to group-object.
+141
+Now it's easy to answer a question
+142
+how many services are started and how many are stopped.
+143
+What should be done
+144
+if you would like to save output to disk? In this case convertto-html could be used that will send
+145
+the result via pipe to out-file.
+146
+So a simple HTML document will be created presenting information generated by the get-service.
+147
+In the family of
+148
+commands starting with out,
+149
+there is also out-host command.
+150
+Out-Host  sends results to the software that has called the function.
+151
+To be honest when you type just only get-service then the output is sent to the host.
+152
+So this command is in invisible to you way  appended to each command that you enter manually. Command
+153
+was started in ISE console,
+154
+so the result is also pushed to ISE console. But if you decide not to display the result in host,
+155
+you might for example send them to graphical
+156
+GridView. Tthat will be done by appending out-gridview command.  After starting the command
+157
+dedicated browser will be started allowing you to search, filter, sort the result interactively.
+158
+Results could be sent to printer as well.
+159
+To have something printed
+160
+sent it to command
+161
+Out-Printer.
+
+--- Formatting output - LAB ---
+
+[No transcript available for this lecture]
+
+--- Formatting output - ANSWERS ---
+
+[No transcript available for this lecture]
+
+--- Variables in PowerShell - VIDEO ---
+
+0
+Variables. In this lesson: How to work with for variables / Creating and removing variables / Variables virtual
+1
+drive / Working with quotation mark and apostrophe. Let's take a look on how to work with variables in
+2
+PowerShel to have a veriable just think yourself a name and prefix it with a dollar sign.
+3
+The value of a variable can be assigned by adding equality sign and pointing
+4
+to some value.
+5
+In this case I have entered $CompNames equal Cantor 9=8. From now whenever in my script
+6
+a name $CompNames will be used
+7
+PowerShell will interpret
+8
+this with a string Cantor8.
+9
+You can test it on your own entering in the command line $CompNames. As a response a value of
+10
+the variable will be displayed.
+11
+How to use variables?
+12
+Let's consider a command displaying services containing in the name a substring SQL from a selected
+13
+computer.
+14
+The command used here is get-servies. Using parameter computer
+15
+This command will generate the results on the computer Cantor8. In next step all the returned values
+16
+will be sent to a Where-Object command that will filter out only a subset of them containing SQL in the
+17
+service name.
+18
+The expression here is a name like asterisk SQL asterisk.
+19
+This command is quite OK,
+20
+and do you returned results are correct,
+21
+however we would like to have a more multi-functional command.
+22
+For example you would like to have a script that can check services on different computers,
+23
+without any modification of this particular pipeline.
+24
+So we are replacing the string
+25
+Cantor8
+26
+with a variable $compName. The sign $ tells PowerSHell it should search for a variable named
+27
+compName and when found extract its value.
+28
+The real variable name is just compNames without the $ sign.
+29
+It's easy to display all the existing in the session variables. Just enter command get-childItem pointing
+30
+to a virtual drive named Variable: . Variable: is a kind of a virtual drive. On this drive
+31
+nstead of files,  variables can be found.
+32
+That is how you can test if a variable already exists.
+33
+You can remove the variable from memory removing it from this virtual disk.
+34
+Look this is our variable compNames.
+35
+There are also a lot of other variables, that are created automatically by PowerShell when starting a session.
+36
+When you terminate your session all the variables will be lost.
+37
+However when you start a session again the PowerShell system variables will be automatically recreated.
+38
+One of common task is to find a variable that matches a given mask.
+39
+Yes this can be done! PowerShell understands metacharacters, so entering Get-ChildIItem compnames asterisk
+40
+will display our variable as a matching for the mask compNames asterisk.
+41
+Additionally we have some dedicated cmdlets that  allow to perform some activities on variables.
+42
+To display all of them
+43
+we can use Get-Command with parameter -noun  variable.
+44
+This will display a list of the commands that in a noun part have the word variable.
+45
+One of them is Clear-Variable. When executed
+46
+it will clear the value of the variable.
+47
+However the variable will remain in memory.
+48
+You can still use it.
+49
+The only difference is that the variable is empty.
+50
+Let's do a quick test.
+51
+The variable compNames contains text Cantor8. After Clear-Variable has been started
+52
+the old value is lost. When you display the value of this variable well an empty result will be displayed.
+53
+But if you listed the variables drive it's still present there.
+54
+If you want to remove the variable from the script pernamently then use the command Remove-Variable.
+55
+Note that in the both commands when you pass as a parameter the name of the variable it's given
+56
+without the $ character.
+57
+That's logical.
+58
+You want to point to the name of the variable not to its value.
+59
+Remember $sign instructs PowerShell that the value should be extracted from the variable.
+60
+Let's come back to remove-variable command. The variable has been removed.
+61
+When you try to check the variable in the command line the empty result is displayed.
+62
+So generally no difference to clear-variable,
+63
+however when you look into the variable drive you will not find the variable there anymore. Logical -
+64
+it has been removed for a moment. By default when you call a non-existent variable
+65
+no error is generated. That is convenient but sometimes it makes it very hard to find a typo in your
+66
+script.
+67
+You can issue a command Set-PSDebug -strict
+68
+What will causes change in this behavior. After referencing to a non initiated previously variable an error
+69
+will be shown, making it easier to find your typos. To change the value of variable
+70
+use $ name of the variable equals new value.
+71
+That's the easiest way, Starting from now
+72
+the variable we will have a new value. Under some special requirements
+73
+for example when the name of the variable should be generated dynamically, on the fly, you can assign
+74
+value to a variable using the set-variable.
+75
+cmdlet.
+76
+And again you reference to the variable name without the $ sign.
+77
+Here we have again created a variable named CompName  and the value of Cantor 8.
+78
+I hope you agree that the syntax with $ and the equality is much more intuitive.
+79
+Anyway the variable has been created and you can start using it
+80
+entering a $ followed by the variable name.
+81
+That's easy. PowerShell allows to define variables using the command New-Variable. As a result a new
+82
+variable will be created but its value is empty.
+83
+To assign the variable a new value use cmdlet set-variable.
+84
+Remember that you are allowed to do a mix of all the present here syntaxes.
+85
+So for example variable can be created using new-variable, but the value can be next changed
+86
+using the equality sign.
+87
+Note that in PowerShell variables don't need to be declared as a variable of specific type. PowerShel guess
+88
+on its own what is
+89
+a type you are working with.
+90
+You will see later that it is possible to force a variable to be of a specific type.
+91
+So let's check whether the variable indeed has changed its value.
+92
+Yes that works as expected.
+93
+Can you recall the comand we have started this lesson with? We will try to change this command so that
+94
+it will be using the variables.
+95
+The goal of the command was to display services from a remote host.
+96
+Those services should contain in the names substring SQL
+97
+This command
+98
+will tests services on the computer determined by the variable $CompNames. We know the current value
+99
+of it is cantor8.
+100
+Next from this list
+101
+oly those services will be displayed where the name matches expression from the $filterExpression
+102
+In this variable,
+103
+we have stored the text SQL. When the command starts PowerShell substitutes the variable CompNames with
+104
+with Cantor8, and the FilterExpression with text SQL. As a result exactly the same results
+105
+are returned as it was with the starting command were the values have been entered just as text
+106
+When the filter expression was built.,
+107
+we have used the quotation marks.
+108
+I know that's not correct but to put your attention I will call it double quotation mark in opposite
+109
+I could use an apostrophe or a single quotation mark.
+110
+What is the difference between them?
+111
+Single and double quotes very often can be used equivalently.
+112
+But here no.
+113
+Here in this example they have different meanings.
+114
+This time the command is not returning SQL services as it was previously.
+115
+Why? That's related to a specific way,
+116
+how single and double quotes work. When a double quote is used
+117
+and in the text there is a variable like here.
+118
+Then PowerShell tries tries to interpret the variable. So it replaces variable with its value.
+119
+That was the case in the first version of our command.
+120
+We have asterisk dollar filter expression asterisk.
+121
+So when the command was executed PowerShell replaced the $filterExpression with text SQL.
+122
+This resulted in text.
+123
+Asterisk SQL asterisk.
+124
+That's very good visible when you
+125
+when you enter in the command line text enclosed in double quotation that contains names of
+126
+variables preceded with $sign. Apostrophe works in a different way.
+127
+When the text is enclosed into single quotes then PowerShell is not replacing variables with values. When
+128
+in the text there is $ filter expression.
+129
+then such a text remains. Just a $filterExpression.
+130
+And again you can test it on your own entering in the command line
+131
+the same text as previously but this time enclosed in single quote. Remember double quotes makes PowerShell
+132
+intelligent enough to understand the variables in the text.
+133
+Single quotes disable this feature and text remains as it was.
+134
+The both solutions have their specific usage.
+135
+So now you surely know why the second command displaying services did not return correct results.
+136
+When a single quote was used
+137
+the expression tried to find services that in the name contain string dollar filterExpressio
+138
+and there aren't any such services. In opposite when the text was in double quotation then the text
+139
+$filterExpression was replaced by as SQL  and such services were found on this computer.
+
+--- Variables in PowerShell - LAB ---
+
+[No transcript available for this lecture]
+
+--- Variables in PowerShell - ANSWERS ---
+
+[No transcript available for this lecture]
+
+--- Tabular variables (lists) - VIDEO ---
+
+0
+List  variables. In this lesson: creating list variables /  readingl lists  from a file  / enumerating list's
+1
+elements /  properties of lists.
+2
+It's time to take a closer look to list variables or table variables. From time to time
+3
+you need to do work with an object that contains a couple of records or elements.
+4
+The idea could be as follows.
+5
+You can try to assign to a variable a string containing some values separated by commas.
+6
+Cantor8, Newton8 and Pascal7.
+7
+and those computer names are enclosed into a double quote.
+8
+When you try to reference to this veriable,
+9
+then you will receive only the text with values separated with commas.
+10
+Sorry that's not a list.
+11
+That's just a text contains some words separated with commas and nothing more.
+12
+Much better would be if the text would be separated with commas.
+13
+That would be areal list of texts.
+14
+The same result should be achieved when the computer names would be put into a file line by line.
+15
+This file could be imported using get-content command. That will produce the list as well.
+16
+Computer names are now shown in three separate lines.
+17
+Let's follow this idea.
+18
+We can try to save the file content into a variable. It's enough to assign the result of the Get-Content
+19
+cmdlet to a variable. On the screen
+20
+nothing more will be presented and this is correct, because the content of the file is in the variable
+21
+instead.
+22
+So now we can display the variable content.
+23
+We have three rows.
+24
+Great.
+25
+This is how a list looks like. Having a list, its content can be sent to another command using the pipeline.
+26
+Look at this.
+27
+The elements of the list are sent via pipeline to the second command which just displays the names read
+28
+for the moment from a file.
+29
+Just a reminder: $_ stands for current element
+30
+processed in the pipe.
+31
+In our case those currently processed elements are just computer names that are of type text.
+32
+So here those computer names have been put into the message that is displayed.
+33
+Let's try to analyze something more useful than just displaying messages. On the disk we had 3 text
+34
+files named Cantor8, Newton8 and Pascal7.
+35
+The content of the file is similar.
+36
+Our goal is to display content of those files.
+37
+Note that on the input we have only the partial name of the file.
+38
+For example Cantor8, Newton8, Pascal7. We are missing the .TXT
+39
+To display the file we need to have the full path.
+40
+So at the beginning we need to add the full path to the folder containing the files and at the end append the
+41
+extension .TXT
+42
+This task will be very easy.
+43
+The names of computers will be sent using pipe to foreach where the  get-content
+44
+command will be invoked.
+45
+The command will read the file content. The file path will be built dynamically because they are put
+46
+into double quote and PowerShell
+47
+will replace the $_ with the computer names.
+48
+This is the result of the command we have built.
+49
+We can see the content of 3 files but now turn your imagination on! The command could connect to those
+50
+computers and run on them some commands. It could copy some files, list services, initiate reboot, install
+51
+windows components or will test if the computers are available in the network and so on.
+52
+But let's come back to the topic of a list. Programmers can enumerate table elements one by one.
+53
+We can do as well! Indexing in PowerShell starts with zero and so when you reference to computer names
+54
+followed by zero in square brackets you will receive the first element of the list. Here.
+55
+the name of computer Cantor8.
+56
+If you would enter 1 in the square brackets you will get Newton8. If after the list name a dot  will
+57
+be added and next property count will be called the number 3 will be returned.
+58
+This is the number of elements contained in the table.
+59
+The same result will be displayed when calling the length property.  In case of a list count and length
+60
+return the same, but don't be surprised.
+61
+For other types of values the results can differ. The length property can be displayed for an element of
+62
+the list.
+63
+It will return the length of the first element of the list. As the first element of the list was text
+64
+"Cantor8", the returned value is 7.
+65
+This text has seven characters.
+66
+Now, let's display the value of the last element of the list.
+67
+We need to calculate the correct index.
+68
+We have compNames.Count elements but we start counting from zero so the index of the last element
+69
+is count minus 1.
+70
+The displayed value is the name of the last computer but in PowerShell this can be done much easier.
+71
+You can ask for the element with index -1.
+72
+The object indexed as -1  is the last object in the list.
+73
+You can call the object number -2.
+74
+If your calculations would be incorrect and your index will be too high then no error will be thrown.
+75
+You will go to just an empty element.
+76
+Let's analyze next practical example showing how to use lists. We want to have a list of all the services
+77
+running on the computer.
+78
+That should not be complicated.
+79
+In the variable services we save the least returned by the command get-service. Nothing was displayed on
+80
+the screen.
+81
+But what is the content of the services variable.
+82
+Services is a list containing 189 elements.
+83
+This number is equal to a number of installed services on this computer.To have a list of only running
+84
+in this moment services,
+85
+first create a command that returns those running services. Having it just assign it into a variable.
+86
+In our case we use the Where-Object command returning only those services that have status running.
+87
+So now in the list there are only at the moment running services. How many services run now?
+88
+Just display the Count property for this variable.
+89
+So how many services have starters different than running.
+90
+That's simple.
+91
+That's just a mathematical problem that can be solved with PowerShell as well.
+92
+$Services.Count  -  $RunningServices.Count.
+93
+And here you have the result 93.
+
+--- Tabular variables (lists) - LAB ---
+
+[No transcript available for this lecture]
+
+--- Tabular variables (lists) - ANSWERS ---
+
+[No transcript available for this lecture]
+
+--- Variable types - VIDEO ---
+
+0
+Variable types. In this lesson: How to declare a variable of a specific type /  when a type should be explicitly
+1
+declared / date and time methods / string methods /  determining type of a variable / type conversion.
+2
+As it already was stated we can use variables without specifying the exact type of a variable.
+3
+However if you want - the type can be specified explicit. It is enough in the front of the variable name
+4
+put the name of the type in square brackets. The type name is the same as in .Net for example:
+5
+int in square brackets $number equals hundred.
+6
+Starting from now you have a variable that is of type int and you can be sure that this variable will
+7
+always be numeric.
+8
+It will not be allowed to assign to this variable a date or a string.
+9
+Let's display the value of the variable. The value is of course hundert.
+10
+Let's try to assign to the variable a text. As you can see it's not allowed because the text could not
+11
+be converted to a number.
+12
+In the same way you can declare a variable of type datetime.
+13
+Here we use as string to initiate the variable with the value. In quotes
+14
+we have a text that can be interpreted as a date.
+15
+This allows the conversion to finish successfully.
+16
+Now when you try to display the value of the variable you will see an important change.
+17
+PowerShell does not display the value exactly the same as it was entered.
+18
+It is displayed as Thursday 19th September and so on. Well we can ask a question: Are the types necessary?
+19
+Isn't it easier to work just with automatic type detection as it was presented in the previous lessons?
+20
+The biggest advantage of having a variable of specific type is that each type has a specialized set of
+21
+methods and properties and all of them can be used with a variable.
+22
+For example for a date you can easily add some days check what a weekday is on that date extract only
+23
+a month part from the date.
+24
+Convert it to a text in different formats and so on.
+25
+For example check when it will be 20 days after 19th September?
+26
+That will be the 9th October and what a weekday it will be? That will be Wednesday. And what date was 14 days
+27
+before 19 September?
+28
+That was 6th September.
+29
+The same idea is valid for logical variables Bolean type can be declared in this way.
+30
+Remember - to initialize the variable when declaring it.
+31
+Here we assign $True. When the variable is displayed
+32
+we see on screen something like text true.
+33
+However when we try to assign the text False, an error will be thrown. In the error message you can find
+34
+valuable hints.
+35
+It is nice described what can be assigned to a boolean variable. Only predefined values $true
+36
+$false,
+37
+1 and zero can be used.
+38
+Of course assogned can be also expression that results in boolean value.
+39
+For example:  a result of compression can be used.
+40
+So let's change the value to zero.
+41
+What is the value now?
+42
+False. To see what methods  a type has.,
+43
+it's enough to pass the variable of that type to the Get-Member command. Get-member will display
+44
+all the methods and properties that the type has.
+45
+Let's look at string variables. String variables allow us to save in a variable any amount of characters
+46
+When displaying the variable exactly the same text will be displayed as it was first assigned. Type
+47
+string has quite different set of methods.
+48
+For example method contains allows to check whether the parameter of that method is a substring of the
+49
+string.
+50
+Here we test if the string Hello contains substring He.
+51
+Method  IndexOf tests on which position the substring passed as argument is in the text.
+52
+Don't be surprised that the letter L is the second
+53
+in the string Hello.
+54
+Remember that PowerShelll counts starting from zero. On the position of zero
+55
+there is H, on the first E
+56
+and on the second L.  OK. Let's assume in a text variable we have text separated by commas. From the
+57
+previous lesson you know that this is not a list of strings but we can create a list of strings
+58
+from these text. Text  variable has a method  named split.
+59
+This method can create a list from such a string. As a parameter pass the character that  should be treated
+60
+as a separator.
+61
+The result is a list that was created by splitting the values from the original text using the comma
+62
+as a separator. As administrator
+63
+you will surely sometimes need to read from a file information that is somehow structered in it.
+64
+Presented here commands
+65
+will allow you read the content from a file,  parse the text, remove the unwanted part of text, search
+66
+for interesting substrings and so on.
+67
+There are also a couple of methods that work only on variables and returns some specific information
+68
+about them.
+69
+You can test for example if the variable is of type string. Use for this operator is. Here
+70
+we have info that a value is a string.  In the next test
+71
+you see that the same variable is not an integer. Such functionality is extremely used when the parameters
+72
+should be tested.
+73
+It's time to look at conversions that mostly are done by PowerShell automatically in background generally
+74
+without your additional action.
+75
+We start with assigning 10 to a string variable.
+76
+Will we have error or not?
+77
+As you can see there isn't any error.
+78
+So let's check the value of the variable.
+79
+It's now 10.
+80
+If now we would run the test again asking if the $s variable is string.
+81
+the result will be true.
+82
+Now we test whether the variable is int.
+83
+It isn't. As you see in the background to PowerShell has converted the value to string and that's
+84
+just a text that looks like 10.
+85
+Is it possible to assign to a variable of type int.  a text that looks like a number?
+86
+Yes that's working.
+87
+What's the variable number now?
+88
+It's 10. Whenever you want to assign value to a variable and the types are not exactly the same  PowerShell
+89
+in background tries to do a conversion.
+90
+If it succeeds no error will be raised. Nice PowerShell!
+91
+So the last examples.
+92
+How much is 10 + 10 when one value is int and the other is a string.
+93
+The result is 20.
+94
+Great. But if the text variable will be something what cannot be converted so easy to a number then we
+95
+have an error.
+
+--- Variable types - LAB ---
+
+[No transcript available for this lecture]
+
+--- Variable types - ANSWERS ---
+
+[No transcript available for this lecture]
+
+--- IF statement - VIDEO ---
+
+0
+If statement. In this lesson: how conditionally execute only a part of your script / how to use if, else and
+1
+elseif statements / when if statement should be used.
+2
+In a moment we will look into the conditional statement . That will allow to execute only part of your script
+3
+Execution will depend on the value of a variable. Before we will start playing with the if statement,
+4
+I would like to tell a little bit words about the WMI and Get-WMIObject command.
+5
+That command will allow to get us some information regarding the disc. When you call a Get-WMIObject
+6
+command passing the class name WIN32_LogicalDisk,
+7
+then all instances of local logical disks will be returned. The amount of returned objects depends
+8
+on the computer where the command is started, because each computer has some specific number of disks
+9
+specific types of disks, sizes of disks and other parameters. Command Get-WMIObject allows you to pass
+10
+additional parameter called filter where you can put some information which drive should be reported
+11
+Here,
+12
+for example we ask only for information regarding the C: drive. As you see now only one object has
+13
+been returned and
+14
+this is object describing the C: drive.
+15
+Please note the notation. Syntax of WMI
+16
+queries requires from us to put the expression using the equality sign,
+17
+and next the constant value C: should be enclosed in single quote.
+18
+That's why the filter expression here in this example is enclosed in double quotes and internally in
+19
+those double quotes we are using expression device ID equals single quote C: single quote.
+20
+That's specific to the language called WQL.
+21
+A script containing the command as it is here is not the best practice. Ideally that should be a parameter
+22
+that's initiated with the C: value and next that parameter should be used internally by the other
+23
+commands
+24
+that should report about that drive.
+25
+And that's what we are doing in the next command.
+26
+Next command again uses the filter parameter but that time the filter expression is built from the constantant
+27
+part like device ID equals but the drive letter, that can change from time to time,
+28
+is now a variable. We are using
+29
+here the double quotes and you know already that when the text contains the name of a variable and we
+30
+use double quotes then during the execution the variable name is replaced with the variable value.
+31
+So generally we will have exactly the same statement as was started previously. As you see
+32
+the result is the same. In the object describing logical disk,
+33
+there is a lot of properties that we can use. To see all of them justsend the output of the command
+34
+to the Get=Member. You can find here
+35
+for example the size property telling about the size of the disk and the freespace telling how much
+36
+free space is still available on the disk.
+37
+If you would be interested in the space that is currently used on the disk you just need to take the
+38
+size property and extract from that value
+39
+the freespace property.
+40
+That way you will know the free main parameters of a disk: free space, used space and the total size.
+41
+So let's go to the last statement in the script.
+42
+Now from the object returned by Get-WMIObject
+43
+we are just selecting a couple of interesting for us properties. Here
+44
+that's size free space and used space. All the values are calculated in bytes.
+45
+Let's suppose that you need to develop a script that will have two parameters. One of them will be the
+46
+letter of the disk that should be reported but the other parameter will tell you what should be returned.
+47
+We will allow three values here.
+48
+If the variable ValueToReturn will be equal used that means that the information about used disk space
+49
+should be returned. If the value is equal freespace then we should report how much space on the disc
+50
+is still free.  When the value of the variable is total space than the expected result is just the total
+51
+size of the disk.
+52
+That's why we decide to use the if statement that depending on the value passed in the variable ValueToReturn
+53
+will execute the selected part of our script.
+54
+So if in the able we have text a freespace, then from the object returned by Get-WMIObject command
+55
+we will take only freespace property and return it to user. If that condition would be not true,
+56
+we still don't know what should be returned.
+57
+So we need to ask additional question and for that elseif will be responsible.
+58
+So here we are asking whether the ValueToReturn value is total space.
+59
+If yes then from the object we will return the property size.
+60
+And well, if the value to return was not equal freespace and was not equal total space we decide to
+61
+execute the last statement of the script.
+62
+Please note that the last part will be executed not only for the value to return equal "used". It will
+63
+be executed whenever in the variable
+64
+there will be text different than freespace and different than total space because here we have the
+65
+statement else.
+66
+So under any other condition execute this part of the script.
+67
+So now you see that the syntax of the if statement is generally just the if word and after that we are
+68
+evaluating an expression
+69
+where the true or false should be computed. In case when the expression evaluated to true,
+70
+then we try to execute the part that follows the if statement.
+71
+However if the calculated here value was not true then we will skip this block and we will go to the
+72
+next instruction. The next instruction can be elseif or else
+73
+and in case when no such instruction exists here, just the next part of your script.
+74
+The conditional expression enlosed  after the if or elseif  statement determines
+75
+which part of the script should be executed.
+76
+Your if, elseif and else statement can contain one if at very beginning,
+77
+more elseif statements depending on the condition that you need to to check, and at the end one else statement.
+78
+The last else statement will be executed when any previous condition wasn't true.
+79
+Only the if statement is obligatory.
+80
+The other are optional.
+81
+So let's now try to execute that script.
+82
+We ask for the used space,
+83
+and indeed the returned value is used space on the disk. If you would be interested in how much space
+84
+on the disc is still free then change the value of the ValueToReturn variable.
+85
+After changing that value just run the script again and the result returned should tell a little
+86
+bit about the free space on the disk.
+87
+If you would like to see the entire disk size change the value of the parameter to total size and run
+88
+the screen again
+89
+Now the value returned should be the total size of the disk.
+90
+If is a great statement that could be used whenever you need to execute a part of your script depending
+91
+on the values passed as parameters.
+92
+Our example is really quite simple.
+93
+And to be honest those variables that we set at the very beginning of our script are not pure parameters.
+94
+Those are just local variables, but the logic and idea of the if statement remains the same.
+95
+Use if whenever your script it should behave differently depending on the conditions that are met
+96
+on the system. Those conditions may be determined by the state of machine where the script is working,
+97
+but also by these settings that are somehow passed to your script. It's always better to have one script
+98
+with parameters that knows how to behave in different conditions,
+99
+then a couple of scripts that can service only one simple situation.
+100
+This will make maintenance of your script much easier because you will need to take care about once
+101
+script.
+102
+That can work in multiple environments on multiple servers and in the multiple conditions.
+103
+If you would to decide to have a couple of dedicated scripts per environment per server per condition
+104
+then you will finish with a lot of scripts that will need to be maintained somehow probably by you wasting
+105
+your valuable time.
+106
+You can for example test presence of a file and execute different parts of code depending of its presence
+107
+or absence, test how much memory you have on the system and behave differently when you have a lot of
+108
+free memory and differently
+109
+if low memory condition is met, test whether the user running the script is a local administrator or
+110
+not and process the situation depending on that. Those are only a couple of situations where if can be
+111
+very useful in the administration of a system.
+
+--- IF statement - LAB ---
+
+[No transcript available for this lecture]
+
+--- IF statement - ANSWERS ---
+
+[No transcript available for this lecture]
+
+--- SWITCH statement - VIDEO ---
+
+0
+Instruction switch. In this lesson: how switch  works / comparing switch with multiple IF statements
+1
+On  the lesson dedicated to if statement, we have shown that using a parameter  we can decide whether the
+2
+script will return information regarding total disk space, free space or used space.
+3
+In this example we will generally program the same functionality but at that time we would like to achieve
+4
+goal using switch statement. Switch statement
+5
+will take a look at the control parameter that's following switch command and depending on its value
+6
+will execute different part of the script. The instructions following values don't need to be so easy
+7
+as it is here. Here in the brackets you can put so many and so complicated statements as you only wish. Generally
+8
+everything what is allowed in PowerShell can be put here into the brackets.
+9
+Depending on the value found in the ValueToReturn variable
+10
+switch  will decide to execute only one part of the script. For example if the passed value is a freespace
+11
+then switch decides to execute only  the instructions found in the first brackets. Here
+12
+we will ask for WMI
+13
+object logical disk, we will filterr out only information regarding the disk letter
+14
+that's determined by the $letter variable
+15
+and then we will select only freespace value from the object returned.
+16
+However if the value in the control variable will be total space then we will again ask for WMI objects
+17
+related to de-selected disk drive
+18
+but that time we will extract from the object only the value of size, In case when the control variable is
+19
+not equal to freespace nor is equal to total space
+20
+then the default section will be executed.
+21
+And in our case the should cause displaying only the used disk space size.
+22
+Let's now test how the script will  work for the ValueToReturn equal total space. After starting
+23
+this script we received value size,
+24
+so the second line has been executed.
+25
+So let's now change the parameter to freespace.
+26
+This will cause that the switch instruction will execute the first line and as a result freespace will
+27
+be returned.
+28
+If you would change the value to used that the information about used disk space will be returned.
+29
+Why?
+30
+Because the control parameter is not equal freespace and is not equal TotalSpace,
+31
+so the default part has been executed.
+32
+The first line returning information about used space.
+33
+So let's now consider when switch instruction should be used.
+34
+First of all switch allows you to execute only some part of your script.
+35
+So it's very similar to how if works.
+36
+However when you have a lot of conditions that should be detected by your script and you know exactly
+37
+the values that can be met during the script execution then probably using one switch operation is
+38
+much easier than using a lot of if statements. Even in future if  the script should be corrected maybe by
+39
+someone else then finding the logic of the script when switched was used will be much easier then if
+40
+somebody would need to understand what multiple if statements are doing in your script.
+41
+Very important is that you need to know the allowed values that can be used by your script.
+42
+For example you can start a service if it's stopped or you can stop service if it's running.
+43
+You can also modify the level of compression or file depending on the size of the file.
+44
+Switch is used often
+45
+there were a lot of nested if statements could be used instead. Using Switch instead of nested if
+46
+statements
+47
+is one of the programmer's best practice, because switch makes your code much more easier to understand.
+
+--- SWITCH statement - LAB ---
+
+[No transcript available for this lecture]
+
+--- SWITCH statement - ANSWERS ---
+
+[No transcript available for this lecture]
+
+--- WHILE loop - VIDEO ---
+
+0
+Instruction while In this lesson: how why loop works  / why the blocl following the while command  may never
+1
+be executed.
+2
+How to connect while with if statement.
+3
+What's the break command.
+4
+Typical usage of while
+5
+It's time to take a closer look to the while statement.
+6
+The general idea about the while loop is to execute a block of commands.
+7
+so long as long the condition in the While statement is true.
+8
+There is one risk associated with that condition.
+9
+The logic of your script may be built in such a way that initially when the first time the condition
+10
+will be evaluated it can evaluate to false.
+11
+In such case the block following the condition will never be executed.
+12
+To be honest this is one of the most frequent error that programmers do when working with the While
+13
+loop. But sometimes these may be used as a trick and such a logic in their script may be planned.
+14
+In this example we have declared the variable $i and this variable will be the most important in
+15
+the entire script.
+16
+Everything will depend on that variable. At the beginning
+17
+the variable receives values zero.
+18
+Next in the while statement each time when we execute the loop we will test whether $i is LT
+19
+so less than 10. If the condition is true
+20
+we are going to execute the block of commands following the while statement.
+21
+So in our case the $i will be incremented by 1 and next it will be displayed.
+22
+So for the first time one will be displayed for the second time two will be displayed and so on.
+23
+The last printed value will be 10. After displaying 10
+24
+the condition will be evaluated once again and we will check whether $i is less than 10.
+25
+At this moment $i will be equal 10,
+26
+so the condition will not be true anymore.
+27
+This will cause that the loop will be finished. will not be executed any more. And here a more complicated
+28
+example.
+29
+Here again we will start with $i equal zero and next we will try to execute commands enclosed in the
+30
+block,
+31
+so long as the condition is true.
+32
+As you see condition is exactly the same as it was previously,
+33
+so $i less than 10. Here the block statement is quite different than in the previous example.
+34
+We start again with incrementing the $I
+35
+by one.
+36
+but next we test whether it's possible to divide modulo 2
+37
+the current value of the $i. Whem $i  divided modulo 2 is EQ
+38
+so equal 0,
+39
+than we will write on the screen message that our $i is even. If the condition is not true then the else
+40
+part of the statement will be executed.
+41
+And in this case on the screen should be displayed message about $i being odd. That's the result: numbers
+42
+from 1 to 10 have been displayed with message stating if the number is odd or even,
+43
+and now the last example. Here you will become familiar with the break statement.
+44
+This script is not the best example of programming best practices,
+45
+however the idea is to present how break works.
+46
+At first sight you may think the do loop statement will be executed a hundred times because the condition
+47
+after the wise statement says $i less than a hundred.
+48
+Additionally each time when we execute the block statement $i will be incremented by 1.
+49
+This may suggest that the loop statement will be indeed executed hundred times. In the first if statement
+50
+we are testing again
+51
+whether  the number can be divided modulo two.
+52
+If yes then we print the message that the number is even if not then we print message that number is
+53
+odd.
+54
+So this part of the script works exactly the same as the previous example.
+55
+But now there is something new the condition in the last if statement tests whether the $i is
+56
+EQ so equal 10.
+57
+If yes then a message will be displayed telling that we have reached the 10 so we will stop executing
+58
+the loop. After the write-host message,
+59
+there is a break statement.
+60
+Break forces to stop execution of the loop, so we will not  go to the while condition and we will not
+61
+test whether the condition is true or not.
+62
+because break forces the loop to stop.
+63
+Normally we would go to next instruction in the script as there aren't any more instructions in our
+64
+script after the while statement that will finish our script.
+65
+So when now looking into the results produced by the script,
+66
+we see that immediately after the message was displayed that 10 is an even number,
+67
+we have a message telling that we have reached 10 so we are breaking the loop.
+68
+Indeed any anymore operation from the loop statement was executed.
+69
+We just jump out of the while statement.
+70
+While s a very useful statement in your script.
+71
+It will execute some instructions so long as the condition is true.
+72
+For example you can test how much free memory you have,
+73
+so long as some specific program is running. You can stop execution of your script so long as another
+74
+server will start answering to ping command.
+75
+We can also try to start a service so long until the service will indeed be running.
+76
+or until we will exceed the number of allowed tries for starting the service.
+
+--- WHILE loop - LAB ---
+
+[No transcript available for this lecture]
+
+--- WHILE loop - ANSWERS ---
+
+[No transcript available for this lecture]
+
+--- FOR loop -  VIDEO ---
+
+0
+Instruction for - in this lesson: how for loop works / what's interation and control variable /
+1
+what's the difference between for and foreach-object / comparison of for loop
+2
+with foreach cmdlet.
+3
+Let's look into details of the for instruction. For should execute some commands put into curly brackets
+4
+so long as some condition is true. For is the best choice
+5
+if you know the number of times when they command should be executed and
+6
+each of those times when those commands are executed is called iteration.
+7
+For example you could copy a file 10 times,  60 times
+8
+test connection with a server, send five emails and so on.
+9
+Each of those repetitions is just the iteration. Before the iteration is done
+10
+we need to test a conditio. This condition depends on a variable that we call very often
+11
+a control variable.
+12
+The control variable has a set value at the very beginning of the loop and next with every iteration
+13
+the control variable is increased or decreased.
+14
+Usually we increase or decrease the variable just by 1, but that's not a rule. After incrementation
+15
+it's again tested,
+16
+if the control condition is still true and the loop ends then when the condition is no more true.
+17
+So if you know the for command from the other languages then four in PowerShell is not very different
+18
+What is surely different is the way we do the comparison.
+19
+In this case we should execute the for loop starting with the control variable named $i with value
+20
+of zero. With each iteration the value of that control variable will be increased by 1.
+21
+This will be done so long as the $i is less than 10. The abbrevation LT that you see here is just the abbrevation
+22
+from the "less than".
+23
+When the value of $i will be equal or greater than 10 the loop statement will finish.
+24
+So let's start the command. As you can see numbers starting from zero and ending with nine have
+25
+been displayed.
+26
+When the control value was incremented to 10 the condition $i less than 10 was no more true.
+27
+So the loop has finished.  I would say that's a very simple example of the for commamd but for is very
+28
+often used to do some activities for each element of the list. In such a case
+29
+the control  variable will point to the currently processed element of the list.
+30
+If the control variable should be bigger than the amount of elements of the list then the loop statement
+31
+should finish.
+32
+In this case you should generally not use the pure for syntax - that's better to use this foreach.
+33
+In this case,
+34
+we have first defined the list containing five strings,
+35
+next we iterate over that list and the $x variable will point to the element of the list.
+36
+For each such element we display message "the current element is there $x".
+37
+The syntax is much more simple because you don't need to think about the control variable,
+38
+you don't need to increment it,
+39
+you don't need to initiate it with the zero value for example at the beginning and you don't need to
+40
+test the value of control variable. We just run  the comands for each element from the list and the
+41
+$x variable will be equal to one of the elements of the list. With every iteration
+42
+it points to the next one element. With  such a syntax you will never forget to increment the control
+43
+variable and you will never do
+44
+snd the errors in the logical condition that defines the loop. Here we don't have to control variable
+45
+so we cannot make mistakes about them.
+46
+You can imagine following examples of using the foreach loop:
+47
+You should copy a file to every server from the list, you need to start every service from a list of
+48
+services, you need to report freespace on hard drive
+49
+having a list of hard drives that should be reported,  you need to make backup of every database on SQL
+50
+Server.
+51
+And many more.
+52
+If that's only possible try to use foreach instead of the for. Generally it could be said that the
+53
+foreach loop is similar to do foreach cmdlet.
+54
+However the syntax is slightly different. In this case the list of elements that should be iterated is
+55
+passed to foreach command by pipeline.
+56
+Next foreach cmdled executes some command for the elements that are given by the pipeline.
+57
+As you see the results are the same.
+58
+However the first command was a pure loop command that needs to iterate over some set of elements.
+59
+And the second one is the cmdlet foreach-object.  Cmdlet  does not require to declare the variable that will
+60
+be iterated in the loop.
+61
+This information is intead available in the variable $_ or $PSItem.
+62
+Generally the both instructions are very similar.
+
+--- FOR loop - LAB ---
+
+[No transcript available for this lecture]
+
+--- FOR loop - ANSWERS ---
+
+[No transcript available for this lecture]
+
+--- Congratulations! ---
+
+[No transcript available for this lecture]

@@ -1,0 +1,32 @@
+
+
+=== Welcome And Introduction ===
+
+
+--- Introduction ---
+
+Hello and welcome to this course.
+Continuous integration and continuous delivery using Jenkins Pipelines.
+Recently, DevOps practices like continuous integration, continuous delivery and continuous deployment
+have become some of the most popular application development practices.
+As developers integrate bug fixes, new feature development or innovative functionality in their source
+code repositories, there is need for automating these processes.
+Jenkins is a popular continuous integration tool that enables you to verify the integration process
+with an automated build and automated test execution.
+As a result of this automation, Jenkins provides valuable and quick feedback about the state and quality
+of your source code.
+Jenkins is an open source automation tool written in Java with plugins built for continuous integration
+purposes.
+Jenkins can be configured to trigger a build for every change made in the source code repository like
+Git Subversion Vsts.
+ET cetera.
+Jenkins allows the teams to focus on their work by automating the build artifact management and deployment
+processes.
+Jenkins Core functionality and flexibility allow it to fit in a variety of environments and can help
+streamline the development process for all stakeholders involved.
+In this course, you will learn about Jenkins and its various components and services.
+You will get an in-depth look at how you can use Jenkins to manage your build and automation jobs.
+Knowledge and experience on Jenkins are highly sought after by startups and large enterprises alike.
+The demand for these skills has been steadily increasing over the last few years.
+We hope you enjoy this course and the information we are going to share with you.
+So let's get started.

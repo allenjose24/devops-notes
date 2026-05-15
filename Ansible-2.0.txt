@@ -1,0 +1,3147 @@
+
+
+=== Introduction ===
+
+
+--- Introduction ---
+
+(typewriter typing)
+Instructor: Hello and welcome
+to this advanced course on Ansible.
+My name is Mumshad Mannambeth
+and I will be your instructor for this course.
+I'm a solutions architect and I specialize
+in designing solutions around cloud and automation.
+This is the second course in the series on Ansible
+and in this course, we will be focusing on advanced concepts
+in Ansible and some real life use cases.
+This is an advanced course
+so there are some prerequisites necessary.
+You must have a basic understanding of YAML language
+which is Ansible's coding language.
+You must have basic understanding of Ansible,
+what its use cases are, what inventory files are,
+and how a basic Ansible playbook is written.
+All of these are covered in the first course,
+Ansible for the absolute beginner, where you'll learn
+all of these topics along with coding exercises on each
+of these topics that will get you comfortable with Ansible.
+So how exactly does this course work?
+This course contains lectures on various topics
+followed by some coding exercises
+where you will practice writing Ansible playbooks.
+You will be developing Ansible playbooks
+for different use cases, and especially focus on
+a lot of advanced playbooks in this course.
+The coding exercises will validate your playbooks
+and ensure you have written them correctly.
+We will also spend some time going
+through demos and understanding how to set up an environment
+on your own to get started easily.
+And there are some extra demos available
+in case you are interested in exploring
+some additional tools or productivity tools around Ansible.
+So what are we going to cover in this course?
+Whatever you see on the left are the topics we covered
+in the beginner's course.
+So we expect you to know how to set up Ansible,
+what YAML files are and how to create them.
+And we expect you to know what Ansible inventory files,
+playbooks, variables, conditionals and loops are.
+In this course, we will be covering more playbooks
+to develop some real life use cases.
+We will understand roles in more detail and how to develop
+and reuse roles ourselves and use them in our playbooks.
+We will look at asynchronous actions, error handling,
+Jinja2 templating, lookups, vault,
+dynamic inventory custom modules,
+and we'll also understand what plugins are
+and how to develop custom plugins yourselves.
+And finally,
+we will always practice, practice, and practice.
+So sit tight and enjoy the ride.
+
+--- Recap ---
+
+-: Hello and welcome to this lecture.
+My name is (indistinct)
+and we are learning Ansible Advanced Topics.
+In this lecture, we will be recapping what we covered
+in the Ansible for the absolute beginner's course.
+If you're here right after that course
+you could skip this lecture and go right ahead.
+Or else, if you wish to refresh your memory,
+feel free to stay.
+So we learned that Ansible helps you
+increase your productivity
+and efficiency by automating a lot of repetitive tasks
+in your environment.
+Whether it be sizing and creating new hosts
+or virtual machines,
+applying configurations on them,
+patching hundreds of servers,
+migrations, deploying applications,
+or even performing security and compliance of audits.
+Ansible is a powerful IT automation tool that you
+can learn quickly.
+It's simple enough for everyone in IT,
+yet powerful enough to automate
+even the most complex deployments.
+We then looked through some use cases such as setting
+up a complex infrastructure that spans across public
+and private cloud and hundreds of VMs using Ansible.
+With Ansible, you could proition VMs on public clouds,
+like Amazon, and proition VMs on private cloud,
+in a private cloud setup like VMware based infrastructure,
+and move on to configuring applications on those
+and setting up communications between them, et cetera.
+We also discussed how to get started with Ansible.
+The different options of installing Ansible
+on a Linux system.
+Remember, Ansible control machine can only be Linux
+as of now.
+However, Windows machines can be a target
+for automation with Ansible.
+So Ansible do support Windows as target servers.
+We also looked at inventory files and how they're defined.
+We looked at the inventory file parameters such as
+Ansible Connection, Ansible user, Ansible password,
+et cetera. And why and where they're used.
+We went through a number of Ansible modules
+available out of the box
+and how to read documentation and how to use them.
+For example, we looked at some
+of the system modules available,
+such as user group, post name, et cetera.
+We looked at some of the command modules,
+such as command shell script,
+and we also looked at some of the file-related modules,
+and some of the database-related modules,
+and cloud related modules such as Amazon, Docker,
+Google, Open Stack, VMware, et cetera.
+And then we also looked at some of the Windows modules,
+such as wind copy, wind command, et cetera.
+These are just very few of the actual modules available.
+There are lots and lots more of built-in,
+out of the box modules available that ships with Ansible.
+We also looked at variables
+and how to use them in playbooks.
+In this course, we will look more
+at separating variables into separate files
+and we'll practice some Ginga to templating,
+et cetera in more depth.
+We also learned conditionals, such as the when directive,
+and how we can execute tasks based on a specific condition.
+And finally, we practiced loops.
+So we used loop to automate the installation
+of a list of packages, using a single task
+and the width items directive.
+So we've just recapped whatever we learned
+in the previous course, and we will now move on
+to learning new and advanced concepts in Ansible.
+
+
+=== Web Application ===
+
+
+--- A Quick Note! ---
+
+[No transcript available for this lecture]
+
+
+=== File Separation ===
+
+
+--- Lab Troubleshooting Guide ---
+
+[No transcript available for this lecture]
+
+
+=== Roles ===
+
+
+--- Setup Environment ---
+
+(typewriter keys clanking)
+-: Hello and welcome to this lecture.
+My name is Mumshad Mannambeth,
+and we are learning advanced Ansible topics.
+In this lecture, we will be looking
+at how to set up an environment for developing with Ansible.
+In the previous course, we've seen
+how to install Ansible on a system,
+but we could really use one or two additional systems
+to get a better understanding
+of how it works in the real world.
+It is not really necessary to set up an environment
+if you're not in a position to do so.
+You can still practice with the coding exercises
+that accompanies this course.
+But if you would like to follow along
+in your own environment, you are free to do so.
+There are multiple ways to set up such an environment.
+If you can spin up few VMs in your lab, that works.
+Or if you want to do it all on your laptop,
+use some kind of virtualization software
+like VirtualBox or VMware Workstation to spin up some VMs.
+Or use something like Docker, which is my preferred method.
+Or if you have worked with Vagrant, that works too.
+At the end of the day, what we really need
+is a control system where we will be able to install Ansible
+and few target systems
+that will be targets of Ansible Playbooks.
+We'll be doing things like installing
+and configuring databases, web servers, et cetera.
+on the target systems.
+I will now demo two of these approaches.
+One is using Oracle Virtual Box,
+and the other is basically an extra,
+which is using Docker, which is my favorite method.
+I will be using the Oracle Virtual Box based setup
+throughout this course for all the demos,
+as I believe most students
+will be able to relate to this straightforward method,
+and it's really easy to set up,
+and you really don't have to know other tools,
+like Docker or Vagrant.
+
+
+=== Asynchronous Actions ===
+
+
+--- Demo - Setup Environment ---
+
+-: Hello and welcome to this demo.
+My name is Mumshad Mannambeth
+I'm going to demonstrate how to set up
+an Ansible environment so that we can
+practice developing Ansible playbooks.
+So our plan is to set up a few VMs,
+one of which will act as an Ansible controller,
+and two others will act as the target servers
+that Ansible controller will target
+to make configuration changes,
+install applications, et cetera.
+So let's get right to it.
+(clears throat)
+In this demo, I'm going to demonstrate how to set up
+an environment using Oracle VirtualBox.
+So there are multiple ways of, for us to do this.
+We can either do it using VMware Workstation
+or we can just pin up VMs,
+if you have access to VMs in your lab environment.
+Or another way to do it is using Oracle VirtualBox.
+So Oracle VirtualBox, for those of you who are new,
+if you go to VirtualBox.org
+you'll get to this website.
+So Oracle VirtualBox is a free virtualization software
+that is available for use at home as well as for enterprise.
+So it's supports Windows and Linux environment
+and it's basically free,
+so it's really easy to work with.
+So if you download the Oracle latest version
+of the Oracle VirtualBox
+that you can see right here and install it.
+Once you install and power it up
+you should get to this interface.
+So now you have Oracle VirtualBox installed
+and I've actually provisioned a few VMs.
+I have a controller VM and two target servers.
+So what I did here is first I just went online
+and searched for an image, a VirtualBox image
+and I downloaded a WM 64-bit operating system and image.
+And all I did was just create a new virtual machine
+using that image.
+(clears throat)
+So if you search online
+you'll find a lot of images freely available.
+Now what I've used is this right here.
+So if you go to osboxes.org/VM,
+you'll find this images available here.
+So I've used the VM 8.6 Jesse image
+and it has about 32 and 64 bits.
+So I've chosen the 64-bit version
+and I've downloaded this image to my local system.
+You can see the username and password,
+the information right here.
+So keep a note of that.
+Once you download this particular image,
+go to your Oracle VM VirtualBox Manager,
+click on new to create a new system.
+The first thing I did
+is to create the Ansible controller system.
+So I did a Ansible controller.
+Just gonna to mark it as number two.
+The type is Linux and version is going to be Debian.
+So I'm gonna select Debian 64-bit
+because that's the image I downloaded.
+The memory size could be one GB, so that's fine.
+And right here, this is where we select
+the file that we downloaded.
+So we're gonna select, 'Use an existing virtual disk',
+well, virtual hard disk file, then click on 'browse'
+and then point to the file that you just downloaded.
+So I have it under downloads, Debian_8.6-VD-64 bit
+and under the 64-bit folder.
+And I have this .VDI file.
+So click on that and click on 'Create'.
+And that should create this particular VM right here.
+The VM that you deploy, make sure,
+it should have a network or internet access.
+Because once you power it on
+you're going to install Ansible on it.
+And that requires the host
+to communicate to the internet
+and pull down the Ansible packages required.
+So you're going to have to make sure
+that you set the right networking.
+So I'm gonna go into settings and network
+and I'm going to select a bridge adapter
+and I'm going to bridge to my wireless router.
+That way it gets to access the external network.
+Click 'OK', and then I'm just going to power it on.
+So it's just powering up now.
+(clicking mouse repeatedly)
+Going to use the network password,
+which is always boxes.org.
+Okay, so I'm in.
+Now I'm going to open a terminal,
+just to check the IP address.
+So I'm gonna do terminal and ifconfig.
+Okay, need to switch to root.
+(typing)
+Wrong password.
+(typing)
+I'm going to do ifconfig to get the IP address.
+So that's the IP address.
+So I can use that to SSH.
+Okay, so I now have a basic Linux system.
+What I want to do is
+before I install Ansible on it
+the next step is to install Ansible on it.
+But before that, I could actually clone this system
+to get two other target servers.
+Or, since I'm not doing any of much customization
+I could just create another two target servers
+just like how we created this controller.
+So I'm just gonna go ahead.
+(typing)
+I'll now follow instructions
+on the Ansible documentation site to get Ansible installed.
+So if you go to docs.ansible.com and the installation page
+under Debian get to, you get to see this information
+about how to install Ansible.
+So the first step is to add the following line
+to etc apt sources.list.
+So I'm going to copy that.
+(typing)
+Okay, so instead of using
+(typing)
+this terminal,
+I'm going to SSH in using PuTTY
+because that's a lot easier.
+So it's 192 168 1.14,
+and this is my control two.
+(typing)
+So I'm going to create a new SSH connection.
+(mouse clicks)
+(typing)
+And it's going to be SSH.
+I'm now going to follow the instructions here.
+So etc apt sources.list,
+(typing)
+(computer chimes)
+and I'm going to add that new line in there
+and then
+(typing)
+add the key.
+(typing)
+Then let's do apt-get update.
+So the packages list are updated
+and then we install Ansible.
+(typing)
+Okay, so I have now installed Ansible,
+if I type in Ansible it should give me the help page.
+And so we are all set.
+Okay, so we've actually deployed a system,
+installed Ansible on it.
+So we are good.
+We follow the same procedure to install two more servers,
+which will be our target servers,
+in this case target server one and target server two.
+And then we're going to target those servers
+for all our operations or Ansible playbooks in the future.
+Now I'd be using these servers for different purposes.
+For example, in a scenario where I want to deploy
+the same application across multiple different servers
+I'd use those servers for that purpose.
+Or, if I wanted to demonstrate
+deploying a distributed application,
+which has a web part on one server,
+database on another servers,
+then I would use these servers for that purpose too.
+For example, I'm going to use server one
+for the web and then server two for the database.
+So this kind of setup will help us work
+with different scenarios like that.
+If you're running multiple different playbooks
+against these target servers,
+you might also want to be able to reset these servers
+to an initial state before you run your second,
+or before you run your second playbook.
+So what I have planned to do
+is to use snapshots for that purpose.
+So you can take a snapshot
+of the servers whenever you want
+by going into the snapshots tab right here,
+in the top right corner.
+So if you click on snapshots
+you'll be able to see the state, the current state
+of that server and you'll be able to take a snapshot
+of the server at any point in time.
+What this helps you to do is initially,
+right after you deploy the server
+and you're ready to run a playbook against it,
+take a snapshot,
+and I've called it as the system ready snapshot.
+That's the initial state.
+Now I could make any changes to that server
+and when I'm done with all my testing,
+to revert it back I could simply right click that,
+the system ready state and say restore snapshot.
+Obviously you'd have to power off the server to do that.
+So that will help me bring back the servers
+to its original state every time
+I run a playbook against it and change its configuration.
+Okay, so as I said before,
+I have already deployed two target servers
+called Target Server One and Target Server Two,
+just to check the connectivity
+between the Ansible controller and the target servers.
+I'm going to run a quick ad hoc command.
+I'm going to run a quick Ansible ad hoc command.
+So first I'm going to find out the IP address for these.
+So I have, so I've already added these target servers
+to my SSH client.
+So I have my target one server as 192 168 1.10 IP address.
+And I have the target two server as 192 168 1.13.
+So what I'm going to do is,
+in the new controller that I just created
+I'm going to create a new inventory file.
+So I'm just going to say inventory.txt.
+I'm gonna add my target server, target one
+and it's going to have Ansible_host= 192.168.1.10
+(typing)
+and it's going to have a password called sshpass.
+And that is going to be password.
+(typing)
+And similarly, I have target two and the IP address
+is going to be 192 168.1.13
+(typing)
+and the password is going to be Passw0rd
+with a capital P and a zero in it.
+And this is the password that I reset to those servers.
+After I deploy the servers, I actually reset the password.
+So this is the new password.
+Okay, so I now have my inventory file.
+Now I could just do Ansible ad hoc command.
+So that's going to be Ansible
+and then my target server name.
+So it is target one.
+I'll try with one server first and then the module.
+So I just want to do a ping.
+So I give a -M for the module
+and I would say Ping is the module that I want to run.
+All that it does is it just tries
+to establish a connectivity to the target server.
+And then I also wanna specify my inventory file.
+So I'd say -I and then the name of the inventory file.
+When I run that it comes back
+with this error message saying, 'using an SSH password
+instead of a key is not possible
+because host key checking is enabled
+and sshpass does not support this'.
+So we basically, so this is a security feature
+that comes out of the box with Ansible.
+You either need to modify your Ansible configuration file
+to accept, to disable host key checking
+or you need to manually add the host key
+into your list of known hosts.
+So in this case I'm just going to modify
+the Ansible configuration file.
+So that is located at etc ansible ansible.cfg
+and I'm just gonna search for key.
+And right here you can see
+host key checking is false as the command reads,
+uncommand this to disable SSH key host checking.
+I will basically, by default host key checking
+is set to true.
+So I'm just going to uncommand it
+so that it sets it to false
+and that way it doesn't check for the host key.
+I wasn't trying to establish a connectivity to that host.
+So I'll save that and go back.
+I run that Ansible command once again
+and as you can see, it's a success.
+So we do a ping and then the target server replies
+with a pong and that basically means
+that it's established a connectivity to the target server.
+I will now test the second target server,
+which is target two.
+And as you can see, that's successful as well.
+If you want to try both servers at the same time,
+you could simply remove two and replace it with a star.
+So target star, this is basically a pattern,
+wildcard pattern used by Ansible.
+And we've looked at this a little bit
+in the previous course.
+So that's, this is one way,
+this way it tries to establish a connectivity
+to both the servers.
+And you could also do the same
+by creating a group in the inventory file
+and putting both the hosts under a group.
+Well, so we've created, deployed three servers.
+We've installed Ansible on one of the controlled servers
+and we have established connectivity
+between our controller server
+and the two target servers successfully using a password.
+So we are all set with our environment
+and we can now go ahead
+and use our playbooks against these servers.
+So thank you so much
+and let's go ahead with the remainder of the course.
+
+
+=== Strategy ===
+
+
+--- Extras - Demo - Setup Environment with Docker ---
+
+-: Hello and welcome to this demo.
+My name is Mumshad Mannambeth
+and we are learning advanced Ansible concepts.
+In this demo, we're going to see how to use Docker
+to set up an Ansible environment
+to play around with and to practice Ansible playbooks.
+Our goal is to set up an environment
+so that Ansible can execute playbooks
+on multiple different target systems,
+and to see how those target systems are configured
+and applications and databases are installed
+and configured on those target systems.
+Docker makes it really easy for us.
+So this is basically an extra piece of demo.
+This is only for those who are interested
+in learning this method using Docker.
+So feel free to skip this lecture
+if you have not worked with Docker.
+So you require a basic understanding of Docker.
+This is how we're going to set up the environment.
+All we need is a single virtual machine.
+You don't need multiple virtual machines
+because with Docker, we're just going
+to power up multiple Docker containers
+and they will act as the target servers for Ansible.
+So we need one virtual machine
+with Ansible obviously, Ansible installed in it
+and then with Docker installed in it.
+So we need a system with Docker installed in it.
+And what we're going to do
+is we're going to power up
+multiple different Docker containers,
+which will have basically basic Ubuntu Docker images
+with probably SSH enabled.
+So we will power up multiple different Docker containers
+and these Docker containers
+will be associated to Docker's internal network.
+And so the systems will get an internal IP address
+in the range by default that is 172.17.0 range.
+So once we have this,
+we are going to target our Ansible playbooks
+to the systems at these IP addresses.
+Okay, so let's take a quick look at a demo.
+So I have this system.
+So I have this SSH client right here
+and I have a Docker host.
+So I have Docker already installed on it.
+If I type Docker, I will be able to see the help command.
+So that's good.
+And so if you do not have Docker installed,
+go to the Docker installation documentation website
+and look for the installation instructions
+for Community Edition for the system
+that you're trying to get Docker installed.
+So I have this right now.
+I'm just going to do Docker ps.
+I do not have any containers running at the moment.
+I also have Ansible running.
+So that's good.
+Okay, so first, what I need to do
+is I need power up some Docker containers.
+So if you go to Docker Hub,
+you will see there are thousands of Docker images.
+So feel free to use whichever you like.
+So I'm currently going to use a custom Docker container
+that I created
+that's in my repository at M. Mumshad.
+And it's Ubuntu and I've enabled SSH on it.
+So Ubuntu SSH enabled is what I called the image.
+And I'm just going to run it
+with -it and -d to run it in the background,
+to run it in the background.
+So this option basically runs this container as a daemon.
+Oops.
+So the options need to be
+after the run command.
+Okay, so that's started.
+I'm going to run, if I do a Docker ps now,
+I will be able to see that container running.
+So this is my first container.
+To see the IP address of that container,
+I could do Docker inspect
+and type in the container ID,
+the first two letters, which is 33.
+It's 33 that you see here.
+And I can see that the IP address for this is
+172.17.0.2.
+That's the IP address.
+So I'm going to power up a few more.
+So I'm going to run the same Docker run command
+a few more times, two more times.
+And then I do a Docker ps and I can see
+that there are three instances running right now.
+Okay, so I'm going to look at the IP for the other two.
+So Docker inspect on four.
+This is 17.0.3.
+And
+(keyboard typing)
+35.
+This is 17.0.4.
+So I have two, three and four.
+Okay, so I have the IP addresses.
+I'm now going to create an inventory file.
+This is an Ansible inventory file.
+And I'm going to call them as target servers,
+so target one Ansible_host.
+The IP for that is 172.17.0.2.
+And the password that I have set for that
+is Password with a capital P and a zero.
+Similarly, I'm going to add the second host.
+172.17.0.3.
+And Ansible SSH pass
+is password.
+And same way I'm going to do target three.
+0.4.
+SSH pass,
+(indistinct) password.
+And that's it.
+I'm now going to run a Ansible
+and a ping command.
+So I'm going to do Ansible target one -m ping.
+That's for the ping module,
+and my inventory file is inventory.txt.
+Okay, so that's successful.
+I'm going to ping all of them at once now.
+So I put a star
+and there you go.
+So I have three servers
+and they've all responded to ping.
+So I basically have, within a single VM,
+I have a Docker and I have three Docker containers
+and I'm able to establish connectivity
+to those containers using my inventory file in Ansible.
+So that's pretty easy and straightforward.
+This way, I can power up hundreds
+of really lightweight Docker containers,
+and it's really, really easy
+to get rid of them when I don't want.
+I can easily power on new VMs
+or new containers for new playbooks.
+So I really don't have to worry
+about resetting my environment
+or anything like that.
+So this is my preferred way
+of working with Ansible playbooks.
+It's really easy to set up
+and it's really easy to work with.
+So obviously, you can see the advantages
+of Docker container over the virtual machines
+that you have to either power up with VMware Workstation
+or Oracle VirtualBox.
+So this makes it really, really easy.
+So yep, that's about it.
+Thanks for your time
+and let's go ahead to the remaining lectures
+in this course.
+
+
+=== Error Handling ===
+
+
+--- Docker Image - ubuntu-ssh-enabled ---
+
+[No transcript available for this lecture]
+
+
+=== Templating - Jinja2 ===
+
+
+--- Coding Exercises ---
+
+-: Hello. And welcome to this demo.
+In this demo, I would like to show how to work
+with the coding exercises
+that accompany this course in Udemy.
+So every time you finish a lecture
+or a demo that accompany the lecture,
+you will automatically be taken
+to the coding exercises section.
+The coding exercises section in Udemy helps
+in practicing what you learned in the video lectures.
+So if you look at this,
+this is a sample of one of the coding exercises section.
+The coding exercises page contains three areas.
+The first one here at the top is your question
+or the challenge that you are asked to solve.
+You will be given a brief introduction
+and a task to complete.
+Below that, you will find two sections.
+On the left, you have a list of files to work with,
+and on the right, is the actual contents of the file.
+Now, every coding exercise has a file
+by default called as Exercise.rb.
+This is a a file that contains a simple banner
+and this is not the file that you have to work with.
+So do not modify this file or write your solution here.
+It is the other files that you have to work with.
+In this case, there are two other files
+called inventory and playbook.
+The Inventory is the inventory file for Ansible
+and Playbook.yaml is the Ansible's playbook file.
+Now, if you look at the task given here,
+you're asked to update the playbook
+with the information about the target server.
+In this case, I need to update DBN score server
+with DBN web server.
+So I'm going to copy that and paste it here to update that.
+And then here at the bottom right,
+you will have a button for checking the solutions.
+So when you click on that,
+your task will be validated.
+And as you can see, it is correct.
+So it shows you a correct message.
+In case you typed it wrong, for some reason,
+you made a typo in your code or some kind of error,
+and when you click on Check Solution,
+you will be given an appropriate error message.
+Some of the exercises push you
+beyond what you learned in the lecture.
+So some coding exercises require you to refer
+to some documentation and do a little bit of research
+to find out the right solution.
+So in such cases, you'll be given a documentation link,
+link to the documentation page.
+By clicking on the link, you will be taken
+to a documentation page for that particular module
+and you can find additional help and examples there.
+So utilize those instructions to complete your task.
+And in case you're not able to figure out,
+always feel free to raise a question.
+So click on the Browse Q&amp;A.
+You might be able to see some questions
+raised by previous students here.
+If not, feel free to ask a question.
+And in case you're having trouble with your playbook,
+copy and paste your playbook,
+so we can refer to that when replying.
+Worst case, if you're unable to figure out a solution,
+you will also find an answer key that is available here.
+Clicking on the link will take you to a code repository
+where you will find solutions for these questions.
+So, that's it for now.
+Thank you.
+
+
+=== Lookups ===
+
+
+--- Web Application ---
+
+(typewriter typing)
+Instructor: Hello and welcome to this lecture.
+My name is Mumshad Mannambeth
+and we're learning advanced Ansible topics.
+In this lecture, we will be talking
+about a basic web application.
+This lecture has nothing to do with Ansible itself.
+It's basically an extra for those who have absolutely
+no experience working with web servers.
+We're going to get a basic understanding
+of what a really really basic web application looks like.
+We will be using this as a use case to deploy servers
+and systems in the remainder of this course.
+So it is important to understand
+at least one real life use case
+and it's important that we are all on the same page.
+If you are already familiar with web applications,
+feel free to skip this lecture.
+Otherwise, stay and refresh your memory.
+So we will be setting up a really really
+simple web application using Python flask application
+and MySQL database.
+The source code of this application is available
+on my GitHub page.
+First, we are going to take a look
+at how the application is set up.
+I will break it down into six steps.
+We have multiple ways to deploy the application.
+First, we are going to see an all in one setup
+where we have all the components of the application
+on the same server.
+So first, we identify a server then we install Python
+and other Python dependencies in it.
+This is because our web application is based in Python.
+We then install MySQL database, configure it
+and start the service, followed by installing flask
+which is what our web application will be based on.
+And then we will write the source code, if it doesn't
+already exist, or we copied the source code over,
+or download it from a source of repository like GitHub.
+And finally, run the web server, and this will get us
+to a point where we'll have
+a fully functional basic web application ready to work with.
+In the remaining section of this course, we will use this
+as a use case to write Ansible playbooks
+and deploy on one or multiple servers
+in a monolithic or a distributed architecture.
+
+
+=== Vault ===
+
+
+--- Demo - Web Application ---
+
+-: Hello, and welcome to this demo.
+In this demo,
+we are going to demonstrate how to deploy
+a simple web application from scratch using a manual method.
+So, this is so we know what we are trying to automate.
+I would recommend anyone to manually
+complete the steps once
+so we know exactly the steps involved
+in what we are automating.
+So these are the steps involved
+in deploying the web application.
+First, identify the web server
+that we are going to deploy the application on
+and then install the Python dependencies.
+Install and configure MySQL server
+and start the services.
+Install Flask,
+download the source code and then run the application.
+So, we will try to do this once manually on a server.
+So the first step is to identify the server.
+So, I have Oracle VirtualBox
+and have a Ansible controller and two target servers.
+So, I'm just going to try and deploy the web application
+on the target server one manually.
+So this is the target server one
+that I'm going to install on.
+I'm going to identify the IP address of the server
+and then I'm going to SSH into that server.
+So, the next step is to install Python dependencies.
+So, I have the simple web application on my GitHub page
+and I have all the instructions detailed here.
+So, I'm gonna follow this one by one.
+So, the first step is to install Python dependencies.
+So, I run the apt-get install command to do that
+and then I'm going to install the database,
+the MySQL server and MySQL client packages.
+Okay, and while that's installing MySQL,
+it'll asks for the root password.
+So, I'm going to enter a root password for the MySQL server.
+Remember that this password will be used later
+during application configuration
+to connect to the application database.
+Okay, so next is to start the MySQL service.
+So, service MySQL starts,
+starts the MySQL service,
+and I can see that verify that it's running.
+I'm now going to connect to the MySQL database.
+And then I'm going to create a new database
+called employee_db.
+I'm going to create a database user
+that I can use to connect to the database.
+I'm going to grant permissions to that,
+for that user in the database.
+And then I'm gonna change to that database using use.
+And then I'm gonna create a table,
+an empty table called employees into that database.
+I will then add one line of test data into it.
+So, that's about the database configurations.
+So, the database is now ready.
+I will now go ahead and install the Python dependencies
+using PIP install.
+So Flask is the first Python package that I need to install
+followed by Flask-MySQL
+which is used by Flask
+to connect to the MySQL database.
+So, basically I'm done with the dependencies.
+The next step is to copy over the code, the source code.
+So, I'm going to copy the source code
+from the app.py on my Github page
+and I'm going to put that in an app.py file,
+and then I run the...
+I start the web server using the Python app.py command.
+So, this web server is now running at the 5,000 port.
+So, it's currently running on 127.0.0.1
+So, I'm not going to be able to access it
+using its IP address because it's the loop back address
+that it's running on.
+So, I'll have to change that.
+So, I will run it with a different command.
+I will run it with a Flask command.
+The Flask command will allow me to expose the server
+on a different IP.
+So, I set an environment variable
+called flask_app to app.py.
+And then I run the Flask application with a host parameter.
+That way I will be able to access...
+That way, the server will run on 0.0.0
+and this way, I will be able to access the web webpage.
+So as you can see,
+I can now access the web server from that webpage.
+If you look at the code
+there are a few URLs that you can test.
+For example, if you go to /how_are_you
+It's going to come back with a message saying,
+"I'm good, how about you?"
+And if you try the URL read from database,
+it's actually going to read a value from the database.
+So, that basically test the database connectivity for us.
+So, that's it.
+That's the basic simple web application.
+Let's go ahead and let's now try to automate this deployment
+using Ansible playbooks.
+
+
+=== Dynamic Inventory ===
+
+
+--- WebApp Installation Instructions on Centos 7 ---
+
+[No transcript available for this lecture]
+
+
+=== Custom Modules ===
+
+
+--- Playbook - Web Application ---
+
+(keyboard clicking)
+-: Hello and welcome to this lecture.
+My name is Mumshad Mannambeth
+and we are learning Advanced Ansible topics.
+In this lecture we'll be creating a playbook
+to deploy the web application
+that we manually created in the previous section.
+So we start with creating an inventory file and a playbook.
+The inventory file has information about our target server.
+In this case, we would like to call it DB and web server.
+This is because our application
+is running in a monolithic architecture
+where both our database and our web part of the application
+are residing on the same server.
+The password and IP are given.
+Then we lay out the structure of our playbook.
+We will start with a single play
+to deploy the web application and list all tasks
+we know needs to be done to get this working.
+We can get away with a single play
+as our application is going to be hosted on a single server.
+We will talk about a better format in the upcoming modules.
+
+
+=== Plugins ===
+
+
+--- Demo - Developing Playbook for Simple Web Application ---
+
+-: Hello, and welcome to this demo
+in this demo we're going to look at how to
+automate the deployment of the web application
+using Ansible playbook.
+So first I'm going to identify the server
+then I'm going to test this on
+so I'm going to shut down the server that I
+already deployed the application on and I'm going
+to reset the state by restoring to the previous
+restore point
+so I'm going to select system ready and
+restore snapshot, and click on restore
+and this is going to
+uh,
+restore the server to a previous state
+I'm now going to power the server up
+um,
+so this is my IDE that I'm going to use for
+developing Ansible playbooks
+um, so you can basically use any IDE, that of
+your preference.
+I use um, python or rubymine
+or anything that supports YAML format
+So python is a free um, community edition of
+Python is actually free and you can actually
+use that
+or any other free IDE's that are available out there
+can be used.
+So, I have this IDE on my windows system and
+the files are to be created on the target
+Ansible controller Linux system.
+And so first I've just going to uh, created a
+folder
+called demo
+and I will have the files created inside this
+so first I'm going to create an imagery file
+called imagery and
+I'm going to define the imagery of my Ansible project
+so the two target servers.
+so instead of target I'm just going to name them
+DB underscore, and DB web server one
+and DB web server two
+Um, the Ansible host IP um,
+I'm going to put in the IP of the first server
+uh, target server
+and the password
+Temporarily I'm going to create and entry for
+the second server, and use the new IP address for
+that server.
+Then I'm going to create a new playbook
+I'm going to name it playbook.YAML
+and now I'm going to create a play
+I'm going to call the play a web application
+I'm going to target the host DB and web server one
+and DB and web server two
+so there are multiple ways of doing that
+you can either do it like this or you can
+remove the second one and put a star
+to use a pattern, or wild card
+Or another option is to create a group
+and put the two servers under that group and
+use the group name.
+So any of these 3 options work.
+I'm just going to restore that to my original
+state
+and I'm just going to use the web server names.
+Okay. And then I'm going to create a task
+under it , um
+so my first task is just going to be a test
+so I'm just going to, uh, use the ping module
+to try a ping.
+So what I can do is, uh, on the Ansible
+controller, um, system I'm going to create a
+directory for the
+um, Ansible project, I will call it
+web deployment
+and inside that I'm going to create an imagery file
+and a playbook file.
+So I'm going to copy the contents of the imagery file
+and put it in there.
+And I'm going to copy to contents of playbook
+and add it to the playbook.
+I will show you a better way to , um,
+get around this.
+So i don't have to , um
+I won't have to copy and paste every time.
+So if you go to tools and deployment
+you'll find that
+you can add a deployment configuration where
+the files, your files from windows will be
+automatically be transferred to the Linux server
+so I'm going create a new deployment server
+and I'm going to provide the IP of my
+Ansible controller.
+Um, I will give it the IP address
+of the Ansible controller system
+and the credentials to connect to it
+uh, after entering the password I will test
+the connectivity so that its successfully
+connected.
+And all I'm going to do is create a mapping that
+when the local folder, which is called demo
+and I will map it to the remote folder
+and root
+the new, uh, I will target the new photo
+I created on the Ansible system
+so this way, every file I create here
+will automatically be transferred, every change
+I make will automatically be transferred to this
+target system.
+So I'm just going to
+run a test
+I'm just going to make a small change
+and I have to turn on the
+automatic upload so that
+every time I make a change it, uh, pushes it over
+so that's good, I'm able to see the change.
+So, um, its going to be very easy going forward
+so I'm going to run the Ansible play book.
+With the playbook and the imagery file I can
+see that, it is able to ping successfully
+that means the connectivity is uh, established
+successfully.
+Okay, so uh, and now I'm going to modify
+my first task.
+I'm going to
+automate my first task which is
+installation of the python dependencies
+so in the manual process I used APT get so
+here I'm going to use the APT module
+in Ansible to install the dependencies.
+So the first dependency is python
+so that's going to be the name of the APT package
+and the state is going to be installed
+means uh, so APT is going to install the python
+dependency.
+And I also have a few other packages, uh
+dependencies to be installed. So what I could do
+is I could use a loop here and then
+so I use the word items directive and um
+I will add, uh, all the required packages as
+a list.
+And so I will run the APT module in a loop
+so instead of python,
+um, I'm going to add python as well in the list
+and instead of that, I will use item
+so that it replaces, with each value in the
+list, every time
+it iterates the loop.
+So this way I get to all the, uh
+dependencies installed.
+The next step is to install and configure database
+so there too I'm using the APT get, uh,
+command, so I will just copy
+this task
+so I will create a new task
+and I'll just replace the list
+of packages to install.
+I'll first update the name and I'll just replace
+the list of packages to install
+in this case my SQL server and
+uh, my SQL client.
+The next step is to start the database service.
+So I will use the service module
+so I'm going to crate a new task and call it
+start uh,
+my SQL service
+and the service name is going to be MySQL
+and the state is going to be "Started"
+and I will also set "enable" to yes this way
+when the server restarts
+the service will automatically be started.
+So the next step is create database
+and database users
+so we have the MySQL modules for that.
+So the first task is to create an application
+database.
+I'm going to use the MYSQL underscore DB module
+the name of that database is going to be
+Employee underscore DB
+and the state is going to be "present"
+The next step is to create a database user
+I will use the MySQL underscore user module
+to create a new user.
+If you need more information about any module
+or what parameters it accepts
+you could always refer the module documentation
+under the module index page on
+Ansible documentation website.
+So, under MySQL you can see that you have
+a MySQL module
+MySQL underscore user module
+and these are the parameters that it accepts.
+So I'm just going to use that here.
+I'm just going to copy and paste that and
+replace the values with the values from
+the command. I know that name its supposed to be
+DB underscore user, the password is supposed to
+be this.
+And,
+I will leave the permissions to the default.
+So I'll skip the insert data step, and I'll go
+ahead with the next one which is installing the
+Python dependencies.
+So I will use the pit module to install the
+python flask, uh, dependencies.
+There's a typo, its supposed to be
+flask and not flash.
+And I'm going to, uh, use the pit module.
+The name of the module is going to be "Flask"
+but since I have two modules to install
+I'll use a loop.
+Um, so I'm going to use both items and I'm
+going to specify the python modules I need installed.
+So flask and flask MySQL.
+Then use the item, uh, variable under loop
+and the state, uh should be "present".
+The next, uh, step is to copy the app.py
+which is my source code to the target server.
+So, I need the source code here, uh, for now
+so that I can copy it over.
+So I'm just going to create a new file for
+uh, the application source code
+and I'm going to copy the source code of the
+application from my get help
+uh repository error
+so this uh, by doing this I'm basically creating
+a local copy of the application source.
+Another way to do this would be to use the
+get help module to download the application
+directly from get help.
+But for now I'm just going to copy the source code over.
+So I'll create a new task to copy the source code
+over, to the target server.
+And I will use the copy module for that.
+So the source is going to be App.py and
+destination is going to be, forward slash Apt
+forward slash app dot PY.
+So that's where I'd like the source code to
+go.
+So the next step is start the web server.
+So I'm going to create a new
+task to start the web server.
+I'm going to copy over the command.
+The path is not correct is should be Apt App dot PY
+but I'll get that fixed later.
+So I have something to add, a NoHop
+and an ampersand to run the task in the background.
+So even when Ansible exits, the website
+continues to run.
+So, um, I'm going to kick off the Ansible playbook
+and as you can see its established connectivity
+to the target servers.
+It's installed all the required dependencies..
+Installed MySQL database
+Uh, started the server.
+Um, I'm going to, uh,
+the browser and try and access the webpage.
+And there I can see that, the webpage is up.
+Um, I've actually changed the source code.
+Uh, the source of the application to
+forward slash APT forward slash APP dot PY
+um, so both the servers are up and I'm able to
+access the web service.
+Um so that's the end of this demo.
+Going forward we will see how to make this
+playbook better
+how to improve this Ansible project using roles
+and using host variables.
+By separating, uh,
+variables to separate files etc.
+Um, thank you.
+
+--- Update: apt module deprecations ---
+
+[No transcript available for this lecture]
+
+--- File Separation ---
+
+-: Hello and welcome to this lecture.
+My name is Mumshad Mannambeth and we are learning
+Advanced Ansible topics.
+In this lecture, we'll be talking about file separation.
+So far we've been defining variables
+in the same inventory file.
+However, this is not a best practice.
+It is better to define this
+in a separate file for that server.
+To do this, first create a host_vars directory
+next to the playbook,
+and then create a file with the same name
+as that of the server, which in this case is DB_
+and _webserver.yaml.
+Then we move the variables and their values
+from the inventory file into this new file.
+Remember to remove the equal sign
+and change it to a semicolon followed by a space.
+This is because this new file is in YAML format.
+You don't need any further configuration.
+When Ansible Playbook is executed,
+Ansible automatically reads the values
+from this file and associates them with the host.
+So it's important to name the file
+with the same name as that of the server.
+And also, it's important to name the folder host_vars,
+because that's the folder that Ansible looks at
+to find out whether there is a file,
+whether there's a variable file for that particular server.
+For host variables
+the folder must be named host_vars,
+and group variables must be named group_vars.
+And you could have a file for each host inside this folder,
+as we have just seen.
+Going forward we'll stick to such best practices
+in our playbooks.
+The next thing to learn is include statements.
+In the previous course,
+we have covered some basics of roles and include statements.
+We're going to go over these real quick.
+In our case, we have a playbook with two sets of tasks:
+one to install and configure the database,
+and the other is to install and configure the web server.
+What if we need to reuse these tasks
+in different playbooks where the requirement may be to
+only install database or to only install the web server?
+So we divide these tasks into two sets.
+We first create two files under a folder called tasks,
+naming them deploy_db.yaml,
+and deploy_web.yaml.
+And we moved the DB task
+into the first one and the web task into the second one.
+Once we're done with that, we add the include statements
+under task in our playbook to include the task
+from these external files.
+
+--- Demo - File Separation ---
+
+-: Hello and welcome to this demo.
+In this demo, we are going to improvise
+on the playbook that we developed earlier.
+What we are going to do is we're going to break up
+the playbook that we developed in the last demo.
+We're going to separate out some of the variables
+to a separate file for host variables
+and then we're going to take out the task
+and put them to a separate file for task
+and just, you know, reorganize our playbook
+and restructure it so it looks more modular.
+Okay, so now I'm going to reset my environment.
+So here I'm going to restore snapshots
+for both of my servers and so that I can redeploy
+the application on them so they're reset.
+I'm now back to my playbook and the first thing
+that I'm going to do is I'm going to move the variables out.
+So if you look here,
+I have some information in the playbook that are hard coded
+such as the employee DB, which is the database name
+and then I also have the database user, user password
+et cetera, kind of hard coded into this playbook.
+Now, we don't want this to be here because this can change
+and so we don't want, when it needs to be changed,
+we don't want the user to go in into the playbook
+and look for this information and change.
+Instead if the variables were in a separate file on its own,
+it'll be easy to modify that later.
+So the first thing that we're gonna do is
+we're just going to bring out the variables
+to a vars right here
+in the play, and later on we'll move it out.
+So for now, we're just going to look for the information.
+So right there we have employee DB,
+which is the database name.
+So I'm gonna create a new entry, a new variable for that.
+I will call it DB underscore name
+and I'll copy the value over there.
+And then I'm going to use the variable name
+and replace the variable name here instead
+of the actual database name.
+Similarly, I'm going to move out a few more things
+such as the user information.
+So I'm gonna move the, I'm gonna create a new variable
+called DB user and move the value there.
+And I'm gonna replace it with the variable name here.
+And always remember when you do it this way,
+you need the double codes around it.
+Then the same with the password.
+So move the db database password out
+and use the variable and replace the variable right here.
+So for now these are the variables that I'd like to move out
+and I'm okay with any other information lying around
+in the playbook.
+So in order to separate this out into a different file,
+what I need to do is I will take that information out.
+I will create a new folder called host underscore vars
+and remember it has to be host underscore vars.
+And under the host vars,
+I'm going to create one file for each server.
+So host vars should always have a file for each server.
+I'm gonna create one file for db and web server.
+Make sure I name it with dot YAML.
+And similarly, I'm going to create another file
+for DBN Web Server two.
+So I have two files now
+and I'm going to cut the information out from here
+and make sure to remove the vars directive
+and I'll paste it in the new files.
+Now, if I want this information to be available
+for both the servers, then I must make sure
+that I have two separate host var file for each server.
+Then I must make sure that I have the information
+in both the files.
+So these variables will only be available
+to that particular server.
+Now this makes sense if we were to have, let's say,
+different database names and different database users
+and passwords for different servers.
+So in that case, this will help
+because we have it defined separately in separate files
+but for instance, in this case, we know
+that it's going to be the same on all servers.
+So another approach to do this is to use groups
+and group variables.
+So what we could do is if we know
+for sure that the variable values are going to
+be the same on both of the servers,
+so we could create a new group called DBN web servers
+and the underlying servers are now part of that group.
+Now we could create a new folder called group wars
+and have a new file created under the group wars
+for that particular group, in this case DBN web servers
+and make sure it's a YAML file.
+And now we'll move the variables out into that group.
+Okay, now we can get rid of the host vars altogether.
+Now all the servers under that group
+will have access to these variables.
+Now all the servers under that group
+all will be associated with these variables.
+So now we are good with that.
+Next we're going to move the tasks out.
+So I'm gonna create a new task folder
+and under the task folder, I'm going to create two files.
+One is for the database
+so that'll be deployed underscore DB dot YAML.
+And then I'm going to take all the database related tasks
+in this case, installing my SQL database
+starting my SQL service, creating application database
+and database user.
+And I'm gonna cut that and move that into this.
+Make sure that the alignment is right.
+They should all be on the same line,
+they should be aligned together.
+Sometimes when you copy or cut and paste,
+your alignment may, the file may go out of alignment.
+So make sure they're aligned correctly.
+And now I'm gonna create a new file called
+deploy underscore web dot YAML
+that I'm gonna take all the web server tasks
+and move it there.
+Now I'm gonna go back to my master playbook
+and I'm just going to include those tasks here
+by using the include directive.
+So I'll say include, and then the file,
+the path to that, those two files.
+Okay, so we are done with the playbook.
+So we now have variables moved into group variable files
+and we have tasks moved into separate task files.
+We can reuse these task files anywhere else
+in our project as required.
+Okay, so I'm now going to run the playbook again.
+I'll make sure that all the changes were moved here.
+And I can see that the playbook starts,
+it establishes connectivity successfully.
+We'll just wait for the dependencies to get installed.
+Okay, so the web server dependencies are installed
+the application database is installed,
+database is installed.
+The source code copied over and the web server is started.
+Okay, so that's the end of the demo.
+So go ahead and practice some of it on your own
+in the coding exercises section.
+
+--- Roles ---
+
+-: Hello and welcome to this lecture.
+My name is Mumshad Mannambeth
+and we are learning Advanced Ansible topics.
+In this lecture, we'll be talking about roles.
+Now that we have worked with includes and variables,
+developing a role should be easy for us.
+Roles are the recommended way
+of developing a playbook in Ansible.
+Roles help us organize our project in a standard structure,
+we use roles within our project,
+and share our work with the open community
+through GitHub or Ansible Galaxy.
+So, what exactly does organize mean?
+When you create a role,
+it automatically creates this folder structure for you
+that contains a set of folders like
+tasks, handlers, VARs, defaults, et cetera
+and the README file is initialized automatically.
+This will help in creating the role as per best practice.
+Once roles are created,
+it is easy to use them in any part of your playbook.
+Simply use the roles directive to assign a role to a server.
+When you do this, Ansible automatically loads all the tasks
+from the task folder,
+all the variables from the variables folder,
+and defaults from the default folder
+and makes them available to the playbook.
+You don't have to use any include commands
+in the main playbook if you're using roles.
+This way, our main playbook looks very, very simple
+and readable
+and we can reuse the same role
+in different parts of the playbook the same way.
+With Ansible Galaxy, these roles can be shared
+and others can import and reuse them with great ease.
+There are thousands of roles already available
+on Ansible Galaxy
+and it's a good idea to check for an existing role
+before starting to develop one on your own.
+What we have so far
+are the tasks separated into two task files
+called Deploy DB and Deploy Web.
+What we really want to be doing
+is to use roles so our work becomes reusable.
+Creating two separate roles for DB and Web
+instead of a single one will help us modularize our work
+and will help us use each of these
+for different purposes in the future.
+If somebody only wanted to deploy a DB server
+or a web server,
+then this design will help us reuse our work
+for different purposes.
+So, we create two separate roles
+called my SQL DB and Flask Web
+using the Ansible Galaxy init command.
+Now, remember, we don't necessarily have to use
+the Ansible Galaxy init command,
+we could simply create the folder structure ourself.
+Ansible Galaxy Command simply makes it easy for us
+and automatically creates the required structure.
+Once the rules are created and we've added all the tasks,
+it's really easy to integrate the rules into our playbook,
+instead of tasks, this time we'll use roles
+and we'll simply list the name of the role that we created.
+In this case, MySQL underscore DB and Flask underscore Web.
+Our application has been monolithic until now,
+meaning both database and web application
+has been on the same server so far.
+Now that we have roles, it is easy for us
+to change our design into a distributed application model.
+We would like to distribute database and web server
+to two separate servers.
+Our new playbook looks simple too.
+Now we have two plays as we have two servers.
+The first play configures database on the first server
+and the second play configures web server
+on the second server.
+
+--- Demo - Roles ---
+
+-: Hello and welcome to this demo.
+In this demo, we're going to see
+how to further modularize our work into roles
+how to create our own roles
+based on what we have done so far,
+and how to share that into the Ansible Galaxy community
+and how to share it with the other users
+in the Ansible community.
+So we already have a lot of details
+separated into separate files like group WARs and tasks.
+So it should be easy for us to create roles from here.
+So first, what we are going to do
+is we are going to create a new folder for roles.
+So it should be created under the same directory.
+So we will create a folder called roles
+and there are two ways to create roles.
+First is to use the Ansible Galaxy command
+to create the role.
+That way it'll automatically create
+that folder structure for us.
+The second way is to create it by ourselves.
+So we will look at both, both the methods.
+So first we're going to have to go into the roles directory.
+So I'll see the into the roles directory.
+And then I will use the Ansible Galaxy init command
+and provide a role name.
+In this case, I'm going first create a role for my SQL.
+So I'll say my SQL underscore DB.
+And right there I've created the role successfully.
+If I go into the role
+I will be able to see the folder structure.
+So what I'm going to do is I'm just going
+to pull down those files that were created
+on the system into my development environment.
+So I'll just use the IDDs download feature
+to download those new files.
+Now, if I look at the roles directory
+I can see the my SQL DB folder
+and the folder structure that is.
+that was created underneath it.
+So if you look at it, there are a number of folders
+that were automatically created, like defaults.
+Defaults is a folder which will store
+all the default variable values.
+And then you have handlers, meta tasks, tests and vars.
+So they all have their own purposes.
+And you also see the readme file.
+You can also see that a readme file
+is automatically created.
+So if you open this readme file
+you will be able to see that it's an MD file.
+It's in a standard readme file format
+supported by co-repositories like GitHub, et cetera.
+So it's important to modify this readme file
+and update it with documentation
+about the role that you're creating.
+I will skip that for now.
+Now what I'd like to do
+is I'm now going to move all the tasks
+from the deployed DB task folder
+and I'm gonna move it into the task folder inside my role.
+There is a main dot yaml file created automatically
+there when we created the folder structure.
+So that's where it needs to go.
+So whenever Ansible runs a playbook
+and when it sees that we are using a role
+it automatically loads all the tasks
+from the task directory and from the main file.
+So the main file is the default file
+that where it load all the tasks from.
+So I have all the tasks there.
+Now I can get rid of the deploy DB task file
+that we created earlier.
+Now the second role to create is for the web.
+So I'm going to create this time,
+I'm going to create it on my own
+without using the Ansible Galaxy command.
+So I'm just going to create that folder structure myself.
+I will create a flask underscore web directory under roles.
+And under that, now I really don't need all that
+for all of that folders if I'm not using them.
+So in this case, I'm only using tasks under roles.
+So I'm just going to create a tasks folder.
+And then under the task directory
+I will create a main dot yaml.
+So it has to be main dot yaml.
+And now I'm going to move all the tasks
+from the deploy web dot yaml file into this.
+So now I have all the tasks here.
+Now I can delete, get rid of the entire task folder
+that we created in the previous session.
+So now I have two roles created
+a flask underscore web and my SQL underscore DB.
+Now we'll see how to associate that with our main playbook.
+But if you look here, I can now get rid of the include task
+but I also have a one task at the top
+that installs all the required dependencies.
+Now if you look at the task, it is for installing.
+It's basically for installing Python
+and all other Python dependencies.
+Now, what I could do is I could create a new role for Python
+and move this task into that.
+So that way in the future, if I were to use Python
+if I had a requirement to install Python
+on any of the servers in any of the projects,
+then I could reuse that particular role
+to get Python installed.
+So I'm going to going one step,
+one more step by creating a new role for Python.
+So I'm gonna create a new directory for Python
+and I'm going to create a new directory into that for tasks.
+And I will create a new file under it for main dot yaml.
+Now I'm going to take the task
+and place it under the main dot yaml under the Python roles.
+So now I have three roles
+flask underscore web, my SQL underscore DB and Python.
+Now I could get rid of the task section altogether
+because now we are no longer importing
+or including task from a task file.
+From now on, we are working with strictly with roles.
+Now you can have tasks and you can have roles in a play.
+Or you can have any one of them, either tasks or roles.
+So now I don't have any tasks to include
+so I'll just go with roles.
+So I'm gonna create the roles directory
+and under that I'm just going to give a list.
+Now, this list and the order of this list is important
+because the my SQL and other web packages
+are dependent on Python.
+So I must make sure that I apply the Python role first
+and then followed by the other roles.
+So in this case, I have a all in one setup
+which means I have both DB
+and web server web application on the same server.
+So what I'm going to do is in roles,
+first applying the Python role,
+and then I'm applying the my SQL DB role
+and then the flask web role.
+Okay, so I'm all set.
+Now my playbook looks really, really simple
+and I have all the tasks moved out
+into respective task file for the respective roles.
+So this is how it should look at the end of our work.
+At the end of the development of Ansible projects
+this is how it should look.
+The main playbook should be very, very simple
+and reusable.
+Okay, I'm now going to execute my Ansible playbook
+with the new changes.
+And I can see that the connectivity is established
+and it's waiting for the dependencies to install.
+And now you can actually see a small change in the task.
+So if you look right here, you see that it's Python.
+Now you see it's separated by SME column.
+So this is the task, and this is actually the role name.
+So this is where you can see that the Ansible
+is applying this particular role.
+And as part of this role, it's running this particular task.
+So this is the role name
+and this is the task name under that role.
+And you can now see
+that it's currently installing my SQL database
+from the my SQL DB role.
+And right here you see it's installing Python flask
+from the flask underscore web role that we created.
+Okay, so that's the end of the playbook execution.
+And we can see that all the necessary tasks are complete
+and the web servers are up.
+Okay, so now I'm going to demo how to share our work
+with other users in the Ansible community
+in the Ansible Galaxy community.
+So Galaxy is the Ansible's community
+for downloading existing roles and sharing roles.
+So if you go to galaxy.ansible.com and log in
+you'll be asked to log in.
+You could log in with your GitHub account
+and you'll be able to see and explore
+all the existing roles right here.
+You can browse roles and browse others, et cetera.
+So as you can see,
+there are a lot of my SQL roles available. Okay?
+So there are multiple ways to do this.
+One is you can do everything
+with the Ansible Galaxy command line
+or you can do it from the Ansible Galaxy webpage.
+I will show how to do it
+with the, through the Ansible Galaxy webpage.
+So here we have our role in our our directory.
+So if you go to the roles directory
+you have all the three roles.
+So I will start with the my SQL DB role.
+So I'm gonna go into the my SQL DB directory.
+As you can see the folder structure right here
+we use the Ansible Galaxy init command
+to create this folder structure.
+One thing I would want to do
+is update the readme file real quick,
+just so the users know what exactly
+this particular role does and how it works.
+So I'm just going to say the role name
+is going to be my SQL DB.
+And here a brief description of the role goes here.
+So I'm just going to say
+this role installs my SQL database.
+And then in your requirements role variables
+I don't have any role variables
+so I'm just gonna get rid of that dependencies.
+So dependencies are going to be,
+so Python must be installed.
+So that's a dependency.
+And in an example playbook
+I'm just going to show an example of how to use this.
+So what we did,
+I'm just going to pick the example from our playbook.
+So my SQL DB.
+So this is a sample playbook
+and all we need to do is for the servers roles
+applied this my SQL DB role.
+And then the license and other information.
+So I'm just gonna leave that as it is,
+have just made minimal changes,
+just gonna get rid of requirements.
+Okay, So I've made that change.
+And another thing that I need to make sure
+before sharing it with Ansible Galaxy
+is that you must make sure to update the meta dot main file.
+So the meta folder contains a main file
+that stores information about your role.
+So it's good to update this.
+So I'm just going to update my name and description.
+Such as architect.
+I'm going to leave everything else as is.
+And if I scroll down, look at this,
+make sure that you enable platforms
+because this is a check that Ansible Galaxy performs
+when you when you try to share it,
+import it into Ansible Galaxy.
+So make sure to uncommend this section.
+So you must have platforms in here.
+And then I'll say what we have tested is on Debian.
+So I'm just gonna say Debian
+and I'm just gonna say all versions.
+So the supports Debian and all versions in Debian
+and then Galaxy tags.
+So I need to tag my role to something to some values.
+For example, in this case, it is a role for a database
+and it is a role for my SQL specifically.
+So I'm just gonna tag it with those two.
+And then dependencies, I'm just gonna ignore that.
+So those are a few changes I've made here.
+And then rest, everything is okay.
+So I'm going to log into my GitHub account
+and I'm going to create a new repository,
+and I'll call that Ansible dash role dash my SQL.
+So Ansible dash role is a standard naming convention
+that everyone uses for Ansible Galaxy.
+So Ansible dash role dash and then whatever this role for
+in this case, my SQL.
+I'm just going to give a brief description.
+This is an Ansible role for my SQL for installing my SQL.
+And make sure that it's public.
+And I'm not going to do anything else.
+I'm just going to create repository.
+So now I have my repository here.
+And it's really easy now to check in your code.
+Just follow the instructions here.
+First, I do a gate init.
+And that initializes an empty gate repository.
+And then I do a, I already have a readme file
+so I'm not going to add that.
+But instead I need to add all the codes.
+So I'm going to copy this.
+I'm going to do a gate add dot
+and that adds all the files to the gate repository.
+And then I need to commit that,
+those changes I'm going to do a commit right here.
+So all the files are added.
+And then I need to add a remote.
+I need to add a remote origin
+for this particular and specify this repository.
+Go back, add that.
+Then I'm just going to push the code.
+Push.
+Now, when I do that, it ask me for the username.
+I'm gonna say, Raymond Charles.
+And I'm gonna give it my password.
+So it's pushed my code to the gate repository.
+So if I go back right here and refresh this page
+I should be able to see that code here
+and I can see the readme file
+that I just updated come here like this.
+So I have all that here.
+I have the tasks,
+and if I look into the main file in the task,
+I see all the tasks related to that.
+So I'm good here.
+All right, so now I have a role created here.
+The next step is to import that to Ansible Galaxy.
+So if I go back to Ansible Galaxy,
+and if I go into my roles,
+it's going to perform a search automatically
+and list the repositories that it finds.
+So I'm just going to refresh.
+So it's already found the new repository
+that I created called Ansible dash role dash my SQL.
+And by clicking on this
+it will now try to import that particular role.
+And as you can see, it's successful.
+So if I click on the, on the roll
+you can see information about the role here.
+So the platforms that it supports
+the name of the role, the minimum version.
+All of this information is coming from the meta file,
+the tags that we provided.
+And then here you can see the command for installation.
+So if I'd like to install this role
+for any purpose in the future,
+or if anybody wants to reuse this particular role
+in the future, they can just run this command
+and it'll import this role into their projects.
+If I now go to explore and or if I go to browse roles
+and if I search for my SQL,
+there are already a lot of my SQL roles,
+but these are not mine.
+If I search for author and if I search by my name
+I will actually see the my SQL role come up here.
+So, and then the users will be able to see that particular
+see the role, and you can see the downloads in the future.
+And they also have a link
+directly to the GitHub repository to find the role.
+So this is one way for searching role.
+Another way to search for roles
+is to search through using the Ansible Galaxy command.
+So I'm going to do Ansible dash Galaxy search
+and my SQL and I will be able to see all the my SQL roles
+that are available out there,
+and a brief description
+and you can easily import.
+And here you see this is, there's the role
+that I just created.
+Okay, so this description was supposed to be
+a description of the repository and not my description.
+So yeah, you can see there are hundreds of my SQL roles
+available out there for various purposes.
+So before you create a role on your own
+make sure you search Ansible Galaxy for any existing role.
+Look at the license on those roles and reuse.
+Okay? So that's the end of this demo.
+I hope you enjoyed it.
+Continue over to the coding exercises section
+and practice working with roles.
+
+--- Asynchronous Actions ---
+
+(typewriter keys clanking)
+Instructor: Hello and welcome to this lecture.
+My name is Mumshad Mannambeth
+and we are learning advanced Ansible topics.
+In this lecture,
+we'll be talking about asynchronous actions.
+As we discussed before,
+Ansible establishes connectivity to target servers over SSH.
+This means the SSH connections stay alive
+throughout the execution of the task in a playbook.
+At times, we may want to execute a long running task
+or a process that exceeds the SSH timeout.
+Or we may simply not want the SSH connection
+to stay alive throughout the operation.
+Instead, invoke the process and check on it at a later time.
+Or we may want to run multiple processes at once
+and check on them later.
+Or another use case maybe to run one or more processes
+and not even bothered to check their status.
+All of these can be achieved using asynchronous actions.
+Let's say, as part of our web application deployment,
+we have a script that monitors and performs health checks
+on the web server.
+It's located at optmonitor_webwebapp.py.
+The scripts perform various monitoring and health checks
+including a stability check to ensure
+that the web server stays online
+for at least five minutes without any issues.
+So obviously this script takes at least five minutes
+to complete execution.
+We don't want Ansible to hold the SSH session alive
+until the script finishes execution.
+We want to tell Ansible that this is an asynchronous task
+so kick it off and check on it after say, every minute.
+So we use the async directive to specify
+the maximum time we would expect the task to execute.
+In our case, let's say six minutes,
+considering the other checks that needs to be performed.
+The async directive tells Ansible
+that this is an asynchronous task, so kick it off
+and check on it later.
+And how frequently does Ansible check
+the status of the script?
+Now, by default, Ansible checks every 10 seconds.
+If you want to change that, use the poll directive.
+We don't want to check every 10 seconds as we think
+that's too often and we don't want to wait for five minutes
+because what if the script fails after the first minute?
+We don't want to waste the remaining four minutes waiting
+for Ansible to check the status.
+So checking every minute seems good.
+So we set the poll value to 60.
+Let's add another task to monitor, say the database
+and we will give it six minutes to execute
+and poll every 60 seconds, just like the previous task.
+What happens here? When Ansible starts execution,
+it first executes the first task
+but it's still going to wait for that task to finish.
+Asynchronous does not mean Ansible is going
+to run that and move forward.
+It's going to monitor the status of the script
+and wait until the time specified is elapsed.
+In this case, 360 seconds.
+So in this case, it's going to run the first check
+and then wait for about six minutes for it to finish
+and then run the second check for monitoring the database
+and wait for six minutes for that to finish.
+What we could do is save a lot of time
+by running both of them in parallel.
+So we would like to run the first task
+and have Ansible move immediately to the second task
+and kick off the second check and then wait for
+both tasks to finish at the end.
+We could do this by setting poll value to zero.
+By setting a poll value to zero,
+we are asking Ansible not to wait there polling the task,
+instead immediately go to the next task.
+In this case, Ansible will go ahead to the next task.
+However, immediately after kicking off
+the second monitoring task, Ansible will exit.
+We haven't done anything to make Ansible wait
+for the task to finish at the end.
+In order to do that, we must first register the result
+of these tasks to a variable.
+So in this case, we are registering the result
+of the first task, which is monitoring web application
+to a variable called webapp_result.
+And we are registering the result of the second task
+which is to monitor the database
+to a variable database_result.
+And then we're going to have a new task to the end
+called check status of the task.
+And we use the async_statusmodule
+to check the status of the task.
+So one of the parameter
+that the async_statusmodule takes is a job ID
+and we could get the job ID for the previous task
+using webapp_result, which is what we registered
+and .ansible_job_id.
+So there we are passing in the job ID
+for the previous task and then we're gonna wait here
+until that task is finished.
+Now remember, all the modules do not support Async,
+so you need to make sure
+that whatever module you're using supports async.
+
+--- Strategy ---
+
+-: Hello and welcome to this lecture.
+My name is Mumshad Mannambeth,
+and we are learning Advanced Ansible topics.
+In this lecture, we'll be looking at strategy.
+So what exactly is strategy?
+Strategy defines how a playbook is executed in Ansible.
+Let's look at an example.
+Here, we have a simple Ansible playbook.
+Note that the actual code related to each task is hidden,
+but we have seen a lot of that before.
+So just think of them as tasks defined properly
+in an Ansible playbook.
+Let's look at the playbook at a high level.
+With this playbook, we are trying to install
+a web application on a single server in an all-in-one mode.
+Meaning, we will have a database and web server
+running on the same system.
+The tasks run by Ansible are to install dependencies,
+install MySQL, start the database,
+install Flask, and finally,
+run the web server.
+It's pretty straightforward since we have a single server.
+When Ansible runs, it completes one task after the other.
+It installs the dependencies,
+then proceeds onto the next task of installing MySQL,
+and then starts the service, and then installs Flask,
+and then finally, runs the web server.
+All good here.
+Now let's see how it works
+when there are multiple servers involved.
+In this playbook, we're going to run the Ansible playbook
+on three separate servers.
+Our intention is to install a complete web application
+on all three servers in an all-in-one mode.
+So we have three servers now.
+When Ansible runs, it runs each task across all servers
+in parallel at the same time.
+It waits for the task to finish on all servers
+before proceeding to the next task.
+In this case, Ansible installs dependencies
+across all servers and waits for it to complete
+on all servers before proceeding to the next task.
+And then it installs MySQL database on all servers,
+and then starts the database on all servers,
+installs the Flask dependency on all servers,
+and finally, runs the server,
+the web server on all servers.
+So this is called linear strategy,
+and this is the default strategy for Ansible.
+Another strategy that is available
+with Ansible is called free.
+To enable a new strategy, use the strategy directive
+and specify the strategy name,
+in this case, free.
+Obviously, if you don't specify any strategy,
+as we have been doing so far,
+it will use the default strategy, which is linear.
+In this case, each server runs all of its tasks
+independent of the other server and does not wait
+for the task to finish on the other servers.
+So each server can go right to the end as fast as it can
+without bothering about any of the other servers.
+There's also a third option.
+Let's say we have five servers,
+but we would like Ansible to execute three at a time.
+This is where batch processing helps us.
+This is not a separate strategy.
+This is based on the linear strategy,
+but you can control the number of servers executed at once
+or in a batch.
+In the playbook, we do not have a strategy option,
+so it uses linear strategy by default.
+But there is a new option called serial
+where you can specify how many servers
+you would like to process together.
+In this case, I specify three.
+So Ansible runs task on three servers first,
+and then once that finishes, Ansible proceeds
+to run task on the next batch.
+It is important to note
+that you can create your own custom strategy
+by developing a strategy plugin yourself.
+In a later lecture, we'll look at how to develop
+custom plugins and custom strategy, et cetera.
+Now, there are a few other options available
+to create such kind of a serial behavior.
+In this case, as specified three,
+which is why it ran on the first three servers,
+and then it ran on the remaining three.
+In this case, there are only two,
+so it just ran on the remaining two servers.
+But there are additional options available
+such as using a percentage.
+So if you say 30%, instead of three,
+then it'll run on 30% of all the servers.
+So how many servers can Ansible talk to at a time?
+In the previous example, what if you had hundred servers
+and wish to run this playbook across all of them
+at the same time?
+Will Ansible run the playbook
+on all hundred servers at the same time?
+No, it won't,
+unless you specify explicitly.
+Ansible uses parallel processes or forks
+to communicate with remote hosts.
+By default, Ansible can create five forks at a time,
+and this is defined in the Ansible configuration file,
+Ansible.cfg.
+This means that even if you try to run this playbook
+against hundred hosts, Ansible will only run
+across five at a time.
+You could increase this value in the configuration file
+to as much as you like provided you ensure
+you have sufficient CPU resources
+and network bandwidth for this operation.
+Head over to the exercises section
+and practice using strategies.
+
+--- Error Handling ---
+
+(keyboard clacking)
+-: Hello and welcome to this lecture.
+My name is Mumshad Mannambeth
+and we're learning Advanced Ansible topics.
+In this lecture, we will be talking
+about error handling in Ansible playbooks.
+In the previous lecture, we looked at strategies
+and we saw the flow of tasks execution in Ansible.
+Let us look at what happens when tasks fail.
+In the case of a single server,
+we saw previously that Ansible executes each task
+against the server until all of them are complete.
+Let's go back and see what happens
+when it fails at a particular step.
+For example, if the first two tasks completes successfully
+and the third task fails,
+it just fails at that point and exits the playbook.
+It's straightforward for a single server scenario,
+but let's see what happens
+when there are multiple servers involved.
+In this case I'm running the playbook
+against three separate servers.
+When I start the playbook,
+it completes installing dependencies on all servers
+and then proceeds to installing MySQL on all servers.
+Once that is complete, it tries to start the database
+but one of the servers fail at starting the database.
+So what happens is Ansible takes that server out of the list
+and continues to execute the remainder of the tasks
+across the other healthy and available servers.
+Ansible will make an attempt
+to complete as many servers as possible.
+This is the default behavior.
+In case we would like it to be consistent
+and want Ansible to stop the execution of playbook
+when one of the servers fail,
+add an option called any errors fatal
+and set its value to true on the play.
+This way, if any task fail on one server, Ansible stops
+the execution of the play altogether and exits.
+At the end of our web application playbook
+we would like to add a new task
+to send out a notification email
+stating that the web server is ready.
+We use the mail module to send out an email to our team
+with a subject and body.
+In this case, we're sending an email to DevOps@corp.com
+with a subject that server is deployed
+and a very simple body.
+However, this is not a critical requirement
+and our SMTP server is not very stable.
+So we really don't care
+if this task completes successfully or not.
+Even if the mail doesn't go through at times
+we are still okay
+and we don't want the playbook to fail because of of it.
+It's just a good to have feature.
+To ignore errors we could simply
+set ignore errors to yes on the task.
+Then the playbook execution will not stop and fail.
+Instead, it'll simply ignore the error and continue.
+Next, we would like to do some error checking.
+For example, we would like to check the contents of a file
+called server dot log
+and fail the playbook if it has any errors in it.
+For this, we use the command module
+to execute a cad var log server dot log command.
+This command returns the contents of the file.
+As long as the file is present and readable
+the task will complete successfully.
+However, as discussed, we would like to fail the playbook
+in case there are errors inside the file.
+For this, we are first going to register
+the result of the command in a variable
+called command underscore output and then we're going to use
+the fail underscore when directive.
+We will write a condition in it
+to look for the word error in the command output.
+If it exists, Ansible will fail the play
+because the value of failed when will then be true.
+If it doesn't exist, then the value in failed when
+will be false and so it just continues as normal.
+Head over to the exercises section
+and practice using ignore errors
+and any errors fatal options.
+
+--- Jinja2 Templating ---
+
+-: Hello, and welcome to this lecture.
+My name is Mumshad Mannambeth,
+and we are learning advanced Ansible topics.
+In this lecture, we'll be talking about Jinja2 templating.
+So what exactly is templating?
+For those of you who are new to templating,
+it is a process of generating dynamic content
+or expressions.
+In fact, we have already used templating
+in some of our playbooks.
+In this module,
+we will go a little bit deeper into templating
+and understand the various options available.
+For example, I have a sentence called,
+'My name is Mumshad Mannambeth.'
+Here, the name itself is a variable,
+so it should form the sentence
+with the value in the variable
+and not a static name as I have it here.
+So I will replace my name
+with a variable surrounded by a double curly brackets.
+The double curly brackets indicate
+that the text inside it is a variable.
+Every expression in Ansible
+will be evaluated as a template
+before being processed by a task in Ansible.
+An easy way to test and play around with Jinja2 templating
+using Ansible is to use the debug module.
+The debug module lets you print a simple message
+out to the screen.
+So in the playbook, I create a simple debug task
+to print a message that uses templating.
+Remember to define the variable
+in the play to use it in the template.
+As I have it here,
+I have defined under Vars 'my_name' to be my name,
+and then the same variable 'my_name'
+is used in the message.
+If you hadn't defined the name under Vars,
+then you'll actually get an error message,
+Ansible will exit with an error message,
+saying that my_name is not defined.
+So ensure that you always define
+the variables before using them.
+So what exactly is the double curly brackets?
+It is a Jinja2 template.
+If you Google Jinja2 online,
+you will see that it is
+a full-featured template engine for Python.
+It is beautiful and powerful
+and has a wide range of features.
+So it's not something specific to Ansible.
+It's a generic template engine
+used for various different purposes,
+and it happens to be the Ansible's choice
+to be used internally for templating.
+In the Ansible documentation page,
+you can see a lot of examples
+on using Jinja2 templating.
+We will look at some of those
+and practice using some of those.
+We know already that the simple and easy use case
+is to substitute parts of a string
+with a value from a variable.
+In this case, the name is,
+and my_name has the actual name Bond in it,
+which is why it returns 'the name is Bond.'
+Let's look at a few more options available.
+What if we want the name to be in upper case?
+We could simply append the keyboard Upper
+to a variable separated by the pipe character.
+This way, the value in the variable
+will be converted to upper case.
+Similarly, we have Lower to convert it to a lower case
+and Title to convert a string to title case.
+These are called filters.
+The keywords Upper, Lower and Title
+that you see here are called filters.
+There are a lot of other filters available.
+We will go through a few more of these.
+You can use a Replace to replace a character
+or part of a string to something else.
+In this case, we're going to replace
+the name Bond with Borne.
+Like we discussed before,
+if you don't declare the value of a variable,
+the playbook will fail
+with the message that it is undefined.
+Now, if you don't want the playbook to fail,
+instead use default value for a variable
+if it's not defined,
+then you could use the Default filter.
+For example, if you hadn't defined
+the first name explicitly to a value,
+if you use the Default filter to set a value,
+it will use the value and not fail.
+If you had defined the value instead,
+then it will use that.
+Let's look at some list and set-based filters.
+For example, let's say we have three numbers in an array,
+as you can see here,
+but when the brackets one, two and three,
+and that is a set, or an array.
+If you'd like to get the lowest number from that,
+you could use the Min filter.
+And so in this case, it'll return one.
+Similarly, you could use the Max filter
+to get the highest number.
+In this case, it happens to be three.
+In case you have an array like this
+where you have duplicate values in the array,
+for example, one, two, three, and two,
+so two is a duplicate,
+if you would like to get the unique items from the array,
+then you could use Unique keyword.
+So in this case, it returns one, two, and three.
+Similarly, let's say you have two separate arrays.
+One, two, three, four on one side,
+and four and five on another side,
+and if you'd like to get
+the unique values across both the arrays,
+then you could use the Union filter.
+And so in this case,
+it's going to return one, two, three, four and five.
+Similarly, if you'd like to find
+the common items in two separate arrays,
+then you could use the Intersect filter,
+and it's going to return four in this case,
+because four is present
+both in the first array and in the secondary.
+If you'd like to generate a random number from 0-100,
+you could use the Random filter
+and it'll return a random number anywhere from 0-100.
+As you can see here,
+100 is the input for the Random filter.
+If you'd like it to be between 0-1000,
+then you could just change 100 to 1000.
+Here's another filter called Join.
+Let's say I have an array of words,
+in this case 'the' 'name' 'is' and 'Bond,'
+are all separate words in an array,
+and I'd like to join those words
+to form a single sentence.
+I could use the Join filter
+and I need to pass in a separator.
+In this case, it happens to be space.
+So it returns a sentence
+with the words joined together with space.
+Let's look at some file-related filters.
+To get the file name from a full path,
+for example /etc/host is a path,
+and if I'd like to retrieve only the file name from it,
+I could use the Base Name filter and it'll return hosts.
+Now, it doesn't work exactly the same way in Windows
+because Windows has a different slash,
+Windows uses the backward slash.
+So if you would like to make it work for Windows,
+then you need to use 'win_basename.'
+So in this case, it returns host
+in a Windows-style path name.
+Next, I have a use case where I'd like
+to get the drive letter from a given path.
+For that I could use 'win_splitdrive.'
+And what it's basically going to do
+is it's going to split the given path
+between drive and the actual path to the file,
+and it returns an array.
+It doesn't actually return the drive itself.
+It returns an array containing two elements.
+Now, what if we want to retrieve
+the first element in the returning array?
+What we could do is we could append, or chain,
+another filter called First to the output that we just got.
+So, this is something new.
+First, we have the 'win_splitdrive' filter
+which returns an array of two elements,
+and then we could append the First filter to it
+to retrieve the first element in the array.
+Similarly, we could use the Last filter
+to get the last element in the array.
+And this way, you could chain as many filters as you want.
+There are a lot of additional filters available
+and the best way to find them is
+to look up the Jinja2 documentation first.
+So if you go through here,
+you will get to see a lot of filters available
+under the Jinja2 documentation.
+If you go to the list of built-in filters,
+you will find a lot of built-in filters available.
+For example, Capitalize, Center, First that we just saw.
+And there are hundreds of built in filters available.
+This is one way.
+Another way is to go to the Ansible documentation,
+and if you look up...
+Under Playbooks and Templating,
+you will find filters for formatting data.
+And here, you have a lot of filters,
+it's usage and a lot of examples.
+So this is another source
+to find a list of built-in filters.
+Later in this course,
+we will also see how to build a custom filter.
+So if you cannot find a filter that you're interested in
+and you'd like to write your own logic,
+then you can do that as well.
+So we look at that in one of the later lectures.
+So go ahead to the coding exercises
+and play around with filters and Jinja2 templating.
+
+--- Lookups ---
+
+(typewriter keys clanking)
+Instructor: Hello and welcome to this lecture.
+My name is Mumshad Mannambeth
+and we are learning advanced Ansible topics.
+In this lecture, we will be talking about lookups.
+So far, we've been storing credentials
+for our target servers inside the inventory file.
+What if there are too many servers
+or if this information is already available elsewhere?
+Let's say we have the credentials of the servers stored
+in a CSV file in a host name and password format.
+The first column being the host name
+and the second column being the password.
+To read the contents of the file
+while Ansible playbook is running,
+and to get the password associated to a host,
+we can use the lookup plugin.
+This is how we use the lookup plugin.
+For example, in this case, the first argument that we pass
+to the lookup plugin is the type of the file,
+which happens to be CSV file in this case.
+There are a number of other options available
+that we'll see in a bit.
+Then comes the value to look up.
+For example, here we would like to look up information
+about the server, target one,
+followed by the file we are looking at.
+For example, in this case, the file is stored
+under the temp directory and it's called credentials.csv.
+And finally, the delimiter, which happens to be comma
+in this case, because it's a CSV file.
+If you have a file which uses another separator,
+maybe like a semicolon or something
+then you could specify that here.
+So this same lookup plugin for CSV file supports multiple
+other character separated file formats as well.
+In this case, this whole function or plugin is going
+to return the password from the CSV file.
+There are a few other lookup plugins available
+such as ini, DNS, MongoDB, et cetera.
+Information about this can be seen
+in the Ansible documentation page
+under playbooks, special topics, and lookups.
+So if you go to lookups,
+you will be able to see the different lookups available
+such as, the CSV is what we just looked at.
+Then you have the ini file, credstash,
+DNS, MongoDB, et cetera.
+And here you can see examples of each of these.
+Head over to the coding exercise section
+and practice using lookups.
+We will practice using two types of lookups,
+one is the CSV file and the other is the ini file.
+
+--- Vault ---
+
+(typewriter keys clanking)
+-: Hello and welcome to this lecture.
+My name is Mumshad Mannambeth,
+and we are learning advanced Ansible topics.
+In this lecture, we'll be looking at Vault.
+We've been storing the credentials
+used to connect to the target servers
+in a plain text format so far.
+Storing passwords and other confidential information
+in plain text format is obviously not a best practice.
+Ansible Vault helps us store this data
+in an encrypted format.
+There are multiple ways to use Ansible Vault.
+Since we already have an inventory file,
+we will simply try to encrypt
+the current inventory file itself.
+To do this, use the Ansible Vault command,
+and run the Ansible Vault encryptInventory.txt command.
+When this is run, you are asked for a new Vault password.
+And on entering the Vault password, the file is encrypted.
+Now the contents of the file look like this.
+If we were to run the Playbook now,
+we will get an error like this.
+It reads, "Attempted to read inventory.txt
+as INI file decryption failed on inventory.txt."
+Well, what it means is basically Ansible Playbook
+was not able to decrypt the file.
+If you're using any encrypted file like this
+in our Ansible project,
+then we must append the option ask-vault-pass
+so that Ansible asks us for the Vault password.
+On entering the same password we used
+while encrypting the file, the Playbook now runs.
+Instead of prompting for the Vault password,
+you could have the Vault password stored in a file,
+and have that file passed in as a value
+to -vault password-file option.
+So as you can see here,
+I now have a -vault -password -file option,
+and I'm passing in the location of a file,
+a txt file in this case, called Vault_pass.txt,
+which has the password stored in it.
+Now you must be thinking,
+what about the security of that file?
+Is it okay to store the Vault password itself
+in a plain text file?
+No, it's not.
+So a third option is to pass in a Python script
+instead of a Vault pass file.
+If you look at this command now, the file name is changed,
+and notice the .py extension on the Vault pass file.
+What I'm doing here is instead of passing in
+a password stored in a plain text format,
+and passing in a script, which will in turn,
+get the password through a program
+and pass it on to Ansible for it to run the Playbook.
+This script could be any program that you might have written
+that retrieves the Vault password from a secure location.
+To view the contents of an encrypted file,
+you could use the Ansible Vault view command.
+To create an encrypted file,
+use the Ansible Vault create command.
+Ansible Vault is only used in command line
+and nothing to be done in Playbooks,
+so we really don't have any coding exercises for it.
+
+--- Dynamic Inventory ---
+
+(object clacking)
+-: Hello and welcome to this lecture.
+My name is Mumshad Mannambeth
+and we are learning advanced Ansible topics.
+In this lecture, we'll be looking at dynamic inventory.
+Now, we are getting it into a little bit
+more advanced concepts.
+Going forward, we'll be looking at some Python code
+behind the scenes
+so you will need to know some basic Python scripting.
+So far, you've seen inventory files in a plain text format,
+something like this.
+This is the simplest way of defining list of servers
+we would like to work with.
+But more often than not,
+we may want to pull this information down
+from an external source like a CMDB database
+or through a cloud platform API of some kind.
+That's where dynamic inventory comes in handy.
+So dynamic inventory is inventory information
+that Ansible retrieves programmatically
+when the Ansible playbook is run,
+as opposed to us defining it
+in a static inventory text file.
+Let's look at a really, really simple example first.
+We have a static inventory file that looks like this
+on the left.
+The command to execute an Ansible playbook using this
+is to pass in the inventory.txt file
+as a parameter to the -i argument.
+The simplest way to understand dynamic inventory
+is to convert the same inventory file into a Python script.
+To use a dynamic inventory file using a script,
+the command looks the same except for the file name
+changing to a script with the .py extension.
+So I have a new file now called inventory.py,
+which is a Python script,
+and all I'm doing for now is to print
+the same inventory details in a JSON format.
+What Ansible does internally is to run this inventory script
+and use the output as inventory information.
+Our script is not very dynamic right now
+but we could easily modify it to pull the information
+from anywhere and print it here.
+We will see some real dynamic inventory scripts later on.
+Let's take a close look at the inventory script.
+Currently, it's very simple.
+Starting at the top, you must specify what environment
+to run this script in.
+In this case, Python using the shebang.
+Otherwise, Ansible will try to execute it as a batch script
+and it won't work.
+Next is retrieving the inventory information.
+In this case, we have statically defined it here
+but instead of this, you can have code in here
+to retrieve the actual inventory information
+from some external sources like a CMDB or some kind of API.
+The format should be in JSON
+and it must be a dictionary of groups.
+In this case, I have divided the servers
+into databases and web.
+Inside each group, you must have a list of hosts
+and variables that are assigned to that group.
+In this case, Ansible SSH pass and Ansible SSH host.
+If you look at the JSON details here, I have databases
+which is the group, and under databases, I have hosts,
+in which I have a list of hosts.
+In my case, db_server is that host.
+Similarly, I have web group
+and I have host called web_server in that group.
+The variables here, which are undefined under vars,
+are the group variables, so these will be assigned
+to all servers in that particular group.
+Finally, we have the main function right here at the bottom
+and the main function prints the data, the JSON data,
+in a string format using the json.dumps call,
+and that's basically it.
+And that's our simple dynamic inventory script.
+There are couple of things more to handle.
+When Ansible executes the script,
+it will pass in one of the two arguments.
+One is called --list and the other is --host
+followed by a host name.
+The first one should output a JSON encoded dictionary
+of all groups, just like what we have now.
+In case of the second, it must print a dictionary
+of variables to make available to that particular host.
+For example, web, in this case,
+has these two variables available.
+To handle these arguments,
+we will add a new function called read CLI args,
+and inside that, read the two arguments.
+Then we will modify our main function to read
+the CLI arguments first, and print inventory data
+in case of list, and some empty data in case of host.
+As you might have guessed already,
+there are a lot of dynamic scripts available
+readily for us to use.
+There are scripts available for Cobbler, AWS, Azure,
+Google Compute Engine, OpenStack, VMware, Docker, et cetera.
+A full list can be found on the Ansible GitHub page.
+
+--- Custom Modules ---
+
+-: Hello, and welcome to this lecture.
+My name is Munsha Mungembet
+and we are learning advanced Ansible topics.
+In this lecture, we will be looking at custom modules.
+First of all, let's recap modules.
+We have worked with a number of modules
+through this course in our playbooks.
+Let's take this sample playbook.
+Modules are each item in the tasks list
+that performs an actual operation,
+or a check.
+In this case, firewall D, service command, debug
+are all modules.
+As discussed before,
+there are a lot of modules available readily with Ansible
+for various purposes, such as
+systems specific commands, files, databases, cloud,
+windows, and more.
+These are all Python codes developed for certain purposes,
+and later in this lecture, we will go through
+a demo of looking at some of these built-in modules.
+But what if none of these modules satisfy our needs?
+What if we want to do something custom?
+What if we want to develop a custom module
+that can be used for a specific purpose in our project?
+Let's start with a really, really simple example.
+Here, we have the debug module
+that prints any given message onto the screen.
+We would like to develop a custom debug module
+that also prints the message,
+but with an additional date prefixed to it.
+It's a really, really simple basic use case.
+This is a sample program.
+So in order to develop a custom module,
+we have to develop a custom python script.
+This script will be placed under the modules directory,
+along with all the other or existing modules,
+or this script can be placed under a library directory
+under your project,
+and you can point Ansible to this library directory
+using an environment variable.
+So, let's look at the script for a second.
+Here, we have a sample program.
+First, what we do in this program
+is we import the JSON modules
+because it is used by our program later on.
+So as you can see, we import JSON.
+If JSON module isn't available,
+then we import a simple JSON.
+Then, we import the Ansible module.
+Ansible module is a built-in class
+that helps us parse the arguments pass to our module.
+So it is easy to use that for parsing the arguments,
+otherwise we will have a hard time parsing it ourselves.
+Then in our main function, we instantiate the Ansible module
+by providing our argument spec.
+The argument spec is a dictionary containing
+a set of arguments we expect for the module.
+Just to refresh your memory,
+the message is one of the arguments here.
+Under the custom debug module that we are newly developing,
+MSG is an argument that we are expecting the user to pass,
+and that particular argument is received
+in the main function,
+while instantiating the Ansible module like this.
+Similarly, for all the arguments we expect,
+we must list them here, one after the other.
+We could also specify if the argument is required or not,
+and then the type of the argument,
+and a default value.
+In this case, required equals true means
+that the argument is required,
+and type equals string indicates that
+the argument that'll be passed in by the user is a string.
+We then read the value of the message parameter
+using the module.params property.
+Then, we print the result in a JSON encoded format
+and exit the program.
+So this is where our custom code is.
+This is where we are prefixing the message
+with the current time.
+And right after we do that we exit the program
+with a zero exit code because it was successful.
+If there's an error, we catch that error
+and we exit the program with an exit code "one".
+To improvise this a little bit,
+we could replace this whole section of printing and exiting
+with a built-in call available with the Ansible module
+called "module.exit_json".
+Module.exit_json prints the message
+and any other properties that you parse in here
+to the screen and exits with exit code zero.
+Module.fail_json prints the error message you parse in
+and exits the module using exit code "one",
+indicating that there was an error.
+Remember not to print anything else on the screen.
+The output of this module should strictly be JSON encoded.
+As per the Ansible best practices,
+there are a few more items required
+for a complete Ansible module.
+One of it is documentation.
+When you run the Ansible document with a module name,
+it lists the help file, or man page,
+for that particular module.
+In this case, I ran the ansible-doc debug command
+and it printed the documentation page
+for that particular module.
+It contains a description of the module, what it does,
+and what parameters can be passed to it.
+This documentation is generated from a documentation block
+in the module code.
+In the module code, before the main function,
+you could create a documentation block like this.
+This particular block is in a YAML format
+and it has the module name, a short description,
+a long description, the version,
+the author's name, some requirements,
+and the options, which are the arguments that are parsed
+to this particular module.
+Another one of the best practices is examples.
+Ansible dash document also outputs
+few example use cases of the module.
+This documentation is generated
+from an example blocks in the module code.
+If you look at the the module code
+right after documentation here, you have an example block.
+This is what will be used by the ansible-document
+to show an example usage of the module
+to the user when he runs the ansible-doc debug command.
+So where are these files created?
+By default all built-in modules
+are located under "modules directory"
+in Ansible folder under disk-packages in Python.
+If you need the custom module
+to be made available for a role,
+you could put this under a library folder in your role
+and it will automatically be made available to the playbook.
+Or, if you need to make it available for multiple projects
+you could store it anywhere and specify the path
+using ansible_library environment variable.
+Let's first look at the GitHub page for Ansible
+to see all the, to see some code for the built in modules.
+If you go to the Ansible GitHub page,
+and under Ansible,
+if you go into the "modules directory",
+you can see all the list of built-in modules available here,
+categorized by the purpose.
+For example, let's take a look at
+one of the built-in modules, under "commands".
+We're going to look at command.py.
+Command.py is the command module.
+If you look at it, as we discussed before
+you could see the documentation block here.
+So this is what
+shows the documentation of this command to the user.
+And then here you have the examples block
+showing a few of the command module examples.
+And then, this is where the actual code is.
+So as we know, in the main function
+this is where the Ansible module gets initiated
+and these are the parameters.
+So, as we know that
+the command module has these few parameters
+and you can see the values for that.
+So then the parameters the value from the parameters
+are retrieved here using the module.params dictionary.
+And then you have all the logic here.
+You can see that if there's a problem,
+module.fail_json fails.
+For example, if there's no command given,
+then the module.fail_json exits the module execution
+with the particular return code.
+Similarly, you can see more details
+about the command execution in this code.
+So you might be thinking it's a bit difficult to
+put together this documentation, the examples,
+and the arguments, and then specifying the Ansible module,
+the argument parser this way, et cetera.
+But I do have an easy way for you.
+(mouse clicking)
+So there's this tool,
+this open source tool that I've been working on,
+called Ansible playable.
+So if you go to the website,
+(mouse clicking)
+(typing)
+ansible-playable.com
+you'll be able to see this project
+and you can see it the project information
+on GitHub, as well.
+So, if this is the first time
+you're looking at this project,
+feel free to watch through these videos for overview
+and getting started.
+And, so this is basically a project, a UI for Ansible,
+which will help you develop Ansible playbooks
+and run them and test them easily.
+Now, the reason I'm talking about this particular tool here
+is to demo how to create a custom module using this tool,
+because it's really easy to do that.
+So if you go to, well, basically if you log in first,
+(mouse clicking)
+and if you go to the modules section right here,
+you will be able to see,
+I'll show you a quick demo
+on how to develop a custom module.
+So you basically click on "new module"
+to create a new module.
+As soon as you click on the new module button
+you get this form where you can fill out all the information
+and on the right you can actually see a template
+for a custom module.
+So whatever we discussed, importing the JSON on at the top,
+and then you have the documentation block,
+and then you have examples block,
+and then you have the main function with the parameters.
+So I'm just going to show you how it works.
+So let's say our custom module is called "custom debug.
+So when I type in the name, you can see that on the right
+it's automatically updating the name of the module
+and the documentation section.
+And so I'm going to say version 0.1,
+my name, (typing)
+(typing continues)
+And then, a short description.
+(typing)
+This is a custom debug module,
+and a long description,
+(typing)
+print message with timestamp.
+and then any notes or requirements that you might need.
+And then this is where you put in the parameter.
+So currently, as you can see on the right
+it just has one parameter.
+You can see the dictionary information right here.
+Let's say you put in
+a parameter, custom parameter like this.
+The parameter that we had was MSG for message.
+And when you see, as soon as you type in the information
+about your parameter, you can see it automatically update
+in the module on the right.
+Similarly, I'm going to say it accepts a string,
+it is required, and any aliases or choices that you want.
+Currently, I do not have any alias or choice, (typing)
+so I'm just gonna leave it like that.
+And I'm going to, I can add as more variables if I need.
+So for example, I'm going to add a new variable called VAR.
+Its variable and it's the type is going to be string,
+it is not required,
+it doesn't have a default value, et cetera.
+So as you can see here on the right,
+it automatically creates those parameters.
+And then, this is where your actual code needs to go.
+Currently, it just prints saying
+by printing a success message.
+Instead of that, you could add your logic here.
+So this is where your logic needs to go.
+Whatever you are doing needs to go around here.
+Currently for now, I'm not going to add anything there.
+And then click on "save", and it saves that custom module.
+So you can basically take this now
+and use it in your project.
+This also has, this tool also has
+the ability to test the custom module.
+So if you click on "test", it actually brings up a prompt
+with the list of key value pairs that you need to parse in.
+So put in the message or the variables
+and then click on "okay", and it'll run.
+In this case, it's not going to run
+because the feature has been disabled
+because it's the public website.
+It's a demo website.
+And so if you'd like to run it on your own,
+you can actually run a copy of this tool
+locally in your environment
+and instructions for that are available here,
+and that then you will be able to run
+and test your playbooks,
+and custom modules in your environment.
+So it makes your life really, really easy.
+Okay, so just one more thing.
+When you look at the Ansible documentation
+for developing a custom module,
+after developing a custom module,
+Ansible provides provides a
+Ansible provides a tool to test your custom modules.
+If you look at the Ansible documentation page
+you will see instructions to test your custom modules.
+So under unit testing, you'll be able to see instructions
+for testing your custom modules.
+So that's about it.
+Thanks for your time, and I hope this was a useful session.
+
+--- Plugins ---
+
+(keyboard clicks)
+Moonsha: Hello and welcome to this lecture.
+My name is Moonsha Manam Beth
+and we are learning Advanced Ansible topics.
+In this lecture, we will be looking at plugins in Ansible.
+The core Ansible engine uses a variety
+of plugins to perform various actions.
+For example, it uses action plugins to invoke modules.
+It uses connection plugins to establish communication
+with hosts.
+Filter plugins to manipulate data.
+Lookup plugins to work with data from external sources
+such as, CSV lookup that we saw earlier.
+Strategy plugins to control flow and execution of play
+and callback plugins to handle events
+or results of execution.
+There are a number of other plugins as well.
+This architecture makes Ansible highly extensible
+as we could easily create additional custom plug-ins
+to suit our needs.
+Let's look at creating a couple of custom plugins.
+If you remember, what we covered
+in the Jinja2 templating chapter,
+before,
+we covered a number of filters that come built-in
+with Ansible as part of Jinja2 or otherwise.
+If none of the above satisfy our needs,
+we could create our own custom filters.
+Let's create a simple custom filter
+that we can use in the playbook
+to get the average of a list.
+We have a simple playbook that prints the average
+of a given list of numbers.
+Note that average is the filter we need to develop
+as it is not available by default in Ansible.
+To do this, create a simple Python file named average.py
+and create this piece of code in it.
+A class named filter module must be created
+and that has a filters method that returns a dictionary
+of filter names and filter functions.
+In this case, our filter name is average
+and our filter function is also average.
+The filter function accepts a list as input
+which is the list called marks passed in here.
+Then simply calculate the average and return it.
+So if you look at this code right here,
+I have a class called filter module.
+And then inside that I have a function called filters
+which returns basically a dictionary
+of keywords and functions.
+So in this case, I just have a function called average
+and so I'm just returning that particular function
+and that function accepts a list.
+So, this list is the marks that is here or right here.
+So this entire list of marks is going to be passed
+into this particular function.
+And so that is available here.
+And I have this really small logic that sums up the list
+and divides it by
+the length of the list to get the average
+and then it returns that average.
+When we run the playbook now,
+we need to remember to set an environment variable
+called Ansible_filter_plugins
+and point it to the filter plugins directory.
+This is how Ansible knows where to find new plugins
+that you created.
+Or you could create these plugins,
+these new plugins in the, along with the default plugins
+that are available under the Python library folder.
+But we don't want to mess around
+with the original source code.
+We want everything that we do to be in our project.
+Which is why we create a folder called
+filter_plugins and create this particular file
+inside that folder.
+When you run this command,
+now before running the Ansible playbook
+as you can see here we have set
+the Ansible filter plugins environment variable
+to the location, which is filter_plugins folder.
+And now when I run the Ansible playbook,
+I can see that it runs and it prints
+the average of the marks.
+Now, let's talk about callback plugins.
+Callback plugins is another type of plugins.
+The output that we usually see from Ansible
+is a result of the callback plugin.
+It is a callback plugin that brings the information
+that you see here in this format on the screen
+at the end of each task or play execution.
+This default output is called skippy.
+We could change the callback plugin to use JSON
+instead of printing it in a text format that you see here.
+For this, you need to set the environment variable
+called Ansible_stdout_callback
+and it will now print the results of the execution
+in a JSON format.
+As you can see right here.
+So what are the use cases of a callback plugin?
+The callback plugins are not only used to print information
+out to the screen.
+You could perform other advanced options such as,
+mail to send errors or notification emails,
+or to integrate with applications like HipChat
+by sending status updates
+during playbook execution
+to integrate with other applications like
+Jabber or Logstash or Slack.
+The timer callback plug-in calculates the execution time
+and prints it to the console at the end of the execution.
+So, these are a few of the built-in
+callback plug-ins available.
+There's a full list of available callback plug-ins.
+If you go to the Ansible source code repository
+and under the Ansible folder
+you will be able to see plugins and callback plugins.
+And here you can see a list of callback plugins
+that are available.
+Now, as we talked before, you could simply
+look up one of these and you should be able to
+develop a custom callback plugin yourself.
+Probably, if you want to integrate
+with one of your applications, you could easily copy one
+of these callback plugins and look up what it does
+and then modify it to create your own callback plugin.
+So let's take a quick look
+at how a custom callback plugin can be developed.
+As before, we create a new Python program.
+In this case, we create a class named callback module,
+extending from the callback module default class.
+Then we override a few methods in the parent class
+such as the V2_playbook_on_task_start
+and then you have V2_runner_on_failed
+V2_runner_on_ok
+V2_runner_on_skipped, et cetera.
+So what this does is every time a task starts execution
+for example, let's say we are installing a web server and
+and we are using the APT or Yum module
+to install a particular package.
+And as soon as that task starts, this particular function
+will be called with information about that task.
+And within this, we could do whatever we want.
+For example, we could just print out
+that information or we could send out an email
+or make a REST API call to some other interface, et cetera.
+Similarly, if the task finishes successfully,
+then this particular function will be called.
+If the task finishes and it fails
+then this particular function is called.
+And if the task was skipped for some reason
+like for example, we talked about the conditionals
+where we used the when directive to
+decide if a particular task has to be run or not.
+So, if a when directive decides
+that a particular task will not be run and will be skipped
+then this particular callback will be called
+and you can basically
+override this function and use it.
+
+--- Conclusion ---
+
+-: Okay, so we are at the end of the advanced Ansible course.
+So together in the basic and advanced courses,
+we discussed what Ansible is,
+how to set up and install Ansible,
+and get started with Ansible,
+what YAML files are, what inventory files are,
+what playbooks look like,
+and how to develop playbooks,
+what are variables and how they're defined,
+what conditionals and loops and roles are.
+And in this course specifically,
+we discussed more details on roles,
+how to develop your own custom roles,
+and how to share it with the community,
+or how to search and use roles
+from the Ansible Galaxy community.
+We discussed what is synchronous functions are
+and how to use them.
+We discussed about error handling, Jinja2 templating,
+lookups to look up information
+from external sources like CSV files, et cetera.
+We learned about vault
+and how to secure information using Ansible vault.
+We discussed about dynamic ,
+creating dynamic or custom modules
+like dynamic inventory files or scripts,
+how to develop custom modules, filters, plugins
+or callback plugins, et cetera.
+And we also practiced a lot
+of various playbooks for different use cases.
+You should now be confident
+in developing your own Ansible playbooks
+or even custom modules and plugins.
+Always, always remember to refer
+to the Ansible documentation page
+at all times for updates or information
+about new modules or instructions on using them.
+Thank you so much for your time,
+and I hope you had a good learning experience.
+Do let me know your feedback
+and I really, really value your feedback.
+I'm constantly looking to improve the course.
+Once again, thank you very much
+for your time and I hope to hear from you.
+
+--- Bonus Lecture ---
+
+[No transcript available for this lecture]
